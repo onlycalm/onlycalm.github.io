@@ -41,17 +41,3 @@
     background: rgba(255,255,255,.7);
 }
 
-body,
-title{
-    cursor: url(/img/Normal.cur),
-        default;
-}
-
-a,
-img,
-button,
-address{
-    cursor: url(/img/Link.cur),
-        default;
-}
-
