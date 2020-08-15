@@ -1,0 +1,37 @@
+<ul>
+<li><p>用断言检查永远不应该发生的错误<br>  优点：错误定位，给代码调试带来极大的便利，创建更稳定、质量更好且不易于出错的代码。<br>  缺点：频繁的调用会极大的影响程序的性能，增加额外的开销。<br>  相比于函数，调用函数需要额外的队栈开销，宏函数节省开销但同一段代码存在多个副本。使用宏函数会引起很多副作用需要小心。  </p>
+<p>  断言使用形式如下：  </p>
+<pre><code>//#define NDEBUG
+
+#ifndef NDEBUG                               
+#define _assert(bExpression)                                 \
+do{                                                          \
+        if (!(bExpression))                                  \
+        {                                                    \
+            ErrorDeal();            /*Error deal*/           \
+        }                                                    \
+}while(0)
+#else
+#define _assert(bExpression)        ((void)0)
+#endif
+
+int main()
+{
+    Byte byNumber1 = 10;
+    Byte byNumber2 = 0;
+    Byte byResult  = 0;
+
+    _assert(0 != byNumber2);        //Cannot be 0
+
+    byResult = byNumber1 / byNumber2;
+    printf(&quot;%d&quot;, byNumber2);
+
+    system(&quot;pause&quot;);
+    return 0;
+} </code></pre><p>  <em>note:通过定义宏NDEBUG来控制断言的开启或关断。用于对较为严重的错误统一处理。另外，禁止把必须执行的代码放在断言中，断言关闭后功能将失效。</em>  </p>
+<p>  用断言的两种形式：<br>  1、断言一直开启。不论是调试版还是发行版都将断言函数开启。<br>  2、可以在测试时启用断言，而在部署时禁用断言。同样，程序投入运行后，最终用户在遇到问题时可以重新起用断言。它可以快速发现并定位软件问题，同时对系统错误进行自动报警。断言可以对在系统中隐藏很深，用其它手段极难发现的问题可以用断言来进行定位，从而缩短软件问题定位时间，提高系统的可测性。实际应用时，可根据具体情况灵活地设计断言。  </p>
+<p>  前置条件断言：代码执行之前必须具备的特性。  </p>
+<p>  后置条件断言：代码执行之后必须具备的特性。  </p>
+<p>  前后不变断言：代码执行前后不能变化的特性。  </p>
+</li>
+</ul>

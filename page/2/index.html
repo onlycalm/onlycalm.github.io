@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OnlyCalm's Blog - onlycalm</title><meta name="description" content="自娱自乐，做大娱乐家"><meta name="keywords" content="OnlyCalm, Calm, Blog"><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/images/favicon.ico"><link rel="canonical" href="http://yoursite.com/page/2/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="OnlyCalm's Blog"><meta property="og:url" content="http://yoursite.com/page/2/"><meta property="og:site_name" content="OnlyCalm's Blog"><meta property="og:description" content="自娱自乐，做大娱乐家"><meta property="og:image" content="http://yoursite.com/images/avatar.png"><meta property="article:published_time" content="2020-08-15T12:08:27.168Z"><meta property="article:modified_time" content="2020-08-15T12:08:27.168Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: {"text":"于心有愧,信心花舍,时光隧道,四季,不求人","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2020-08-15 20:08:27'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 5.0.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/images/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">78</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">108</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">18</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="color"></div><header class="full_page" id="page-header" style="background-image: url(/images/index_img.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">OnlyCalm's Blog</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="site-info"><h1 id="site_title">OnlyCalm's Blog</h1><div id="site_subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div id="scroll_down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout_page" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E8%B0%83%E8%AF%95log/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E8%B0%83%E8%AF%95log/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.038Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+
+
+调试log
+
+
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E7%8A%B6%E6%80%81%E5%9E%8B%E5%8F%82%E6%95%B0/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E7%8A%B6%E6%80%81%E5%9E%8B%E5%8F%82%E6%95%B0/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.036Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+状态型参数。&emsp;&emsp;状态型参数用于表示当前运行下的某种状态，是实时的因此不像常量宏可以用预处理指令检验。比如电机的开关波状态，阀门的开关状态，气压状态等。我们可以定义为如下结构体：  
+//Status enum definition-------------------------------------------------------------------
+typedef enum MotorPwm&#123;PWM_CLOSE, PWM_OPEN&#125;EMotorPwm;                 //Motor Pwm Status
+typedef enum AirPressure&#123;AP_LOW, AP_NORMAL, AP_HIGH&#125;EAirPressure;    //Air Pressure Status
+
+//Status parameter structure definition----------------------------------------------------
+typedef struct ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E7%8A%B6%E6%80%81%E5%9E%8B%E5%8F%82%E6%95%B0/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E7%8A%B6%E6%80%81%E5%9E%8B%E5%8F%82%E6%95%B0/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.030Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+
+
+状态型参数
+
+
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%99%AE%E9%80%9A%E5%80%BC%E5%8F%82%E6%95%B0/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%99%AE%E9%80%9A%E5%80%BC%E5%8F%82%E6%95%B0/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.023Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+普通值参数。&emsp;&emsp;普通值参数是较为庞大的一类参数，这类参数的值类型不一，值之间的关联性可以很复杂，每种值各有特点，参数的有效性检验很难做统一的处理。我们可以定义为如下结构体：  
+//Sign enum definition-------------------------------------------------------------------
+typedef enum Sign&#123;SIGN_MINUS = -1, SIGN_PLUS = 1&#125;ESign;          //Unusual state
+typedef enum Lock&#123;LOCK_UNLOCK = 0, LOCK_LOCK = 1&#125;ELock;          //Resource lock
+
+//Value parameter structure definition----------------------------------------------------
+typedef struct ValueParameter
+&#123; ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%99%AE%E9%80%9A%E5%80%BC%E5%8F%82%E6%95%B0/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%99%AE%E9%80%9A%E5%80%BC%E5%8F%82%E6%95%B0/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.020Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+
+
+普通值参数
+
+
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%96%AD%E8%A8%80/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%96%AD%E8%A8%80/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.017Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+用断言检查永远不应该发生的错误  优点：错误定位，给代码调试带来极大的便利，创建更稳定、质量更好且不易于出错的代码。  缺点：频繁的调用会极大的影响程序的性能，增加额外的开销。  相比于函数，调用函数需要额外的队栈开销，宏函数节省开销但同一段代码存在多个副本。使用宏函数会引起很多副作用需要小心。  
+  断言使用形式如下：  
+//#define NDEBUG
+
+#ifndef NDEBUG                               
+#define _assert(bExpression)                                 \
+do&#123;                                                          \
+        if (!(bExpression))                                  \
+        &#123;                                                    \
+         ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%96%AD%E8%A8%80/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%96%AD%E8%A8%80/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.014Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+
+
+断言
+
+
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%95%85%E9%9A%9C%E5%9E%8B%E5%8F%82%E6%95%B0/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%95%85%E9%9A%9C%E5%9E%8B%E5%8F%82%E6%95%B0/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.008Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+故障型参数。&emsp;&emsp;故障型参数用于记录当前或历史的故障发生情况，并决定是否要发出报警信号或停机等操作。我们可以定义为如下结构体：  
+//Unusual enum definition-------------------------------------------------------------------
+typedef enum UnusualSymbol&#123;ABNORMAL, NORMAL&#125;EUnusualSymbol;        //Unusual state
+
+//Unusual parameter structure definition----------------------------------------------------
+typedef struct UnusualParameter
+&#123;
+    EUnusualSymbol eUnusualSymbol;                //Unusual symbol
+    EUnusualSymbol ePrevious;          ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%95%85%E9%9A%9C%E5%9E%8B%E5%8F%82%E6%95%B0/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E6%95%85%E9%9A%9C%E5%9E%8B%E5%8F%82%E6%95%B0/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.005Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+
+
+故障型参数
+
+
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E5%BC%82%E5%B8%B8/" title="无题">     <img class="post_bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E5%BC%82%E5%B8%B8/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-10T14:41:38.002Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></span></div><div class="content">
+异常  &emsp;&emsp;如果一个子程序在运行过程中遇到了预料之外的情况，但这个情况又必须处理否则会影响功能的使用或程序的运行，这个时候需要子程序将异常抛出，把“问题”交给能解释并处理好它的代码。这属于一种错误处理机制。  &emsp;&emsp;能在局部处理的错误优选在局部处理，不能立即处理或局部无法处理的问题可抛出异常。不能用异常来推卸责任。异常处理函数需要了解大量子程序可能抛出何种错误并给出处理办法，弱化了程序的封装性，增加了程序的复杂程度。  &emsp;&emsp;每种异常都对应一种特殊情况，因此要确保异常信息中含有为理解异常抛出原因所需的充分信息，这对于读取异常信息的人来说是很有价值的。比如当发生数据越界时，除了抛出对应的故障码标识数据越界外，还应该给出上下界和非法的数据值。  
+  总结：断言、错误处理代码、异常都需要有完备的故障捕获处理，以及故障信息的记录反馈。因此有必要考虑一种方法以确保异常处理的一致性，即创建一个集中的异常报告机制。这个机制需要能对异常信息进行一个集中的格式化和存储。c语言不像c++和java自带异常机制，但c语言可以借助setjmp和lon ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">OnlyCalm</div><div class="author-info__description">自娱自乐，做大娱乐家</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives"><div class="headline">文章</div><div class="length_num">78</div></a></div><div class="card-info-data-item is-center">      <a href="/tags"><div class="headline">标签</div><div class="length_num">108</div></a></div><div class="card-info-data-item is-center"><a href="/categories"><div class="headline">分类</div><div class="length_num">18</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-recent-item"><div class="aside-recent-post"><a class="aside-post-cover" href="/docs/hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2(%E4%BA%94)%E2%80%94%E2%80%94hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0%E7%A0%81%E4%BA%91/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2(%E4%BA%94)%E2%80%94%E2%80%94hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/" title="无题"><img class="aside-post-bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="aside-post-info"><a class="aside-post-title" href="/docs/hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2(%E4%BA%94)%E2%80%94%E2%80%94hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0%E7%A0%81%E4%BA%91/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2(%E4%BA%94)%E2%80%94%E2%80%94hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/" title="无题">无题</a><time class="aside-post_meta post-meta-date" datetime="2020-08-15T12:06:13.258Z" title="发表于 2020-08-15 20:06:13">2020-08-15</time></div></div><div class="aside-recent-post"><a class="aside-post-cover" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E9%9A%94%E6%A0%8F/" title="无题"><img class="aside-post-bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="aside-post-info"><a class="aside-post-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E9%9A%94%E6%A0%8F/" title="无题">无题</a><time class="aside-post_meta post-meta-date" datetime="2020-08-10T14:41:38.072Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></div></div><div class="aside-recent-post"><a class="aside-post-cover" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E9%9A%94%E6%A0%8F/" title="无题"><img class="aside-post-bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="aside-post-info"><a class="aside-post-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E9%9A%94%E6%A0%8F/" title="无题">无题</a><time class="aside-post_meta post-meta-date" datetime="2020-08-10T14:41:38.069Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></div></div><div class="aside-recent-post"><a class="aside-post-cover" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E9%94%99%E8%AF%AF%E7%A0%81/" title="无题"><img class="aside-post-bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="aside-post-info"><a class="aside-post-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E9%94%99%E8%AF%AF%E7%A0%81/" title="无题">无题</a><time class="aside-post_meta post-meta-date" datetime="2020-08-10T14:41:38.068Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></div></div><div class="aside-recent-post"><a class="aside-post-cover" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E9%94%99%E8%AF%AF%E7%A0%81/" title="无题"><img class="aside-post-bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="aside-post-info"><a class="aside-post-title" href="/docs/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C/%E5%8F%82%E6%95%B0%E6%9C%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8Cppt%E6%B1%87%E6%8A%A5/%E9%94%99%E8%AF%AF%E7%A0%81/" title="无题">无题</a><time class="aside-post_meta post-meta-date" datetime="2020-08-10T14:41:38.065Z" title="发表于 2020-08-10 22:41:38">2020-08-10</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GCC/"><span class="card-category-list-name">GCC</span><span class="card-category-list-count">1</span></a></li><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GCC/%E6%B5%85%E6%98%BE%E6%98%93%E6%87%82%E7%9A%84GCC%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">浅显易懂的GCC使用教程</span><span class="card-category-list-count">1</span></a></li></ul><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Hexo/"><span class="card-category-list-name">Hexo</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Lua/"><span class="card-category-list-name">Lua</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/PySide2/"><span class="card-category-list-name">PySide2</span><span class="card-category-list-count">15</span></a></li><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/PySide2/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87/"><span class="card-category-list-name">PySide2基础篇</span><span class="card-category-list-count">15</span></a></li></ul><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python3/"><span class="card-category-list-name">Python3</span><span class="card-category-list-count">14</span></a></li><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python3/Python3%E5%9F%BA%E7%A1%80%E7%AF%87/"><span class="card-category-list-name">Python3基础篇</span><span class="card-category-list-count">11</span></a></li></ul>
+            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/categories">
+                <span>查看更多</span><i class="fas fa-angle-right"></i></a></li>           
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/ADC/" style="font-size: 16px; color: #999">ADC</a> <a href="/tags/AES/" style="font-size: 16px; color: #999">AES</a> <a href="/tags/BPSK/" style="font-size: 16px; color: #999">BPSK</a> <a href="/tags/Blog/" style="font-size: 16px; color: #999">Blog</a> <a href="/tags/Bug/" style="font-size: 16px; color: #999">Bug</a> <a href="/tags/ButterFly/" style="font-size: 16px; color: #999">ButterFly</a> <a href="/tags/DSSS/" style="font-size: 16px; color: #999">DSSS</a> <a href="/tags/Doxygen/" style="font-size: 16px; color: #999">Doxygen</a> <a href="/tags/GCC/" style="font-size: 16px; color: #999">GCC</a> <a href="/tags/GVim/" style="font-size: 17.5px; color: #999da3">GVim</a> <a href="/tags/Hexo/" style="font-size: 16px; color: #999">Hexo</a> <a href="/tags/Leaderf/" style="font-size: 16px; color: #999">Leaderf</a> <a href="/tags/Lua/" style="font-size: 16px; color: #999">Lua</a> <a href="/tags/NerdTree/" style="font-size: 16px; color: #999">NerdTree</a> <a href="/tags/PWM/" style="font-size: 16px; color: #999">PWM</a> <a href="/tags/PyQt/" style="font-size: 20.5px; color: #99a5b6">PyQt</a> <a href="/tags/PySide2/" style="font-size: 20.5px; color: #99a5b6">PySide2</a> <a href="/tags/Python/" style="font-size: 22px; color: #99a9bf">Python</a> <a href="/tags/Python3/" style="font-size: 19px; color: #99a1ac">Python3</a> <a href="/tags/QCheckBox/" style="font-size: 16px; color: #999">QCheckBox</a> <a href="/tags/QComboBox/" style="font-size: 16px; color: #999">QComboBox</a> <a href="/tags/QDialog/" style="font-size: 16px; color: #999">QDialog</a> <a href="/tags/QFileDialog/" style="font-size: 16px; color: #999">QFileDialog</a> <a href="/tags/QLabel/" style="font-size: 16px; color: #999">QLabel</a> <a href="/tags/QLineEdit/" style="font-size: 16px; color: #999">QLineEdit</a> <a href="/tags/QMenu/" style="font-size: 16px; color: #999">QMenu</a> <a href="/tags/QMenuBar/" style="font-size: 16px; color: #999">QMenuBar</a> <a href="/tags/QMessageBox/" style="font-size: 16px; color: #999">QMessageBox</a> <a href="/tags/QPlainTextEdit/" style="font-size: 16px; color: #999">QPlainTextEdit</a> <a href="/tags/QProgressBar/" style="font-size: 16px; color: #999">QProgressBar</a> <a href="/tags/QPushButton/" style="font-size: 16px; color: #999">QPushButton</a> <a href="/tags/QRadioButton/" style="font-size: 16px; color: #999">QRadioButton</a> <a href="/tags/QSpinBox/" style="font-size: 16px; color: #999">QSpinBox</a> <a href="/tags/QStatusBar/" style="font-size: 16px; color: #999">QStatusBar</a> <a href="/tags/QTabWidget/" style="font-size: 16px; color: #999">QTabWidget</a> <a href="/tags/QToolBar/" style="font-size: 16px; color: #999">QToolBar</a> <a href="/tags/Qt/" style="font-size: 20.5px; color: #99a5b6">Qt</a> <a href="/tags/SVN/" style="font-size: 16px; color: #999">SVN</a> <a href="/tags/TeamViewer/" style="font-size: 16px; color: #999">TeamViewer</a> <a href="/tags/Vim/" style="font-size: 17.5px; color: #999da3">Vim</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">23</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">16</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/04/"><span class="card-archive-list-date">四月 2020</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/03/"><span class="card-archive-list-date">三月 2020</span><span class="card-archive-list-count">10</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/09/"><span class="card-archive-list-date">九月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/08/"><span class="card-archive-list-date">八月 2019</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives">
+              <span>查看更多</span><i class="fas fa-angle-right"  ></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-article-name">文章数目 :</div><div class="webinfo-article-count">78</div></div><div class="webinfo-item"><div class="webinfo-site-wordcount-name">本站总字数 :</div><div class="webinfo-site-wordcount">137.7k</div></div><div class="webinfo-item">      <div class="webinfo-site-uv-name">本站访客数 :</div><div class="webinfo-site-uv-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="webinfo-site-name">本站总访问量 :</div><div class="webinfo-site-pv-count" id="busuanzi_value_site_pv"></div></div></div></div></div></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a target="_blank" rel="noopener" href="https://onlycalm.github.io">OnlyCalm</a> 的博客</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    var typed = new Typed("#subtitle", {
+      strings: "纪念我过去 为人如此风趣,活得精彩 结尾切勿流眼泪,友情爱情两边都发现 亏欠,没求过你 你就当我骄傲,离时代远远 无人间烟火,从今天开始 相识当做别离,做喜欢的工作和享受游戏 一死了 怎细味".split(","),
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = '纪念我过去 为人如此风趣'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') subtitleType()
+  else $.getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js', subtitleType)
+} else {
+  subtitleType()
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script id="canvas_nest" defer="defer" color="0, 205, 102" opacity="0.7" zIndex="-1" count="200" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="/js/third-party/ClickShowText.js" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script></div></body></html>

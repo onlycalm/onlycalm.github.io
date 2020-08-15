@@ -1,0 +1,48 @@
+<ul>
+<li><p>普通值参数。<br>&emsp;&emsp;普通值参数是较为庞大的一类参数，这类参数的值类型不一，值之间的关联性可以很复杂，每种值各有特点，参数的有效性检验很难做统一的处理。我们可以定义为如下结构体：  </p>
+<pre><code>//Sign enum definition-------------------------------------------------------------------
+typedef enum Sign{SIGN_MINUS = -1, SIGN_PLUS = 1}ESign;          //Unusual state
+typedef enum Lock{LOCK_UNLOCK = 0, LOCK_LOCK = 1}ELock;          //Resource lock
+
+//Value parameter structure definition----------------------------------------------------
+typedef struct ValueParameter
+{
+    ESign eSign;                                //Value: SIGN_PLUS of SIGN_MINUS
+    Word wValue;                                //Current value
+    Word wPrevious;                             //Previous value
+    Word wDefault;                              //Default value
+    Word wCounter;                              //duration time
+    Word wUpperLimit;                           //Upper limit
+    Word wLowerLimit;                           //Lower limit
+    Word wJumpLimit;                            //Jump limit
+    Word wOverdueLimit;                         //Overdue limit
+    Byte wLock;                                 //Resource lock
+}TValueParameter, * pTValueParameter;
+
+//Value parameter initialization----------------------------------------------------------
+//Motor Rpm
+TValueParameter tvMotorActualRpm = {.eSign         = SIGN_PLUS,
+                                    .wValue        = 0,                //Unit: Rpm
+                                    .wPrevious     = 0,
+                                    .wDefault      = 1000,
+                                    .wCounter      = 0,                //Unit: ms
+                                    .wUpperLimit   = 2000,
+                                    .wLowerLimit   = 0,
+                                    .wJumpLimit    = 1000,
+                                    .wOverdueLimit = 0,                //Unit: s
+                                    .wLock           = LOCK_UNLOCK
+                                   };
+
+//Speed
+TValueParameter tvSpeed = {.eSign         = SIGN_PLUS,
+                           .wValue        = 0,                //Unit: 0.1K/M
+                           .wPrevious     = 0,
+                           .wDefault      = 400,
+                           .wCounter      = 0,                //Unit: ms
+                           .wUpperLimit   = 200,
+                           .wLowerLimit   = 0,
+                           .wJumpLimit    = 1000,
+                           .wOverdueLimit = 0,                //Unit: s
+                           .wLock          = LOCK_UNLOCK
+                          };</code></pre></li>
+</ul>

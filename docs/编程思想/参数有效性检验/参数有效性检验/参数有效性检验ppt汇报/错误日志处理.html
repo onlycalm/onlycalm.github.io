@@ -1,0 +1,48 @@
+<ul>
+<li><p>错误日志处理。<br>  &emsp;&emsp;随着项目规模的不断扩大，日志的应用对于维护程序的正常运行具有重要的意义。当一个程序崩溃时如果没有抛出异常信息，对于维护人员来说无法快速定位问题，更别谈去解决问题了。<br>  日志时程序员解决问题的第一手资料。异常发生时，从别人口述的情况往往存在不准确或模糊，为了更好的解决问题我们需要当时发生了什么，用户当时做了什么操作，运行环境有无异常，数据有哪些变化，异常时否反复发生，是偶发还是有必然起因。若日志做了详细记录对于问题的定位和解决起到举足轻重的作用。  </p>
+<ol>
+<li><p>日志的作用</p>
+<ol>
+<li>记录用户操作的审计日志，甚至就是监管部门的要求。   </li>
+<li>记录程序运行的流程。   </li>
+<li>记录数据的变化。  </li>
+<li>记录异常信息，快速定位问题根源。  </li>
+<li>数据统计和性能分析（程序性能或设备性能）。<br></br> </li>
+</ol>
+</li>
+<li><p>如何做好程序日志  </p>
+<ol>
+<li><p>日志的可读性<br> &emsp;&emsp;看日志的是程序员，但并不一定是接触过相关模块或看过这部分源码的程序员。日志应该一路了然，信息详细但又不重复冗余。日志信息应该准确可靠，避免含糊不清的日志。  </p>
+</li>
+<li><p>日志的资源消耗<br> &emsp;&emsp;日志的记录毫无疑问需要消耗资源，占用程序运行的时间资源、占用io口写入文件或数据库，占用磁盘或EE存储。日志信息应该简明扼要，避免打印无意义的日志，减少重复日志。日志应该做成滚动式，记录一段时间内的日志和错误等级高的日志，防止日志文件写满存储空间。  </p>
+</li>
+<li><p>日志应该分等级<br> 日志的等级可以分为FATAL、ERROR、INFO、DEBUG、TRACE。  </p>
+<ol>
+<li><p>FALTAL（致命）<br> FALTAL是错误等级最高的重大错误，它的出现程序无法自我恢复，必须通过复位程序才能运行。该类错误应该记录错误码。  </p>
+</li>
+<li><p>ERROR（错误）<br> 这类错误虽然发生，但可以通过程序来弥补或忽略来保证程序正常运行。该类错误需要记录错误码。  </p>
+</li>
+<li><p>WARN（警告）<br> 表示会出现潜在错误的情形，比如参数未传入，使用默认了参数，参数持续时长一直未变化，这类错误虽异常但在程序员预期之内，并且程序做了充分的弥补措施。也建议记录错误码。  </p>
+</li>
+<li><p>INFO（信息）<br> 用于记录程序的运行过程，打印一些程序运行中的重要信息，但要避免滥用。  </p>
+</li>
+<li><p>DEBUG（调试）<br> 用于开发调试过程中，由程序员自由控制，具有较高灵活度。  </p>
+</li>
+<li><p>TRACE（跟踪）<br> 一般不使用。用于跟踪函数的调用，不含变量只反应函数调用关系。  </p>
+</li>
+</ol>
+</li>
+</ol>
+<p>代码示例：  </p>
+<p> //Log Level definition—————————————————————–<br> typedef enum LogLevel {LOG_LEVEL_TRACE, LOG_LEVEL_DEBUG, LOG_LEVEL_INFO, LOG_LEVEL_WARN, LOG_LEVEL_ERROR, LOG_LEVEL_FATAL} ELogLevel;</p>
+<p> // 定义FATAL级别输出宏<br> #define LOG_FATAL(wFaultCode, strFormat, …)         LogPrint(LOG_LEVEL_FATAL, “<a href="%s">%s &lt;%d&gt;</a> “ “[%#08X]” strFormat “\n”, <strong>FILE</strong>, <strong>LINE</strong>, <strong>FUNCTION</strong>, wFaultCode, ##<strong>VA_ARGS</strong>)</p>
+<p> // 定义ERROR级别输出宏<br> #define LOG_ERROR(wFaultCode, strFormat, …)         LogPrint(LOG_LEVEL_ERROR, “<a href="%s">%s &lt;%d&gt;</a> “ “[%#08X]” strFormat “\n”, <strong>FILE</strong>, <strong>LINE</strong>, <strong>FUNCTION</strong>, wFaultCode, ##<strong>VA_ARGS</strong>)</p>
+<p> // 定义WARN级别输出宏<br> #define LOG_WARN(wFaultCode, strFormat, …)          LogPrint(LOG_LEVEL_WARN, “<a href="%s">%s &lt;%d&gt;</a> “ “[%#08X]” strFormat “\n”, <strong>FILE</strong>, <strong>LINE</strong>, <strong>FUNCTION</strong>, wFaultCode, ##<strong>VA_ARGS</strong>)  </p>
+<p> // 定义INFO级别输出宏<br> #define LOG_INFO(strFormat, …)          LogPrint(LOG_LEVEL_INFO, “<a href="%s">%s &lt;%d&gt;</a> “ strFormat “\n”, <strong>FILE</strong>, <strong>LINE</strong>, <strong>FUNCTION</strong>, ##<strong>VA_ARGS</strong>)</p>
+<p> // 定义DEBUG级别输出宏<br> #define LOG_DEBUG(strFormat, …)         LogPrint(LOG_LEVEL_DEBUG, “<a href="%s">%s &lt;%d&gt;</a> “ strFormat “\n”, <strong>FILE</strong>, <strong>LINE</strong>, <strong>FUNCTION</strong>, ##<strong>VA_ARGS</strong>)   </p>
+<p> // 定义TRACE级别输出宏<br> #define LOG_TRACE(strFormat, …)         LogPrint(LOG_LEVEL_TRACE, “<a href="%s">%s &lt;%d&gt;)</a> “ strFormat “\n”, <strong>FILE</strong>, <strong>LINE</strong>, <strong>FUNCTION</strong>, ##<strong>VA_ARGS</strong>)</p>
+<p>输出结果展示：  </p>
+<center>![Alt text](.\Pictures\DemoLog.PNG "DemoLog")</center></li>
+</ol>
+</li>
+</ul>

@@ -1,0 +1,47 @@
+<ul>
+<li><p>功能型参数。<br>&emsp;&emsp;用于表示某项功能开关的参数，我们可以定义为如下结构体：   </p>
+<pre><code>//Type redefinition------------------------------------------------------------------------
+typedef unsigned char Byte;
+typedef Uint16        Word;
+
+//Function enum definition-----------------------------------------------------------------
+typedef enum Switch {DISABLE, ENABLE} ESwitch; //Switch variable
+
+//Functional parameter structure-----------------------------------------------------------
+typedef struct FunParameter
+{
+    ESwitch eSwitch;               //Value: ENABLE or DISABLE
+    ESwitch ePrevious;             //Previous value
+    Word wCounter;                 //Enable or Disable time
+}TFunParameter, * pTFunParameter;
+
+//functional parameter initialization------------------------------------------------------
+//Motor head temperature
+TFunParameter tfHeadTemp = {.eSwitch = ENABLE,
+                            .ePrevious = DISABLE,
+                            .wCounter = 0
+                           };</code></pre><p>  <em>note:定义历史值方便检测功能开关状态切换的跳变变化。功能有时需要记录开启或者关闭时间，因此直接将定时器封装进结构体使得参数关系紧密。</em>  </p>
+<p>  &emsp;&emsp;对功能型参数使用枚举类型因此不需要检测值越界失效和符号异常失效，重要的是检测关联数据异常失效。比如功能A和B为互斥关系，一次只能有一个功能打开或两个功能都关闭，再比如功能B开启前应该先打开功能A。功能开关较多，关联性强的情况下这样的检测变得重要。<br>  &emsp;&emsp;对于功能型参数的关联性检测可以放到预处理时期由编译器检测，不用等到外出调试才发现错误。预处理指令不能检测变量，考虑到功能有效性一旦确当后不在修改，但又要满足调试时可能存在的对功能开关的修改，可以通过以下形式实现：  </p>
+<pre><code>//General macro definition-----------------------------------------------------------------
+#define ENABLE                    1
+#define DISABLE                   0
+
+//The switch of Function-------------------------------------------------------------------
+#define FUN_HEAD_TEMP             ENABLE
+#define FUN_OIL_PRESS             DISABLE
+#define FUN_HEAD_TEMP_STOP        ENABLE
+
+//Functional correlation detection---------------------------------------------------------
+#if((FUN_HEAD_TEMP == FUN_OIL_PRESS) &amp;&amp; (FUN_HEAD_TEMP == ENABLE))
+    #error 油压与油温为互斥功能,不能同时开启。
+#endif
+
+#if((FUN_HEAD_TEMP_STOP == ENABLE) &amp;&amp; (FUN_HEAD_TEMP == DISABLE))
+    #error 开启油温停机功能必须同时开启油温采样功能。
+#endif
+
+//functional parameter initialization--------------------------------------------------------
+TFunParameter tfHeadTemp = {.eSwitch = FUN_HEAD_TEMP, .ePrevious = DISABLE, .wCounter = 0};              //Motor head temperature
+TFunParameter tfOilPress = {.eSwitch = FUN_OIL_PRESS, .ePrevious = DISABLE, .wCounter = 0};              //Oile press Function
+TFunParameter tfHeadTempStop = {.eSwitch = FUN_HEAD_TEMP_STOP, .ePrevious = DISABLE, .wCounter = 0};     //Motor Closed Function</code></pre></li>
+</ul>

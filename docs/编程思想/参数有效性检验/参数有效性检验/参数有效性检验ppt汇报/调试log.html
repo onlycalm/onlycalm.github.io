@@ -1,0 +1,70 @@
+<ul>
+<li><p>调试log。<br>  &emsp;&emsp;跟踪代码运行轨迹，担当开发环境中的调试利器，提高开发效率，增强查错能力。<br>  区别出产品代码与开发代码。产品级软件要求运行快速、节约资源、较高安全性，而开发中的软件可以运行缓慢、资源利用奢侈、提供一些额外的辅助调试的不安全操作。开发期间牺牲一些速度和资源换取使开发顺畅的内置工具，比如调试log，用于监视程序运行流程和数据。  </p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef unsigned int Uint16;
+
+typedef unsigned char Byte;
+typedef Uint16        Word;
+
+//Function enum definition-----------------------------------------------------------------
+typedef enum Switch {DISABLE, ENABLE} ESwitch; //Switch variable
+
+#define DEBUG_LOG
+
+#ifdef DEBUG_LOG
+    //Global variable-----------------------------------------------------------------
+    ESwitch bDebugSwtich = DISABLE;
+
+    //Switch function
+    #define DEBUG_SWITCH(bSwitch)        bDebugSwtich = (bSwitch)
+
+    //Basic function
+    #define DEBUG_ENTER_FUN()            (DISABLE == bDebugSwtich) ? ((void)0) : printf(&quot;File: %s. -Line: %d. &lt;-----Enter function - %s -----&gt;\n&quot;, __FILE__, __LINE__, __FUNCTION__)
+    #define DEBUG_EXIT_FUN()             (DISABLE == bDebugSwtich) ? ((void)0) : printf(&quot;File: %s. -Line: %d. &lt;-----Exit function - %s -----&gt;\n&quot;, __FILE__, __LINE__, __FUNCTION__)
+    #define DEBUG_PRINT(strFormat, ...)  (DISABLE == bDebugSwtich) ? ((void)0) : printf(&quot;File: %s. -Line: %d. -Function: %s. ---&gt;&gt; &quot; strFormat &quot;\n&quot;, __FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__)
+    #define DEBUG_RETURN(Ret)            (DISABLE == bDebugSwtich) ? ((void)0) : printf(&quot;File: %s. -Line: %d. -Function: %s. ===&gt;&gt; Ret: %#08X\n&quot;, __FILE__, __LINE__, __FUNCTION__, Ret);
+
+    //Extension function
+    #define DEBUG_NUMBER(Number)         (DISABLE == bDebugSwtich) ? ((void)0) : printf(&quot;File: %s. -Line: %d. -Function: %s. ---&gt;&gt; &quot; #Number &quot; = %d\n&quot;, __FILE__, __LINE__, __FUNCTION__, Number)
+#else
+    //Switch function
+    #define DEBUG_SWITCH(bSwitch)        ((void)0)
+
+    //Basic function
+    #define DEBUG_ENTER_FUN()            ((void)0)
+    #define DEBUG_EXIT_FUN()             ((void)0)
+    #define DEBUG_PRINT(strFormat, ...)  ((void)0)
+    #define DEBUG_RETURN(Ret)            ((void)0)
+
+    //Extension function
+    #define DEBUG_NUMBER(Number)         ((void)0)
+#endif
+
+int main()
+{
+    int a = 0;
+    int b = 0;
+    int sum = 0;
+    int Return = 0x00000001;
+
+    DEBUG_SWITCH(ENABLE);
+    DEBUG_ENTER_FUN();
+
+    a = 10;
+    DEBUG_NUMBER(a);
+    b = 2;
+    DEBUG_NUMBER(b);
+    sum = a + b;
+    DEBUG_PRINT(&quot;%d  = %d + %d&quot;, sum, a, b);
+
+    DEBUG_RETURN(Return);
+    DEBUG_EXIT_FUN();
+    DEBUG_SWITCH(DISABLE);
+
+    system(&quot;pause&quot;);
+    return Return;
+}</code></pre><p>  输出结果展示：  </p>
+  <center>![Alt text](.\Pictures\Debug_Log.PNG "Debug_Log")</center></li>
+</ul>
