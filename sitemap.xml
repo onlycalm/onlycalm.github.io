@@ -72,14 +72,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/docs/PySide2/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94QSpinBox%E8%BF%90%E7%94%A8/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94QSpinBox%E8%BF%90%E7%94%A8/</loc>
+    <loc>http://yoursite.com/docs/PySide2/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94QPlainTextEdit%E8%BF%90%E7%94%A8/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94QPlainTextEdit%E8%BF%90%E7%94%A8/</loc>
     
     <lastmod>2020-08-09</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/docs/PySide2/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94QPlainTextEdit%E8%BF%90%E7%94%A8/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94QPlainTextEdit%E8%BF%90%E7%94%A8/</loc>
+    <loc>http://yoursite.com/docs/PySide2/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94QSpinBox%E8%BF%90%E7%94%A8/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94QSpinBox%E8%BF%90%E7%94%A8/</loc>
     
     <lastmod>2020-08-09</lastmod>
     
@@ -107,14 +107,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/docs/PySide2/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94QProgressBar%E8%BF%90%E7%94%A8/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94QProgressBar%E8%BF%90%E7%94%A8/</loc>
+    <loc>http://yoursite.com/docs/PySide2/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94QMessageBox%E8%BF%90%E7%94%A8/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94QMessageBox%E8%BF%90%E7%94%A8/</loc>
     
     <lastmod>2020-08-09</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/docs/PySide2/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94QMessageBox%E8%BF%90%E7%94%A8/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94QMessageBox%E8%BF%90%E7%94%A8/</loc>
+    <loc>http://yoursite.com/docs/PySide2/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94QProgressBar%E8%BF%90%E7%94%A8/PySide2%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94QProgressBar%E8%BF%90%E7%94%A8/</loc>
     
     <lastmod>2020-08-09</lastmod>
     
@@ -578,14 +578,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/QSpinBox/</loc>
+    <loc>http://yoursite.com/tags/QPlainTextEdit/</loc>
     <lastmod>2020-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/QPlainTextEdit/</loc>
+    <loc>http://yoursite.com/tags/QSpinBox/</loc>
     <lastmod>2020-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -627,14 +627,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/QProgressBar/</loc>
+    <loc>http://yoursite.com/tags/QMessageBox/</loc>
     <lastmod>2020-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/QMessageBox/</loc>
+    <loc>http://yoursite.com/tags/QProgressBar/</loc>
     <lastmod>2020-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -691,6 +691,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/Gitee/</loc>
+    <lastmod>2020-08-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE/</loc>
     <lastmod>2020-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
