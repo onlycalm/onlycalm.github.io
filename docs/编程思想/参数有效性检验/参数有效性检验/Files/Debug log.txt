@@ -1,7 +1,0 @@
-File: C:\Users\think\Desktop\DEBUG_LOG.c. -Line: 24. <-----Enter function - main ----->
-File: C:\Users\think\Desktop\DEBUG_LOG.c. -Line: 27. -Function: main. --->> a = 10
-File: C:\Users\think\Desktop\DEBUG_LOG.c. -Line: 29. -Function: main. --->> b = 2
-File: C:\Users\think\Desktop\DEBUG_LOG.c. -Line: 31. -Function: main. --->> 12  = 10 + 2
-File: C:\Users\think\Desktop\DEBUG_LOG.c. -Line: 33. -Function: main. ===>> Ret: 0X000001
-File: C:\Users\think\Desktop\DEBUG_LOG.c. -Line: 34. <-----Exit function - main ----->
-请按任意键继续. . .

@@ -1,6 +1,0 @@
-[TRACE] - [C:\Users\think\Desktop\DEBUG_LOG.c <75>)](main) --------Enter Main Function---------
-[DEBUG] - [C:\Users\think\Desktop\DEBUG_LOG.c <78>](main) a = 10
-[INFO] - [C:\Users\think\Desktop\DEBUG_LOG.c <80>](main) b = 0
-[ERROR] - [C:\Users\think\Desktop\DEBUG_LOG.c <84>](main) [0X1000003]The denominator is zero
-[INFO] - [C:\Users\think\Desktop\DEBUG_LOG.c <91>](main) Ret: 0X00000000
-[TRACE] - [C:\Users\think\Desktop\DEBUG_LOG.c <92>)](main) --------Exit Main Function---------
