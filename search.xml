@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>为什么要坚持写博客</title>
+      <link href="//docs/%E6%84%9F%E6%82%9F/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%9D%9A%E6%8C%81%E5%86%99%E5%8D%9A%E5%AE%A2/"/>
+      <url>//docs/%E6%84%9F%E6%82%9F/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%9D%9A%E6%8C%81%E5%86%99%E5%8D%9A%E5%AE%A2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="为什么要坚持写博客"><a href="#为什么要坚持写博客" class="headerlink" title="为什么要坚持写博客"></a><center>为什么要坚持写博客</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;如果将“为什么要坚持写博客？”的问题换成“为什么要坚持学习”，我想你由非常多的原因告诉自己要坚持学习，比如为了提升自己，为了增强自己的竞争力不被淘汰等。人的一生说长步长说短不短，从学生时期不同阶段学习不同的科学文化知识，到进入社会后学习技能、待人处事之道、甚至学习娱乐。我们总是在学习让自己更好发展的知识，有些知识即学即用，有些知识受用终生，潜移默化。有些知识繁杂，有些知识零星，有些知识成体系，如果将学习的知识进行整理归类，方便自己复习查阅也分享给他人受用。倘若将学习知识的过程记录下来，这其实就是一个人的成长过程。写博客的就是记录自己的人生，分享知识的财富。</em></p><h2 id="1-谈谈我写博客的历程"><a href="#1-谈谈我写博客的历程" class="headerlink" title="1 谈谈我写博客的历程"></a>1 谈谈我写博客的历程</h2><p>&emsp;&emsp;我第一次写博客是在大四临近毕业，在苏州一家公司实习时期。在大学期间参加过很多科研竞赛，每次遇到问题就会上一些技术论坛也博客网站搜索答案和发起提问，比如正点原子和野火官方论坛，CSDN和博客园等。到工作实习时发现自己在学校搞的东西都是小儿科，很多东西要从头学起，于是白嫖了四年终于决定在CSDN上发表自己的文章，记录和分享学习的过程。<br>&emsp;&emsp;我写博客并不算早，现在在一些技术群里发现很多大学生甚至高中生已经开始接触编程并写博客，他们的文章内容也可圈可点。现在00后接触电脑挺早的，直到高中家里才买了第一台电脑，现在年轻人有更好的机会学习。<br>&emsp;&emsp;我曾经在CSDN上创建过两个账号，第一个账号由于当时追一个女孩子最后没有追到所以放弃使用了，想要放弃一切和她有关的东西，比较幼稚不多提了。第二个账号用到最近也打算弃用了，开始自立门户写博客。</p><h2 id="2-为什么要自立门户"><a href="#2-为什么要自立门户" class="headerlink" title="2 为什么要自立门户"></a>2 为什么要自立门户</h2><p>&emsp;&emsp;所谓的自立门户就是不在一些博客平台上发布文章，自己租用服务器或免费的平台自己搭建发布博客。这两年一些快速、简洁且高效的博客框架兴起，最重要的是免费，使得搭建个人博客变得简单，更程序员开始自己搭建博客。<br>&emsp;&emsp;搭建自己的博客有几大优势，当然也有弊端。<br>&emsp;&emsp;优势：</p><blockquote><ul><li>根据自己喜好高度自定制。像CSDN个性化做的太差，大家都是一个模子，博客园相对更具个性化，但它的主页是古董级别。</li><li>不需要经受平台的管理审核。平台基本还是人工审核，下班时间发布需要等待第二天过审，过审效率不定有时候过审很慢。有些内容不能过审，自立门户也不要去发违规的内容，小心被查封网站，但相对自由很多了。</li><li>不会被植入广告。像我之前用的CSDN，广告内容会占据两个显眼位置，自立门户有没有广告取决于你。</li><li>可发布更丰富的内容。我放弃CSDN最主要的原因是它只允许发布IT技术博客，我尝试发过一些非技术博客但不能过审。我希望把自己的博客当做工作、学习、生活的记录分享平台，而不是工作去CSDN或博客源发，生活去微博发，然后学习看学得内容是什么在决定去哪儿发。</li><li>可以了解更详细的访问数据。如果你想详细知道自己博客的访问情况，比如主要访问者年龄段，访问平均时长等信息，品台一般不提供或收费提供。而自立门户后如果你购买了域名（域名真的不贵，比平台会员便宜多了），让百度和Google收录你的网站，你就可以在他们的站长平台看到详细的访问数据，是真的非常详细！根据这些信息来调整创作内容。</li><li>可以自己管理评论。自立门户包括评论系统也是自己选择的，目前免费的评论系统不少，你可以对评论进行管理，而平台则无法管理或权限很小。</li></ul></blockquote><p>&emsp;&emsp;劣势：</p><blockquote><ul><li>没有平台的访问量。平台最大的优势就是访问量，只要你的文章写得好，平台还会推送到首页，而自立门户可能意味着无人问津。当然，你可以将自己的文章让百度和Google收录能带来一定的访问量，但还是不如一些大平台，比如CSDN在百度搜索的优先级很高，很容易搜索出来，而你个人向百度提交你的链接，它可能几个月甚至根本不会收录你的链接。</li><li>不利于赚取收益。比如CSDN上一些大博主可能是某些技术大牛或名师，它的文章需要付费订阅，这可以给辛苦创作的博主带来一定的收入，而自立门户目前顶多放个捐款二维码，等掉馅饼了。</li><li>没有固定的粉丝。平台拥有大量的注册用户，用户之间可以互相关注或取关，自立门户则意味着访问者都是散兵游勇，很难留住长期用户。</li><li>需要花更多精力维护。在品台上发布文章很容易，而自立门户自由度高带来的影响就是需要维护你所用的博客框架，博客主题，所用的各类插件等，因为这些东西可能存在Bug不要你自己解决，也需要自行升级版本。</li></ul></blockquote><p>&emsp;&emsp;如果你想要更多的阅读量或粉丝，那建议你在平台发布，如果想要找一个集工作、学习、生活于一体的个人“空间”，无疑只能自立门户建博客了。</p><h2 id="3-请坚持写博客"><a href="#3-请坚持写博客" class="headerlink" title="3 请坚持写博客"></a>3 请坚持写博客</h2><p>&emsp;&emsp;我相信所有坚持写博客的人都是热爱技术，热爱生活，积极拼搏的人。我想某种程度上来说博客也算是一种“日记”，它记录你的成长，隐含了青春的迷茫和拼搏，饱含了成熟后经验。愿每一个写博客的人能坚持写下你的“故事”，向同样热爱学习的人分享知识，虽然有时候一个人感到孤寂，有时候坚持的事也令你很怀疑，不求回报，只是想要给世界留下点足迹。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 感悟 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客 </tag>
+            
+            <tag> 感悟 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Qt Creator下载与安装</title>
       <link href="//docs/Qt%20Creator/Qt%20Creator%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/"/>
       <url>//docs/Qt%20Creator/Qt%20Creator%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/</url>
@@ -313,11 +340,11 @@
             
             <tag> Hexo </tag>
             
+            <tag> Gitee </tag>
+            
             <tag> 部署 </tag>
             
             <tag> Coding </tag>
-            
-            <tag> Gitee </tag>
             
         </tags>
       
@@ -1400,9 +1427,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> TeamViewer </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -2210,28 +2237,6 @@
     
     
     <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>reward</title>
-      <link href="/reward/index.html"/>
-      <url>/reward/index.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title></title>
       <link href="/css/butterfly.css"/>
       <url>/css/butterfly.css</url>
@@ -2265,11 +2270,33 @@
     
     
     <entry>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>reward</title>
+      <link href="/reward/index.html"/>
+      <url>/reward/index.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>music</title>
       <link href="/music/index.html"/>
       <url>/music/index.html</url>
       
-        <content type="html"><![CDATA[    <div id="aplayer-UUCJFwjV" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
+        <content type="html"><![CDATA[    <div id="aplayer-AGFcWvxN" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
       
     </entry>
     
