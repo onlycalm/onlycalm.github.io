@@ -4,11 +4,38 @@
   
     
     <entry>
+      <title>嵌入式单片机开发的低功耗追求</title>
+      <link href="//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%9A%84%E4%BD%8E%E5%8A%9F%E8%80%97%E8%BF%BD%E6%B1%82/"/>
+      <url>//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%9A%84%E4%BD%8E%E5%8A%9F%E8%80%97%E8%BF%BD%E6%B1%82/</url>
+      
+        <content type="html"><![CDATA[<h1 id="嵌入式单片机开发的低功耗追求"><a href="#嵌入式单片机开发的低功耗追求" class="headerlink" title="嵌入式单片机开发的低功耗追求"></a><center>嵌入式单片机开发的低功耗追求</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;虽然我使用单片机开发也有几年时间了，由于我主要是做上层的功能开发，因此在单片机底层的性能上关注较少，有所欠缺。到M公司后它的产品都是用锂电池、干电池、超级电容，因此对功耗要求比较严格，而这恰巧是我的短板。虽然我作出的产品功能上没有什么问题，但在功耗性能上总觉得不够满意。而如今经过磨练也积攒了一点经验，希望将其记录分享给需要的人。</em></p><h2 id="1-关于低功耗"><a href="#1-关于低功耗" class="headerlink" title="1 关于低功耗"></a>1 关于低功耗</h2><h3 id="1-1-为什么要追求低功耗"><a href="#1-1-为什么要追求低功耗" class="headerlink" title="1.1 为什么要追求低功耗"></a>1.1 为什么要追求低功耗</h3><p>&emsp;&emps;追求低功耗是为了节省电量损耗，增加设备的使用时长。特别在一些使用电池供电的移动设备中，降低功耗将使得产品更具有竞争力。</p><h3 id="1-2-如何计算用电设备使用时长"><a href="#1-2-如何计算用电设备使用时长" class="headerlink" title="1.2 如何计算用电设备使用时长"></a>1.2 如何计算用电设备使用时长</h3><p>&emsp;&emsp;电池最重要的参数之一就是电池容量，单位通常是 <strong>mAh</strong>、<strong>Ah</strong>。比如一个3000mAh的电池，当用电设备使用该电池以3000mA进行放电时可以持续放电1h。<br>&emsp;&emsp;计算库仑：<br>$$1mAh = 0.001A \times 3600s = 3.6As = 3.6C$$ （库仑）<br>&emsp;&emsp;计算功率：<br>$$P = UI = I^{2}R = \frac{U^{2}}{R}$$<br>&emsp;&emsp;一点锂电池的容量是80mAh，用电设备的最大损耗电流是1mA，那么 $\frac{80mAh}{1mA} = 80h$，该设备理论上至少可以使用80小时。</p><h2 id="2-如何降低功耗"><a href="#2-如何降低功耗" class="headerlink" title="2 如何降低功耗"></a>2 如何降低功耗</h2><p>&emsp;&emsp;要降低功耗首先要知道在哪些地方消耗功耗，然后对症下药，针对性的降低每一块的功耗。功耗和硬件及软件都有关系，主要从六个方面进行优化：</p><blockquote><ul><li>器件选型</li><li>合理配置IO</li><li>优化硬件电路</li><li>选择合适主频</li><li>充分利用低功耗模式</li><li>节约使用外设资源和时钟</li></ul></blockquote><p>&emsp;&emsp;降低功耗的秘诀总结起来就是一个字“抠”，尽可能的从各个方面去“节约”使用。</p><h2 id="3-器件选型"><a href="#3-器件选型" class="headerlink" title="3 器件选型"></a>3 器件选型</h2><p>&emsp;&emsp;电路中往往会使用至少一个主控芯片及其他传感器，这些器件都具有一定的功耗损耗，在器件选型时在成本和性能需求允许的情况下应该尽量选择功耗较低的芯片或传感器，需要仔细阅读相关手册。<br>&emsp;&emsp;器件选型是做低功耗的前提，比如选择一款M4内核的高性能单片机将无法在低功耗上获得较好的表现，器件决定了低功耗的下限。一般来说使用M0或M0+内核的低功耗单片机更适合作出低功耗产品，但在芯片资源上会较为“紧张”。对于一些外部传感器比如GSensor，其功耗还与配置的有关，性能配置得越高功耗也越高。</p><h2 id="4-合理配置IO"><a href="#4-合理配置IO" class="headerlink" title="4 合理配置IO"></a>4 合理配置IO</h2><p>&emsp;&emsp;根据使用，我们可以将IO分为三类：</p><blockquote><ul><li>特殊功能IO。如SWD口、接外部晶振的IO、复位IO等。</li><li>根据电路设计所使用的IO。比如输出输出IO、IIC通讯IO等。</li><li>未使用的剩余IO。一些电路设计未接，悬空的IO。</li></ul></blockquote><p>&emsp;&emsp;另外，IO作为输出时通常还可配置驱动能力，驱动力越强功耗越大，所以在驱动能力足够情况下尽量选小的，一般驱动数字器件选择较低的驱动能力就足够了。</p><h3 id="4-1-特殊功能IO"><a href="#4-1-特殊功能IO" class="headerlink" title="4.1 特殊功能IO"></a>4.1 特殊功能IO</h3><p>&emsp;&emsp;特殊功能的IO配置是确定的，比如IIC口就需要配置为开漏输出且外部上拉，复位脚往往也要配置为输入并且外部上拉，而SWD口默认就配置好了，我们省功耗的操作空间较小。</p><h3 id="4-2-根据电路设计所使用的IO"><a href="#4-2-根据电路设计所使用的IO" class="headerlink" title="4.2 根据电路设计所使用的IO"></a>4.2 根据电路设计所使用的IO</h3><p>&emsp;&emsp;当IO的外部电路接上拉电阻时，那么当对IO输入低电平将产生较大的电流损耗，常见的运用是按键电路。根据外部电路的设计，IO需要配置为合适的状态才能最省功耗。根据我的经验总结为以下几条：</p><blockquote><ul><li>当IO作为输入时，如果输入信号有频繁的高低变化，将IO配置为浮空输入将更省功耗。</li><li>当IO作为输出时，如果需要频繁输出高低电平，将IO配置为推挽输出将更省功耗。</li><li>当IO间歇作为输出时，比如在采样电路中，不采样时可将IO口配置为高阻输出状态可降低电流损耗。高阻态相当于电阻很大，理论上等效为“断开”，从而降低流过电流。</li><li>如果外部接了上拉电阻，要尽量减少IO处于低电平的时间。反过来如果是下拉电阻，则要尽量避免IO处于高电平的时间。</li></ul></blockquote><p>&emsp;&emsp;总之，就是要避免压差，产生压差又有电阻形成通路，就会产生损耗电流。</p><h3 id="4-3-未使用的剩余IO"><a href="#4-3-未使用的剩余IO" class="headerlink" title="4.3 未使用的剩余IO"></a>4.3 未使用的剩余IO</h3><p>&emsp;&emsp;大多数单片机的IO，如果悬空时配置为上拉会比下拉更省功耗，通常可配置为上拉输入。芯片复位后IO口往往处于高阻输入状态，即浮空输入状态。目的是防止复位时IO的异常电平变化导致外部器件做出错误的动作，所以上电后需要对IO进行配置。当浮空脚悬空时电平是介于高低之间，会产生漏电流，因此通常的做法是对未使用的悬空IO口配置为上拉输入状态，也可以是高祖输出（指开漏输出高，外部无上拉），这样能达到最低电流功耗。不同的单片机可能存在差异，具体特性需要查阅手册。</p><h2 id="5-优化硬件电路"><a href="#5-优化硬件电路" class="headerlink" title="5 优化硬件电路"></a>5 优化硬件电路</h2><p>&emsp;&emsp;一些硬件工程师认为自己电路设计好了，功耗高是软件的问题，而软件工程师也<br>委屈，明明功能很简单但功耗就是降不下去。事实上功耗和软硬件都脱不了干系。<br>&emps;&emsp;当你器件选型好，拿到板子后先别急着调试功能，先把把IO口配置到最佳状态，然后将主芯片及所用的传感器设置到一个手册上有对应功耗数据的确定状态，比如关闭单片机所有的外设并进入sleep模式，然后测试整板的功耗，如果明显比手册上记录的功耗大，那就是硬件电路设计的问题，存在漏电流。<br>&emsp;&emsp;我自己就被坑过，软件也要懂点硬件知识不然被坑的时候想破头也不明白。硬件设计的电路中存在功耗损耗大的常见就是上拉电阻的地方，比如IO外部上拉，IIC总线的上拉等。如果硬件设计的上拉电阻过小，则电路电平为低时将产生较大的电流损耗，比如上拉电阻4.7kΩ接1.8v，当IO输出低电平时将产生损耗电流为 $\frac{1.8v}{4.7kΩ} = 383uA$，这对低功耗产品太说功耗太过大，如果将上拉电阻改为100kΩ呢 $\frac{1.8v}{100kΩ} = 18uA$，这功耗差异非常明显。IIC总线上拉电阻也不宜过大，否则会导致驱动能力不足上升沿过缓，但是其他普通IO口则对上升沿要求不高，选择较大的上拉电阻能降低电流损耗。<br>&emsp;&emsp;除了上面提到的上拉电阻，还有硬件的采样电路、滤波电路、放大电路等，这些电路往往是硬件增加功耗的大头，我们可以先从软件上关闭其他功能，单独对这些硬件电路进行“试用”，检测是否存在缺陷而导致功耗过大。</p><h2 id="6-选择合适主频"><a href="#6-选择合适主频" class="headerlink" title="6 选择合适主频"></a>6 选择合适主频</h2><p>&emsp;&emps;手册上都会给出单片机在不同主频下的电流损耗，不难看出主频越高电流损耗越大，但这里有个误区。在实际使用中并不是一味的追求将主频降到最低越好，因为手册上给出的数据是cpu跑空循环的数据，而实际使用中我们往往会在运算完成后进入低功耗模式，主频+低功耗模式对功耗的影响就像一辆汽车跑100公里用什么速度跑最省油，结论不是最高速度也不会是龟速，而是中间某一个达到优劣势平衡的速度。高的主频能尽快将有限的运算完成，使得有更多处于低功耗模式的时间。而降低主频虽然运算变慢，但是同比条件下低主频损耗更小。在实际使用中我们需要综合考虑运算量和芯片低功耗特性，通过实际调试去选择一个最优功耗的主频，不要盲目降低主频。</p><h2 id="7-充分利用低功耗模式"><a href="#7-充分利用低功耗模式" class="headerlink" title="7 充分利用低功耗模式"></a>7 充分利用低功耗模式</h2><p>&emsp;&emsp;不同的单片机低工作模式不同，常见的有这五类：</p><blockquote><ul><li>Active mode: cpu及所有外设都可正常工作。</li><li>Sleep mode: 一般cpu停止，但外设都可正常工作，任意中断源可唤醒cpu。</li><li>Deep sleep mode: 一般cpu和大部分外设都停止工作，除了一些专用的低功耗外设。仅一些特殊的中断源可唤醒cpu。</li><li>Power down mode: 一般cpu和外设都不能使用，仅一些特殊的中断源可唤醒cpu。</li><li>Deep power down mode: cpu和外设都不能使用，mcu功耗达到最低，仅少数外部IO中断可唤醒，唤醒后相当于复位运行。唤醒时间较长，不用于实时性要求较高的情况。</li></ul></blockquote><p>&emsp;&emsp;以上几种功耗模式从上到下电流损耗减小，唤醒从上到下增大。</p><p>&emsp;&emsp;为了节省功耗，在满足功和能性能的前提下尽可能进入功耗更为低的模式。根据我的经验总结有如下规律：</p><blockquote><ul><li>需要cpu运算时使用Active mode。</li><li>不需要cpu但需要外设，且实时性要求高需要立即唤醒时使用Sleep mode。</li><li>不需要cpu和一般外设，只留特殊的低功耗外设时使用Deep sleep mode。</li><li>不需要cpu和外设，仅在需要时通过特殊中断源唤醒时使用Power down mode。</li><li>停止mcu所有功能，追求最低功耗，仅在外部中断时唤醒且不追求高实时性时用Deep power down mode。</li></ul></blockquote><p>&emsp;&emsp;功耗模式越多，对功耗优化的操作空间越大，合理的在不同功耗模式下切换将利于获得最低电流损耗。mcu休眠和唤醒时间一般手册上都会给出，一般都是us级的，即使在1ms内我们也可以在不同功耗模式下多次切换来追求更低的电流损耗。也要避免过于频繁的切换功耗模式，在功耗模式切换时（进入或退出），功耗大于维持在某个模式下，因此高频的切换功耗模式可能会导致电流损耗反而增大。<br>&emsp;&emsp;程序运行中有时候会用到delay函数进行延迟，delay通常是cpu跑无意义的计算进行粗略延迟等待，如果延迟时间较长，我们可以将delay函数优化为在低功耗模式下等待并由定时器唤醒。<br>&emsp;&emsp;一些对计时精度要求不高的情况下，可以不适用低功耗定时器来唤醒低功耗模式下的mcu，而通过看门狗唤醒，虽然计时不准但可以少用一个外设从而节省功耗。</p><h2 id="8-节约使用外设资源和时钟"><a href="#8-节约使用外设资源和时钟" class="headerlink" title="8 节约使用外设资源和时钟"></a>8 节约使用外设资源和时钟</h2><p>&emsp;&emsp;外设时mcu资源，使用mcu的外设当然会增加功耗。很多外设都有自己的控制时钟，甚至一些特殊的寄存器进行操作，也有相应的时钟需要使能，而使能这些时钟也会增加功耗。我根据经验总结出以下几条建议：</p><blockquote><ul><li>尽量避免使用功能过于高级的外设，优先考虑低性能外设或只是用外设的部分所需功能。</li><li>关闭不使用的外设。比如从未使用的外设不应该配置使能，使用到的外设在不需要时也尽量关闭，在需要时才使能。</li><li>关闭不使用的时钟，比如从未使用的时钟不应该配置使能，使用到的时钟在不需要时也尽量关闭，在需要时才使能。</li></ul></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 嵌入式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 单片机 </tag>
+            
+            <tag> 低功耗 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>单片机的几种IO口</title>
       <link href="//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%87%A0%E7%A7%8DIO%E5%8F%A3/"/>
       <url>//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%87%A0%E7%A7%8DIO%E5%8F%A3/</url>
       
-        <content type="html"><![CDATA[<h1 id="单片机的几种IO口"><a href="#单片机的几种IO口" class="headerlink" title="单片机的几种IO口"></a><center>单片机的几种IO口</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;学习单片机开发也有一段时间了，对一些底层的东西不太了解或不够深入，希望能弥补上这些知识空缺。</em></p><h2 id="1-GPIO的几种状态"><a href="#1-GPIO的几种状态" class="headerlink" title="1 GPIO的几种状态"></a>1 GPIO的几种状态</h2><blockquote><ul><li>输入状态<ul><li>浮空输入</li><li>上/下拉输入</li><li>模拟输入</li></ul></li><li>输出状态<ul><li>推挽输出</li><li>开漏输出</li></ul></li></ul></blockquote><h2 id="2-输入状态"><a href="#2-输入状态" class="headerlink" title="2 输入状态"></a>2 输入状态</h2><h3 id="2-1-浮空输入"><a href="#2-1-浮空输入" class="headerlink" title="2.1 浮空输入"></a>2.1 浮空输入</h3><p>&emsp;&emsp;辅控输入即IO口在芯片内部既不接上拉电阻也不接下拉电阻，输入电阻相当于非常大。IO口的电平状态不确定，完全由外部决定，悬空时用示波器直接测量可能是高电平也可能是低电平。由于浮空状态容易受到干扰甚至是静电导致芯片损坏，因此未使用的脚一般要避免浮空。<br>&emsp;&emsp;浮空输入的常见运用是检测按键状态。</p><h3 id="2-2-上拉-下拉输入"><a href="#2-2-上拉-下拉输入" class="headerlink" title="2.2 上拉/下拉输入"></a>2.2 上拉/下拉输入</h3><p>&emsp;&emsp;IO上拉输入指的是通过配置，在芯片内部将该IO串联电阻后接Vcc；IO下拉输入指的是通过配置，在芯片内部将该IO串联电阻后接Gnd。</p><h3 id="2-3-模拟输入"><a href="#2-3-模拟输入" class="headerlink" title="2.3 模拟输入"></a>2.3 模拟输入</h3><p>&emsp;&emsp;普通的数字IO口可以通过输入数据寄存器的0或1读取到外部电平的高低状态，而模拟IO无法通过输入寄存器的值反应电平的高低，一般需要借助ADC或电压比较器去获取外部电平的值。<br>&emsp;&emsp;常用于AD检测或电压比较器。</p><h2 id="3-输出状态"><a href="#3-输出状态" class="headerlink" title="3 输出状态"></a>3 输出状态</h2><h3 id="3-1-推挽输出"><a href="#3-1-推挽输出" class="headerlink" title="3.1 推挽输出"></a>3.1 推挽输出</h3><p>&emsp;&emsp;推挽输出可以输出高低电平，可以直接驱动功耗不大的数字器件。内部结构相当于两个三极管或MOSFET互补工作，不管输出高还是低，总有一个开关管导通。如果两个推完输出相互直连，其中一个芯片若输出高，此时上面的MOS导通下面MOS闭合，而一个芯片若输出低，即下面的MOS导通上面的MOS闭合，电流会从上MOS导通的VCC直接流向下MOS导通的GND，整个通路电阻很小，将会发生短路并损坏端口。因此推挽输出不能实现”线与“。</p><h3 id="3-2-开漏输出"><a href="#3-2-开漏输出" class="headerlink" title="3.2 开漏输出"></a>3.2 开漏输出</h3><p>&emsp;&emsp;开漏输出只能输出低电平，如果要输出高电平必须通过外部上拉电阻才能实现。内部输出1时MOS管截止，输出与地断开，这时候IO其实没有驱动能力，需要外部连接上拉电阻才能输出高电平；内部输出0时MOS管导通接地，所以开漏达到输出低电平效果。开漏输出的吸电流能力较强，适合做电流型的驱动。<br>&emsp;&emsp;关于开漏输出接上拉电阻的一大运用是IIC线路。当上拉电阻阻值较小时，上升沿的延迟就小，但功耗较大，反之，当上拉电阻阻值较大时，上升沿延迟就大，但功耗较小。但电阻影响上升沿不影响下降沿。根据上升沿时延和功耗的需要，综合考虑选择合适的上拉电阻。</p><h3 id="3-3-高阻输出"><a href="#3-3-高阻输出" class="headerlink" title="3.3 高阻输出"></a>3.3 高阻输出</h3><p>&emsp;&emsp;IO的高阻态实际上是输出IO，与浮空输入有些类似，输入电阻都非常大。不同在于浮空输入是输入型IO，而高阻态IO实际是开漏输出在输出高电平时的状态，且外部不接上拉电阻。</p><h2 id="芯片复位后的IO状态"><a href="#芯片复位后的IO状态" class="headerlink" title="芯片复位后的IO状态"></a>芯片复位后的IO状态</h2><p>&emsp;&emsp;通常芯片复位后IO初始状态是高阻输入，为了防止芯片被异常复位时的IO电平变化对外部器件产生异常动作。但为了避免高阻输入产生漏电流，在芯片启动后需要对端口进行配置，改为其他状态，如内部拉高输入或输出。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="单片机的几种IO口"><a href="#单片机的几种IO口" class="headerlink" title="单片机的几种IO口"></a><center>单片机的几种IO口</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;学习单片机开发也有一段时间了，对一些底层的东西不太了解或不够深入，希望能弥补上这些知识空缺。</em></p><h2 id="1-GPIO的几种状态"><a href="#1-GPIO的几种状态" class="headerlink" title="1 GPIO的几种状态"></a>1 GPIO的几种状态</h2><blockquote><ul><li>输入状态<ul><li>浮空输入</li><li>上/下拉输入</li><li>模拟输入</li></ul></li><li>输出状态<ul><li>推挽输出</li><li>开漏输出</li></ul></li></ul></blockquote><h2 id="2-输入状态"><a href="#2-输入状态" class="headerlink" title="2 输入状态"></a>2 输入状态</h2><h3 id="2-1-浮空输入"><a href="#2-1-浮空输入" class="headerlink" title="2.1 浮空输入"></a>2.1 浮空输入</h3><p>&emsp;&emsp;辅控输入即IO口在芯片内部既不接上拉电阻也不接下拉电阻，输入电阻相当于非常大。IO口的电平状态不确定，完全由外部决定，悬空时用示波器直接测量可能是高电平也可能是低电平。由于浮空状态容易受到干扰甚至是静电导致芯片损坏，因此未使用的脚一般要避免浮空。<br>&emsp;&emsp;浮空输入的常见运用是检测按键状态。</p><h3 id="2-2-上拉-下拉输入"><a href="#2-2-上拉-下拉输入" class="headerlink" title="2.2 上拉/下拉输入"></a>2.2 上拉/下拉输入</h3><p>&emsp;&emsp;IO上拉输入指的是通过配置，在芯片内部将该IO串联电阻后接Vcc；IO下拉输入指的是通过配置，在芯片内部将该IO串联电阻后接Gnd。</p><h3 id="2-3-模拟输入"><a href="#2-3-模拟输入" class="headerlink" title="2.3 模拟输入"></a>2.3 模拟输入</h3><p>&emsp;&emsp;普通的数字IO口可以通过输入数据寄存器的0或1读取到外部电平的高低状态，而模拟IO无法通过输入寄存器的值反应电平的高低，一般需要借助ADC或电压比较器去获取外部电平的值。<br>&emsp;&emsp;常用于AD检测或电压比较器。</p><h2 id="3-输出状态"><a href="#3-输出状态" class="headerlink" title="3 输出状态"></a>3 输出状态</h2><h3 id="3-1-推挽输出"><a href="#3-1-推挽输出" class="headerlink" title="3.1 推挽输出"></a>3.1 推挽输出</h3><p>&emsp;&emsp;推挽输出可以输出高低电平，可以直接驱动功耗不大的数字器件。内部结构相当于两个三极管或MOSFET互补工作，不管输出高还是低，总有一个开关管导通。如果两个推完输出相互直连，其中一个芯片若输出高，此时上面的MOS导通下面MOS闭合，而一个芯片若输出低，即下面的MOS导通上面的MOS闭合，电流会从上MOS导通的VCC直接流向下MOS导通的GND，整个通路电阻很小，将会发生短路并损坏端口。因此推挽输出不能实现”线与“。</p><h3 id="3-2-开漏输出"><a href="#3-2-开漏输出" class="headerlink" title="3.2 开漏输出"></a>3.2 开漏输出</h3><p>&emsp;&emsp;开漏输出只能输出低电平，如果要输出高电平必须通过外部上拉电阻才能实现。内部输出1时MOS管截止，输出与地断开，这时候IO其实没有驱动能力，需要外部连接上拉电阻才能输出高电平；内部输出0时MOS管导通接地，所以开漏达到输出低电平效果。开漏输出的吸电流能力较强，适合做电流型的驱动。<br>&emsp;&emsp;关于开漏输出接上拉电阻的一大运用是IIC线路。当上拉电阻阻值较小时，上升沿的延迟就小，但功耗较大，反之，当上拉电阻阻值较大时，上升沿延迟就大，但功耗较小。但电阻影响上升沿不影响下降沿。根据上升沿时延和功耗的需要，综合考虑选择合适的上拉电阻。</p><h3 id="3-3-高阻输出"><a href="#3-3-高阻输出" class="headerlink" title="3.3 高阻输出"></a>3.3 高阻输出</h3><p>&emsp;&emsp;IO的高阻态实际上是输出IO，与浮空输入有些类似，输入电阻都非常大。不同在于浮空输入是输入型IO，而高阻态IO实际是开漏输出在输出高电平时的状态，且外部不接上拉电阻。</p><h2 id="4-芯片复位后的IO状态"><a href="#4-芯片复位后的IO状态" class="headerlink" title="4 芯片复位后的IO状态"></a>4 芯片复位后的IO状态</h2><p>&emsp;&emsp;通常芯片复位后IO初始状态是高阻输入，为了防止芯片被异常复位时的IO电平变化对外部器件产生异常动作。但为了避免高阻输入产生漏电流，在芯片启动后需要对端口进行配置，改为其他状态，如内部拉高输入或输出。</p><h2 id="5-IO的驱动能力"><a href="#5-IO的驱动能力" class="headerlink" title="5 IO的驱动能力"></a>5 IO的驱动能力</h2><p>&emsp;&emsp;大部分的单片机IO口都可以选择驱动能力的强弱，一般来说驱动能力越强则功耗损耗也越大。IO对外部的驱动能力既要看电压驱动能力，还要看电流驱动能力。有个简易的判断驱动能力是否足够的方法，将电路开路后则是电压是否符合负载电压，如果负责则表示电压驱动能力足够，否则电压驱动能力不够。如果接上负载后电压降低了，这就表明电流驱动能力不足。</p>]]></content>
       
       
       <categories>
@@ -1001,6 +1028,8 @@
       
         <tags>
             
+            <tag> QComboBox </tag>
+            
             <tag> PySide2 </tag>
             
             <tag> Python </tag>
@@ -1010,8 +1039,6 @@
             <tag> Qt </tag>
             
             <tag> 基础 </tag>
-            
-            <tag> QComboBox </tag>
             
         </tags>
       
@@ -2311,11 +2338,11 @@
       
         <tags>
             
-            <tag> 感悟 </tag>
-            
             <tag> 感想 </tag>
             
             <tag> 离职 </tag>
+            
+            <tag> 感悟 </tag>
             
         </tags>
       
@@ -2420,22 +2447,33 @@
     
     
     <entry>
-      <title></title>
-      <link href="/css/butterfly.css"/>
-      <url>/css/butterfly.css</url>
+      <title>about</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
       
-        <content type="html"><![CDATA[@keyframes gradientBG {    0% {        background-position: 0% 50%;    }    50% {        background-position: 100% 50%;    }    100% {        background-position: 0% 50%;    }}#web_bg {    background: linear-gradient(-45deg, #ead1dc, #cfe2f3, #fff2cc, #d9d2e9);    background-size: 400% 400%;    animation: gradientBG 15s ease infinite;}/*页脚背景设置白色透明*/#footer {    background: rgba(255,255,255,.3);}/*页脚 字体默认设为黑色*/#footer-wrap {    color: rgb(0,0,0);}/*页脚 a 标签字体默认设为蓝色*/#footer-wrap a {    color: rgb(0,0,255);}/*文章背景*/.layout_post>#post {    background: rgba(255,255,255,.7);}/*其他背景*/#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    background: rgba(255,255,255,.7);}]]></content>
+        <content type="html"><![CDATA[<h1 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a><center>关于作者</center></h1><p>&emsp;&emsp;作者是一个热爱技术，普普通通的上班族。希望将自己学习的知识经验分享给别人，帮助别人在学习的路上少走弯路提高效率。同时也是为了督促自己坚持学习，珍惜时间。除了分享技术，我也希望能记录自己的生活和兴趣，在自己的空间里自娱自乐，做大娱乐家。</p>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>about</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[<h1 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a><center>关于作者</center></h1><p>&emsp;&emsp;作者是一个热爱技术，普普通通的上班族。希望将自己学习的知识经验分享给别人，帮助别人在学习的路上少走弯路提高效率。同时也是为了督促自己坚持学习，珍惜时间。除了分享技术，我也希望能记录自己的生活和兴趣，在自己的空间里自娱自乐，做大娱乐家。</p>]]></content>
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/css/butterfly.css"/>
+      <url>/css/butterfly.css</url>
+      
+        <content type="html"><![CDATA[@keyframes gradientBG {    0% {        background-position: 0% 50%;    }    50% {        background-position: 100% 50%;    }    100% {        background-position: 0% 50%;    }}#web_bg {    background: linear-gradient(-45deg, #ead1dc, #cfe2f3, #fff2cc, #d9d2e9);    background-size: 400% 400%;    animation: gradientBG 15s ease infinite;}/*页脚背景设置白色透明*/#footer {    background: rgba(255,255,255,.3);}/*页脚 字体默认设为黑色*/#footer-wrap {    color: rgb(0,0,0);}/*页脚 a 标签字体默认设为蓝色*/#footer-wrap a {    color: rgb(0,0,255);}/*文章背景*/.layout_post>#post {    background: rgba(255,255,255,.7);}/*其他背景*/#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    background: rgba(255,255,255,.7);}]]></content>
       
     </entry>
     
@@ -2457,29 +2495,7 @@
       <link href="/music/index.html"/>
       <url>/music/index.html</url>
       
-        <content type="html"><![CDATA[    <div id="aplayer-EaOtIhfa" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>tags</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[    <div id="aplayer-vKGWGPBG" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
       
     </entry>
     
@@ -2491,6 +2507,17 @@
       <url>/reward/index.html</url>
       
         <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
