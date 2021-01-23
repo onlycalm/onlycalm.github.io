@@ -1113,9 +1113,9 @@
             
             <tag> 深入 </tag>
             
-            <tag> 进阶篇 </tag>
-            
             <tag> 多线程 </tag>
+            
+            <tag> 进阶篇 </tag>
             
         </tags>
       
@@ -1728,9 +1728,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> 函数 </tag>
+            
+            <tag> Python </tag>
             
             <tag> Python3 </tag>
             
@@ -1930,9 +1930,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> 函数 </tag>
+            
+            <tag> Python </tag>
             
             <tag> Python3 </tag>
             
@@ -2300,6 +2300,35 @@
     
     
     <entry>
+      <title>压力曲线</title>
+      <link href="//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/"/>
+      <url>//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/</url>
+      
+        <content type="html"><![CDATA[<h1 id="压力曲线"><a href="#压力曲线" class="headerlink" title="压力曲线"></a><center>压力曲线</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;解决的问题：</em><br><em>&emsp;&emsp;1.探究了如何去实现压力曲线的转换用于单片机输出相应的频率。</em><br><em>&emsp;&emsp;2.介绍了如何考虑使用的传感器压敏特性生成最合适的压力曲线。</em><br><em>&emsp;&emsp;3.介绍了一种压力曲线的理论拟合方法，将计算转化过程大大简化。</em></p><p>&emsp;&emsp;1.协议要求的压力曲线（压力等级——频率）是无法直接用于单片机输出的，需要有一个转化关系（单片机无法直接获取压力等级，直接得到的是电压值即采样值。频率的输出是对应定时器的设置值，也需要一个转换关系）。<br>&emsp;&emsp;2.不同的压力传感器有其自己的压敏特性（不能通用，更换压力传感器时需要重新设置曲线），需要将具体使用的压敏特性考虑进曲线中。压敏特性即克重——电压曲线（我们一般用的压力传感器是压力引起电压变化）。<br>&emsp;&emsp;3.单片机的运算性能较差，特别像主动笔这样的低功耗产品，需要考虑使用理论又将理论简化用于单片机运算（避免引入高次方、对数、幂运算，避免程序引入math库。将曲线拟合为多项式，总之就是减少计算量）。</p><p>&emsp;&emsp;单片机软件开发过程中我们常常会接触很多曲线，要求输入与输出按照一定曲线规律。比如要求克重和输出压力等级呈现一定曲线关系。克重并非软件直接能采集到的，即使通过ADC采样值转换也并非一条简单的直线。压力等级和频率呈现一定曲线关系，而频率和单片机定时器设置值呈现一定曲线关系。<br>&emsp;&emsp;类似这样的，协议规定了输入和输出呈现一定曲线关系，但对于软件来说输入和输出并非软件的直接输入和输出。层层转换，中间涉及到多条曲线关系。如何让很好的转换为软件的直接输入和输出的曲线关系，并且简化单片机的计算量是可以值得探究的问题。</p><h2 id="1-协议的要求，克重和压力等级的曲线关系"><a href="#1-协议的要求，克重和压力等级的曲线关系" class="headerlink" title="1 协议的要求，克重和压力等级的曲线关系"></a>1 协议的要求，克重和压力等级的曲线关系</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Protocol%20line.png" alt="Protocol line.png" title="协议曲线"><br>&emsp;&emsp;如上图，横坐标是克重，纵坐标是压力等级，该协议要求克重和压力等级呈现一定的曲线关系（形状类似对数函数曲线），你可能已经想到了，直接用Matlab或Origin软件拟合出曲线公式即可，没错，中间蓝色曲线拟合公式为：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Ideal%20formula.png" alt="Ideal formula.png" title="协议曲线公式"><br>&emsp;&emsp;拟合度达到了1!，说明协议的意图这实际就是一条对数函数曲线。<br>&emsp;&emsp;但单片机直接采集到的并不是克重，ADC的采样值（电压），输出的压力等级最终需要转换为定时器的设置值。我们寻求克重和采样值的曲线关系，这条曲线与我们的产品结构和硬件相关，所以需要实际产品测试选取。以下是我测试的4件样品的采样值和克重的对应关系图。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20gram.png" alt="Sample gram.png" title="采样值克重对应曲线图"><br>&emsp;&emsp;实际多测几件产品，曲线最终选取代表性的一条或求每个各种的采样值平均值。最后得到一条曲线（我一般取平均），可以看到克重和采样值的曲线关系也是一条对数函数曲线，我们一般喜欢输入作为横轴，所以交换下坐标轴变为指数函数曲线（互为反函数）：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20gram2.png" alt="Sample gram2.png" title="采样值克重对应曲线图"><br>&emsp;&emsp;可以看到拟合出来的曲线公式，拟合度达到了0.99642。<br>&emsp;&emsp;现在已经有两个曲线公式，将采样值转换为克重，克重转换为压力等级。<br>&emsp;&emsp;剩下就要考虑把压力等级转换为频率输出了。根据协议压力等级和频率也有一个曲线关系，曲线拟合出来为（协议给的是256个离散的点）：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Pressure%20frq.png" alt="Pressure frq.png" title="压力等级频率曲线"><br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Pressure%20level.png" alt="Pressure level.png" title="压力等级频率曲线"><br>&emsp;&emsp;频率和定时器设置值是正比直线关系，比较容易写出曲线公式。<br>&emsp;&emsp;最后把这些的曲线公式相互套入得到最终公式为：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20cnt.png" alt="Sample cnt.png" title="Sample cnt"><br>&emsp;&emsp;为了减少误差不建议在中间推算曲线过程中看到公式复杂就急着拟合为简单的曲线公式，最后才做一次结果曲线的拟合最好。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Final%20line.png" alt="Final line.png" title="Final line"><br>&emsp;&emsp;转化关系流程图：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">flowchat</span><br><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">opGram&#x3D;&gt;operation: 克重</span><br><span class="line">opSampleValue&#x3D;&gt;operation: 采样值</span><br><span class="line">opSensorCurve&#x3D;&gt;operation: 传感器压敏曲线(Curve1)</span><br><span class="line">opProtocolCurve&#x3D;&gt;operation: 协议要求的压力曲线(Curve 2)</span><br><span class="line">opPressureLv&#x3D;&gt;operation: 压力等级</span><br><span class="line">opPressureFrq&#x3D;&gt;operation: 压力频率曲线(Curve 3)</span><br><span class="line">opFrq&#x3D;&gt;operation: 频率</span><br><span class="line">opTimerCfg&#x3D;&gt;operation: 单片机定时器配置和频率曲线对应曲线(Curve 4)</span><br><span class="line">opTimerSetValue&#x3D;&gt;operation: 定时器设置值</span><br><span class="line">cond&#x3D;&gt;condition</span><br><span class="line"></span><br><span class="line">st-&gt;opSampleValue</span><br><span class="line">opSampleValue-&gt;opSensorCurve</span><br><span class="line">opSensorCurve-&gt;opGram</span><br><span class="line">opGram-&gt;opProtocolCurve</span><br><span class="line">opProtocolCurve-&gt;opPressureLv</span><br><span class="line">opPressureLv-&gt;opPressureFrq</span><br><span class="line">opPressureFrq-&gt;opFrq</span><br><span class="line">opFrq-&gt;opTimerCfg</span><br><span class="line">opTimerCfg-&gt;opTimerSetValue</span><br><span class="line">opTimerSetValue-&gt;e</span><br></pre></td></tr></table></figure><p>最终拟合曲线：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">flowchat</span><br><span class="line">st&#x3D;&gt;start</span><br><span class="line">e&#x3D;&gt;end</span><br><span class="line">opSampleValue&#x3D;&gt;operation: 采样值</span><br><span class="line">opFitCurve&#x3D;&gt;operation: 最终拟合曲线(Curve 5</span><br><span class="line">opTimerSetValue&#x3D;&gt;operation: 定时器设置值</span><br><span class="line"></span><br><span class="line">st-&gt;opSampleValue</span><br><span class="line">opSampleValue-&gt;opFitCurve</span><br><span class="line">opFitCurve-&gt;opTimerSetValue</span><br><span class="line">opTimerSetValue-&gt;e</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;总结：最后得到的曲线运算量并不大，虽然前后推了很多公式，但套入后得到一个总的公式，虽然这个公式复杂，但进行一次多项式拟合后就可用于单片机计算，又不用引入math库。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 主动笔 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 曲线 </tag>
+            
+            <tag> 硅胶 </tag>
+            
+            <tag> 压力 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>c代码命名规范</title>
       <link href="//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E8%8A%AF%E7%89%87AES%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/"/>
       <url>//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E8%8A%AF%E7%89%87AES%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/</url>
@@ -2325,35 +2354,6 @@
             <tag> AES </tag>
             
             <tag> python </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>压力曲线</title>
-      <link href="//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/"/>
-      <url>//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/</url>
-      
-        <content type="html"><![CDATA[<h1 id="压力曲线"><a href="#压力曲线" class="headerlink" title="压力曲线"></a><center>压力曲线</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;解决的问题：</em><br><em>&emsp;&emsp;1.探究了如何去实现压力曲线的转换用于单片机输出相应的频率。</em><br><em>&emsp;&emsp;2.介绍了如何考虑使用的传感器压敏特性生成最合适的压力曲线。</em><br><em>&emsp;&emsp;3.介绍了一种压力曲线的理论拟合方法，将计算转化过程大大简化。</em></p><p>&emsp;&emsp;1.协议要求的压力曲线（压力等级——频率）是无法直接用于单片机输出的，需要有一个转化关系（单片机无法直接获取压力等级，直接得到的是电压值即采样值。频率的输出是对应定时器的设置值，也需要一个转换关系）。<br>&emsp;&emsp;2.不同的压力传感器有其自己的压敏特性（不能通用，更换压力传感器时需要重新设置曲线），需要将具体使用的压敏特性考虑进曲线中。压敏特性即克重——电压曲线（我们一般用的压力传感器是压力引起电压变化）。<br>&emsp;&emsp;3.单片机的运算性能较差，特别像主动笔这样的低功耗产品，需要考虑使用理论又将理论简化用于单片机运算（避免引入高次方、对数、幂运算，避免程序引入math库。将曲线拟合为多项式，总之就是减少计算量）。</p><p>&emsp;&emsp;单片机软件开发过程中我们常常会接触很多曲线，要求输入与输出按照一定曲线规律。比如要求克重和输出压力等级呈现一定曲线关系。克重并非软件直接能采集到的，即使通过ADC采样值转换也并非一条简单的直线。压力等级和频率呈现一定曲线关系，而频率和单片机定时器设置值呈现一定曲线关系。<br>&emsp;&emsp;类似这样的，协议规定了输入和输出呈现一定曲线关系，但对于软件来说输入和输出并非软件的直接输入和输出。层层转换，中间涉及到多条曲线关系。如何让很好的转换为软件的直接输入和输出的曲线关系，并且简化单片机的计算量是可以值得探究的问题。</p><h2 id="1-协议的要求，克重和压力等级的曲线关系"><a href="#1-协议的要求，克重和压力等级的曲线关系" class="headerlink" title="1 协议的要求，克重和压力等级的曲线关系"></a>1 协议的要求，克重和压力等级的曲线关系</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Protocol%20line.png" alt="Protocol line.png" title="协议曲线"><br>&emsp;&emsp;如上图，横坐标是克重，纵坐标是压力等级，该协议要求克重和压力等级呈现一定的曲线关系（形状类似对数函数曲线），你可能已经想到了，直接用Matlab或Origin软件拟合出曲线公式即可，没错，中间蓝色曲线拟合公式为：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Ideal%20formula.png" alt="Ideal formula.png" title="协议曲线公式"><br>&emsp;&emsp;拟合度达到了1!，说明协议的意图这实际就是一条对数函数曲线。<br>&emsp;&emsp;但单片机直接采集到的并不是克重，ADC的采样值（电压），输出的压力等级最终需要转换为定时器的设置值。我们寻求克重和采样值的曲线关系，这条曲线与我们的产品结构和硬件相关，所以需要实际产品测试选取。以下是我测试的4件样品的采样值和克重的对应关系图。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20gram.png" alt="Sample gram.png" title="采样值克重对应曲线图"><br>&emsp;&emsp;实际多测几件产品，曲线最终选取代表性的一条或求每个各种的采样值平均值。最后得到一条曲线（我一般取平均），可以看到克重和采样值的曲线关系也是一条对数函数曲线，我们一般喜欢输入作为横轴，所以交换下坐标轴变为指数函数曲线（互为反函数）：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20gram2.png" alt="Sample gram2.png" title="采样值克重对应曲线图"><br>&emsp;&emsp;可以看到拟合出来的曲线公式，拟合度达到了0.99642。<br>&emsp;&emsp;现在已经有两个曲线公式，将采样值转换为克重，克重转换为压力等级。<br>&emsp;&emsp;剩下就要考虑把压力等级转换为频率输出了。根据协议压力等级和频率也有一个曲线关系，曲线拟合出来为（协议给的是256个离散的点）：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Pressure%20frq.png" alt="Pressure frq.png" title="压力等级频率曲线"><br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Pressure%20level.png" alt="Pressure level.png" title="压力等级频率曲线"><br>&emsp;&emsp;频率和定时器设置值是正比直线关系，比较容易写出曲线公式。<br>&emsp;&emsp;最后把这些的曲线公式相互套入得到最终公式为：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20cnt.png" alt="Sample cnt.png" title="Sample cnt"><br>&emsp;&emsp;为了减少误差不建议在中间推算曲线过程中看到公式复杂就急着拟合为简单的曲线公式，最后才做一次结果曲线的拟合最好。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Final%20line.png" alt="Final line.png" title="Final line"><br>&emsp;&emsp;转化关系流程图：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">flowchat</span><br><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">opGram&#x3D;&gt;operation: 克重</span><br><span class="line">opSampleValue&#x3D;&gt;operation: 采样值</span><br><span class="line">opSensorCurve&#x3D;&gt;operation: 传感器压敏曲线(Curve1)</span><br><span class="line">opProtocolCurve&#x3D;&gt;operation: 协议要求的压力曲线(Curve 2)</span><br><span class="line">opPressureLv&#x3D;&gt;operation: 压力等级</span><br><span class="line">opPressureFrq&#x3D;&gt;operation: 压力频率曲线(Curve 3)</span><br><span class="line">opFrq&#x3D;&gt;operation: 频率</span><br><span class="line">opTimerCfg&#x3D;&gt;operation: 单片机定时器配置和频率曲线对应曲线(Curve 4)</span><br><span class="line">opTimerSetValue&#x3D;&gt;operation: 定时器设置值</span><br><span class="line">cond&#x3D;&gt;condition</span><br><span class="line"></span><br><span class="line">st-&gt;opSampleValue</span><br><span class="line">opSampleValue-&gt;opSensorCurve</span><br><span class="line">opSensorCurve-&gt;opGram</span><br><span class="line">opGram-&gt;opProtocolCurve</span><br><span class="line">opProtocolCurve-&gt;opPressureLv</span><br><span class="line">opPressureLv-&gt;opPressureFrq</span><br><span class="line">opPressureFrq-&gt;opFrq</span><br><span class="line">opFrq-&gt;opTimerCfg</span><br><span class="line">opTimerCfg-&gt;opTimerSetValue</span><br><span class="line">opTimerSetValue-&gt;e</span><br></pre></td></tr></table></figure><p>最终拟合曲线：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">flowchat</span><br><span class="line">st&#x3D;&gt;start</span><br><span class="line">e&#x3D;&gt;end</span><br><span class="line">opSampleValue&#x3D;&gt;operation: 采样值</span><br><span class="line">opFitCurve&#x3D;&gt;operation: 最终拟合曲线(Curve 5</span><br><span class="line">opTimerSetValue&#x3D;&gt;operation: 定时器设置值</span><br><span class="line"></span><br><span class="line">st-&gt;opSampleValue</span><br><span class="line">opSampleValue-&gt;opFitCurve</span><br><span class="line">opFitCurve-&gt;opTimerSetValue</span><br><span class="line">opTimerSetValue-&gt;e</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;总结：最后得到的曲线运算量并不大，虽然前后推了很多公式，但套入后得到一个总的公式，虽然这个公式复杂，但进行一次多项式拟合后就可用于单片机计算，又不用引入math库。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 主动笔 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 曲线 </tag>
-            
-            <tag> 硅胶 </tag>
-            
-            <tag> 压力 </tag>
             
         </tags>
       
@@ -2688,9 +2688,9 @@
       
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 管理 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 工程 </tag>
             
@@ -2863,17 +2863,6 @@
     
     
     <entry>
-      <title></title>
-      <link href="/css/butterfly.css"/>
-      <url>/css/butterfly.css</url>
-      
-        <content type="html"><![CDATA[@keyframes gradientBG {    0% {        background-position: 0% 50%;    }    50% {        background-position: 100% 50%;    }    100% {        background-position: 0% 50%;    }}#web_bg {    background: linear-gradient(-45deg, #ead1dc, #cfe2f3, #fff2cc, #d9d2e9);    background-size: 400% 400%;    animation: gradientBG 15s ease infinite;}/*页脚背景设置白色透明*/#footer {    background: rgba(255,255,255,.3);}/*页脚 字体默认设为黑色*/#footer-wrap {    color: rgb(0,0,0);}/*页脚 a 标签字体默认设为蓝色*/#footer-wrap a {    color: rgb(0,0,255);}/*文章背景*/.layout_post>#post {    background: rgba(255,255,255,.7);}/*其他背景*/#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    background: rgba(255,255,255,.7);}]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>about</title>
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
@@ -2896,11 +2885,11 @@
     
     
     <entry>
-      <title>reward</title>
-      <link href="/reward/index.html"/>
-      <url>/reward/index.html</url>
+      <title></title>
+      <link href="/css/butterfly.css"/>
+      <url>/css/butterfly.css</url>
       
-        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
+        <content type="html"><![CDATA[@keyframes gradientBG {    0% {        background-position: 0% 50%;    }    50% {        background-position: 100% 50%;    }    100% {        background-position: 0% 50%;    }}#web_bg {    background: linear-gradient(-45deg, #ead1dc, #cfe2f3, #fff2cc, #d9d2e9);    background-size: 400% 400%;    animation: gradientBG 15s ease infinite;}/*页脚背景设置白色透明*/#footer {    background: rgba(255,255,255,.3);}/*页脚 字体默认设为黑色*/#footer-wrap {    color: rgb(0,0,0);}/*页脚 a 标签字体默认设为蓝色*/#footer-wrap a {    color: rgb(0,0,255);}/*文章背景*/.layout_post>#post {    background: rgba(255,255,255,.7);}/*其他背景*/#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    background: rgba(255,255,255,.7);}]]></content>
       
     </entry>
     
@@ -2918,22 +2907,33 @@
     
     
     <entry>
-      <title>tags</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>music</title>
+      <link href="/music/index.html"/>
+      <url>/music/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[    <div id="aplayer-vlDAdvGE" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>music</title>
-      <link href="/music/index.html"/>
-      <url>/music/index.html</url>
+      <title>reward</title>
+      <link href="/reward/index.html"/>
+      <url>/reward/index.html</url>
       
-        <content type="html"><![CDATA[    <div id="aplayer-topGyBve" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
