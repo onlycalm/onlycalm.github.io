@@ -4,6 +4,323 @@
   
     
     <entry>
+      <title>Git基础篇（十）——Git分支管理</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（十）——Git分支管理"><a href="#Git基础篇（十）——Git分支管理" class="headerlink" title="Git基础篇（十）——Git分支管理"></a><center>Git基础篇（十）——Git分支管理</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;强大的分支管理是Git版本管控的一大亮点，这是真正会学使用Git的关键。</em></p><h2 id="1-理解分支"><a href="#1-理解分支" class="headerlink" title="1 理解分支"></a>1 理解分支</h2><p>&emsp;&emsp;说道分支管理首先要理解什么是分支。在前面的文章中我们提到过，Git会将我们提交的版本按照时间线进行串起来，然后HEAD就像指针一样会直线这些版本，整个就像数据结构中的链表一般。<br>&emsp;&emsp;当我们创建仓库时Git会为我们创建一个名为“master”的分支，通常我们将其作为主分支。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_branch_master.png" alt="git_branch_master.png" title="git_branch_master"></p><p>&emsp;&emsp;就像上面这张图，每一次版本提交就是一个节点，每一个分支就像一个指向节点的指针，比如master分支就存在一个master指针指向节点，而HEAD也是一个指针，它指向master。<br>&emsp;&emsp;如果存在多个分支，就对应多个分支指针指向节点，要分支切换操作就是将HEAD指向其他分支指针的过程。比如存在master和dev两个分支，而当分支切换到dev时，即为HEAD指向dev指针。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_branch_dev.png" alt="git_branch_dev.png" title="git_branch_dev"></p><p>&emsp;&emsp;所谓分支合并即为不同分支指针指向同一版本节点，仅在分支刚创建和合并分支时出现分支指针指向同一版本节点。当Git版本管理存在多个分支时，可以在这些分支的指针处添加新的版本节点，也即互不影响的并行开发，开发到一定阶段后再将不同分支合并到主分支，然后将其余分支删除。其余分支的修改最终都要回归到主分支。<br>&emsp;&emsp;我们尝试创建两个分支然后将其合并，以下是示范。先在master主分支下提交一次版本c0，这时候master指针指向c0，HEAD指向master。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_1.png" alt="Test_merge_1.png" title="Test_merge_1"></p><p>&emsp;&emsp;创建并切换到dev分支，在该分支下提交c1版本，此时dev指针指向版本c1，HEAD则指向dev指针。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_2.png" alt="Test_merge_2.png" title="Test_merge_2"></p><p>&emsp;&emsp;我们再尝试切换到master分支并且在该分支下提交c2版本，此时HEAD指向master指针。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_3.png" alt="Test_merge_3.png" title="Test_merge_3"></p><p>&emsp;&emsp;在master分支下与dev分支合并。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_4.png" alt="Test_merge_4.png" title="Test_merge_4"></p><p>&emsp;&emsp;此时dev分支已经完成了它的“使命”，可以将其删除了，将dev分支删除。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_5.png" alt="Test_merge_5.png" title="Test_merge_5"></p><h2 id="2-分支操作"><a href="#2-分支操作" class="headerlink" title="2 分支操作"></a>2 分支操作</h2><h3 id="2-1-创建分支"><a href="#2-1-创建分支" class="headerlink" title="2.1 创建分支"></a>2.1 创建分支</h3><h4 id="2-1-1-git-checkout-b"><a href="#2-1-1-git-checkout-b" class="headerlink" title="2.1.1 git checkout -b"></a>2.1.1 git checkout -b</h4><p>&emsp;&emsp;Git会为我们的仓库默认创建一个名为master的主分支，若想要添加其他分支可使用指令<code>git checkout -b &lt;name&gt;</code>，比如我们创建一个名为”dev”的分支，该指令创建分支后还会自动切换到这个分支即HEAD指向新的分支。由于是在master分支下创建的dev分支，因此创建时master和dev是指向同一个节点版本的，但后续的版本提交将会是独立分别进行的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev</span><br></pre></td></tr></table></figure><h4 id="2-1-2-git-branch"><a href="#2-1-2-git-branch" class="headerlink" title="2.1.2 git branch"></a>2.1.2 git branch</h4><p>&emsp;&emsp;也可以创建分支但不切换到新的分支，使用指令<code>git branch &lt;name&gt;</code>。比如创建dev分支，HEAD仍然保持在当前分支下不切换到新分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch dev</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;可以<code>git brach</code>指令后不写分支名，则为查看当前仓库拥有的所有分支名。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure><h4 id="2-1-3-git-switch-c"><a href="#2-1-3-git-switch-c" class="headerlink" title="2.1.3 git switch -c"></a>2.1.3 git switch -c</h4><p>&emsp;&emsp;<code>git switch</code>指令是Git v2.23版本之后新增的，<code>git switch -c &lt;new&gt;</code>同<code>git checkout -b &lt;naem&gt;</code>效果相同，创建及切换分支。在旧的版本中<code>checkout</code>既用于版本检出，也有用于分支创建和切换，新的Git新增了<code>switch</code>指令专用于分支切换。使用该指令创建并切换到dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch -c dev</span><br></pre></td></tr></table></figure><h3 id="2-2-切换分支"><a href="#2-2-切换分支" class="headerlink" title="2.2 切换分支"></a>2.2 切换分支</h3><h4 id="2-2-1-git-checkout"><a href="#2-2-1-git-checkout" class="headerlink" title="2.2.1 git checkout"></a>2.2.1 git checkout</h4><p>&emsp;&emsp;上面讲到的一些创建分支的指令在创建时其实也会自动切换到新的分支，但毕竟不是专用于分支切换的，我们想要在已经存在的几个分支之前切换可以使用<code>git checkout &lt;name&gt;</code>指令。比如要切换到已经存在的dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br></pre></td></tr></table></figure><h4 id="2-2-2-git-switch"><a href="#2-2-2-git-switch" class="headerlink" title="2.2.2 git switch"></a>2.2.2 git switch</h4><p>&emsp;&emsp;Git v2.23版本之后新增的<code>git switch &lt;name&gt;</code>指令专用于分支切换。比如切换到已经存在的dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch dev</span><br></pre></td></tr></table></figure><h3 id="2-3-删除分支"><a href="#2-3-删除分支" class="headerlink" title="2.3 删除分支"></a>2.3 删除分支</h3><p>&emsp;&emsp;使用指令<code>git branch -d &lt;name&gt;</code>删除分支，不要注意的是不能删除当前正在使用的分支，因此最少会存在一个分支。比如当前正处于master分支，我们删除dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d dev</span><br></pre></td></tr></table></figure><h3 id="2-4-合并分支"><a href="#2-4-合并分支" class="headerlink" title="2.4 合并分支"></a>2.4 合并分支</h3><p>&emsp;&emsp;<code>git merge &lt;name&gt;</code>指令为将某分支合并到当前分支下，分支的合并是分支操作的最终目的。分支的合并实际是将两个分支的修改差异合并，通常它是自动完成的，但也可能存在冲突，比如两个版本都同时对一个“地方”进行了修改，这样Git就不知道应该以哪个分支的改动为准，Git会将冲突留给人工去干预解决冲突。通常文件的添加和代码的新增不会冲突。比如当前处于master分支，我们要将dev分支合并到master分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure><h3 id="2-5-查看分支树"><a href="#2-5-查看分支树" class="headerlink" title="2.5 查看分支树"></a>2.5 查看分支树</h3><p>&emsp;&emsp;Git管理的项目可以有多个分支，而每个分支可以有多个节点，想要记清楚各个节点之间的关系是不现实的，使用<code>git log</code>指令可以显示当前分支所有节点提交信息及与其有关系的其他分支的节点提交信息（注意，不会显示其余分支的所有节点提交信息），但文字显示不够直观，我们可以使用<code>git log --graph</code>将分支之间的关系图形化显示，可以清晰的看出节点之间的关系及在哪里产生分支或在哪里合并分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_log_graph.png" alt="git_log_graph.png" title="git_log_graph"></p><p>&emsp;&emsp;<code>--oneline</code>参数可以简化显示的信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --oneline</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_log_graph_oneline.png" alt="git_log_graph_oneline.png" title="git_log_graph_oneline"></p><p>&emsp;&emsp;<code>--all</code>指令可以查看所有分支所有节点提交的版本信息。这也是我常用的指令。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --oneline --all</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 版本 </tag>
+            
+            <tag> 版本管理 </tag>
+            
+            <tag> 分支 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（九）——编辑gitignore文件</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94%E7%BC%96%E8%BE%91gitignore%E6%96%87%E4%BB%B6/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94%E7%BC%96%E8%BE%91gitignore%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（九）——编辑gitignore文件"><a href="#Git基础篇（九）——编辑gitignore文件" class="headerlink" title="Git基础篇（九）——编辑gitignore文件"></a><center>Git基础篇（九）——编辑gitignore文件</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;工程目录中有些文件我们并不希望对其进行版本管理，比如工程编译生成的中间文件，个人编辑的某些临时文件等。那么如何让Git知道哪些文件应该版本管理，哪些文件应该忽略呢？这据需要用到.gitignore文件了。</em></p><h2 id="1-gitignore文件作用"><a href="#1-gitignore文件作用" class="headerlink" title="1 .gitignore文件作用"></a>1 .gitignore文件作用</h2><p>&emsp;&emsp;在需要的目录中（通常放在Git管理的项目根目录），创建一个名为 <strong>.gitignore</strong> 的文件，以此文件所处的路径为基础，相对路径形式指定Git管理时要管理和忽略的文件或目录。下面详细介绍编辑的语法规则。</p><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>&emsp;&emsp;<code>#</code>符号为行注释，其后的内容会被忽略，用来编辑注释信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Annotation</span><br></pre></td></tr></table></figure><h2 id="2-忽略文件或目录"><a href="#2-忽略文件或目录" class="headerlink" title="2 忽略文件或目录"></a>2 忽略文件或目录</h2><p>&emsp;&emsp;<code>/</code>符号放在目录名之后，比如忽略工程下的”A”目录及该目录下的所有子目录和文件，忽略”B“目录下的“b.c”的文件，忽略根目录下“main.c”文件，可以这样编辑文件内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Ignore A&#x2F;</span><br><span class="line">A&#x2F;</span><br><span class="line"></span><br><span class="line"># Ignore B&#x2F;b.c</span><br><span class="line">B&#x2F;b.c</span><br><span class="line"></span><br><span class="line"># Ignore main.c</span><br><span class="line">main.c</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;注意不要多次一举在前面添加<code>./</code>，这不表示当前路径。</p><h2 id="3-不忽略文件或目录"><a href="#3-不忽略文件或目录" class="headerlink" title="3 不忽略文件或目录"></a>3 不忽略文件或目录</h2><p>&emsp;&emsp;如果在路径开头加上<code>!</code>符号，则表示不要忽略文件或目录。通过这个符号指定不忽略的作用效果“强”于忽略，组合起来即可实现“忽略某个目录下除了某些指定不忽略的文件或目录以外的所有其他文件和目录”。假设目录结构如下。</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A/a1.c</span><br><span class="line">A/a2.c</span><br><span class="line">A/B/b1.c</span><br><span class="line">A/B/b2.c</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果版本提交时想忽略A目录下除了“a1.c”以外所有的文件和目录，可以这样写命令。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Ignore A&#x2F; but a1.c</span><br><span class="line">A&#x2F;</span><br><span class="line">!A&#x2F;a1.c</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;这两句的先后顺序可以交换，也即与书写顺序无关。</p><h2 id="4-通配符"><a href="#4-通配符" class="headerlink" title="4 通配符"></a>4 通配符</h2><blockquote><ul><li>*：表示匹配任意字符串；</li><li>?：表示匹配任意一个字符；</li><li>[]：表示匹配括号指定范围的一个字符：<ul><li>-：括号内可以使用<code>-</code>指定范围，比如：<code>[0-9]</code>、<code>[a-z]</code>、<code>[A-Z]</code>；</li><li>^：括号内可以使用<code>^</code>指定排除的范围，比如<code>[^0-9]</code>、<code>[^a-z]</code>、<code>[^A-Z]</code>；</li></ul></li></ul></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 版本 </tag>
+            
+            <tag> 版本管理 </tag>
+            
+            <tag> gitignore </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（八）——Git删除操作</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<h1 id="GitGit基础篇（八）——Git删除操作"><a href="#GitGit基础篇（八）——Git删除操作" class="headerlink" title="GitGit基础篇（八）——Git删除操作"></a><center>GitGit基础篇（八）——Git删除操作</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;前面我们降到了文件提交到Git，那么将不需要的文件删除呢？比如某一次提交不小心提交了不需要的工程副产物文件。</em></p><h2 id="1-删除工作目录文件"><a href="#1-删除工作目录文件" class="headerlink" title="1 删除工作目录文件"></a>1 删除工作目录文件</h2><p>&emsp;&emsp;工作区的文件正修改的文件实际上还未被Git进行管理，直接删除即可，这里还是介绍一种在命令行窗口中通过指令删除的方法。使用<code>rm</code>指令加文件名形式。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm a.c a.h</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;这样删除的只是工作目录下的文件，不影响暂存区和仓库。</p><h2 id="2-删除暂存区文件"><a href="#2-删除暂存区文件" class="headerlink" title="2 删除暂存区文件"></a>2 删除暂存区文件</h2><p>&emsp;&emsp;指令<code>git rm</code>会同时将文件从工作目录和暂存区删除。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm a.c a.h</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果删除的文件在工作区已经被修改或在暂存区它是本次刚<code>add</code>进来还未<code>commit</code>的，使用<code>git rm</code>指令删除则会出现错误提示，我们可以使用参数<code>-f</code>表示强制删除。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm -f a.c a.h</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果只想把文件从暂存区删除，而不从工作目录删除，也即<code>add</code>指令的反面指令，可以使用<code>--cached</code>参数。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached a.c a.h</span><br></pre></td></tr></table></figure><h2 id="3-删除仓库文件"><a href="#3-删除仓库文件" class="headerlink" title="3 删除仓库文件"></a>3 删除仓库文件</h2><p>&emsp;&emsp;已经提交到仓库的文件实际不能直接删除，如果想要去掉某些文件需要重新提交删除了这些文件的版本。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 版本 </tag>
+            
+            <tag> 版本管理 </tag>
+            
+            <tag> 删除 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（七）——Git修改管理</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（七）——Git修改管理"><a href="#Git基础篇（七）——Git修改管理" class="headerlink" title="Git基础篇（七）——Git修改管理"></a><center>Git基础篇（七）——Git修改管理</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;对于版本的管理，版本之间的差异对比是常用的操作，检查修改的内容。</em></p><h2 id="1-暂存区和工作目录的差异"><a href="#1-暂存区和工作目录的差异" class="headerlink" title="1 暂存区和工作目录的差异"></a>1 暂存区和工作目录的差异</h2><p>&emsp;&emsp;通过使用<code>git diff</code>查看当前暂存区和工作目录的差异（只显示差异部分即快照），但不会显示工作空间新增的文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;也可以指定要查看的文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff a.c a.h</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_diff_a_c_a_h.png" alt="git_diff_a_c_a_h.png" title="git_diff_a_c_a_h"></p><h2 id="2-暂存区和本地仓库的差异"><a href="#2-暂存区和本地仓库的差异" class="headerlink" title="2 暂存区和本地仓库的差异"></a>2 暂存区和本地仓库的差异</h2><p>&emsp;&emsp;想要查看暂存区和当前本地仓库之间的差异可以使用参数<code>--cached</code>或<code>staged</code>。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --staged</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_diff_cached.png" alt="git_diff_cached.png" title="git_diff_cached"></p><p>&emsp;&emsp;也可指定要查看差异的文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached a.c a.h</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --staged a.c a.h</span><br></pre></td></tr></table></figure><h2 id="3-仓库两次提交的差异"><a href="#3-仓库两次提交的差异" class="headerlink" title="3 仓库两次提交的差异"></a>3 仓库两次提交的差异</h2><p>&emsp;&emps;本地仓库存在多次提交时，我们想要比较某两次提交之间的差异，这时候可以指定要比较的两个版本的Hash编号或标签。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff 64a7e38 a141d52</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_diff_commit1_commit2.png" alt="git_diff_commit1_commit2.png" title="git_diff_commit1_commit2"></p><p>&emsp;&emsp;如果要查看的是本地仓库当前版本和上一版本的差异，也可以直接使用<code>git show</code>指令。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果只关心哪些文件存在差异，也即哪些文件被修改、新增、删除，对具体的文件内容不关心可以使用<code>--stat</code>参数。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --stat 64a7e38 a141d52</span><br></pre></td></tr></table></figure><h2 id="4-查看仓库的提交记录"><a href="#4-查看仓库的提交记录" class="headerlink" title="4 查看仓库的提交记录"></a>4 查看仓库的提交记录</h2><p>&emsp;&emsp;Git对每次提交都会进行记录和管理，我们可以使其列出每一次提交的记录信息。同时也能用于查看HEAD目前指向哪个版本。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果也可以简化显示的信息，一次提交信息占一行。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果要在log信息基础上显示每次提交后有哪些文件被改动、增加、删除，但不显示具体改动内容信息，可以使用参数<code>--stat</code>。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --stat</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;按作者分类输出提交的汇总信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git shortlog</span><br></pre></td></tr></table></figure><h2 id="5-查看工作目录和暂存区修改记录"><a href="#5-查看工作目录和暂存区修改记录" class="headerlink" title="5 查看工作目录和暂存区修改记录"></a>5 查看工作目录和暂存区修改记录</h2><p>&emsp;&emsp;通过使用指令<code>git status</code>我们可以了解当前对工作目录和暂存区的文件修改、增加、删除情况，但不关系具体的修改内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;也可以简化显示的信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status -s</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_status.png" alt="git_status.png" title="git_status"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 修改 </tag>
+            
+            <tag> 版本 </tag>
+            
+            <tag> 版本管理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（三）——Git工作区域及文件状态</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Git%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F%E5%8F%8A%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Git%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F%E5%8F%8A%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（三）——Git工作区域及文件状态"><a href="#Git基础篇（三）——Git工作区域及文件状态" class="headerlink" title="Git基础篇（三）——Git工作区域及文件状态"></a><center>Git基础篇（三）——Git工作区域及文件状态</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;想要真正熟悉Git用法，必须对Git工作原理有所熟悉。这篇文章介绍Git的集中工作区域和Git中文件的几种状态。</em></p><h2 id="1-Git四种工作区域"><a href="#1-Git四种工作区域" class="headerlink" title="1 Git四种工作区域"></a>1 Git四种工作区域</h2><p>&emsp;&emsp;Git将存储区域划分为四种：工作目录（Working Directory）、暂存区（Stage/Index）、仓库区/版本库（Repository/Git Directory）、远程仓库（Remote Directory）。</p><blockquote><ul><li>工作目录（Working Directory）：就是你的项目目录但不包括”.git“目录，是对文件进行编辑修改的目录；</li><li>暂存区（Stage/Index）：用于临时存放改动，此时改动已经被Git进行管理。实际上暂存区就是”.git“目录下”index“文件（.git/index）；</li><li>仓库区/版本库（Repository/Git Directory）：核心区域，是存放所有版本提交的区域，内容都存放在”.git“目录中；</li><li>远程仓库（Remote Directory）：存储在远端进行项目托管的服务器中，比如Github或者公司的某一台充当服务器作用的电脑；</li></ul></blockquote><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Git%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F%E5%8F%8A%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81/Work_area.png" alt="Work_area.png" title="Work_area"></p><p>&emsp;&emsp;工作目录就是你进行“创作”区域，此时没有进行版本管控，而仓库区是进行版本管控的区域，但为什么在工作区和仓库区中间还存在一个暂存区，比如SVN就没有暂存区的概念，暂存区有什么作用呢？当修改未完成时，这时候不能把未完成的修改提交上去，但是又希望当前的修改进行适当的版本管理，那么就可以选择将工作区的最新修改提交到暂存区。<br>&emsp;&emsp;通常使用Git的工作流程是，现在工作区进行开发，然后将修改提交到暂存区，将一次完整的修改提交到本地仓库并写上log，最后考虑是否提交到远程仓库或将修改推送给别人，与别人分享自己的修改。</p><h2 id="2-Git四种文件状态"><a href="#2-Git四种文件状态" class="headerlink" title="2 Git四种文件状态"></a>2 Git四种文件状态</h2><p>&emsp;&emsp;Git版本的控制实际是对文件的控制，但要注意版本管控的单位不是文件，一个版本可以包含很多文件。在Git中，根据文件的提交和修改存在四种状态的文件。</p><blockquote><ul><li>未跟踪（Untracked）：文件当前未参与Git版本管控；</li><li>未修改（Unmodify）：文件已经入库但未修改；</li><li>已修改（Modified）：文件已经入库并且存在修改；</li><li>已暂存（Staged）：文件处于暂存状态；</li></ul></blockquote><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Git%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F%E5%8F%8A%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81/File_status.png" alt="File_status.png" title="File_status"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 版本 </tag>
+            
+            <tag> 版本管理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（五）——Git版本提交</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（四）——Git版本提交"><a href="#Git基础篇（四）——Git版本提交" class="headerlink" title="Git基础篇（四）——Git版本提交"></a><center>Git基础篇（四）——Git版本提交</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;Git操作的单位是版本，一次提交就是一个版本，而所有版本的集合就是版本库（Repository）。Git的操作就是针对版本的操作，想要熟练掌握Git关键就在熟练的对版本的操作。</em></p><h2 id="1-Git提交"><a href="#1-Git提交" class="headerlink" title="1 Git提交"></a>1 Git提交</h2><h3 id="1-1-修改提交到暂存区"><a href="#1-1-修改提交到暂存区" class="headerlink" title="1.1 修改提交到暂存区"></a>1.1 修改提交到暂存区</h3><p>&emsp;&emsp;当对某个文件内容进行修改或新增文件后，我们需要先将这些“变化”提交到 <strong>暂存区</strong> 。</p><h4 id="1-1-1-git-add"><a href="#1-1-1-git-add" class="headerlink" title="1.1.1 git add"></a>1.1.1 git add</h4><p>&emsp;&emsp;将工作区当前目录及其子目录内所有变化提交到暂存区，包括修改、新建和删除。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将工作区被删除或修改的文件提交到暂存区，不会提交新建的文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -u</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add --update</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将整个工作区所有目录内的所有变化提交到暂存区，包括修改、新建和删除。在v2.0以上版本中，与<code>git add .</code>的区别在只是作用范围不同。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add --all</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果写明文件名可以指定要提交到暂存区的文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add a.c a.h</span><br></pre></td></tr></table></figure><h3 id="1-2-修改提交到本地仓库"><a href="#1-2-修改提交到本地仓库" class="headerlink" title="1.2 修改提交到本地仓库"></a>1.2 修改提交到本地仓库</h3><p>&emsp;&emsp;<code>git commit</code>指令用于将暂存库的修改提交到本地仓库。</p><h4 id="1-2-1-git-commit"><a href="#1-2-1-git-commit" class="headerlink" title="1.2.1 git commit"></a>1.2.1 git commit</h4><p>&emsp;&emsp;将暂存区的修改提交到本地仓库中并且添加Log说明可以使用下面这条命令。<code>-m</code>参数后接一个字符串，作为对本次版本提交的说明。如果加了<code>-m</code>参数但不输入“message”信息，则会进入Vi模式让你手动编辑说明信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;message&quot;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;输入的“message”也可以是多行。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &#96;</span><br><span class="line">message1</span><br><span class="line">message2</span><br><span class="line">message3</span><br><span class="line">&#96;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果想要写详细的注释信息，直接在命令框里编辑会比较麻烦，可以使用<code>-F</code>参数指定文件，将文件内容作为版本提交时的说明信息。比如工程上一级目录中有一个”log.txt”说明文件，可以这样写指令。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -F ..&#x2F;log.txt</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;对已经完成的提交再次修改。比如你讲修改提交到仓库后，Leader觉得不行要你继续修改，这时候版本已经提交上去了，要么abandon这次提交，要么对这次提交再次修改。通常再次修改是更好的选择。回车后会进入Vi模式，重写注释内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果只想修改提交内容而不像修改注释可以使用<code>--no-edit</code>命令。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend --no-edit</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果对工作区文件进行了修改或删除（不包括新增），想要同时完成提交到暂存区和本地仓库，那么可以使用<code>-a</code>或<code>--all</code>指令。要注意该条指令是对整个工作区有效。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -a -m &quot;message&quot;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;可以写明文件名指定要提交的文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit a.c a.h -m &quot;message&quot;</span><br></pre></td></tr></table></figure><h3 id="1-3-修改提交到远程仓库"><a href="#1-3-修改提交到远程仓库" class="headerlink" title="1.3 修改提交到远程仓库"></a>1.3 修改提交到远程仓库</h3><h4 id="1-3-1-git-push"><a href="#1-3-1-git-push" class="headerlink" title="1.3.1 git push"></a>1.3.1 git push</h4><p>&emsp;&emsp;<code>git push</code>命令用于将本地仓库修改推送到远程仓库。一般形式为：<code>git push &lt;远程主机名&gt; &lt;本地分支名&gt; &lt;远程分支名&gt;</code>。<br>&emsp;&emsp;比如下面这条指令就表示将本地名为master的分支推送到远程名为origin的主机上名为master的分支，通常本地分支名和远程分支名是相同的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master: refs&#x2F;for&#x2F;master</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;若将本地分支名省略，则表示表示将远程上名为master的分支删除。含义就是给远程origin主机上master分支推送一个空分支，就是删除它。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin : refs&#x2F;for&#x2F;master</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果省略的是远程分支名，则默认将当前分支推送到远程与其存在追踪关系的分支，通常两个分支是同名的。如果远程不存在这个分支则会新建它然后推送。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果当前分支与远程分支存在对应关系，甚至可以将远程分支都省略，将当前分支推送到origin主机对应的分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果当前分支只有一个远程主机和分支，连主机名都可省略。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果一个分支与多个主机都存在追踪关系，可以指定一个默认主机。比如下面的代码将origin作为该分支的默认主机。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将本地所有分支推送到远程服务器分支，如果分支不存在则新建。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --all origin</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;通常修改前我们需要先将服务器上最新的版本pull到本地然后在最新版本上修改上传，如果修改的版本是基于比服务器上当前版本更低的，通常提交时会提示你pull，有时候你希望强制提交。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 版本 </tag>
+            
+            <tag> 版本管理 </tag>
+            
+            <tag> 提交 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（六）——Git版本回退</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（六）——Git版本回退"><a href="#Git基础篇（六）——Git版本回退" class="headerlink" title="Git基础篇（六）——Git版本回退"></a><center>Git基础篇（六）——Git版本回退</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;人无完人，没有人能确保每次的修改都是完美的，即使提交是完美的需求也可能突然改变。版本回退是Git中重要且常用的操作之一。</em></p><h2 id="1-Git版本回退"><a href="#1-Git版本回退" class="headerlink" title="1 Git版本回退"></a>1 Git版本回退</h2><p>&emsp;&emsp;说到版本回退首先要知道Git是如何标识不同版本的。Git会为每次提交上去的版本记录快照并生成一串十六进制编号（Hash值），以这串编号作为当前版本的独一无二标识，按照时间线多次的提交就连成条”线“也即提交记录，每一条”线“就是一个分支，还存在一个HEAD指针指向其中一个版本也即其记录了某个版本的十六进制编号。原理就像数据结构中链表和节点指针的关系。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commit 6574ac2446b82c86f2af107783b405032784303a</span><br><span class="line">Author: onlycalm &lt;741089410@qq.com&gt;</span><br><span class="line">Date:   Fri Feb 12 00:05:22 2021 +0800</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/Version_branch.png" alt="Version_branch.png" title="Version_branch"></p><p>&emsp;&emsp;回退的目的是在旧版本基础上修改并重新提交，这个过程可以分为两步，第一步是版本回退到旧版本也即版本提交的回退，第二步是将旧的版本记录重新回到进行开发的工作目录下来也即工作区之间的提交回退，实际操作中这两步也可以只用一条指令。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/Work_area.png" alt="Work_area.png" title="Work_area"></p><h3 id="1-1-工作区之间的提交回退"><a href="#1-1-工作区之间的提交回退" class="headerlink" title="1.1 工作区之间的提交回退"></a>1.1 工作区之间的提交回退</h3><p>&emsp;&emsp;在前面的文章中我们提到Git中将存储分为四种区域，如果将这个提交顺序称为正向提交，<strong>工作目录-&gt;暂存区-&gt;仓库区-&gt;远程仓库</strong> ，那么顺序反过来就是版本提交回退了。</p><h4 id="1-1-1-仓库区回退到工作目录"><a href="#1-1-1-仓库区回退到工作目录" class="headerlink" title="1.1.1 仓库区回退到工作目录"></a>1.1.1 仓库区回退到工作目录</h4><h5 id="1-1-1-1-git-checkout"><a href="#1-1-1-1-git-checkout" class="headerlink" title="1.1.1.1 git checkout"></a>1.1.1.1 git checkout</h5><p>&emsp;&emsp;<code>git checkout</code>指令可以将本地仓库的指定提交记录检出到工作目录。<code>&lt;commit&gt;</code>可以是对应版本的Hash编号或标签，Hash编号可以写完整的，一般写前7位即可。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;commit&gt;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;放弃工作区当前的修改，强制检出仓库区当前版本。不过该指令要慎用，因为没有“后悔”指令，一旦放弃工作目录的修改就无法找回，因为这些修改还未被Git管理。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -f</span><br></pre></td></tr></table></figure><h4 id="1-1-2-远程仓库区回退到本地仓库"><a href="#1-1-2-远程仓库区回退到本地仓库" class="headerlink" title="1.1.2 远程仓库区回退到本地仓库"></a>1.1.2 远程仓库区回退到本地仓库</h4><p>&emsp;&emsp;由于远程仓库可能是多人共同维护的，因此从远程仓库过来的更新可能是自己历史提交的记录也可能是别人提交的记录。</p><h5 id="1-1-2-1-git-fetch"><a href="#1-1-2-1-git-fetch" class="headerlink" title="1.1.2.1 git fetch"></a>1.1.2.1 git fetch</h5><p>&emsp;&emsp;当指定远程主机某个分支时，只对指定的分支有效，拉取该远程主机下某分支的全部更新内容到本地仓库。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin master</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将远程仓库的特定主机全部更新内容拉取到本地仓库。只指定远程主机名，不特指某个分支，则对所有分支都有效。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果所操作的仓库只有一个远程主机和分支，连主机名都可省略。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch</span><br></pre></td></tr></table></figure><h5 id="1-1-2-2-git-clone"><a href="#1-1-2-2-git-clone" class="headerlink" title="1.1.2.2 git clone"></a>1.1.2.2 git clone</h5><p>&emsp;&emsp;将远程仓库整个克隆到本地某个目录。<code>&lt;Address</code>是远程仓库的地址。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;Address&gt;</span><br></pre></td></tr></table></figure><h4 id="1-1-3-远程仓库区回退到工作目录"><a href="#1-1-3-远程仓库区回退到工作目录" class="headerlink" title="1.1.3 远程仓库区回退到工作目录"></a>1.1.3 远程仓库区回退到工作目录</h4><p>&emsp;&emsp;将远程仓库内容直接拉取的到工作空间常见的指令是<code>git pull</code>，与<code>git fetch</code>相比除了拉取的目标存储区域不同外，pull拉取后会将远程库和本地分支合并（merge），而合并可能存在冲突需要我们手动解决，因此它是拉取到工作目录，解决冲突后commit。</p><h5 id="1-1-3-1-git-pull"><a href="#1-1-3-1-git-pull" class="headerlink" title="1.1.3.1 git pull"></a>1.1.3.1 git pull</h5><p>&emsp;&emsp;将远程主机的全部更新内容拉取到本地并且和本地存在追踪关系的分支进行合并。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果所操作的仓库只有一个远程主机和分支，连主机名都可省略。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure><h3 id="1-2-提交版本的回退"><a href="#1-2-提交版本的回退" class="headerlink" title="1.2 提交版本的回退"></a>1.2 提交版本的回退</h3><h4 id="1-2-1-git-reset"><a href="#1-2-1-git-reset" class="headerlink" title="1.2.1 git reset"></a>1.2.1 git reset</h4><p>&emsp;&emsp;将本地仓库的版本回退到上一次提交的版本。一个<code>^</code>表示上一个提交版本，如果连续写N个<code>^</code>则会回退到前第N次提交。<code>git reset</code>版本回退后，中间“跨过”的版本会直接删除，因为有版本丢弃所以HEAD将会“断”，不是在原来基础上增加，所以要慎用。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD^</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;回退版本时可以直接指定版本的Hash值或标签。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset &lt;commit&gt;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;但如果要回退的历史版本比较久远，写很多个<code>^</code>会很麻烦，也可以使用<code>~&lt;N&gt;</code>回退前第N次提交。比如以下指令表示回退到前第5次提交。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD~5</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;使用<code>--soft</code>指令，可以撤销对本地仓库的提交将版本回退到历史版本，但不影响工作目录和暂存区未完成的修改。也即只回退版本库，但不影响暂存区和工作区。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD^</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;使用<code>--mixed</code>指令，回退版本库和暂存区，实际上<code>--mixed</code>可以被省略，也就是默认情况下的<code>git reset</code>指令。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --mixed HEAD^</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;使用<code>--hard</code>指令，回退版本库、暂存区、工作区。用这个指令要小心，因为工作区的修改是没有版本控制的，一旦工作区的修改没了是无法恢复的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure><h4 id="1-2-2-git-revert"><a href="#1-2-2-git-revert" class="headerlink" title="1.2.2 git revert"></a>1.2.2 git revert</h4><p>&emsp;&emsp;<code>git revert</code>特殊之处在于其回退版本后中间“跨过”的版本也都会保留，并且HEAD也会在原来基础上增加，也即不影响之前的提交内容。指令用法与<code>git reset</code>是类似的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD^^</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD~5</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;回退版本时可以直接指定版本的Hash编号或标签。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 版本 </tag>
+            
+            <tag> 版本管理 </tag>
+            
+            <tag> 回退 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（四）——Git创建版本库</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（四）——Git创建版本库"><a href="#Git基础篇（四）——Git创建版本库" class="headerlink" title="Git基础篇（四）——Git创建版本库"></a><center>Git基础篇（四）——Git创建版本库</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;Git并不是对任意目录都能进行管理，首先管理的目录必须是Git创建的版本库，那么如何将项目目录创建为Git版本库进行管理呢？</em></p><h2 id="1-创建Git版本库"><a href="#1-创建Git版本库" class="headerlink" title="1 创建Git版本库"></a>1 创建Git版本库</h2><p>&emsp;&emsp;在工程的根目录（可以是空目录）下执行“Git Bash”命令，或对工程根目录文件夹右键鼠标菜单中点击“Git Bash Here”弹出命令行窗口执行以下命令：</p><h3 id="1-1-git-init"><a href="#1-1-git-init" class="headerlink" title="1.1 git init"></a>1.1 git init</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;该命令会在根目录下自动创建文件夹”.git“（该目录默认是隐藏的），意味着Git把这个目录变为了Git可以管理的仓库了，”.git“目录中记录了Git对于该项目的所有版本管理记录，所以千万不要随意去修改它，你只需运行指令让Git自动管理这个目录。<br>&emsp;&emsp;另外，值得一提的是，Git擅长的是文字文本的版本管理，如果涉及图片、视频、pdf、硬件原理图等更复杂的文件，Git对齐的版本管理效果很差。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 版本 </tag>
+            
+            <tag> 版本管理 </tag>
+            
+            <tag> 创建 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（二）——Git安装</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%AE%89%E8%A3%85/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%AE%89%E8%A3%85/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（二）——Git安装"><a href="#Git基础篇（二）——Git安装" class="headerlink" title="Git基础篇（二）——Git安装"></a><center>Git基础篇（二）——Git安装</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;Git最初的版本是在Linux上开发的，因此在很长一段时间里Git只有Linux和Unix版本，目前它已经可以在Linux、Unix、IOS、Windows几大平台上运行。</em></p><h2 id="1-Windows安装Git"><a href="#1-Windows安装Git" class="headerlink" title="1 Windows安装Git"></a>1 Windows安装Git</h2><p>&emsp;&emsp;Git是免费开源的，我们直接在<a href="https://git-scm.com/downloads">Git官网</a>下载相应的Release版本安装即可。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E8%AE%A4%E8%AF%86Git/Git_installation.png" alt="Git_installation.png" title="Git_installation"></p><p>&emsp;&emsp;按照默认，一路点“下一步”就行了。在开始菜单或鼠标右键中就可以看到“Git-Bash”，在其中即可输入Git指令执行。<br>&emsp;&emsp;在Git版本管理系统中，每个操作者都需要标识“身份”，Git中是通过用户名和邮箱地址进行“身份”标识的。在“Git-Bash”中输入以下指令配置自己的用户名和邮箱地址。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global user.name &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 版本管理 </tag>
+            
+            <tag> Git </tag>
+            
+            <tag> 安装 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（一）——认识Git</title>
+      <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E8%AE%A4%E8%AF%86Git/"/>
+      <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E8%AE%A4%E8%AF%86Git/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（一）——认识Git"><a href="#Git基础篇（一）——认识Git" class="headerlink" title="Git基础篇（一）——认识Git"></a><center>Git基础篇（一）——认识Git</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;Git是目前最主流的分布式版本管理系统。另外，Git也是开源的，高效的管理系统，从小到大的项目都可以使用Git轻松管理。目前它已经是使用最广泛的版本管理工具了。</em></p><h2 id="1-Git发展史简述"><a href="#1-Git发展史简述" class="headerlink" title="1 Git发展史简述"></a>1 Git发展史简述</h2><p>&emsp;&emsp;2005年，Linux的缔造者Linus Torvalds用C编写了一个分布式版本控制系统用于对Linux系统源码的管理，自此Git正式登上历史舞台。自此Git迅速流行起来，直到2008年GitHub网站上线，免费为开源项目提供基于Git的存储，自此Git开始逐渐成为主流版本管理系统。</p><h2 id="2-Git与其他版本管理系统有什么不同？"><a href="#2-Git与其他版本管理系统有什么不同？" class="headerlink" title="2 Git与其他版本管理系统有什么不同？"></a>2 Git与其他版本管理系统有什么不同？</h2><p>&emsp;&emsp;Git与其他版本管理系统不同，它是分布式的，而CVS和SVN都是集中式版本管理系统。</p><h3 id="2-1-集中式版本管理系统"><a href="#2-1-集中式版本管理系统" class="headerlink" title="2.1 集中式版本管理系统"></a>2.1 集中式版本管理系统</h3><p>&emsp;&emsp;集中式版本管理系统核心是必有一台中央服务器，其余电脑与这台服务器相连接，当需要开发项目时，必须先从服务器上获取相应的版本副本，修改完成后再将自己的副本推送到服务器端进行更新，其他人员则可从服务器端获取你最新的修改。<br>&emsp;&emsp;缺点是必须保持网络畅通，否则你无法获取到最新的版本以及将你的修改推送到服务器端。一旦服务器出现故障，则工作将会被迫停止。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E8%AE%A4%E8%AF%86Git/Centralized_version_management_system.png" alt="Centralized_version_management_system.png" title="Centralized_version_management_system"></p><h3 id="2-2-分布式版本管理系统"><a href="#2-2-分布式版本管理系统" class="headerlink" title="2.2 分布式版本管理系统"></a>2.2 分布式版本管理系统</h3><p>&emsp;&emsp;没有中央服务器，每一台主机上都有一个完整的版本库，因此可以在自己主机上进行独立的版本修改而不需要先从服务器上获取相应的版本库。由于没有中央服务器，因此如果你想看到别人的修改，就需要别人将其修改推送给你，根据需要选择和自己的修改进行合并。<br>&emsp;&emsp;因为每台主机都有完整的版本库，因此任意一台主机发生故障不会影响其余主机的工作。由于完整的版本库在主机本地，因此在没有网络的情况下也可以进行开发和版本库的管理。如果你想获取别人对版本库的修改，那么需要对方将其修改推送给你，如果一个项目有很多人在开发，那么两两之间互相推送修改将会是非常繁琐的过程。为了避免这样的结果，在Git中通常也引入中央服务器，所有人统一将自己的修改推送给中央服务器，但这台中央服务器不是必须的，引入它只是为了使得版本交换方便。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E8%AE%A4%E8%AF%86Git/Distributed_version_management_system.png" alt="Distributed_version_management_system.png" title="Distributed_version_management_system"></p><p>&emsp;&emsp;值得一提的是Git强大的分支管理也是优于其他版本管理系统的一大优势。<br>&emsp;&emsp;另外分布式版本管理系统也不止Git一个，但最广泛使用是Git。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 版本管理 </tag>
+            
+            <tag> Git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>单片机存储分配</title>
+      <link href="//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/"/>
+      <url>//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/</url>
+      
+        <content type="html"><![CDATA[<h1 id="单片机存储分配"><a href="#单片机存储分配" class="headerlink" title="单片机存储分配"></a><center>单片机存储分配</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;RAM和Flash是单片机重要的数据存储介质，在使用MDK编译时我们也会看到编译结果中会显示’Code、RO-data、RW-data、ZI-data’的使用大小。单片机到底是怎么划分这些存储区域，变量和代码是怎么存储的呢？</em></p><h2 id="1-单片机存储区域的划分"><a href="#1-单片机存储区域的划分" class="headerlink" title="1 单片机存储区域的划分"></a>1 单片机存储区域的划分</h2><p>&emsp;&emsp;单片机对地址的划分规则（按照地址排序）一般如下：<br>高地址</p><table><thead><tr><th align="center">地址划分区域</th><th align="center">含义</th></tr></thead><tbody><tr><td align="center">命令行及环境参数（高地址）</td><td align="center">main函数是可以有参数的，而传入的参数值将被存储在该区域。</td></tr><tr><td align="center">STACK（栈）</td><td align="center">由编译器决定分配和释放，存放函数的参数变量及局部非静态变量等。</td></tr><tr><td align="center">HEAP（堆）</td><td align="center">通常由程序员；申请和释放，若忘记释放则在程序结束时释放。</td></tr><tr><td align="center">.bss段（未初始化数据段）</td><td align="center">通常用来存放程序中未初始化的全局变量和静态变量，也称为.bss段（Block Started by Symbol），属于静态内存分配。</td></tr><tr><td align="center">.data段（初始化数据段）</td><td align="center">通常用来存放程序中已初始化的全局变量和静态变量，属于静态内存分配。</td></tr><tr><td align="center">Code段</td><td align="center">对应的存储介质为ROM。存储二进制程序执行源代码的区域，占用空间在程序运行前就已确定，通常是只读的防止程序被篡改，但也有某些单片机架构允许代码段可写来修改程序。程序常量也存储在该区域。</td></tr><tr><td align="center">中断向量（低地址）</td><td align="center">向量表通常存储在存储空间的首地址，包含了系统中可用异常（中断）的异常（中断）向量，以及主栈指针（MSP）的初始值。</td></tr></tbody></table><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/MCU_memory_allocation.png" alt="MCU_memory_allocation.png" title="MCU_memory_allocation"></p><h3 id="1-1-命令行及环境参数"><a href="#1-1-命令行及环境参数" class="headerlink" title="1.1 命令行及环境参数"></a>1.1 命令行及环境参数</h3><p>&emsp;&emsp;main函数是可以接受参数输入的，我们可以将main函数的参数分为两类：</p><blockquote><ul><li>命令行参数<ul><li>main函数的第一个参数，常命名为argc或ac，表示命令行参数的数量。</li><li>main函数的第二个参数，常命名为argv或av，是指向命令行（c字符串）的指针数组。</li></ul></li><li>环境变量<ul><li>main函数的第三个参数，常命名为envp或env，是指向环境变量（c字符串）的指针数组。</li></ul></li></ul></blockquote><h3 id="1-2-栈（又称堆栈）和堆"><a href="#1-2-栈（又称堆栈）和堆" class="headerlink" title="1.2 栈（又称堆栈）和堆"></a>1.2 栈（又称堆栈）和堆</h3><h4 id="1-2-1-栈"><a href="#1-2-1-栈" class="headerlink" title="1.2.1 栈"></a>1.2.1 栈</h4><p>&emsp;&emsp;由编译器决定分配和释放，用于存放函数局部非静态变量和函数参数变量等，是动态的内存分配。与栈操作是对应的，当函数被调用时，分配局部非静态变量和函数参数变量对应了入栈操作，而这些变量的释放对应了退栈操作。因此局部非静态变量和函数参数变量的访问涉及到入栈和退栈操作，相对全局或静态变量会更低效。<br>&emsp;&emsp;还需要解释下为何局部非全局变量和函数参数变量的内存分配和释放是由编译器决定的。程序运行时要使用的栈空间，在编译时就已经由编译器决定好了要分配多少，何时分配和销毁，这部分栈空间的分配和释放的代码在编译后就已经生成好了，只是在运行时执行了它而已。</p><h4 id="1-2-2-堆"><a href="#1-2-2-堆" class="headerlink" title="1.2.2 堆"></a>1.2.2 堆</h4><p>&emsp;&emsp;堆是用于存放进程运行中被动态的分配内存段，它也是动态的内存分配。当进程调用malloc、free等内存分配和释放函数时，这部分内存就处于堆上。</p><h4 id="1-2-3-栈和堆的增长"><a href="#1-2-3-栈和堆的增长" class="headerlink" title="1.2.3 栈和堆的增长"></a>1.2.3 栈和堆的增长</h4><p>&emsp;&emsp;栈和堆的内存分配都是动态的，也即实际的空间大小随着程序的运行是会变化的。一些程序对栈的消耗较大，一些程序对堆的消耗较大，为了节省空间，往往将栈设计为地址向低地址增长，堆则地址向高地址增长。也即在物理上栈和堆其实共享一块存储区域，只是首地址不同，地址增长方向相反。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/Stack_and_heap_memory_growth.png" alt="Stack_and_heap_memory_growth.png" title="Stack_and_heap_memory_growth"></p><h3 id="1-3-bss段（未初始化数据段）"><a href="#1-3-bss段（未初始化数据段）" class="headerlink" title="1.3 .bss段（未初始化数据段）"></a>1.3 .bss段（未初始化数据段）</h3><p>&emsp;&emsp;未初始化数据段也即.bss段，通常是指用来存放程序中未初始化的全局变量和静态变量。.bss段为静态内存分配。</p><h3 id="1-4-data段（初始化数据段）"><a href="#1-4-data段（初始化数据段）" class="headerlink" title="1.4 .data段（初始化数据段）"></a>1.4 .data段（初始化数据段）</h3><p>&emsp;&emsp;通常用来存放已初始化的全局变量和静态变量，也属于静态内存分配。<br>&emsp;&emsp;这里有个疑问，为什么要把全局变量和静态变量按照初始化和未初始化分开存储呢？变量的初始值是由启动代码完成的，为了使启动代码简化，编译器会把全局或静态变量按照是否初始化分段划分，.data段的的映像包含了各个变量的初始值，被保存在“只读数据段”（对应ZO-data，存储在ROM中），这样启动代码就可以简单的直接按照映像复制数据到.data段，这样所有需要初始化的全局或静态变量就都初始化了。.bss段未初始化的变量，启动代码通常会对其清0操作。<br>&emsp;&emsp;还有一些细节需要了解。一些编译器，对于初始化值为0的全局或静态变量编译器仍然将其分配到.bss段。一些编译器，对于定义但未使用的变量，不会为其分配变量空间。</p><h3 id="1-5-代码段"><a href="#1-5-代码段" class="headerlink" title="1.5 代码段"></a>1.5 代码段</h3><p>&emsp;&emsp;这部分存储区域用来存放程序执行代码，大小在编译后就已经确定，往往也是占用存储空间最大的部分。通常这部分存储区域是只读的，为了防止程序被篡改。</p><h3 id="1-6-中断向量"><a href="#1-6-中断向量" class="headerlink" title="1.6 中断向量"></a>1.6 中断向量</h3><p>&emsp;&emsp;单片机的实时处理离不开中断的触发，中断向量通常存储在空间的首地址处。这部分区域还包含了系统中可用异常（中断）的异常（中断）向量，以及主栈指针（MSP）的初始值。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/Interrupt_vector_table.png" alt="Interrupt_vector_table.png" title="Interrupt_vector_table"></p><h2 id="2-Code、RO-data、RW-data、ZI-data"><a href="#2-Code、RO-data、RW-data、ZI-data" class="headerlink" title="2 Code、RO-data、RW-data、ZI-data"></a>2 Code、RO-data、RW-data、ZI-data</h2><p>&emsp;&emsp;MDK编译通过后，在“Build Output”窗口会显示Code、RO-data、RW-data、ZI-data几种类型的大小（单位是Byte）。为了对程序存储空间使用情况有更具体的了解，我们需要能看懂这些编译结果。</p><h3 id="2-1-Code"><a href="#2-1-Code" class="headerlink" title="2.1 Code"></a>2.1 Code</h3><p>&emsp;&emsp;代码执行程序占用的空间大小，通常是存储空间消耗的“大头”部分。</p><h3 id="2-2-RO-data"><a href="#2-2-RO-data" class="headerlink" title="2.2 RO-data"></a>2.2 RO-data</h3><p>&emsp;&emsp;Read only data，即只读数据域。它指程序中只读数据占用的存储空间大小，这些数据存储在ROM中（一般为单片机内部Flash）。这些数据包括字符串常量和数值常量，比如C中被const修饰的变量。由于ROM的访问速度比RAM慢，因此常量数据的访问速度要低于变量。</p><h3 id="2-3-RW-data"><a href="#2-3-RW-data" class="headerlink" title="2.3 RW-data"></a>2.3 RW-data</h3><p>&emsp;&emsp;Read write data，即可读写数据域。指经过初始化（指非0值）的全局或静态变量占用的存储空间大小，程序加载前存储在ROM，加载后存储在RAM，因此可以在程序运行中修改值。</p><h3 id="2-4-ZI-data"><a href="#2-4-ZI-data" class="headerlink" title="2.4 ZI-data"></a>2.4 ZI-data</h3><p>&emsp;&emsp;Zero initialie data，即0初始化区域。指未经过初始化或初始化值为0的变量占用的存储空间大小，与RW-data类似，加载前存储在ROM中，加载后存储在RAM，因此可以在程序运行中修改值。它们的区别在于是否被初始化或初始值是否为0，这样划分是为了简化启动代码的设计（划分的原因上面讲过了）。</p><h3 id="2-5-程序RAM和ROM使用大小"><a href="#2-5-程序RAM和ROM使用大小" class="headerlink" title="2.5 程序RAM和ROM使用大小"></a>2.5 程序RAM和ROM使用大小</h3><p>&emsp;&emsp;通过MDK我们可以了解单片机的空间使用情况如：</p><table><thead><tr><th align="center">程序状态与区域</th><th align="center">组成</th></tr></thead><tbody><tr><td align="center">程序执行时的只读区域（RO）</td><td align="center">Code + RO-data</td></tr><tr><td align="center">程序执行时的可读写区域（RW）</td><td align="center">RW-data + ZI-data</td></tr><tr><td align="center">程序存储时占用的ROM区域</td><td align="center">Code + RO-data + RW-data</td></tr></tbody></table><p>&emsp;&emsp;我们较常关注的是ROM和RAM占用的大小：</p><table><thead><tr><th align="center">空间资源</th><th align="center">组成</th></tr></thead><tbody><tr><td align="center">RAM</td><td align="center">RW-data + ZI-data</td></tr><tr><td align="center">ROM</td><td align="center">Code + RO-data + RW-data</td></tr></tbody></table><h2 id="3-关于运行状态和掉电状态下的存储"><a href="#3-关于运行状态和掉电状态下的存储" class="headerlink" title="3 关于运行状态和掉电状态下的存储"></a>3 关于运行状态和掉电状态下的存储</h2><p>&emsp;&emsp;RAM具有高速读写的特性，但由于价格高使得空间资源更加有限，掉电数据丢失。而ROM读写速度比RAM慢，但价格更低空间资源更大，且具有掉电保存的特点。为了更充分的利用资源，程序在运行和掉电状态下的存储是不同的。<br>&emsp;&emsp;程序是保存在掉电不丢失的ROM中的，通常单片机程序运行是在ROM中运行程序（也有一些单片机能把部分程序加载到RAM运行，加快运行速度，但是掉电后将会丢失而且RAM空间非常有限）。在单片机开始运行时，内核在执行主体程序前会先执行启动代码（启动代码是固化在单片机内部ROM的，一般情况下用户访问不到也修改不了），启动代码会将RW-data从ROM加载到RAM，这时分为有初始化.data段和未初始化的.bss段，对.data段进行初始化加载值，对.bss段统一清零。常量存储的RO-data区也保存在ROM中，程序运行时直接从ROM读取。<br>&emsp;&emsp;因此就不难理解RW-data的使用大小既要算到RAM里也要算到ROM里，Code和Ro-data的大小包含在ROM中，ZI-data大小包含在RAM中。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 嵌入式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SRAM </tag>
+            
+            <tag> RAM </tag>
+            
+            <tag> 内存 </tag>
+            
+            <tag> 单片机 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vim基础篇（五）——搜索操作</title>
       <link href="//docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E6%90%9C%E7%B4%A2%E6%93%8D%E4%BD%9C/"/>
       <url>//docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E6%90%9C%E7%B4%A2%E6%93%8D%E4%BD%9C/</url>
@@ -36,10 +353,10 @@
     
     <entry>
       <title>Vim基础篇（四）——标签页操作</title>
-      <link href="//docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%93%8D%E4%BD%9C%20-%20%E5%89%AF%E6%9C%AC/"/>
-      <url>//docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%93%8D%E4%BD%9C%20-%20%E5%89%AF%E6%9C%AC/</url>
+      <link href="//docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%93%8D%E4%BD%9C/"/>
+      <url>//docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%93%8D%E4%BD%9C/</url>
       
-        <content type="html"><![CDATA[<h1 id="Vim基础篇（四）——标签页操作"><a href="#Vim基础篇（四）——标签页操作" class="headerlink" title="Vim基础篇（四）——标签页操作"></a><center>Vim基础篇（四）——标签页操作</h1><p><em>前言：</em><br><em>&emsp;&emsp;Window是显示Buffer的控件，而Tab是存放Window的控件。一个Tab内可以放多个Window，一个Vim可以运行多个Tab。掌握Tab的基本操作会使得编辑工作更得心应手。</em></p><h2 id="1-Tab的创建或删除"><a href="#1-Tab的创建或删除" class="headerlink" title="1 Tab的创建或删除"></a>1 Tab的创建或删除</h2><p>&emsp;&emsp;在Vim启动时将自动为你创建一个Tab。 <strong>注意：Window、Tab、Buffer三者直接没有必然的一一对应关系。</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabnew &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;新建Tab页，并且在新的Tab页中打开一个新的Window并且新建一个名为“file”的Buffer。如果未指定“file”，则新建一个无名缓存。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabe[dit] &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;新建Tab页，并且在新的Tab页中打开一个新的Window显示“file”文件内容，即将该文件内容读入缓存。如果未指定“file”，则打开一个无名缓存。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabc[lose] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;关闭编号为N的Tab也，同时该Tab内的所有窗口也会被关闭，但是不会关闭在该Tab打开的缓存。N缺省值为当前标签页的编号。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabo[nly] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;关闭除了编号为N以外的所有Tab也，N缺省值为光标所在Tab页的编号。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tabs</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;列出当前所有的Tab页，同时会显示每个Tab页对应的编号，显示每个Tab页内每个窗口打开文件名。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%93%8D%E4%BD%9C/tabs.png" alt="reg.png" title="tabs"></p><h2 id="2-Tab切换"><a href="#2-Tab切换" class="headerlink" title="2 Tab切换"></a>2 Tab切换</h2><p>&emssp;&emsp;一个Vim可以同时打开多个Tab页，每一个Tab页可以显示多个Window，为了更好的显示有时需要在几个Tab页之间切换。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabp[revious] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到当前窗口所显示Tab的前第N个Tab。N缺省值为1。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabn[ext] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到当前窗口所显示Tab的后第N个Tab。N缺省值为1。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabfirst</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到第一个Tab页。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabl[ast]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到最后一个Tab页。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Vim基础篇（四）——标签页操作"><a href="#Vim基础篇（四）——标签页操作" class="headerlink" title="Vim基础篇（四）——标签页操作"></a><center>Vim基础篇（四）——标签页操作</h1><p><em>前言：</em><br><em>&emsp;&emsp;Window是显示Buffer的控件，而Tab是存放Window的控件。一个Tab内可以放多个Window，一个Vim可以运行多个Tab。掌握Tab的基本操作会使得编辑工作更得心应手。</em></p><h2 id="1-Tab的创建或删除"><a href="#1-Tab的创建或删除" class="headerlink" title="1 Tab的创建或删除"></a>1 Tab的创建或删除</h2><p>&emsp;&emsp;在Vim启动时将自动为你创建一个Tab。 <strong>注意：Window、Tab、Buffer三者直接没有必然的一一对应关系。</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabnew &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;新建Tab页，并且在新的Tab页中打开一个新的Window并且新建一个名为“file”的Buffer。如果未指定“file”，则新建一个无名缓存。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabe[dit] &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;新建Tab页，并且在新的Tab页中打开一个新的Window显示“file”文件内容，即将该文件内容读入缓存。如果未指定“file”，则打开一个无名缓存。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabc[lose] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;关闭编号为N的Tab也，同时该Tab内的所有窗口也会被关闭，但是不会关闭在该Tab打开的缓存。N缺省值为当前标签页的编号。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabo[nly] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;关闭除了编号为N以外的所有Tab也，N缺省值为光标所在Tab页的编号。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tabs</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;列出当前所有的Tab页，同时会显示每个Tab页对应的编号，显示每个Tab页内每个窗口打开文件名。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%93%8D%E4%BD%9C/tabs.png" alt="reg.png" title="tabs"></p><h2 id="2-Tab切换"><a href="#2-Tab切换" class="headerlink" title="2 Tab切换"></a>2 Tab切换</h2><p>&emsp;&emsp;一个Vim可以同时打开多个Tab页，每一个Tab页可以显示多个Window，为了更好的显示有时需要在几个Tab页之间切换。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabp[revious] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到当前窗口所显示Tab的前第N个Tab。N缺省值为1。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabn[ext] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到当前窗口所显示Tab的后第N个Tab。N缺省值为1。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabfirst</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到第一个Tab页。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:tabl[ast]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到最后一个Tab页。</p>]]></content>
       
       
       <categories>
@@ -72,7 +389,7 @@
       <link href="//docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%BC%93%E5%AD%98%E6%93%8D%E4%BD%9C/"/>
       <url>//docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%BC%93%E5%AD%98%E6%93%8D%E4%BD%9C/</url>
       
-        <content type="html"><![CDATA[<h1 id="Vim基础篇（三）——缓存操作"><a href="#Vim基础篇（三）——缓存操作" class="headerlink" title="Vim基础篇（三）——缓存操作"></a><center>Vim基础篇（三）——缓存操作</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;Buffer是一块内存缓冲区，Vim打开文件实际是把文件的内容读取到缓冲区中，未保存时修改内容实际是修改缓冲区中的内容，保存文件就是把缓存中的内容写入到文件中（文件是存储在硬盘）。对Vim的缓冲区有一定熟悉了解，并掌握一些基础的Buffer操作将会使我们的编辑过程更加随心所欲。</em></p><h2 id="1-Buffer的创建或删除"><a href="#1-Buffer的创建或删除" class="headerlink" title="1 Buffer的创建或删除"></a>1 Buffer的创建或删除</h2><p>&emsp;&emsp;Vim打开文件实质是将处于硬盘的文件内容读取到内存中，也即只要是打开文件的操作Vim都将为打开的文件创建一个缓存空间。例如<code>vim file1 file2 file3</code>即为同时打开三个文件，相应的创建了三个Buffer。<br>&emsp;&emsp;Buffer与窗口不是一一对应的关系，但Buffer必须借助Window才能显示。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:w[rite][!] &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将当前缓冲区内容写入文件，也就是保存文件，如果设置了<code>readonly</code>则不能写入，如果加上<code>!</code>表示”强制“，即使只读也可强制写入文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wa[ll][!]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将当前所有窗口已修改的缓存都写入文件，进行保存。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:e[dit][!] &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;重新将当前文件的内容加载到缓冲区，如果对当前缓冲区有修改则无法加载，使用<code>!</code>可强制放弃对当前缓冲区的修改，重新加载文件内容到缓冲区。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:ba[ll]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;为当前每一个缓存都打开一个窗口进行显示。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bd &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;从缓冲区删除编号为N的缓存，如果当前已在Window中显示则也会关闭该Window。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bd &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;从缓冲区删除名称为”file”的缓存，如果当前已在Window中显示则也会关闭该Window。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">badd &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将”file”文件加载到缓冲区，但不会为其打开Window。</p><h2 id="2-Buffer的种类"><a href="#2-Buffer的种类" class="headerlink" title="2 Buffer的种类"></a>2 Buffer的种类</h2><table><thead><tr><th align="center">符号</th><th align="center">解释</th></tr></thead><tbody><tr><td align="center">-</td><td align="center">Readonly buffer，禁用了modifiable选项，只读缓冲区</td></tr><tr><td align="center">=</td><td align="center">Readonly buffer，只读缓冲区</td></tr><tr><td align="center">a</td><td align="center">Active buffer，活动缓冲区，当前显示在屏幕上</td></tr><tr><td align="center">h</td><td align="center">Hidden buffer，影藏缓冲区，已载入但没有显示在屏幕上</td></tr><tr><td align="center">+</td><td align="center">Modified buffer，已经更改的缓冲区</td></tr><tr><td align="center">x</td><td align="center">Error buffer，读入时报错的缓冲区</td></tr><tr><td align="center">%</td><td align="center">Current buffer，当前缓冲区</td></tr><tr><td align="center">#</td><td align="center">Alternate buffer，交换缓冲区</td></tr><tr><td align="center">u</td><td align="center">Unlisted buffer，只有在列示命令中使用!修饰符才能显示的缓冲区</td></tr></tbody></table><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buffers</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">files</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;以上三种方式效果一样，都是列出当前所有Buffer的信息。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%BC%93%E5%AD%98%E6%93%8D%E4%BD%9C/buffers.png" alt="reg.png" title="buffers"></p><p>&emsp;&emsp;第一列是Buffer的编号，第二列为Buffer的状态信息，第三列为Buffer名称，也是对应的文件名称，第四列为光标在该Buffer中所处的行位置，光标回到该Buffer时会回到该位置。</p><h2 id="3-Buffer切换"><a href="#3-Buffer切换" class="headerlink" title="3 Buffer切换"></a>3 Buffer切换</h2><p>&emssp;&emsp;Window是用来显示Buffer的内容，所谓的切换就是切换Window中显示的Buffer。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:bp[revious] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到当前窗口所显示Buffer的前第N个Buffer，将其内容显示在窗口中。N缺省值为1。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:bn[ext] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到当前窗口所显示Buffer的后第N个Buffer，将其内容显示在窗口中。N缺省值为1。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:bf[irst]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;当前窗口显示第一个Buffer的内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:bl[ast]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;当前窗口显示最后一个Buffer的内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:b[uffer] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;当前窗口显示编号为N的Buffer的内容。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Vim基础篇（三）——缓存操作"><a href="#Vim基础篇（三）——缓存操作" class="headerlink" title="Vim基础篇（三）——缓存操作"></a><center>Vim基础篇（三）——缓存操作</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;Buffer是一块内存缓冲区，Vim打开文件实际是把文件的内容读取到缓冲区中，未保存时修改内容实际是修改缓冲区中的内容，保存文件就是把缓存中的内容写入到文件中（文件是存储在硬盘）。对Vim的缓冲区有一定熟悉了解，并掌握一些基础的Buffer操作将会使我们的编辑过程更加随心所欲。</em></p><h2 id="1-Buffer的创建或删除"><a href="#1-Buffer的创建或删除" class="headerlink" title="1 Buffer的创建或删除"></a>1 Buffer的创建或删除</h2><p>&emsp;&emsp;Vim打开文件实质是将处于硬盘的文件内容读取到内存中，也即只要是打开文件的操作Vim都将为打开的文件创建一个缓存空间。例如<code>vim file1 file2 file3</code>即为同时打开三个文件，相应的创建了三个Buffer。<br>&emsp;&emsp;Buffer与窗口不是一一对应的关系，但Buffer必须借助Window才能显示。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:w[rite][!] &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将当前缓冲区内容写入文件，也就是保存文件，如果设置了<code>readonly</code>则不能写入，如果加上<code>!</code>表示”强制“，即使只读也可强制写入文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wa[ll][!]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将当前所有窗口已修改的缓存都写入文件，进行保存。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:e[dit][!] &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;重新将当前文件的内容加载到缓冲区，如果对当前缓冲区有修改则无法加载，使用<code>!</code>可强制放弃对当前缓冲区的修改，重新加载文件内容到缓冲区。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:ba[ll]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;为当前每一个缓存都打开一个窗口进行显示。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bd &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;从缓冲区删除编号为N的缓存，如果当前已在Window中显示则也会关闭该Window。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bd &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;从缓冲区删除名称为”file”的缓存，如果当前已在Window中显示则也会关闭该Window。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">badd &#123;file&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将”file”文件加载到缓冲区，但不会为其打开Window。</p><h2 id="2-Buffer的种类"><a href="#2-Buffer的种类" class="headerlink" title="2 Buffer的种类"></a>2 Buffer的种类</h2><table><thead><tr><th align="center">符号</th><th align="center">解释</th></tr></thead><tbody><tr><td align="center">-</td><td align="center">Readonly buffer，禁用了modifiable选项，只读缓冲区</td></tr><tr><td align="center">=</td><td align="center">Readonly buffer，只读缓冲区</td></tr><tr><td align="center">a</td><td align="center">Active buffer，活动缓冲区，当前显示在屏幕上</td></tr><tr><td align="center">h</td><td align="center">Hidden buffer，影藏缓冲区，已载入但没有显示在屏幕上</td></tr><tr><td align="center">+</td><td align="center">Modified buffer，已经更改的缓冲区</td></tr><tr><td align="center">x</td><td align="center">Error buffer，读入时报错的缓冲区</td></tr><tr><td align="center">%</td><td align="center">Current buffer，当前缓冲区</td></tr><tr><td align="center">#</td><td align="center">Alternate buffer，交换缓冲区</td></tr><tr><td align="center">u</td><td align="center">Unlisted buffer，只有在列示命令中使用!修饰符才能显示的缓冲区</td></tr></tbody></table><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buffers</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">files</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;以上三种方式效果一样，都是列出当前所有Buffer的信息。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Vim/Vim%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E7%BC%93%E5%AD%98%E6%93%8D%E4%BD%9C/buffers.png" alt="reg.png" title="buffers"></p><p>&emsp;&emsp;第一列是Buffer的编号，第二列为Buffer的状态信息，第三列为Buffer名称，也是对应的文件名称，第四列为光标在该Buffer中所处的行位置，光标回到该Buffer时会回到该位置。</p><h2 id="3-Buffer切换"><a href="#3-Buffer切换" class="headerlink" title="3 Buffer切换"></a>3 Buffer切换</h2><p>&emsp;&emsp;Window是用来显示Buffer的内容，所谓的切换就是切换Window中显示的Buffer。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:bp[revious] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到当前窗口所显示Buffer的前第N个Buffer，将其内容显示在窗口中。N缺省值为1。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:bn[ext] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;切换到当前窗口所显示Buffer的后第N个Buffer，将其内容显示在窗口中。N缺省值为1。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:bf[irst]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;当前窗口显示第一个Buffer的内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:bl[ast]</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;当前窗口显示最后一个Buffer的内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:b[uffer] &#123;N&#125;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;当前窗口显示编号为N的Buffer的内容。</p>]]></content>
       
       
       <categories>
@@ -171,7 +488,7 @@
       <link href="//docs/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%98%BE%E5%8D%A1/"/>
       <url>//docs/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%98%BE%E5%8D%A1/</url>
       
-        <content type="html"><![CDATA[<h1 id="电脑选型（六）——显卡"><a href="#电脑选型（六）——显卡" class="headerlink" title="电脑选型（六）——显卡"></a><center>电脑选型（六）——显卡</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;显卡就是显示接口卡，或称显示适配器。是把计算机的数字信号变为显示器可以辨别的视频信号，控制显示器正确显示画面，也即显卡承担的是图形输出的任务。</em></p><h2 id="1-初识显卡"><a href="#1-初识显卡" class="headerlink" title="1 初识显卡"></a>1 初识显卡</h2><p>&emsp;&emsp;目前主流的显卡厂商就两家，AMD（超微半导体）和Nvidia（英伟达）。它们生产的显卡分别被称为A卡和N卡。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E7%A1%AC%E7%9B%98/SEAGATE%20BarraCuda.png" alt="SEAGATE BarraCuda.png" title="SEAGATE BarraCuda"></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="电脑选型（六）——显卡"><a href="#电脑选型（六）——显卡" class="headerlink" title="电脑选型（六）——显卡"></a><center>电脑选型（六）——显卡</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;显卡就是显示接口卡，或称显示适配器。是把计算机的数字信号变为显示器可以辨别的视频信号，控制显示器正确显示画面，也即显卡承担的是图形输出的任务。</em></p><h2 id="1-初识显卡"><a href="#1-初识显卡" class="headerlink" title="1 初识显卡"></a>1 初识显卡</h2><p>&emsp;&emsp;目前主流的显卡厂商就两家，AMD（超微半导体）和Nvidia（英伟达）。它们生产的显卡分别被称为 <strong>A卡</strong> 和 <strong>N卡</strong> ，这些显卡先卖给OEM制造商，比如华硕、技嘉、微星、七彩虹、丽台等，通过不同的设计方案再加工成一张张市售的显卡。<br>&emsp;&emsp;在网上流传一句话“A卡看高清，N卡玩游戏”，在过去，通常A卡更擅长处理2D画面，更低功耗，因此A卡更适合办公且性价比更高，N卡更擅长处理3D画面，性能发挥更充分，适合作为游戏显卡。<br>&emsp;&emsp;描述显卡的性能参数有核心频率、显存、流处理器、接口等。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%98%BE%E5%8D%A1/Graphics_card_parameters.png" alt="Graphics_card_parameters.png" title="Graphics_card_parameters"></p><h2 id="2-显卡主流品牌"><a href="#2-显卡主流品牌" class="headerlink" title="2 显卡主流品牌"></a>2 显卡主流品牌</h2><p>&emsp;&emsp;在选择显卡时尽量选择大品牌，这样质量和售后更有保障。目前显卡市场中N卡具有绝对优势，而在高端显卡领域N卡更是找不到对手。目前显卡市场被A卡和N卡垄断，OEM制造商按照生产N卡和A卡可以划分两大阵营。</p><h3 id="2-1-N卡主流OEM制造商"><a href="#2-1-N卡主流OEM制造商" class="headerlink" title="2.1 N卡主流OEM制造商"></a>2.1 N卡主流OEM制造商</h3><p>&emsp;&emsp;目前主流的N卡OEM制造商有华硕、技嘉、微星、七彩虹、铭瑄、索泰、影驰、映众、耕升。其中像华硕和技嘉，其实即做A卡也做N卡。</p><h3 id="2-2-A卡主流OEM制造商"><a href="#2-2-A卡主流OEM制造商" class="headerlink" title="2.2 A卡主流OEM制造商"></a>2.2 A卡主流OEM制造商</h3><p>&emsp;&emsp;目前主流的A卡OEM制造商有蓝宝石、迪兰。</p><h2 id="3-公版和非公版显卡"><a href="#3-公版和非公版显卡" class="headerlink" title="3 公版和非公版显卡"></a>3 公版和非公版显卡</h2><p>&emsp;&emsp;由原厂（AMD或Nvidia）设计的显卡称为 <strong>公版</strong> 显卡，而由OEM显卡厂商根据自身产品需要基于公版重新设计，以求更好的适配自身产品的显卡称为 <strong>非公版</strong> 显卡。一般来说公版显卡性能强悍，材质用料较好，强劲的稳定性和强大的超频能力，但散热能力一般不足，价格较高功能单一。非公版则性价比高，产品更多样化，也有其独到之处，但用料做工更普通。一般上建议选择非公版显卡。</p><h2 id="4-集成显卡、核心显卡、独立显卡"><a href="#4-集成显卡、核心显卡、独立显卡" class="headerlink" title="4 集成显卡、核心显卡、独立显卡"></a>4 集成显卡、核心显卡、独立显卡</h2><p>&emsp;&emsp;若显卡被做在北桥上，我们称为 <strong>集成显卡</strong> ，集成显卡一般不带显存，而是使用系统的一部分内存作为显存，另外内存频率一般比不上独立显卡的显存，因此集成显卡性能上不如独立显卡。现在AMD和Intel开始把显卡集成在CPU中了，我们称为 <strong>核心显卡</strong> ， 集成显卡和核心显卡性能差异不大。 <strong>独立显卡</strong> 是做在独立于主板之外的板卡上，它需要用接口与主板相连接。独立显卡具备单独的显存，不占系统内存，具有更高的性能，但成本也更高，受到游戏玩家的青睐。如果要办公、低功耗、低成本、普通影音娱乐，建议选择集成显卡或独立显卡，如果用于大型游戏或者对显示效果有高的要求，建议选择独立显卡。</p><h2 id="5-显存"><a href="#5-显存" class="headerlink" title="5 显存"></a>5 显存</h2><p>&emsp;&emsp;就像计算机内存一行，显存也就是显卡的内存，也被称为帧缓存，用来存储显卡处理过或即将提取的渲染数据。渲染数据先存储在显存中，等待显示芯片或CPU的调配，最终把处理结果输出在显示器上。<br>&emsp;&emsp;根内存类似的，显存的分存储器种类和存储空间大小都是显存最常被关注的参数。</p><h3 id="5-1-显存种类"><a href="#5-1-显存种类" class="headerlink" title="5.1 显存种类"></a>5.1 显存种类</h3><p>&emsp;&emsp;显存随着技术的发展，显存经历了很多的迭代，目前市场中所用的显存类型主要有GDDR3、SDDR3、GDDR5、GDDR6，性能上拥有了更高的频率、稳定性、读写速度。目前主流种类中性能最好的是GDDR6。</p><h3 id="5-2-显存大小"><a href="#5-2-显存大小" class="headerlink" title="5.2 显存大小"></a>5.2 显存大小</h3><p>&emsp;&emsp;目前较常见的显卡内存大小有2GB、4GB、6GB、8GB，显存不必追求很大，根据自己使用需求够用就行。</p><h3 id="5-3-显存速度"><a href="#5-3-显存速度" class="headerlink" title="5.3 显存速度"></a>5.3 显存速度</h3><p>&emsp;&emsp;单位时间交换的数据量也越大，对应的显卡性能也会得到提升。目前常见的显存速度有8Gbps、12Gbps、14Gbps，越大表示显存速度越快。</p><h3 id="5-4-显存位宽"><a href="#5-4-显存位宽" class="headerlink" title="5.4 显存位宽"></a>5.4 显存位宽</h3><p>&emsp;&emsp;显存位宽是显存在一个时钟周期内所能传输的数据位数，位宽越大当然相同时间传输的数据量就越大，数据传输性能越好。目前常见的显存位宽比如有128bit、192bit、256bit。</p><h2 id="6-核心频率"><a href="#6-核心频率" class="headerlink" title="6 核心频率"></a>6 核心频率</h2><p>&emsp;&emsp;核心频率是显卡显示核心的工作频率，核心频率越高代表性能越好。显卡也存在超频，可以使用超频软件实现显卡超频，大多数显卡都是可以超频的，但是增加的散热量要注意散热问题。超频的目的是提高显卡的核心频率，使其核心工作在超出常规的工作频率下达到更高的性能。目前主流的显卡核心频率已经达到上千MHz，比如1710MHz、1830MHz。</p><h2 id="7-风扇"><a href="#7-风扇" class="headerlink" title="7 风扇"></a>7 风扇</h2><p>&emsp;&emsp;独立显卡都是需要专用的散热风扇的，一般独立显卡是和风扇集成装在一起的。<br>&emsp;&emsp;显卡风扇有两种，涡轮风扇和轴流扇叶风扇。前者转速高风量大，但噪声也大，后者转速要低一些但噪声小。一般来说公版是涡轮风扇，非公版是轴流式风扇。从风扇个数来说，有双风扇和三风扇的。</p><h2 id="8-接口"><a href="#8-接口" class="headerlink" title="8 接口"></a>8 接口</h2><p>&emsp;&emsp;显卡接口类型是指显卡与主板或显示器的接口种类，接口是否与主板匹配决定了主板是否能使用该接口，不同的接口也能为显卡带来不同的性能支持。<br>&emsp;&emsp;接口可以分为四种，信号输入接口、总线接口、可升级接口、电源接口。当显卡将显示器信号处理完毕之后，还要通过接口将信号传送给显示器，与显示器的接口常见的有VGA、HDMI、DP等，跟前面我们讲过的显示器接口对应。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B/%E7%94%B5%E8%84%91%E9%80%89%E5%9E%8B%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E6%98%BE%E5%8D%A1/Graphics_card.png" alt="Graphics_card.png" title="Graphics_card"></p>]]></content>
       
       
       <categories>
@@ -368,19 +685,6 @@
             <tag> 动词 </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="//docs/Git/Git%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E7%AE%80%E4%BB%8B/"/>
-      <url>//docs/Git/Git%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E7%AE%80%E4%BB%8B/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
       
     </entry>
     
@@ -593,11 +897,11 @@
       
         <tags>
             
+            <tag> 单片机 </tag>
+            
             <tag> 状态 </tag>
             
             <tag> IO </tag>
-            
-            <tag> 单片机 </tag>
             
         </tags>
       
@@ -814,6 +1118,8 @@
       
         <tags>
             
+            <tag> 安装 </tag>
+            
             <tag> PyQt </tag>
             
             <tag> Qt </tag>
@@ -821,8 +1127,6 @@
             <tag> Qt Creator </tag>
             
             <tag> 下载 </tag>
-            
-            <tag> 安装 </tag>
             
         </tags>
       
@@ -944,11 +1248,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> 博客 </tag>
             
             <tag> 图床 </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> Gitee </tag>
             
@@ -975,13 +1279,13 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> 博客 </tag>
             
             <tag> 图床 </tag>
             
             <tag> 七牛 </tag>
+            
+            <tag> Hexo </tag>
             
         </tags>
       
@@ -1006,9 +1310,9 @@
       
         <tags>
             
-            <tag> ButterFly </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> ButterFly </tag>
             
             <tag> 站点地图 </tag>
             
@@ -1041,11 +1345,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
-            
-            <tag> Hexo </tag>
             
         </tags>
       
@@ -1070,11 +1374,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
-            
-            <tag> Hexo </tag>
             
             <tag> 功能 </tag>
             
@@ -1101,11 +1405,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
-            
-            <tag> Hexo </tag>
             
             <tag> 部署 </tag>
             
@@ -1136,11 +1440,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
-            
-            <tag> Hexo </tag>
             
             <tag> 管理 </tag>
             
@@ -1169,11 +1473,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
-            
-            <tag> Hexo </tag>
             
             <tag> 美化 </tag>
             
@@ -1574,8 +1878,6 @@
       
         <tags>
             
-            <tag> QComboBox </tag>
-            
             <tag> PySide2 </tag>
             
             <tag> Python </tag>
@@ -1585,6 +1887,8 @@
             <tag> Qt </tag>
             
             <tag> 基础 </tag>
+            
+            <tag> QComboBox </tag>
             
         </tags>
       
@@ -1926,11 +2230,11 @@
       
         <tags>
             
+            <tag> 版本 </tag>
+            
             <tag> 规范 </tag>
             
             <tag> 定义 </tag>
-            
-            <tag> 版本 </tag>
             
         </tags>
       
@@ -2430,6 +2734,35 @@
     
     
     <entry>
+      <title>压力曲线</title>
+      <link href="//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/"/>
+      <url>//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/</url>
+      
+        <content type="html"><![CDATA[<h1 id="压力曲线"><a href="#压力曲线" class="headerlink" title="压力曲线"></a><center>压力曲线</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;解决的问题：</em><br><em>&emsp;&emsp;1.探究了如何去实现压力曲线的转换用于单片机输出相应的频率。</em><br><em>&emsp;&emsp;2.介绍了如何考虑使用的传感器压敏特性生成最合适的压力曲线。</em><br><em>&emsp;&emsp;3.介绍了一种压力曲线的理论拟合方法，将计算转化过程大大简化。</em></p><p>&emsp;&emsp;1.协议要求的压力曲线（压力等级——频率）是无法直接用于单片机输出的，需要有一个转化关系（单片机无法直接获取压力等级，直接得到的是电压值即采样值。频率的输出是对应定时器的设置值，也需要一个转换关系）。<br>&emsp;&emsp;2.不同的压力传感器有其自己的压敏特性（不能通用，更换压力传感器时需要重新设置曲线），需要将具体使用的压敏特性考虑进曲线中。压敏特性即克重——电压曲线（我们一般用的压力传感器是压力引起电压变化）。<br>&emsp;&emsp;3.单片机的运算性能较差，特别像主动笔这样的低功耗产品，需要考虑使用理论又将理论简化用于单片机运算（避免引入高次方、对数、幂运算，避免程序引入math库。将曲线拟合为多项式，总之就是减少计算量）。</p><p>&emsp;&emsp;单片机软件开发过程中我们常常会接触很多曲线，要求输入与输出按照一定曲线规律。比如要求克重和输出压力等级呈现一定曲线关系。克重并非软件直接能采集到的，即使通过ADC采样值转换也并非一条简单的直线。压力等级和频率呈现一定曲线关系，而频率和单片机定时器设置值呈现一定曲线关系。<br>&emsp;&emsp;类似这样的，协议规定了输入和输出呈现一定曲线关系，但对于软件来说输入和输出并非软件的直接输入和输出。层层转换，中间涉及到多条曲线关系。如何让很好的转换为软件的直接输入和输出的曲线关系，并且简化单片机的计算量是可以值得探究的问题。</p><h2 id="1-协议的要求，克重和压力等级的曲线关系"><a href="#1-协议的要求，克重和压力等级的曲线关系" class="headerlink" title="1 协议的要求，克重和压力等级的曲线关系"></a>1 协议的要求，克重和压力等级的曲线关系</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Protocol%20line.png" alt="Protocol line.png" title="协议曲线"><br>&emsp;&emsp;如上图，横坐标是克重，纵坐标是压力等级，该协议要求克重和压力等级呈现一定的曲线关系（形状类似对数函数曲线），你可能已经想到了，直接用Matlab或Origin软件拟合出曲线公式即可，没错，中间蓝色曲线拟合公式为：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Ideal%20formula.png" alt="Ideal formula.png" title="协议曲线公式"><br>&emsp;&emsp;拟合度达到了1!，说明协议的意图这实际就是一条对数函数曲线。<br>&emsp;&emsp;但单片机直接采集到的并不是克重，ADC的采样值（电压），输出的压力等级最终需要转换为定时器的设置值。我们寻求克重和采样值的曲线关系，这条曲线与我们的产品结构和硬件相关，所以需要实际产品测试选取。以下是我测试的4件样品的采样值和克重的对应关系图。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20gram.png" alt="Sample gram.png" title="采样值克重对应曲线图"><br>&emsp;&emsp;实际多测几件产品，曲线最终选取代表性的一条或求每个各种的采样值平均值。最后得到一条曲线（我一般取平均），可以看到克重和采样值的曲线关系也是一条对数函数曲线，我们一般喜欢输入作为横轴，所以交换下坐标轴变为指数函数曲线（互为反函数）：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20gram2.png" alt="Sample gram2.png" title="采样值克重对应曲线图"><br>&emsp;&emsp;可以看到拟合出来的曲线公式，拟合度达到了0.99642。<br>&emsp;&emsp;现在已经有两个曲线公式，将采样值转换为克重，克重转换为压力等级。<br>&emsp;&emsp;剩下就要考虑把压力等级转换为频率输出了。根据协议压力等级和频率也有一个曲线关系，曲线拟合出来为（协议给的是256个离散的点）：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Pressure%20frq.png" alt="Pressure frq.png" title="压力等级频率曲线"><br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Pressure%20level.png" alt="Pressure level.png" title="压力等级频率曲线"><br>&emsp;&emsp;频率和定时器设置值是正比直线关系，比较容易写出曲线公式。<br>&emsp;&emsp;最后把这些的曲线公式相互套入得到最终公式为：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20cnt.png" alt="Sample cnt.png" title="Sample cnt"><br>&emsp;&emsp;为了减少误差不建议在中间推算曲线过程中看到公式复杂就急着拟合为简单的曲线公式，最后才做一次结果曲线的拟合最好。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Final%20line.png" alt="Final line.png" title="Final line"><br>&emsp;&emsp;转化关系流程图：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">flowchat</span><br><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">opGram&#x3D;&gt;operation: 克重</span><br><span class="line">opSampleValue&#x3D;&gt;operation: 采样值</span><br><span class="line">opSensorCurve&#x3D;&gt;operation: 传感器压敏曲线(Curve1)</span><br><span class="line">opProtocolCurve&#x3D;&gt;operation: 协议要求的压力曲线(Curve 2)</span><br><span class="line">opPressureLv&#x3D;&gt;operation: 压力等级</span><br><span class="line">opPressureFrq&#x3D;&gt;operation: 压力频率曲线(Curve 3)</span><br><span class="line">opFrq&#x3D;&gt;operation: 频率</span><br><span class="line">opTimerCfg&#x3D;&gt;operation: 单片机定时器配置和频率曲线对应曲线(Curve 4)</span><br><span class="line">opTimerSetValue&#x3D;&gt;operation: 定时器设置值</span><br><span class="line">cond&#x3D;&gt;condition</span><br><span class="line"></span><br><span class="line">st-&gt;opSampleValue</span><br><span class="line">opSampleValue-&gt;opSensorCurve</span><br><span class="line">opSensorCurve-&gt;opGram</span><br><span class="line">opGram-&gt;opProtocolCurve</span><br><span class="line">opProtocolCurve-&gt;opPressureLv</span><br><span class="line">opPressureLv-&gt;opPressureFrq</span><br><span class="line">opPressureFrq-&gt;opFrq</span><br><span class="line">opFrq-&gt;opTimerCfg</span><br><span class="line">opTimerCfg-&gt;opTimerSetValue</span><br><span class="line">opTimerSetValue-&gt;e</span><br></pre></td></tr></table></figure><p>最终拟合曲线：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">flowchat</span><br><span class="line">st&#x3D;&gt;start</span><br><span class="line">e&#x3D;&gt;end</span><br><span class="line">opSampleValue&#x3D;&gt;operation: 采样值</span><br><span class="line">opFitCurve&#x3D;&gt;operation: 最终拟合曲线(Curve 5</span><br><span class="line">opTimerSetValue&#x3D;&gt;operation: 定时器设置值</span><br><span class="line"></span><br><span class="line">st-&gt;opSampleValue</span><br><span class="line">opSampleValue-&gt;opFitCurve</span><br><span class="line">opFitCurve-&gt;opTimerSetValue</span><br><span class="line">opTimerSetValue-&gt;e</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;总结：最后得到的曲线运算量并不大，虽然前后推了很多公式，但套入后得到一个总的公式，虽然这个公式复杂，但进行一次多项式拟合后就可用于单片机计算，又不用引入math库。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 主动笔 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 曲线 </tag>
+            
+            <tag> 硅胶 </tag>
+            
+            <tag> 压力 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>c代码命名规范</title>
       <link href="//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E8%8A%AF%E7%89%87AES%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/"/>
       <url>//docs/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E8%8A%AF%E7%89%87AES%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/</url>
@@ -2455,35 +2788,6 @@
             <tag> AES </tag>
             
             <tag> python </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>压力曲线</title>
-      <link href="//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/"/>
-      <url>//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/</url>
-      
-        <content type="html"><![CDATA[<h1 id="压力曲线"><a href="#压力曲线" class="headerlink" title="压力曲线"></a><center>压力曲线</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;解决的问题：</em><br><em>&emsp;&emsp;1.探究了如何去实现压力曲线的转换用于单片机输出相应的频率。</em><br><em>&emsp;&emsp;2.介绍了如何考虑使用的传感器压敏特性生成最合适的压力曲线。</em><br><em>&emsp;&emsp;3.介绍了一种压力曲线的理论拟合方法，将计算转化过程大大简化。</em></p><p>&emsp;&emsp;1.协议要求的压力曲线（压力等级——频率）是无法直接用于单片机输出的，需要有一个转化关系（单片机无法直接获取压力等级，直接得到的是电压值即采样值。频率的输出是对应定时器的设置值，也需要一个转换关系）。<br>&emsp;&emsp;2.不同的压力传感器有其自己的压敏特性（不能通用，更换压力传感器时需要重新设置曲线），需要将具体使用的压敏特性考虑进曲线中。压敏特性即克重——电压曲线（我们一般用的压力传感器是压力引起电压变化）。<br>&emsp;&emsp;3.单片机的运算性能较差，特别像主动笔这样的低功耗产品，需要考虑使用理论又将理论简化用于单片机运算（避免引入高次方、对数、幂运算，避免程序引入math库。将曲线拟合为多项式，总之就是减少计算量）。</p><p>&emsp;&emsp;单片机软件开发过程中我们常常会接触很多曲线，要求输入与输出按照一定曲线规律。比如要求克重和输出压力等级呈现一定曲线关系。克重并非软件直接能采集到的，即使通过ADC采样值转换也并非一条简单的直线。压力等级和频率呈现一定曲线关系，而频率和单片机定时器设置值呈现一定曲线关系。<br>&emsp;&emsp;类似这样的，协议规定了输入和输出呈现一定曲线关系，但对于软件来说输入和输出并非软件的直接输入和输出。层层转换，中间涉及到多条曲线关系。如何让很好的转换为软件的直接输入和输出的曲线关系，并且简化单片机的计算量是可以值得探究的问题。</p><h2 id="1-协议的要求，克重和压力等级的曲线关系"><a href="#1-协议的要求，克重和压力等级的曲线关系" class="headerlink" title="1 协议的要求，克重和压力等级的曲线关系"></a>1 协议的要求，克重和压力等级的曲线关系</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Protocol%20line.png" alt="Protocol line.png" title="协议曲线"><br>&emsp;&emsp;如上图，横坐标是克重，纵坐标是压力等级，该协议要求克重和压力等级呈现一定的曲线关系（形状类似对数函数曲线），你可能已经想到了，直接用Matlab或Origin软件拟合出曲线公式即可，没错，中间蓝色曲线拟合公式为：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Ideal%20formula.png" alt="Ideal formula.png" title="协议曲线公式"><br>&emsp;&emsp;拟合度达到了1!，说明协议的意图这实际就是一条对数函数曲线。<br>&emsp;&emsp;但单片机直接采集到的并不是克重，ADC的采样值（电压），输出的压力等级最终需要转换为定时器的设置值。我们寻求克重和采样值的曲线关系，这条曲线与我们的产品结构和硬件相关，所以需要实际产品测试选取。以下是我测试的4件样品的采样值和克重的对应关系图。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20gram.png" alt="Sample gram.png" title="采样值克重对应曲线图"><br>&emsp;&emsp;实际多测几件产品，曲线最终选取代表性的一条或求每个各种的采样值平均值。最后得到一条曲线（我一般取平均），可以看到克重和采样值的曲线关系也是一条对数函数曲线，我们一般喜欢输入作为横轴，所以交换下坐标轴变为指数函数曲线（互为反函数）：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20gram2.png" alt="Sample gram2.png" title="采样值克重对应曲线图"><br>&emsp;&emsp;可以看到拟合出来的曲线公式，拟合度达到了0.99642。<br>&emsp;&emsp;现在已经有两个曲线公式，将采样值转换为克重，克重转换为压力等级。<br>&emsp;&emsp;剩下就要考虑把压力等级转换为频率输出了。根据协议压力等级和频率也有一个曲线关系，曲线拟合出来为（协议给的是256个离散的点）：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Pressure%20frq.png" alt="Pressure frq.png" title="压力等级频率曲线"><br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Pressure%20level.png" alt="Pressure level.png" title="压力等级频率曲线"><br>&emsp;&emsp;频率和定时器设置值是正比直线关系，比较容易写出曲线公式。<br>&emsp;&emsp;最后把这些的曲线公式相互套入得到最终公式为：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Sample%20cnt.png" alt="Sample cnt.png" title="Sample cnt"><br>&emsp;&emsp;为了减少误差不建议在中间推算曲线过程中看到公式复杂就急着拟合为简单的曲线公式，最后才做一次结果曲线的拟合最好。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/Final%20line.png" alt="Final line.png" title="Final line"><br>&emsp;&emsp;转化关系流程图：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">flowchat</span><br><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">opGram&#x3D;&gt;operation: 克重</span><br><span class="line">opSampleValue&#x3D;&gt;operation: 采样值</span><br><span class="line">opSensorCurve&#x3D;&gt;operation: 传感器压敏曲线(Curve1)</span><br><span class="line">opProtocolCurve&#x3D;&gt;operation: 协议要求的压力曲线(Curve 2)</span><br><span class="line">opPressureLv&#x3D;&gt;operation: 压力等级</span><br><span class="line">opPressureFrq&#x3D;&gt;operation: 压力频率曲线(Curve 3)</span><br><span class="line">opFrq&#x3D;&gt;operation: 频率</span><br><span class="line">opTimerCfg&#x3D;&gt;operation: 单片机定时器配置和频率曲线对应曲线(Curve 4)</span><br><span class="line">opTimerSetValue&#x3D;&gt;operation: 定时器设置值</span><br><span class="line">cond&#x3D;&gt;condition</span><br><span class="line"></span><br><span class="line">st-&gt;opSampleValue</span><br><span class="line">opSampleValue-&gt;opSensorCurve</span><br><span class="line">opSensorCurve-&gt;opGram</span><br><span class="line">opGram-&gt;opProtocolCurve</span><br><span class="line">opProtocolCurve-&gt;opPressureLv</span><br><span class="line">opPressureLv-&gt;opPressureFrq</span><br><span class="line">opPressureFrq-&gt;opFrq</span><br><span class="line">opFrq-&gt;opTimerCfg</span><br><span class="line">opTimerCfg-&gt;opTimerSetValue</span><br><span class="line">opTimerSetValue-&gt;e</span><br></pre></td></tr></table></figure><p>最终拟合曲线：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">flowchat</span><br><span class="line">st&#x3D;&gt;start</span><br><span class="line">e&#x3D;&gt;end</span><br><span class="line">opSampleValue&#x3D;&gt;operation: 采样值</span><br><span class="line">opFitCurve&#x3D;&gt;operation: 最终拟合曲线(Curve 5</span><br><span class="line">opTimerSetValue&#x3D;&gt;operation: 定时器设置值</span><br><span class="line"></span><br><span class="line">st-&gt;opSampleValue</span><br><span class="line">opSampleValue-&gt;opFitCurve</span><br><span class="line">opFitCurve-&gt;opTimerSetValue</span><br><span class="line">opTimerSetValue-&gt;e</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;总结：最后得到的曲线运算量并不大，虽然前后推了很多公式，但套入后得到一个总的公式，虽然这个公式复杂，但进行一次多项式拟合后就可用于单片机计算，又不用引入math库。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 主动笔 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 曲线 </tag>
-            
-            <tag> 硅胶 </tag>
-            
-            <tag> 压力 </tag>
             
         </tags>
       
@@ -2721,9 +3025,9 @@
       
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 安装 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> GVim </tag>
             
@@ -2818,15 +3122,15 @@
       
         <tags>
             
-            <tag> 管理 </tag>
-            
             <tag> 基础 </tag>
             
-            <tag> 工程 </tag>
+            <tag> 管理 </tag>
             
             <tag> GVim </tag>
             
             <tag> Vim </tag>
+            
+            <tag> 工程 </tag>
             
         </tags>
       
@@ -2855,11 +3159,11 @@
             
             <tag> 基础 </tag>
             
+            <tag> NerdTree </tag>
+            
             <tag> GVim </tag>
             
             <tag> Vim </tag>
-            
-            <tag> NerdTree </tag>
             
         </tags>
       
@@ -2884,11 +3188,11 @@
       
         <tags>
             
+            <tag> 感悟 </tag>
+            
             <tag> 感想 </tag>
             
             <tag> 离职 </tag>
-            
-            <tag> 感悟 </tag>
             
         </tags>
       
@@ -3026,22 +3330,11 @@
     
     
     <entry>
-      <title>友链</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>music</title>
       <link href="/music/index.html"/>
       <url>/music/index.html</url>
       
-        <content type="html"><![CDATA[    <div id="aplayer-pYPRbOMU" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
+        <content type="html"><![CDATA[    <div id="aplayer-TmDZirdk" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
       
     </entry>
     
@@ -3062,6 +3355,17 @@
       <title>tags</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>友链</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
