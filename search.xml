@@ -8,7 +8,7 @@
       <link href="//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/"/>
       <url>//docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/</url>
       
-        <content type="html"><![CDATA[<h1 id="Git基础篇（十）——Git分支管理"><a href="#Git基础篇（十）——Git分支管理" class="headerlink" title="Git基础篇（十）——Git分支管理"></a><center>Git基础篇（十）——Git分支管理</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;强大的分支管理是Git版本管控的一大亮点，这是真正会学使用Git的关键。</em></p><h2 id="1-理解分支"><a href="#1-理解分支" class="headerlink" title="1 理解分支"></a>1 理解分支</h2><p>&emsp;&emsp;说道分支管理首先要理解什么是分支。在前面的文章中我们提到过，Git会将我们提交的版本按照时间线进行串起来，然后HEAD就像指针一样会直线这些版本，整个就像数据结构中的链表一般。<br>&emsp;&emsp;当我们创建仓库时Git会为我们创建一个名为“master”的分支，通常我们将其作为主分支。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_branch_master.png" alt="git_branch_master.png" title="git_branch_master"></p><p>&emsp;&emsp;就像上面这张图，每一次版本提交就是一个节点，每一个分支就像一个指向节点的指针，比如master分支就存在一个master指针指向节点，而HEAD也是一个指针，它指向master。<br>&emsp;&emsp;如果存在多个分支，就对应多个分支指针指向节点，要分支切换操作就是将HEAD指向其他分支指针的过程。比如存在master和dev两个分支，而当分支切换到dev时，即为HEAD指向dev指针。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_branch_dev.png" alt="git_branch_dev.png" title="git_branch_dev"></p><p>&emsp;&emsp;所谓分支合并即为不同分支指针指向同一版本节点，仅在分支刚创建和合并分支时出现分支指针指向同一版本节点。当Git版本管理存在多个分支时，可以在这些分支的指针处添加新的版本节点，也即互不影响的并行开发，开发到一定阶段后再将不同分支合并到主分支，然后将其余分支删除。其余分支的修改最终都要回归到主分支。<br>&emsp;&emsp;我们尝试创建两个分支然后将其合并，以下是示范。先在master主分支下提交一次版本c0，这时候master指针指向c0，HEAD指向master。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_1.png" alt="Test_merge_1.png" title="Test_merge_1"></p><p>&emsp;&emsp;创建并切换到dev分支，在该分支下提交c1版本，此时dev指针指向版本c1，HEAD则指向dev指针。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_2.png" alt="Test_merge_2.png" title="Test_merge_2"></p><p>&emsp;&emsp;我们再尝试切换到master分支并且在该分支下提交c2版本，此时HEAD指向master指针。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_3.png" alt="Test_merge_3.png" title="Test_merge_3"></p><p>&emsp;&emsp;在master分支下与dev分支合并。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_4.png" alt="Test_merge_4.png" title="Test_merge_4"></p><p>&emsp;&emsp;此时dev分支已经完成了它的“使命”，可以将其删除了，将dev分支删除。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/Test_merge_5.png" alt="Test_merge_5.png" title="Test_merge_5"></p><h2 id="2-分支操作"><a href="#2-分支操作" class="headerlink" title="2 分支操作"></a>2 分支操作</h2><h3 id="2-1-创建分支"><a href="#2-1-创建分支" class="headerlink" title="2.1 创建分支"></a>2.1 创建分支</h3><h4 id="2-1-1-git-checkout-b"><a href="#2-1-1-git-checkout-b" class="headerlink" title="2.1.1 git checkout -b"></a>2.1.1 git checkout -b</h4><p>&emsp;&emsp;Git会为我们的仓库默认创建一个名为master的主分支，若想要添加其他分支可使用指令<code>git checkout -b &lt;name&gt;</code>，比如我们创建一个名为”dev”的分支，该指令创建分支后还会自动切换到这个分支即HEAD指向新的分支。由于是在master分支下创建的dev分支，因此创建时master和dev是指向同一个节点版本的，但后续的版本提交将会是独立分别进行的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev</span><br></pre></td></tr></table></figure><h4 id="2-1-2-git-branch"><a href="#2-1-2-git-branch" class="headerlink" title="2.1.2 git branch"></a>2.1.2 git branch</h4><p>&emsp;&emsp;也可以创建分支但不切换到新的分支，使用指令<code>git branch &lt;name&gt;</code>。比如创建dev分支，HEAD仍然保持在当前分支下不切换到新分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch dev</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;可以<code>git brach</code>指令后不写分支名，则为查看当前仓库拥有的所有分支名。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure><h4 id="2-1-3-git-switch-c"><a href="#2-1-3-git-switch-c" class="headerlink" title="2.1.3 git switch -c"></a>2.1.3 git switch -c</h4><p>&emsp;&emsp;<code>git switch</code>指令是Git v2.23版本之后新增的，<code>git switch -c &lt;new&gt;</code>同<code>git checkout -b &lt;naem&gt;</code>效果相同，创建及切换分支。在旧的版本中<code>checkout</code>既用于版本检出，也有用于分支创建和切换，新的Git新增了<code>switch</code>指令专用于分支切换。使用该指令创建并切换到dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch -c dev</span><br></pre></td></tr></table></figure><h3 id="2-2-切换分支"><a href="#2-2-切换分支" class="headerlink" title="2.2 切换分支"></a>2.2 切换分支</h3><h4 id="2-2-1-git-checkout"><a href="#2-2-1-git-checkout" class="headerlink" title="2.2.1 git checkout"></a>2.2.1 git checkout</h4><p>&emsp;&emsp;上面讲到的一些创建分支的指令在创建时其实也会自动切换到新的分支，但毕竟不是专用于分支切换的，我们想要在已经存在的几个分支之前切换可以使用<code>git checkout &lt;name&gt;</code>指令。比如要切换到已经存在的dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br></pre></td></tr></table></figure><h4 id="2-2-2-git-switch"><a href="#2-2-2-git-switch" class="headerlink" title="2.2.2 git switch"></a>2.2.2 git switch</h4><p>&emsp;&emsp;Git v2.23版本之后新增的<code>git switch &lt;name&gt;</code>指令专用于分支切换。比如切换到已经存在的dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch dev</span><br></pre></td></tr></table></figure><h3 id="2-3-删除分支"><a href="#2-3-删除分支" class="headerlink" title="2.3 删除分支"></a>2.3 删除分支</h3><p>&emsp;&emsp;使用指令<code>git branch -d &lt;name&gt;</code>删除分支，不要注意的是不能删除当前正在使用的分支，因此最少会存在一个分支。比如当前正处于master分支，我们删除dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d dev</span><br></pre></td></tr></table></figure><h3 id="2-4-合并分支"><a href="#2-4-合并分支" class="headerlink" title="2.4 合并分支"></a>2.4 合并分支</h3><p>&emsp;&emsp;<code>git merge &lt;name&gt;</code>指令为将某分支合并到当前分支下，分支的合并是分支操作的最终目的。分支的合并实际是将两个分支的修改差异合并，通常它是自动完成的，但也可能存在冲突，比如两个版本都同时对一个“地方”进行了修改，这样Git就不知道应该以哪个分支的改动为准，Git会将冲突留给人工去干预解决冲突。通常文件的添加和代码的新增不会冲突。比如当前处于master分支，我们要将dev分支合并到master分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure><h3 id="2-5-查看分支树"><a href="#2-5-查看分支树" class="headerlink" title="2.5 查看分支树"></a>2.5 查看分支树</h3><p>&emsp;&emsp;Git管理的项目可以有多个分支，而每个分支可以有多个节点，想要记清楚各个节点之间的关系是不现实的，使用<code>git log</code>指令可以显示当前分支所有节点提交信息及与其有关系的其他分支的节点提交信息（注意，不会显示其余分支的所有节点提交信息），但文字显示不够直观，我们可以使用<code>git log --graph</code>将分支之间的关系图形化显示，可以清晰的看出节点之间的关系及在哪里产生分支或在哪里合并分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_log_graph.png" alt="git_log_graph.png" title="git_log_graph"></p><p>&emsp;&emsp;<code>--oneline</code>参数可以简化显示的信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --oneline</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86/git_log_graph_oneline.png" alt="git_log_graph_oneline.png" title="git_log_graph_oneline"></p><p>&emsp;&emsp;<code>--all</code>指令可以查看所有分支所有节点提交的版本信息。这也是我常用的指令。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --oneline --all</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h1 id="Git基础篇（十）——Git分支管理"><a href="#Git基础篇（十）——Git分支管理" class="headerlink" title="Git基础篇（十）——Git分支管理"></a><center>Git基础篇（十）——Git分支管理</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;强大的分支管理是Git版本管控的一大亮点，这是真正会学使用Git的关键。</em></p><h2 id="1-理解分支"><a href="#1-理解分支" class="headerlink" title="1 理解分支"></a>1 理解分支</h2><p>&emsp;&emsp;说道分支管理首先要理解什么是分支。在前面的文章中我们提到过，Git会将我们提交的版本按照时间线进行串起来，然后HEAD就像指针一样会直线这些版本，整个就像数据结构中的链表一般。<br>&emsp;&emsp;当我们创建仓库时Git会为我们创建一个名为“master”的分支，通常我们将其作为主分支。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/git_branch_master.png" alt="git_branch_master.png" title="git_branch_master"></p><p>&emsp;&emsp;就像上面这张图，每一次版本提交就是一个节点，每一个分支就像一个指向节点的指针，比如master分支就存在一个master指针指向节点，而HEAD也是一个指针，它指向master。<br>&emsp;&emsp;如果存在多个分支，就对应多个分支指针指向节点，要分支切换操作就是将HEAD指向其他分支指针的过程。比如存在master和dev两个分支，而当分支切换到dev时，即为HEAD指向dev指针。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/git_branch_dev.png" alt="git_branch_dev.png" title="git_branch_dev"></p><p>&emsp;&emsp;所谓分支合并即为不同分支指针指向同一版本节点，仅在分支刚创建和合并分支时出现分支指针指向同一版本节点。当Git版本管理存在多个分支时，可以在这些分支的指针处添加新的版本节点，也即互不影响的并行开发，开发到一定阶段后再将不同分支合并到主分支，然后将其余分支删除。其余分支的分支最终都要回归到主分支。<br>&emsp;&emsp;我们尝试创建两个分支然后将其合并，以下是示范。先在master主分支下提交一次版本c0，这时候master指针指向c0，HEAD指向master。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/Test_merge_1.png" alt="Test_merge_1.png" title="Test_merge_1"></p><p>&emsp;&emsp;创建并切换到dev分支，在该分支下提交c1版本，此时dev指针指向版本c1，HEAD则指向dev指针。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/Test_merge_2.png" alt="Test_merge_2.png" title="Test_merge_2"></p><p>&emsp;&emsp;我们再尝试切换到master分支并且在该分支下提交c2版本，此时HEAD指向master指针。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/Test_merge_3.png" alt="Test_merge_3.png" title="Test_merge_3"></p><p>&emsp;&emsp;在master分支下与dev分支合并。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/Test_merge_4.png" alt="Test_merge_4.png" title="Test_merge_4"></p><p>&emsp;&emsp;此时dev分支已经完成了它的“使命”，可以将其删除了，将dev分支删除。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/Test_merge_5.png" alt="Test_merge_5.png" title="Test_merge_5"></p><h2 id="2-分支操作"><a href="#2-分支操作" class="headerlink" title="2 分支操作"></a>2 分支操作</h2><h3 id="2-1-创建分支"><a href="#2-1-创建分支" class="headerlink" title="2.1 创建分支"></a>2.1 创建分支</h3><h4 id="2-1-1-git-checkout-b"><a href="#2-1-1-git-checkout-b" class="headerlink" title="2.1.1 git checkout -b"></a>2.1.1 git checkout -b</h4><p>&emsp;&emsp;Git会为我们的仓库默认创建一个名为master的主分支，若想要添加其他分支可使用指令<code>git checkout -b &lt;name&gt;</code>，比如我们创建一个名为”dev”的分支，该指令创建分支后还会自动切换到这个分支即HEAD指向新的分支。由于是在master分支下创建的dev分支，因此创建时master和dev是指向同一个节点版本的，但后续的版本提交将会是独立分别进行的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev</span><br></pre></td></tr></table></figure><h4 id="2-1-2-git-branch"><a href="#2-1-2-git-branch" class="headerlink" title="2.1.2 git branch"></a>2.1.2 git branch</h4><p>&emsp;&emsp;也可以创建分支但不切换到新的分支，使用指令<code>git branch &lt;name&gt;</code>。比如创建dev分支，HEAD仍然保持在当前分支下不切换到新分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch dev</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;可以<code>git brach</code>指令后不写分支名，则为查看当前仓库拥有的所有分支名。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure><h4 id="2-1-3-git-switch-c"><a href="#2-1-3-git-switch-c" class="headerlink" title="2.1.3 git switch -c"></a>2.1.3 git switch -c</h4><p>&emsp;&emsp;<code>git switch</code>指令是Git v2.23版本之后新增的，<code>git switch -c &lt;new&gt;</code>同<code>git checkout -b &lt;naem&gt;</code>效果相同，创建及切换分支。在旧的版本中<code>checkout</code>既用于版本检出，也有用于分支创建和切换，新的Git新增了<code>switch</code>指令专用于分支切换。使用该指令创建并切换到dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch -c dev</span><br></pre></td></tr></table></figure><h3 id="2-2-切换分支"><a href="#2-2-切换分支" class="headerlink" title="2.2 切换分支"></a>2.2 切换分支</h3><h4 id="2-2-1-git-checkout"><a href="#2-2-1-git-checkout" class="headerlink" title="2.2.1 git checkout"></a>2.2.1 git checkout</h4><p>&emsp;&emsp;上面讲到的一些创建分支的指令在创建时其实也会自动切换到新的分支，但毕竟不是专用于分支切换的，我们想要在已经存在的几个分支之前切换可以使用<code>git checkout &lt;name&gt;</code>指令。比如要切换到已经存在的dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br></pre></td></tr></table></figure><h4 id="2-2-2-git-switch"><a href="#2-2-2-git-switch" class="headerlink" title="2.2.2 git switch"></a>2.2.2 git switch</h4><p>&emsp;&emsp;Git v2.23版本之后新增的<code>git switch &lt;name&gt;</code>指令专用于分支切换。比如切换到已经存在的dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch dev</span><br></pre></td></tr></table></figure><h3 id="2-3-删除分支"><a href="#2-3-删除分支" class="headerlink" title="2.3 删除分支"></a>2.3 删除分支</h3><p>&emsp;&emsp;使用指令<code>git branch -d &lt;name&gt;</code>删除分支，不要注意的是不能删除当前正在使用的分支，因此最少会存在一个分支。比如当前正处于master分支，我们删除dev分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d dev</span><br></pre></td></tr></table></figure><h3 id="2-4-合并分支"><a href="#2-4-合并分支" class="headerlink" title="2.4 合并分支"></a>2.4 合并分支</h3><p>&emsp;&emsp;<code>git merge &lt;name&gt;</code>指令为将某分支合并到当前分支下，分支的合并是分支操作的最终目的。分支的合并实际是将两个分支的分支差异合并，通常它是自动完成的，但也可能存在冲突，比如两个版本都同时对一个“地方”进行了分支，这样Git就不知道应该以哪个分支的改动为准，Git会将冲突留给人工去干预解决冲突。通常文件的添加和代码的新增不会冲突。比如当前处于master分支，我们要将dev分支合并到master分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure><h3 id="2-5-查看分支树"><a href="#2-5-查看分支树" class="headerlink" title="2.5 查看分支树"></a>2.5 查看分支树</h3><p>&emsp;&emsp;Git管理的项目可以有多个分支，而每个分支可以有多个节点，想要记清楚各个节点之间的关系是不现实的，使用<code>git log</code>指令可以显示当前分支所有节点提交信息及与其有关系的其他分支的节点提交信息（注意，不会显示其余分支的所有节点提交信息），但文字显示不够直观，我们可以使用<code>git log --graph</code>将分支之间的关系图形化显示，可以清晰的看出节点之间的关系及在哪里产生分支或在哪里合并分支。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/git_log_graph.png" alt="git_log_graph.png" title="git_log_graph"></p><p>&emsp;&emsp;<code>--oneline</code>参数可以简化显示的信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --oneline</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/git_log_graph_oneline.png" alt="git_log_graph_oneline.png" title="git_log_graph_oneline"></p><p>&emsp;&emsp;<code>--all</code>指令可以查看所有分支所有节点提交的版本信息。这也是我常用的指令。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --oneline --all</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> 版本 </tag>
-            
             <tag> 版本管理 </tag>
+            
+            <tag> 版本 </tag>
             
             <tag> 分支 </tag>
             
@@ -49,9 +49,9 @@
       
         <tags>
             
-            <tag> 版本 </tag>
-            
             <tag> 版本管理 </tag>
+            
+            <tag> 版本 </tag>
             
             <tag> gitignore </tag>
             
@@ -78,9 +78,9 @@
       
         <tags>
             
-            <tag> 版本 </tag>
-            
             <tag> 版本管理 </tag>
+            
+            <tag> 版本 </tag>
             
             <tag> 删除 </tag>
             
@@ -107,11 +107,11 @@
       
         <tags>
             
+            <tag> 版本管理 </tag>
+            
             <tag> 修改 </tag>
             
             <tag> 版本 </tag>
-            
-            <tag> 版本管理 </tag>
             
         </tags>
       
@@ -136,9 +136,9 @@
       
         <tags>
             
-            <tag> 版本 </tag>
-            
             <tag> 版本管理 </tag>
+            
+            <tag> 版本 </tag>
             
         </tags>
       
@@ -163,9 +163,9 @@
       
         <tags>
             
-            <tag> 版本 </tag>
-            
             <tag> 版本管理 </tag>
+            
+            <tag> 版本 </tag>
             
             <tag> 提交 </tag>
             
@@ -192,9 +192,9 @@
       
         <tags>
             
-            <tag> 版本 </tag>
-            
             <tag> 版本管理 </tag>
+            
+            <tag> 版本 </tag>
             
             <tag> 回退 </tag>
             
@@ -221,9 +221,9 @@
       
         <tags>
             
-            <tag> 版本 </tag>
-            
             <tag> 版本管理 </tag>
+            
+            <tag> 版本 </tag>
             
             <tag> 创建 </tag>
             
@@ -250,9 +250,9 @@
       
         <tags>
             
-            <tag> 版本管理 </tag>
-            
             <tag> Git </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> 安装 </tag>
             
@@ -279,9 +279,9 @@
       
         <tags>
             
-            <tag> 版本管理 </tag>
-            
             <tag> Git </tag>
+            
+            <tag> 版本管理 </tag>
             
         </tags>
       
@@ -1248,11 +1248,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> 博客 </tag>
             
             <tag> 图床 </tag>
-            
-            <tag> Hexo </tag>
             
             <tag> Gitee </tag>
             
@@ -1279,13 +1279,13 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> 博客 </tag>
             
             <tag> 图床 </tag>
             
             <tag> 七牛 </tag>
-            
-            <tag> Hexo </tag>
             
         </tags>
       
@@ -1310,9 +1310,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 站点地图 </tag>
             
@@ -1345,11 +1345,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
         </tags>
       
@@ -1374,11 +1374,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 功能 </tag>
             
@@ -1405,11 +1405,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 部署 </tag>
             
@@ -1440,11 +1440,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 管理 </tag>
             
@@ -1473,11 +1473,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 美化 </tag>
             
@@ -2053,6 +2053,8 @@
       
         <tags>
             
+            <tag> QPushButton </tag>
+            
             <tag> PySide2 </tag>
             
             <tag> Python </tag>
@@ -2062,8 +2064,6 @@
             <tag> Qt </tag>
             
             <tag> 基础 </tag>
-            
-            <tag> QPushButton </tag>
             
         </tags>
       
@@ -2498,9 +2498,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> TeamViewer </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -2705,35 +2705,6 @@
     
     
     <entry>
-      <title>单片机编码BPSK信号</title>
-      <link href="//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/"/>
-      <url>//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/</url>
-      
-        <content type="html"><![CDATA[<h1 id="单片机编码BPSK信号"><a href="#单片机编码BPSK信号" class="headerlink" title="单片机编码BPSK信号"></a><center>单片机编码BPSK信号</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;一些终端短距无限通讯的设备，依然选择使用电信号作为信号的载体，比如主动笔和触控屏之间。算然短距但是信号幅度不强又易受到干扰，通常传输中伴随着信号源的运动，比如笔在书写的过程中向屏发送信号等。这就要求我们选择的通讯方式要具有较强的抗干扰能力，从笔端到屏端发送的数据可以以BPSK码作为载波，增强信号传输过程中的抗干扰能力。本文介绍了如何通过单片机将数据转化为BPSK码发送。</em></p><h2 id="1-什么是BPSK信号？"><a href="#1-什么是BPSK信号？" class="headerlink" title="1 什么是BPSK信号？"></a>1 什么是BPSK信号？</h2><p>&emsp;&emsp;BPSK(Binary phase Shift Keying)即二进制相移键控。在通讯领域通常将基带信号对应上要发送的码元，比如码元为101100时，基带信号为持续1个单位长度的高电平，持续1一个单位长度的低电平，持续2个单位长度的高电平，持续两个单位长度的低电平。将该码元信号作为基带信号，假设载波信号是一个正弦函数，则调相规则为基带信号为高电平时载波信号不变，基带信号为低电平时载波信号进行相位移动，通常移动半个周期即反向。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/BPSK%20sin.png" alt="BPSK sin.png" title="载波信号为正弦信号"></p><p>&emsp;&emsp;python3测试代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">6</span>, <span class="number">0.0001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#基带信号</span></span><br><span class="line">y1 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; <span class="number">1</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">2</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">4</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">6</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#载波信号</span></span><br><span class="line">y2 = np.sin(<span class="number">2</span> * math.pi * (x - <span class="number">1</span> / <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#BPSK调相信号</span></span><br><span class="line">y3 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    n = int(v * <span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">if</span> y1[n] == <span class="number">1</span>:</span><br><span class="line">        y3.append(y2[n])</span><br><span class="line">    <span class="keyword">elif</span> y1[n] == <span class="number">0</span>:</span><br><span class="line">        y3.append(-y2[n])</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置窗格大小</span></span><br><span class="line">Window = plt.figure(num = <span class="number">3</span>)</span><br><span class="line"><span class="comment">#添加子图</span></span><br><span class="line">Line1 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">Line2 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">Line3 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">Line1.plot(x, y1)</span><br><span class="line">Line2.plot(x, y2)</span><br><span class="line">Line3.plot(x, y3)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure><h2 id="2-运用于单片机短距通讯的数字信号BPSK编码规则"><a href="#2-运用于单片机短距通讯的数字信号BPSK编码规则" class="headerlink" title="2 运用于单片机短距通讯的数字信号BPSK编码规则"></a>2 运用于单片机短距通讯的数字信号BPSK编码规则</h2><p>&emsp;&emsp;以上是在通讯领域BPSK一般运用，在单片机短距数字通讯时，为了更好的发送数字信号我们用周期是基带信号一个码元电平持续时间偶数倍分之一的方波信号作为载波信号，这个方波信号它初始电平为高或低，本文讨论高电平起始，低电平起始情况类似。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/BPSK%20PWM.png" alt="BPSK PWM.png" title="载波信号为方波"></p><p>&emsp;&emsp;python3测试代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">12</span>, <span class="number">0.0001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#基带信号</span></span><br><span class="line">y1 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; <span class="number">4</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">8</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">12</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#载波信号</span></span><br><span class="line">y2 = []</span><br><span class="line">m = <span class="number">1</span>                   <span class="comment">#PWM起始电平高</span></span><br><span class="line">u = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; u:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        u += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">1</span>:</span><br><span class="line">            m = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            m = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    y2.append(m)</span><br><span class="line"></span><br><span class="line"><span class="comment">#BPSK调相信号</span></span><br><span class="line">y3 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    n = int(v * <span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">if</span> y1[n] == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> y2[n] == <span class="number">1</span>:</span><br><span class="line">            y3.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> y2[n] == <span class="number">0</span>:</span><br><span class="line">            y3.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> y1[n] == <span class="number">0</span>:</span><br><span class="line">        y3.append(y2[n])</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置窗格大小</span></span><br><span class="line">Window = plt.figure(num = <span class="number">3</span>)</span><br><span class="line"><span class="comment">#添加子图</span></span><br><span class="line">Line1 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">Line2 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">Line3 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">Line1.plot(x, y1)</span><br><span class="line">Line2.plot(x, y2)</span><br><span class="line">Line3.plot(x, y3)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;我们假设要发送的码元数据为0x5A，对应二进制为01011010b。基带信号中一个码元1为持续一个单位时间的高电平，一个码元0则为持续一个单位时间的低电平。而载波信号为是占空比为50%的方波信号，它的周期是基带信号单位时间的偶数倍分之一，其初始电平为高。按BPSK的调相规则信号调制后如图：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/BPSK%20PWM%200x5A.png" alt="BPSK PWM 0x5A.png" title="BPSK编码发送0x5A数据"></p><p>&emsp;&emsp;python3测试代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">32</span>, <span class="number">0.0001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#基带信号</span></span><br><span class="line">y1 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; <span class="number">4</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">8</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">12</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">16</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">20</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">24</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">28</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">32</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#载波信号</span></span><br><span class="line">y2 = []</span><br><span class="line">m = <span class="number">1</span>                   <span class="comment">#PWM起始电平高</span></span><br><span class="line">u = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; u:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        u += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">1</span>:</span><br><span class="line">            m = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            m = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    y2.append(m)</span><br><span class="line"></span><br><span class="line"><span class="comment">#BPSK调相信号</span></span><br><span class="line">y3 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    n = int(v * <span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">if</span> y1[n] == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> y2[n] == <span class="number">1</span>:</span><br><span class="line">            y3.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> y2[n] == <span class="number">0</span>:</span><br><span class="line">            y3.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> y1[n] == <span class="number">0</span>:</span><br><span class="line">        y3.append(y2[n])</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置窗格大小</span></span><br><span class="line">Window = plt.figure(num = <span class="number">3</span>)</span><br><span class="line"><span class="comment">#添加子图</span></span><br><span class="line">Line1 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">Line2 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">Line3 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">Line1.plot(x, y1)</span><br><span class="line">Line2.plot(x, y2)</span><br><span class="line">Line3.plot(x, y3)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure><h2 id="3-如何通过单片机外设资源输出BPSK信号"><a href="#3-如何通过单片机外设资源输出BPSK信号" class="headerlink" title="3 如何通过单片机外设资源输出BPSK信号"></a>3 如何通过单片机外设资源输出BPSK信号</h2><p>&emsp;&emsp;弄清楚了数据编码规则后，就需要考虑如何调用单片机的外设资源从IO口输出BPSK信号了。<br>&emsp;&emsp;以下我们以基带信号每个码元的单位时间对应载波信号方波的两个周期举例。码元0对应载波信号方波以高电平起始，码元1为低电平起始，也就相当于移相半个周期。<br>&emsp;&emsp;对单片机外设资源的要求：单片机需要具备带PWM输出的定时器，该定时器除了能设置PWM输出的频率和占空比外，还需要控制PWM的起始电平、停止电平、匹配值电平、溢出值电平（周期值电平），方便在灵活的控制PWM的高低电平变化。同时需要能产生比较值和溢出值中断。为了方便控制，定时器可以设置为锯齿波模式，向上计数。</p><h3 id="3-1-发送单个码元"><a href="#3-1-发送单个码元" class="headerlink" title="3.1 发送单个码元"></a>3.1 发送单个码元</h3><p>&emsp;&emsp;码元0是高电平起始，对应载波信号两个周期方波输出。为了保证起始值输出高电平，定时器需要将起始电平设为高，停止电平设为低。为了保证输出50%的占空比，将比较值电平配置为低，溢出值电平配置为高。码元1是低电平起始，定时器需要配置为起始电平低，停止电平低，比较值电平高，溢出值电平低。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/%E9%94%AF%E9%BD%BF%E6%B3%A2%E7%A0%81%E5%85%830_.png" alt="锯齿波码元0_.png" title="锯齿波码元0_"><br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/%E9%94%AF%E9%BD%BF%E6%B3%A2%E7%A0%81%E5%85%831_.png" alt="锯齿波码元1_.png" title="锯齿波码元1_"><br>&emsp;&emsp;为了能数出方波的个数，需要开启比较中断，在中断里进行累加。一个码元对应两个方波周期，则累加到2时表示完成一个码元输出，可以开始下一个码元输出。<br>&emsp;&emsp;单个码元发送结束后需要关闭定时器停止输出。关闭的时机很重要，如果关闭过早或过晚会导致输出的BPSK信号残缺或有多余部分，最终导致接收设备处理出错。如果输出的最后一个码元是0，其高电平起始意味着低电平结束，我们可以在最后一个匹配值中断中停止输出。而如果最后一个码元是1，其低电平起始意味着高电平结束，为了保证信号输出完整，我们需要在最后一个匹配值中断中将溢出值中断打开，然后在触发的溢出值中断里停止输出。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/Single%20bit%200_.png" alt="Single bit 0_.png" title="Single bit 0_"><br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/Single%20bit%201_.png" alt="Single bit 1_.png" title="Single bit 1_"></p><p>&emsp;&emsp;为了便于后文描述，我们将以下定时器配置称为码元0配置：<br>起始电平：高<br>停止电平：低<br>匹配值电平：低<br>溢出值电平：高<br>&emsp;&emsp;将以下定时器配置称为码元1配置：<br>起始电平：低<br>停止电平：低<br>匹配值电平：高<br>溢出值电平：低</p><h3 id="3-2-发送多个码元"><a href="#3-2-发送多个码元" class="headerlink" title="3.2 发送多个码元"></a>3.2 发送多个码元</h3><p>&emsp;&emsp;发送多个码元，如果码元值不变，比如全0或全1，这种情况只是发送单个码元后控制好关闭信号输出的时间而已，这里主要讨论码元变化的情况。拆分细了说可以分为两种情况：</p><ul><li>发送码元01<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/Bits%2001_.png" alt="Bits 01_.png" title="Bits 01_"><br>&emsp;&emsp;在开始发送码元0之前我们会先进行码元0配置，发送码元1当然也需要切换定时器配置，为了保证信号不在切换配置时出现差错，切换配置的时机选择非常重要。我们应当选择码元0的最后一个匹配值中断里切换为码元1配置，保证在下一个边沿信号出现之前完成配置，同时又保证码元0和码元1的信号输出完整。码元1切换码元0配置同理。</li><li>发送码元10<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/Bits%2010_.png" alt="Bits 10_.png" title="Bits 10_"><br>&emsp;&emsp;方法同发送01。先设置码元1配置，然后在码元1的最后一个匹配值中断里切码元0配置。</li></ul><h3 id="3-3-码元中插入间隔发送"><a href="#3-3-码元中插入间隔发送" class="headerlink" title="3.3 码元中插入间隔发送"></a>3.3 码元中插入间隔发送</h3><p>&emsp;&emsp;在通讯中为了使接收设备能更好的同步上发送设备的信号，以及让接收设备更容易解析出发送设备的数据，我们常常在持续发送一段码元后空出载波信号一个周期的低电平作为信标。比如每3Bit的码元就空出一个周期间隔。<br>&emsp;&emsp;这里为了便于描述问题，我们只看gap的前后1个码元，总共有四种情况：</p><ul><li>发送0Gap0<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/0Gap0_.png" alt="0Gap0_.png" title="0Gap0_"></li><li>发送0Gap1<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/0Gap1_.png" alt="0Gap1_.png" title="0Gap1_"></li><li>发送1Gap0<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/1Gap0_.png" alt="1Gap0_.png" title="1Gap0_"></li><li>发送1Gap1<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/1Gap1_.png" alt="1Gap1_.png" title="1Gap1_"><br>&emsp;&emsp;虽然有四种情况，但是处理方式其实都是一样的，即从码元0/1配置切换到Gap配置，再从Gap配置切换回码元0/1配置。关键问题在于Gap0的配置，以及切换配置的时机。<br>&emsp;&emsp;如下配置我们称为Gap配置：<br>匹配值电平：低<br>溢出值电平：低<br>&emsp;&emsp;有了上面的基础这里我们很容易明白从码元切到Gap配置的时机依然是码元最后一个匹配值中断里，从Gap切换回码元的时机为Gap中的匹配值中断。只有在这样的时机切换配置才能保证输出信号每个周期的电平都是完整，不多不少的。</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 主动笔 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 信号 </tag>
-            
-            <tag> 编码 </tag>
-            
-            <tag> BPSK </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>压力曲线</title>
       <link href="//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/"/>
       <url>//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8E%8B%E5%8A%9B%E6%9B%B2%E7%BA%BF/</url>
@@ -2755,6 +2726,35 @@
             <tag> 硅胶 </tag>
             
             <tag> 压力 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>单片机编码BPSK信号</title>
+      <link href="//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/"/>
+      <url>//docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/</url>
+      
+        <content type="html"><![CDATA[<h1 id="单片机编码BPSK信号"><a href="#单片机编码BPSK信号" class="headerlink" title="单片机编码BPSK信号"></a><center>单片机编码BPSK信号</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;一些终端短距无限通讯的设备，依然选择使用电信号作为信号的载体，比如主动笔和触控屏之间。算然短距但是信号幅度不强又易受到干扰，通常传输中伴随着信号源的运动，比如笔在书写的过程中向屏发送信号等。这就要求我们选择的通讯方式要具有较强的抗干扰能力，从笔端到屏端发送的数据可以以BPSK码作为载波，增强信号传输过程中的抗干扰能力。本文介绍了如何通过单片机将数据转化为BPSK码发送。</em></p><h2 id="1-什么是BPSK信号？"><a href="#1-什么是BPSK信号？" class="headerlink" title="1 什么是BPSK信号？"></a>1 什么是BPSK信号？</h2><p>&emsp;&emsp;BPSK(Binary phase Shift Keying)即二进制相移键控。在通讯领域通常将基带信号对应上要发送的码元，比如码元为101100时，基带信号为持续1个单位长度的高电平，持续1一个单位长度的低电平，持续2个单位长度的高电平，持续两个单位长度的低电平。将该码元信号作为基带信号，假设载波信号是一个正弦函数，则调相规则为基带信号为高电平时载波信号不变，基带信号为低电平时载波信号进行相位移动，通常移动半个周期即反向。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/BPSK%20sin.png" alt="BPSK sin.png" title="载波信号为正弦信号"></p><p>&emsp;&emsp;python3测试代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">6</span>, <span class="number">0.0001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#基带信号</span></span><br><span class="line">y1 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; <span class="number">1</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">2</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">4</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">6</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#载波信号</span></span><br><span class="line">y2 = np.sin(<span class="number">2</span> * math.pi * (x - <span class="number">1</span> / <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#BPSK调相信号</span></span><br><span class="line">y3 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    n = int(v * <span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">if</span> y1[n] == <span class="number">1</span>:</span><br><span class="line">        y3.append(y2[n])</span><br><span class="line">    <span class="keyword">elif</span> y1[n] == <span class="number">0</span>:</span><br><span class="line">        y3.append(-y2[n])</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置窗格大小</span></span><br><span class="line">Window = plt.figure(num = <span class="number">3</span>)</span><br><span class="line"><span class="comment">#添加子图</span></span><br><span class="line">Line1 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">Line2 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">Line3 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">Line1.plot(x, y1)</span><br><span class="line">Line2.plot(x, y2)</span><br><span class="line">Line3.plot(x, y3)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure><h2 id="2-运用于单片机短距通讯的数字信号BPSK编码规则"><a href="#2-运用于单片机短距通讯的数字信号BPSK编码规则" class="headerlink" title="2 运用于单片机短距通讯的数字信号BPSK编码规则"></a>2 运用于单片机短距通讯的数字信号BPSK编码规则</h2><p>&emsp;&emsp;以上是在通讯领域BPSK一般运用，在单片机短距数字通讯时，为了更好的发送数字信号我们用周期是基带信号一个码元电平持续时间偶数倍分之一的方波信号作为载波信号，这个方波信号它初始电平为高或低，本文讨论高电平起始，低电平起始情况类似。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/BPSK%20PWM.png" alt="BPSK PWM.png" title="载波信号为方波"></p><p>&emsp;&emsp;python3测试代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">12</span>, <span class="number">0.0001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#基带信号</span></span><br><span class="line">y1 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; <span class="number">4</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">8</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">12</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#载波信号</span></span><br><span class="line">y2 = []</span><br><span class="line">m = <span class="number">1</span>                   <span class="comment">#PWM起始电平高</span></span><br><span class="line">u = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; u:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        u += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">1</span>:</span><br><span class="line">            m = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            m = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    y2.append(m)</span><br><span class="line"></span><br><span class="line"><span class="comment">#BPSK调相信号</span></span><br><span class="line">y3 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    n = int(v * <span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">if</span> y1[n] == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> y2[n] == <span class="number">1</span>:</span><br><span class="line">            y3.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> y2[n] == <span class="number">0</span>:</span><br><span class="line">            y3.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> y1[n] == <span class="number">0</span>:</span><br><span class="line">        y3.append(y2[n])</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置窗格大小</span></span><br><span class="line">Window = plt.figure(num = <span class="number">3</span>)</span><br><span class="line"><span class="comment">#添加子图</span></span><br><span class="line">Line1 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">Line2 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">Line3 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">Line1.plot(x, y1)</span><br><span class="line">Line2.plot(x, y2)</span><br><span class="line">Line3.plot(x, y3)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;我们假设要发送的码元数据为0x5A，对应二进制为01011010b。基带信号中一个码元1为持续一个单位时间的高电平，一个码元0则为持续一个单位时间的低电平。而载波信号为是占空比为50%的方波信号，它的周期是基带信号单位时间的偶数倍分之一，其初始电平为高。按BPSK的调相规则信号调制后如图：<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/BPSK%20PWM%200x5A.png" alt="BPSK PWM 0x5A.png" title="BPSK编码发送0x5A数据"></p><p>&emsp;&emsp;python3测试代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">32</span>, <span class="number">0.0001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#基带信号</span></span><br><span class="line">y1 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; <span class="number">4</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">8</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">12</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">16</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">20</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">24</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">28</span>:</span><br><span class="line">        y1.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> v &lt; <span class="number">32</span>:</span><br><span class="line">        y1.append(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#载波信号</span></span><br><span class="line">y2 = []</span><br><span class="line">m = <span class="number">1</span>                   <span class="comment">#PWM起始电平高</span></span><br><span class="line">u = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    <span class="keyword">if</span> v &lt; u:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        u += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">1</span>:</span><br><span class="line">            m = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            m = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    y2.append(m)</span><br><span class="line"></span><br><span class="line"><span class="comment">#BPSK调相信号</span></span><br><span class="line">y3 = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> x:</span><br><span class="line">    n = int(v * <span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">if</span> y1[n] == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> y2[n] == <span class="number">1</span>:</span><br><span class="line">            y3.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> y2[n] == <span class="number">0</span>:</span><br><span class="line">            y3.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> y1[n] == <span class="number">0</span>:</span><br><span class="line">        y3.append(y2[n])</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置窗格大小</span></span><br><span class="line">Window = plt.figure(num = <span class="number">3</span>)</span><br><span class="line"><span class="comment">#添加子图</span></span><br><span class="line">Line1 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">Line2 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">Line3 = Window.add_subplot(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">Line1.plot(x, y1)</span><br><span class="line">Line2.plot(x, y2)</span><br><span class="line">Line3.plot(x, y3)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure><h2 id="3-如何通过单片机外设资源输出BPSK信号"><a href="#3-如何通过单片机外设资源输出BPSK信号" class="headerlink" title="3 如何通过单片机外设资源输出BPSK信号"></a>3 如何通过单片机外设资源输出BPSK信号</h2><p>&emsp;&emsp;弄清楚了数据编码规则后，就需要考虑如何调用单片机的外设资源从IO口输出BPSK信号了。<br>&emsp;&emsp;以下我们以基带信号每个码元的单位时间对应载波信号方波的两个周期举例。码元0对应载波信号方波以高电平起始，码元1为低电平起始，也就相当于移相半个周期。<br>&emsp;&emsp;对单片机外设资源的要求：单片机需要具备带PWM输出的定时器，该定时器除了能设置PWM输出的频率和占空比外，还需要控制PWM的起始电平、停止电平、匹配值电平、溢出值电平（周期值电平），方便在灵活的控制PWM的高低电平变化。同时需要能产生比较值和溢出值中断。为了方便控制，定时器可以设置为锯齿波模式，向上计数。</p><h3 id="3-1-发送单个码元"><a href="#3-1-发送单个码元" class="headerlink" title="3.1 发送单个码元"></a>3.1 发送单个码元</h3><p>&emsp;&emsp;码元0是高电平起始，对应载波信号两个周期方波输出。为了保证起始值输出高电平，定时器需要将起始电平设为高，停止电平设为低。为了保证输出50%的占空比，将比较值电平配置为低，溢出值电平配置为高。码元1是低电平起始，定时器需要配置为起始电平低，停止电平低，比较值电平高，溢出值电平低。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/%E9%94%AF%E9%BD%BF%E6%B3%A2%E7%A0%81%E5%85%830_.png" alt="锯齿波码元0_.png" title="锯齿波码元0_"><br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/%E9%94%AF%E9%BD%BF%E6%B3%A2%E7%A0%81%E5%85%831_.png" alt="锯齿波码元1_.png" title="锯齿波码元1_"><br>&emsp;&emsp;为了能数出方波的个数，需要开启比较中断，在中断里进行累加。一个码元对应两个方波周期，则累加到2时表示完成一个码元输出，可以开始下一个码元输出。<br>&emsp;&emsp;单个码元发送结束后需要关闭定时器停止输出。关闭的时机很重要，如果关闭过早或过晚会导致输出的BPSK信号残缺或有多余部分，最终导致接收设备处理出错。如果输出的最后一个码元是0，其高电平起始意味着低电平结束，我们可以在最后一个匹配值中断中停止输出。而如果最后一个码元是1，其低电平起始意味着高电平结束，为了保证信号输出完整，我们需要在最后一个匹配值中断中将溢出值中断打开，然后在触发的溢出值中断里停止输出。<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/Single%20bit%200_.png" alt="Single bit 0_.png" title="Single bit 0_"><br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/Single%20bit%201_.png" alt="Single bit 1_.png" title="Single bit 1_"></p><p>&emsp;&emsp;为了便于后文描述，我们将以下定时器配置称为码元0配置：<br>起始电平：高<br>停止电平：低<br>匹配值电平：低<br>溢出值电平：高<br>&emsp;&emsp;将以下定时器配置称为码元1配置：<br>起始电平：低<br>停止电平：低<br>匹配值电平：高<br>溢出值电平：低</p><h3 id="3-2-发送多个码元"><a href="#3-2-发送多个码元" class="headerlink" title="3.2 发送多个码元"></a>3.2 发送多个码元</h3><p>&emsp;&emsp;发送多个码元，如果码元值不变，比如全0或全1，这种情况只是发送单个码元后控制好关闭信号输出的时间而已，这里主要讨论码元变化的情况。拆分细了说可以分为两种情况：</p><ul><li>发送码元01<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/Bits%2001_.png" alt="Bits 01_.png" title="Bits 01_"><br>&emsp;&emsp;在开始发送码元0之前我们会先进行码元0配置，发送码元1当然也需要切换定时器配置，为了保证信号不在切换配置时出现差错，切换配置的时机选择非常重要。我们应当选择码元0的最后一个匹配值中断里切换为码元1配置，保证在下一个边沿信号出现之前完成配置，同时又保证码元0和码元1的信号输出完整。码元1切换码元0配置同理。</li><li>发送码元10<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/Bits%2010_.png" alt="Bits 10_.png" title="Bits 10_"><br>&emsp;&emsp;方法同发送01。先设置码元1配置，然后在码元1的最后一个匹配值中断里切码元0配置。</li></ul><h3 id="3-3-码元中插入间隔发送"><a href="#3-3-码元中插入间隔发送" class="headerlink" title="3.3 码元中插入间隔发送"></a>3.3 码元中插入间隔发送</h3><p>&emsp;&emsp;在通讯中为了使接收设备能更好的同步上发送设备的信号，以及让接收设备更容易解析出发送设备的数据，我们常常在持续发送一段码元后空出载波信号一个周期的低电平作为信标。比如每3Bit的码元就空出一个周期间隔。<br>&emsp;&emsp;这里为了便于描述问题，我们只看gap的前后1个码元，总共有四种情况：</p><ul><li>发送0Gap0<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/0Gap0_.png" alt="0Gap0_.png" title="0Gap0_"></li><li>发送0Gap1<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/0Gap1_.png" alt="0Gap1_.png" title="0Gap1_"></li><li>发送1Gap0<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/1Gap0_.png" alt="1Gap0_.png" title="1Gap0_"></li><li>发送1Gap1<br><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A0%81BPSK%E4%BF%A1%E5%8F%B7/1Gap1_.png" alt="1Gap1_.png" title="1Gap1_"><br>&emsp;&emsp;虽然有四种情况，但是处理方式其实都是一样的，即从码元0/1配置切换到Gap配置，再从Gap配置切换回码元0/1配置。关键问题在于Gap0的配置，以及切换配置的时机。<br>&emsp;&emsp;如下配置我们称为Gap配置：<br>匹配值电平：低<br>溢出值电平：低<br>&emsp;&emsp;有了上面的基础这里我们很容易明白从码元切到Gap配置的时机依然是码元最后一个匹配值中断里，从Gap切换回码元的时机为Gap中的匹配值中断。只有在这样的时机切换配置才能保证输出信号每个周期的电平都是完整，不多不少的。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 主动笔 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 信号 </tag>
+            
+            <tag> 编码 </tag>
+            
+            <tag> BPSK </tag>
             
         </tags>
       
@@ -3122,15 +3122,15 @@
       
         <tags>
             
+            <tag> 管理 </tag>
+            
             <tag> 基础 </tag>
             
-            <tag> 管理 </tag>
+            <tag> 工程 </tag>
             
             <tag> GVim </tag>
             
             <tag> Vim </tag>
-            
-            <tag> 工程 </tag>
             
         </tags>
       
@@ -3159,11 +3159,11 @@
             
             <tag> 基础 </tag>
             
-            <tag> NerdTree </tag>
-            
             <tag> GVim </tag>
             
             <tag> Vim </tag>
+            
+            <tag> NerdTree </tag>
             
         </tags>
       
@@ -3334,18 +3334,18 @@
       <link href="/music/index.html"/>
       <url>/music/index.html</url>
       
-        <content type="html"><![CDATA[    <div id="aplayer-TmDZirdk" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
+        <content type="html"><![CDATA[    <div id="aplayer-nKzxUhnU" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>reward</title>
-      <link href="/reward/index.html"/>
-      <url>/reward/index.html</url>
+      <title>友链</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
-        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
@@ -3363,11 +3363,11 @@
     
     
     <entry>
-      <title>友链</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>reward</title>
+      <link href="/reward/index.html"/>
+      <url>/reward/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
       
     </entry>
     
