@@ -4,6 +4,103 @@
   
     
     <entry>
+      <title>Git基础篇（十一）——Git标签管理</title>
+      <link href="//docs/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/"/>
+      <url>//docs/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（十一）——Git标签管理"><a href="#Git基础篇（十一）——Git标签管理" class="headerlink" title="Git基础篇（十一）——Git标签管理"></a><center>Git基础篇（十一）——Git标签管理</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;为了更方便的对提交进行操作，可以使用Tag，使用它将使得版本迭代关系更清晰，对比较的操作更便捷。</em></p><h2 id="1-Tag有什么用？"><a href="#1-Tag有什么用？" class="headerlink" title="1 Tag有什么用？"></a>1 Tag有什么用？</h2><p>&emsp;&emsp;每个提交都有一个唯一的Hash值与其一一对应，但这是难以记忆的，我们可以给某个提交取“别名”，这样便于区分记忆，也能通过“别名“对该提交进行操作。</p><h2 id="2-Tag创建"><a href="#2-Tag创建" class="headerlink" title="2 Tag创建"></a>2 Tag创建</h2><p>&emsp;&emsp;为当前提交创建一个Tag可以使用指令<code>git tag</code>。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tagname&gt;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;如果要给过去的提交追加Tag，可以在末尾指定提交的Hash值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tagname&gt; &lt;hash ID&gt;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;当前分支添加标签，但此种形式不不会为标签添加注释。如果要新建标签且为标签添加注释可以使用 <code>-a</code> 参数，加上 <code>-m</code> 参数可以在不进入vi模式下进行注释编辑。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a &lt;tagname&gt; -m &quot;comment&quot;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;同样的，如果要给过去的提交追加Tag，可以在末尾指定提交的Hash值。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a &lt;tagname&gt; -m &quot;comment&quot; &lt;hash ID&gt;</span><br></pre></td></tr></table></figure><h2 id="3-Tag查看"><a href="#3-Tag查看" class="headerlink" title="3 Tag查看"></a>3 Tag查看</h2><p>&emsp;&emsp;查看所有标签，默认按字母顺序排列。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;但上面这条指令不会显示Tag的注释信息，如果想要显示注释信息则可使用 <code>-n</code> 参数。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -n</span><br></pre></td></tr></table></figure><h2 id="4-查找Tag"><a href="#4-查找Tag" class="headerlink" title="4 查找Tag"></a>4 查找Tag</h2><p>&emsp;&emsp;模糊查找Tag，可以使用通配符进行匹配，使用指令 <code>-l</code> 。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -l &quot;v1.*&quot;</span><br></pre></td></tr></table></figure><h2 id="5-将Tag推动到远程"><a href="#5-将Tag推动到远程" class="headerlink" title="5 将Tag推动到远程"></a>5 将Tag推动到远程</h2><p>&emsp;&emsp;默认情况下在本地创建的Tag不会同步到远程服务器上，如果需要推送到远程，必须在本地创建完成后推送到远程仓库上。<br>&emsp;&emsp;将单个标签推送到远程仓库。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;tagname&gt;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;将所有标签推送到远程服仓库。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure><h2 id="6-删除本地Tag"><a href="#6-删除本地Tag" class="headerlink" title="6 删除本地Tag"></a>6 删除本地Tag</h2><p>&emsp;&emsp;通过使用指令 <code>-d</code> 可以指定要删除Tag。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;tagname&gt;</span><br></pre></td></tr></table></figure><h2 id="7-删除远程Tag"><a href="#7-删除远程Tag" class="headerlink" title="7 删除远程Tag"></a>7 删除远程Tag</h2><p>&emsp;&emsp;将远程仓库的某个标签删除，有两种方式。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete &lt;tagname&gt;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :refs&#x2F;tags&#x2F;tagname</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git </category>
+          
+          <category> 基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 基础篇 </tag>
+            
+            <tag> Git </tag>
+            
+            <tag> Tag </tag>
+            
+            <tag> 标签 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git高级篇（一）——Git注释规范</title>
+      <link href="//docs/Git/%E9%AB%98%E7%BA%A7%E7%AF%87/Git%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83/"/>
+      <url>//docs/Git/%E9%AB%98%E7%BA%A7%E7%AF%87/Git%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git高级篇（一）——Git注释规范"><a href="#Git高级篇（一）——Git注释规范" class="headerlink" title="Git高级篇（一）——Git注释规范"></a><center>Git高级篇（一）——Git注释规范</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;为每一次的Git提交都打上Log是一个好习惯，在协作开发时统一一种注释风格，为提交写上简洁明了的注释是重要的，本篇文章介绍一种Git注释规范。</em></p><h2 id="1-GCM（git-commit-message）格式"><a href="#1-GCM（git-commit-message）格式" class="headerlink" title="1 GCM（git commit message）格式"></a>1 GCM（git commit message）格式</h2><p>&emsp;&emsp;使用Angular的GCM格式，将注释信息分为是三个部分，header、body、footer，它们各占一行。header必写但其scope是可选的，body和footer也是可选的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;footer&gt;</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;每行不超过100字符。</p><h3 id="1-1-header"><a href="#1-1-header" class="headerlink" title="1.1 header"></a>1.1 header</h3><p>&emsp;&emsp;header占一行，包括三个字段type（必须）、scope（可选）、subject（必选）。</p><h4 id="1-1-1-Type"><a href="#1-1-1-Type" class="headerlink" title="1.1.1 Type"></a>1.1.1 Type</h4><p>&emsp;&emsp;type的规则为下列之一：</p><blockquote><ul><li>feat：新功能（feature）；</li><li>fix：修补bug；</li><li>docs：文档修改；</li><li>style：不影响代码含义的修改，比如规范化修改；</li><li>refactor：重构；</li><li>perf：提升性能的修改；</li><li>test：增加或修改测试；</li><li>chore：构建流程或辅助工具的变动；</li></ul></blockquote><h4 id="1-1-2-Scope"><a href="#1-1-2-Scope" class="headerlink" title="1.1.2 Scope"></a>1.1.2 Scope</h4><p>&emsp;&emsp;scope说明本次提交修改的范围，层级、模块等，如果同时修改多处可使用“*”。</p><h4 id="1-1-3-subject"><a href="#1-1-3-subject" class="headerlink" title="1.1.3 subject"></a>1.1.3 subject</h4><p>&emsp;&emsp;是对修改的简要说明：</p><blockquote><ul><li>使用祈使句，一般现在时；</li><li>首字母小写；</li><li>句末不使用句号；</li></ul></blockquote><h3 id="1-2-Body"><a href="#1-2-Body" class="headerlink" title="1.2 Body"></a>1.2 Body</h3><p>&emsp;&emsp;使用祈使句，一般现在时。body中需要写明变更原因和变更点。</p><h3 id="1-3-Footer"><a href="#1-3-Footer" class="headerlink" title="1.3 Footer"></a>1.3 Footer</h3><p>&emsp;&emsp;Breaking change（破坏性变化/重大变化）或关闭issue的信息都写在footer。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git </category>
+          
+          <category> 高级篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 规范 </tag>
+            
+            <tag> 注释 </tag>
+            
+            <tag> Git </tag>
+            
+            <tag> 高级篇 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git高级篇（二）——Git分支开发</title>
+      <link href="//docs/Git/%E9%AB%98%E7%BA%A7%E7%AF%87/Git%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/"/>
+      <url>//docs/Git/%E9%AB%98%E7%BA%A7%E7%AF%87/Git%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git高级篇（二）——Git分支开发"><a href="#Git高级篇（二）——Git分支开发" class="headerlink" title="Git高级篇（二）——Git分支开发"></a><center>Git高级篇（二）——Git分支开发</center></h1><p><em>前言：</em><br><em>&emsp;&emsp;灵活的分支开发模式是Git的一大亮点，针对不同的开发任务，创建不同的分支任务。</em></p><h2 id="1-分支构成"><a href="#1-分支构成" class="headerlink" title="1 分支构成"></a>1 分支构成</h2><blockquote><ul><li>master：主分支。是永久分支，与线上版本保持一致；</li><li>develop：开发分支。也是永久分支，是进行代码开发的主要分支，从master分支拉取；</li><li>feature：功能分支。属于临时分支，针对特定功能开发的分支。一般一个独立的功能创建一个feature分支，若几个功能存在依赖关系，则只创建一个feature分支开发它们；</li><li>release：预发布分支。属于临时分支，由develop创建出来的分支，以此分支为基准进行提测；</li><li>hotfix：修补分支。属于临时分支，该分支主要用于修复线上bug；</li></ul></blockquote><p>&emsp;&emsp;master和develop是两条必要的主要分支，前者是正式版本的发布，后者用于日常的开发，而feature、release、hotfix是三条临时分支，用于一些特定目的的版本开发，一般临时分支完成开发后应该删除。其实简化的分支开发管理只需要master和develop两个分支。</p><h3 id="1-1-master分支"><a href="#1-1-master分支" class="headerlink" title="1.1 master分支"></a>1.1 master分支</h3><p>&emsp;&emsp;该分支为永久分支，不可删除。分支上节点与线上版本保持一致。每个提交都有对应的Tag方便检索。<br>&emsp;&emsp;只能有一个master分支。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/%E9%AB%98%E7%BA%A7%E7%AF%87/Git%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/master.png" alt="master.png" title="master.png"></p><h3 id="1-2-develop分支"><a href="#1-2-develop分支" class="headerlink" title="1.2 develop分支"></a>1.2 develop分支</h3><p>&emsp;&emsp;该分支为永久分支，不可删除。develop分支从master分支拉取，进行日常的开发。<br>&emsp;&emsp;只能有一个develop分支。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/%E9%AB%98%E7%BA%A7%E7%AF%87/Git%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/develop.png" alt="develop.png" title="develop.png"></p><h3 id="1-3-feature分支"><a href="#1-3-feature分支" class="headerlink" title="1.3 feature分支"></a>1.3 feature分支</h3><p>&emsp;&emsp;进行功能开发时，我们以develop分支为基础拉取一个feature分支进行特定功能开发。当同时有多个功能在开发时，可以针对不同的功能开发同时存在多个feature分支。一般一个独立的功能创建一个feature分支，若几个功能存在依赖关系，则只创建一个feature分支开发它们。当功能开发完成后合并回develop分支。feature分支从develop来，回develop去。由于属于临时分支，使用完成后可将其删除。<br>&emsp;&emsp;可以有多个feature分子，分支命名规则为 <code>feature/name</code> 。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/%E9%AB%98%E7%BA%A7%E7%AF%87/Git%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/feature.png" alt="feature.png" title="feature.png"></p><h3 id="1-4-release分支"><a href="#1-4-release分支" class="headerlink" title="1.4 release分支"></a>1.4 release分支</h3><p>&emsp;&emsp;release分支从develop分支拉取出来，是预发布分支，针对这个分支上的提交进行提测和修改Bug，也即releasef分支可以针对测试发现的Bug继续开发，测试通过后合并到master分支上发布正式版，并且合并到develop分支上继续后续开发。由于属于临时分支，使用完成后可将其删除。<br>&emsp;&emsp;可以有多个release分子，分支命名规则为 <code>release/name</code> 。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/%E9%AB%98%E7%BA%A7%E7%AF%87/Git%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/release.png" alt="release.png" title="release.png"></p><h3 id="1-5-hotfix分支"><a href="#1-5-hotfix分支" class="headerlink" title="1.5 hotfix分支"></a>1.5 hotfix分支</h3><p>&emsp;&emsp;针对master分支上出现的Bug，从master分支拉取hotfix分支，创建hotfix分支进行Bug修复，Bug修复完成后合并回master分支上发布正式版，并且合并到develop分支上继续后续开发。<br>&emsp;&emsp;可以有多个hotfix分子，分支命名规则为 <code>hotfix/name</code> 。</p><p><img src= "/img/loading.gif" data-lazy-src="http://onlycalm.gitee.io/blogimage/docs/Git/%E9%AB%98%E7%BA%A7%E7%AF%87/Git%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/hotfix.png" alt="release.png" title="hotfix.png"></p><h2 id="2-特殊情况下的分支开发"><a href="#2-特殊情况下的分支开发" class="headerlink" title="2 特殊情况下的分支开发"></a>2 特殊情况下的分支开发</h2><h3 id="2-1-紧急上线新功能"><a href="#2-1-紧急上线新功能" class="headerlink" title="2.1 紧急上线新功能"></a>2.1 紧急上线新功能</h3><p>&emsp;&emsp;如果需要紧急上线一个新功能，而develop代码目前存在未完成的开发不能上线，那么此时可以特殊情况特殊处理，从master拉取feature分支进制功能开发，开发完成之后代码合并到master分支。</p><h3 id="2-2-同时开发的功能出现依赖"><a href="#2-2-同时开发的功能出现依赖" class="headerlink" title="2.2 同时开发的功能出现依赖"></a>2.2 同时开发的功能出现依赖</h3><p>&emsp;&emsp;相互独立的功能开发，应该分别创建feature分支进行功能开发，但若在开发过程中发现这些功能并非完全独立存在依赖，那么就应该将功能存在依赖的feature分支合并后开发。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git </category>
+          
+          <category> 高级篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+            <tag> 分支 </tag>
+            
+            <tag> 高级篇 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2021春节孤感</title>
       <link href="//docs/%E6%84%9F%E6%82%9F/2021%E6%98%A5%E8%8A%82%E5%AD%A4%E6%84%9F/"/>
       <url>//docs/%E6%84%9F%E6%82%9F/2021%E6%98%A5%E8%8A%82%E5%AD%A4%E6%84%9F/</url>
@@ -53,9 +150,9 @@
             
             <tag> 版本 </tag>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> Git </tag>
             
@@ -88,9 +185,9 @@
             
             <tag> 版本 </tag>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> Git </tag>
             
@@ -123,9 +220,9 @@
             
             <tag> 版本 </tag>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> Git </tag>
             
@@ -191,9 +288,9 @@
             
             <tag> 版本 </tag>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> Git </tag>
             
@@ -224,9 +321,9 @@
             
             <tag> 版本 </tag>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> Git </tag>
             
@@ -259,9 +356,9 @@
             
             <tag> 版本 </tag>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> Git </tag>
             
@@ -294,9 +391,9 @@
             
             <tag> 版本 </tag>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> Git </tag>
             
@@ -329,9 +426,9 @@
             
             <tag> 安装 </tag>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> Git </tag>
             
@@ -360,9 +457,9 @@
       
         <tags>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 版本管理 </tag>
             
             <tag> Git </tag>
             
@@ -922,13 +1019,13 @@
       
         <tags>
             
-            <tag> 冠词 </tag>
-            
             <tag> English </tag>
             
             <tag> 语法 </tag>
             
             <tag> 基础 </tag>
+            
+            <tag> 冠词 </tag>
             
         </tags>
       
@@ -1077,13 +1174,13 @@
       
         <tags>
             
+            <tag> 名词 </tag>
+            
             <tag> English </tag>
             
             <tag> 语法 </tag>
             
             <tag> 基础 </tag>
-            
-            <tag> 名词 </tag>
             
         </tags>
       
@@ -1331,11 +1428,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> 博客 </tag>
             
             <tag> 图床 </tag>
-            
-            <tag> Hexo </tag>
             
             <tag> Gitee </tag>
             
@@ -1362,13 +1459,13 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> 博客 </tag>
             
             <tag> 图床 </tag>
             
             <tag> 七牛 </tag>
-            
-            <tag> Hexo </tag>
             
         </tags>
       
@@ -1393,9 +1490,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 站点地图 </tag>
             
@@ -1428,11 +1525,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
         </tags>
       
@@ -1457,11 +1554,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 功能 </tag>
             
@@ -1488,17 +1585,17 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
             
+            <tag> Hexo </tag>
+            
+            <tag> Gitee </tag>
+            
             <tag> 部署 </tag>
             
             <tag> Coding </tag>
-            
-            <tag> Gitee </tag>
             
         </tags>
       
@@ -1523,11 +1620,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 管理 </tag>
             
@@ -1556,11 +1653,11 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 美化 </tag>
             
@@ -2678,9 +2775,9 @@
             
             <tag> 注释 </tag>
             
-            <tag> 语法 </tag>
-            
             <tag> 基础篇 </tag>
+            
+            <tag> 语法 </tag>
             
             <tag> Python </tag>
             
@@ -3343,13 +3440,13 @@
       
         <tags>
             
-            <tag> 基础篇 </tag>
-            
             <tag> GCC </tag>
             
             <tag> gcc </tag>
             
             <tag> g++ </tag>
+            
+            <tag> 基础篇 </tag>
             
             <tag> 教程 </tag>
             
@@ -3394,33 +3491,11 @@
     
     
     <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>about</title>
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
       
         <content type="html"><![CDATA[<h1 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a><center>关于作者</center></h1><p>&emsp;&emsp;作者是一个热爱技术，普普通通的上班族。希望将自己学习的知识经验分享给别人，帮助别人在学习的路上少走弯路提高效率。同时也是为了督促自己坚持学习，珍惜时间。除了分享技术，我也希望能记录自己的生活和兴趣，在自己的空间里自娱自乐，做大娱乐家。</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>tags</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
@@ -3438,9 +3513,9 @@
     
     
     <entry>
-      <title>友链</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -3464,7 +3539,29 @@
       <link href="/music/index.html"/>
       <url>/music/index.html</url>
       
-        <content type="html"><![CDATA[    <div id="aplayer-ZwHGYumt" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
+        <content type="html"><![CDATA[    <div id="aplayer-jFgkSwmH" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>友链</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
