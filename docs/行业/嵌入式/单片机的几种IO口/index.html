@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>单片机的几种IO口 | OnlyCalm's Blog</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="单片机的几种IO口前言：&amp;amp;emsp;&amp;amp;emsp;学习单片机开发也有一段时间了，对一些底层的东西不太了解或不够深入，希望能弥补上这些知识空缺。 1 GPIO的几种状态  输入状态 浮空输入 上&amp;#x2F;下拉输入 模拟输入   输出状态 推挽输出 开漏输出     2 输入状态2.1"><link rel="shortcut icon" href="http://onlycalm.gitee.io/blogimage/res/Favicon.ico"><link rel="canonical" href="http://onlycalm.cn/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%87%A0%E7%A7%8DIO%E5%8F%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '单片机的几种IO口',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-10-01 08:54:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/Avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">225</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">319</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">53</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://onlycalm.gitee.io/blogimage/res/Cover_1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="OnlyCalm's Blog"><span class="site-name">OnlyCalm's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">单片机的几种IO口</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-10-01T00:54:00.000Z" title="发表于 2020-10-01 08:54:00">2020-10-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-10-01T00:54:00.000Z" title="更新于 2020-10-01 08:54:00">2020-10-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%A1%8C%E4%B8%9A/">行业</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="单片机的几种IO口"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%87%A0%E7%A7%8DIO%E5%8F%A3/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%87%A0%E7%A7%8DIO%E5%8F%A3/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="单片机的几种IO口"><a href="#单片机的几种IO口" class="headerlink" title="单片机的几种IO口"></a><center>单片机的几种IO口</center></h1><p><em>前言：</em><br>&amp;emsp;&amp;emsp;<em>学习单片机开发也有一段时间了，对一些底层的东西不太了解或不够深入，希望能弥补上这些知识空缺。</em></p>
+<h2 id="1-GPIO的几种状态"><a href="#1-GPIO的几种状态" class="headerlink" title="1 GPIO的几种状态"></a>1 GPIO的几种状态</h2><blockquote>
+<ul>
+<li>输入状态<ul>
+<li>浮空输入</li>
+<li>上&#x2F;下拉输入</li>
+<li>模拟输入</li>
+</ul>
+</li>
+<li>输出状态<ul>
+<li>推挽输出</li>
+<li>开漏输出</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="2-输入状态"><a href="#2-输入状态" class="headerlink" title="2 输入状态"></a>2 输入状态</h2><h3 id="2-1-浮空输入"><a href="#2-1-浮空输入" class="headerlink" title="2.1 浮空输入"></a>2.1 浮空输入</h3><p>&amp;emsp;&amp;emsp;辅控输入即IO口在芯片内部既不接上拉电阻也不接下拉电阻，输入电阻相当于非常大。IO口的电平状态不确定，完全由外部决定，悬空时用示波器直接测量可能是高电平也可能是低电平。由于浮空状态容易受到干扰甚至是静电导致芯片损坏，因此未使用的脚一般要避免浮空。<br>&amp;emsp;&amp;emsp;浮空输入的常见运用是检测按键状态。</p>
+<h3 id="2-2-上拉-x2F-下拉输入"><a href="#2-2-上拉-x2F-下拉输入" class="headerlink" title="2.2 上拉&#x2F;下拉输入"></a>2.2 上拉&#x2F;下拉输入</h3><p>&amp;emsp;&amp;emsp;IO上拉输入指的是通过配置，在芯片内部将该IO串联电阻后接Vcc；IO下拉输入指的是通过配置，在芯片内部将该IO串联电阻后接Gnd。</p>
+<h3 id="2-3-模拟输入"><a href="#2-3-模拟输入" class="headerlink" title="2.3 模拟输入"></a>2.3 模拟输入</h3><p>&amp;emsp;&amp;emsp;普通的数字IO口可以通过输入数据寄存器的0或1读取到外部电平的高低状态，而模拟IO无法通过输入寄存器的值反应电平的高低，一般需要借助ADC或电压比较器去获取外部电平的值。<br>&amp;emsp;&amp;emsp;常用于AD检测或电压比较器。</p>
+<h2 id="3-输出状态"><a href="#3-输出状态" class="headerlink" title="3 输出状态"></a>3 输出状态</h2><h3 id="3-1-推挽输出"><a href="#3-1-推挽输出" class="headerlink" title="3.1 推挽输出"></a>3.1 推挽输出</h3><p>&amp;emsp;&amp;emsp;推挽输出可以输出高低电平，可以直接驱动功耗不大的数字器件。内部结构相当于两个三极管或MOSFET互补工作，不管输出高还是低，总有一个开关管导通。如果两个推完输出相互直连，其中一个芯片若输出高，此时上面的MOS导通下面MOS闭合，而一个芯片若输出低，即下面的MOS导通上面的MOS闭合，电流会从上MOS导通的VCC直接流向下MOS导通的GND，整个通路电阻很小，将会发生短路并损坏端口。因此推挽输出不能实现”线与“。</p>
+<h3 id="3-2-开漏输出"><a href="#3-2-开漏输出" class="headerlink" title="3.2 开漏输出"></a>3.2 开漏输出</h3><p>&amp;emsp;&amp;emsp;开漏输出只能输出低电平，如果要输出高电平必须通过外部上拉电阻才能实现。内部输出1时MOS管截止，输出与地断开，这时候IO其实没有驱动能力，需要外部连接上拉电阻才能输出高电平；内部输出0时MOS管导通接地，所以开漏达到输出低电平效果。开漏输出的吸电流能力较强，适合做电流型的驱动。<br>&amp;emsp;&amp;emsp;关于开漏输出接上拉电阻的一大运用是IIC线路。当上拉电阻阻值较小时，上升沿的延迟就小，但功耗较大，反之，当上拉电阻阻值较大时，上升沿延迟就大，但功耗较小。但电阻影响上升沿不影响下降沿。根据上升沿时延和功耗的需要，综合考虑选择合适的上拉电阻。</p>
+<h3 id="3-3-高阻输出"><a href="#3-3-高阻输出" class="headerlink" title="3.3 高阻输出"></a>3.3 高阻输出</h3><p>&amp;emsp;&amp;emsp;IO的高阻态实际上是输出IO，与浮空输入有些类似，输入电阻都非常大。不同在于浮空输入是输入型IO，而高阻态IO实际是开漏输出在输出高电平时的状态，且外部不接上拉电阻。</p>
+<h2 id="4-芯片复位后的IO状态"><a href="#4-芯片复位后的IO状态" class="headerlink" title="4 芯片复位后的IO状态"></a>4 芯片复位后的IO状态</h2><p>&amp;emsp;&amp;emsp;通常芯片复位后IO初始状态是高阻输入，为了防止芯片被异常复位时的IO电平变化对外部器件产生异常动作。但为了避免高阻输入产生漏电流，在芯片启动后需要对端口进行配置，改为其他状态，如内部拉高输入或输出。</p>
+<h2 id="5-IO的驱动能力"><a href="#5-IO的驱动能力" class="headerlink" title="5 IO的驱动能力"></a>5 IO的驱动能力</h2><p>&amp;emsp;&amp;emsp;大部分的单片机IO口都可以选择驱动能力的强弱，一般来说驱动能力越强则功耗损耗也越大。IO对外部的驱动能力既要看电压驱动能力，还要看电流驱动能力。有个简易的判断驱动能力是否足够的方法，将电路开路后则是电压是否符合负载电压，如果负责则表示电压驱动能力足够，否则电压驱动能力不够。如果接上负载后电压降低了，这就表明电流驱动能力不足。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://onlycalm.cn">OnlyCalm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://onlycalm.cn/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%87%A0%E7%A7%8DIO%E5%8F%A3/">http://onlycalm.cn/docs/行业/嵌入式/单片机的几种IO口/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://onlycalm.cn" target="_blank">OnlyCalm's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a><a class="post-meta__tags" href="/tags/%E7%8A%B6%E6%80%81/">状态</a><a class="post-meta__tags" href="/tags/IO/">IO</a></div><div class="post_share"><div class="social-share" data-image="https://onlycalm.gitee.io/blogimage/res/Cover_1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="http://onlycalm.gitee.io/blogimage/res/微信收款码.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/微信收款码.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="http://onlycalm.gitee.io/blogimage/res/支付宝收款码.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/支付宝收款码.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%9A%84%E4%BD%8E%E5%8A%9F%E8%80%97%E8%BF%BD%E6%B1%82/" title="嵌入式单片机开发的低功耗追求"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_13.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">嵌入式单片机开发的低功耗追求</div></div></a></div><div class="next-post pull-right"><a href="/docs/%E5%85%B4%E8%B6%A3/English/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E8%8B%B1%E8%AF%AD%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E4%BB%A3%E8%AF%8D/" title="英语基础语法（二）——代词"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">英语基础语法（二）——代词</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BAADC%E9%87%87%E6%A0%B7/" title="单片机ADC采样"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-13</div><div class="title">单片机ADC采样</div></div></a></div><div><a href="/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/" title="单片机存储分配"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-07</div><div class="title">单片机存储分配</div></div></a></div><div><a href="/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%9A%84%E4%BD%8E%E5%8A%9F%E8%80%97%E8%BF%BD%E6%B1%82/" title="嵌入式单片机开发的低功耗追求"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_13.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-10-01</div><div class="title">嵌入式单片机开发的低功耗追求</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">OnlyCalm</div><div class="author-info__description">自娱自乐，做大娱乐家</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">225</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">319</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">53</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/onlycalm"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">新婿，新婚快乐。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%87%A0%E7%A7%8DIO%E5%8F%A3"><span class="toc-text">单片机的几种IO口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-GPIO%E7%9A%84%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-text">1 GPIO的几种状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81"><span class="toc-text">2 输入状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%B5%AE%E7%A9%BA%E8%BE%93%E5%85%A5"><span class="toc-text">2.1 浮空输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%B8%8A%E6%8B%89-x2F-%E4%B8%8B%E6%8B%89%E8%BE%93%E5%85%A5"><span class="toc-text">2.2 上拉&#x2F;下拉输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5"><span class="toc-text">2.3 模拟输入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BE%93%E5%87%BA%E7%8A%B6%E6%80%81"><span class="toc-text">3 输出状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8E%A8%E6%8C%BD%E8%BE%93%E5%87%BA"><span class="toc-text">3.1 推挽输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%BC%80%E6%BC%8F%E8%BE%93%E5%87%BA"><span class="toc-text">3.2 开漏输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E9%AB%98%E9%98%BB%E8%BE%93%E5%87%BA"><span class="toc-text">3.3 高阻输出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%8A%AF%E7%89%87%E5%A4%8D%E4%BD%8D%E5%90%8E%E7%9A%84IO%E7%8A%B6%E6%80%81"><span class="toc-text">4 芯片复位后的IO状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-IO%E7%9A%84%E9%A9%B1%E5%8A%A8%E8%83%BD%E5%8A%9B"><span class="toc-text">5 IO的驱动能力</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Vim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E7%BB%88%E7%AB%AF%E6%8F%92%E4%BB%B6vim-floaterm/" title="Vim基础篇（二十八）——终端插件vim-floaterm"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim基础篇（二十八）——终端插件vim-floaterm"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Vim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E7%BB%88%E7%AB%AF%E6%8F%92%E4%BB%B6vim-floaterm/" title="Vim基础篇（二十八）——终端插件vim-floaterm">Vim基础篇（二十八）——终端插件vim-floaterm</a><time datetime="2023-01-20T12:05:00.000Z" title="发表于 2023-01-20 20:05:00">2023-01-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu%E5%AE%89%E8%A3%85wine%E8%BF%90%E8%A1%8CWindows%E5%BA%94%E7%94%A8/" title="Ubuntu安装wine运行Windows应用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ubuntu安装wine运行Windows应用"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu%E5%AE%89%E8%A3%85wine%E8%BF%90%E8%A1%8CWindows%E5%BA%94%E7%94%A8/" title="Ubuntu安装wine运行Windows应用">Ubuntu安装wine运行Windows应用</a><time datetime="2022-10-01T13:43:00.000Z" title="发表于 2022-10-01 21:43:00">2022-10-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu%E5%AE%89%E8%A3%85VMware%E8%BF%90%E8%A1%8CWindows/" title="Ubuntu安装VMware运行Windows"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ubuntu安装VMware运行Windows"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu%E5%AE%89%E8%A3%85VMware%E8%BF%90%E8%A1%8CWindows/" title="Ubuntu安装VMware运行Windows">Ubuntu安装VMware运行Windows</a><time datetime="2022-09-09T18:22:00.000Z" title="发表于 2022-09-10 02:22:00">2022-09-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Ubuntu/%E5%AE%89%E8%A3%85Ubuntu20.04%E7%B3%BB%E7%BB%9F/" title="安装Ubuntu20.04系统"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="安装Ubuntu20.04系统"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Ubuntu/%E5%AE%89%E8%A3%85Ubuntu20.04%E7%B3%BB%E7%BB%9F/" title="安装Ubuntu20.04系统">安装Ubuntu20.04系统</a><time datetime="2022-05-28T16:19:00.000Z" title="发表于 2022-05-29 00:19:00">2022-05-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Windows/%E5%AE%89%E8%A3%85Win10%E7%B3%BB%E7%BB%9F/" title="安装Win10系统"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="安装Win10系统"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Windows/%E5%AE%89%E8%A3%85Win10%E7%B3%BB%E7%BB%9F/" title="安装Win10系统">安装Win10系统</a><time datetime="2022-05-04T07:33:00.000Z" title="发表于 2022-05-04 15:33:00">2022-05-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://onlycalm.cn">OnlyCalm</a> 的博客</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+      appKey: 'f2158LsoEVzRzMS8EG7rvFSs',
+      avatar: 'wavatar',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '0b3f5b76c03e1d9ecca0',
+      clientSecret: '94ba0623c1599038f16bc6ecbdf0c9015c735fe5',
+      repo: 'blogtalk',
+      owner: 'onlycalm',
+      admin: ['onlycalm'],
+      id: '160caefd48c8a76910e34d150f9c288e',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Valine' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script src="/js/sakura.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
