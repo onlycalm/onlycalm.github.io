@@ -3869,39 +3869,6 @@
     
     
     <entry>
-      <title>Git进阶篇（二）——Git分支开发</title>
-      <link href="//docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/"/>
-      <url>//docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Git进阶篇（二）——Git分支开发"><a href="#Git进阶篇（二）——Git分支开发" class="headerlink" title="Git进阶篇（二）——Git分支开发"></a><center>Git进阶篇（二）——Git分支开发</center></h1><p><em>前言：</em><br>&amp;emsp;&amp;emsp;<em>灵活的分支开发模式是Git的一大亮点，针对不同的开发任务，创建不同的分支任务。</em></p><h2 id="1-分支构成"><a href="#1-分支构成" class="headerlink" title="1 分支构成"></a>1 分支构成</h2><blockquote><ul><li>master：主分支。是永久分支，与线上版本保持一致；</li><li>develop：开发分支。也是永久分支，是进行代码开发的主要分支，从master分支拉取；</li><li>feature：功能分支。属于临时分支，针对特定功能开发的分支。一般一个独立的功能创建一个feature分支，若几个功能存在依赖关系，则只创建一个feature分支开发它们；</li><li>release：预发布分支。属于临时分支，由develop创建出来的分支，以此分支为基准进行提测；</li><li>hotfix：修补分支。属于临时分支，该分支主要用于修复线上bug；</li></ul></blockquote><p>&amp;emsp;&amp;emsp;master和develop是两条必要的主要分支，前者是正式版本的发布，后者用于日常的开发，而feature、release、hotfix是三条临时分支，用于一些特定目的的版本开发，一般临时分支完成开发后应该删除。其实简化的分支开发管理只需要master和develop两个分支。</p><h3 id="1-1-master分支"><a href="#1-1-master分支" class="headerlink" title="1.1 master分支"></a>1.1 master分支</h3><p>&amp;emsp;&amp;emsp;该分支为永久分支，不可删除。分支上节点与线上版本保持一致。每个提交都有对应的Tag方便检索。<br>&amp;emsp;&amp;emsp;只能有一个master分支。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/master.png" alt="master.png" title="master.png"></p><p>&amp;emsp;&amp;emsp;master节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/master_in_out.png" alt="master_in_out.png" title="master_in_out.png"></p><h3 id="1-2-develop分支"><a href="#1-2-develop分支" class="headerlink" title="1.2 develop分支"></a>1.2 develop分支</h3><p>&amp;emsp;&amp;emsp;该分支为永久分支，不可删除。develop分支从master分支拉取，进行日常的开发。<br>&amp;emsp;&amp;emsp;只能有一个develop分支。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/develop.png" alt="develop.png" title="develop.png"></p><p>&amp;emsp;&amp;emsp;develop节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/develop_in_out.png" alt="develop_in_out.png" title="develop_in_out.png"></p><h3 id="1-3-feature分支"><a href="#1-3-feature分支" class="headerlink" title="1.3 feature分支"></a>1.3 feature分支</h3><p>&amp;emsp;&amp;emsp;进行功能开发时，我们以develop分支为基础拉取一个feature分支进行特定功能开发。当同时有多个功能在开发时，可以针对不同的功能开发同时存在多个feature分支。一般一个独立的功能创建一个feature分支，若几个功能存在依赖关系，则只创建一个feature分支开发它们。当功能开发完成后合并回develop分支。feature分支从develop来，回develop去。由于属于临时分支，使用完成后可将其删除。<br>&amp;emsp;&amp;emsp;可以有多个feature分子，分支命名规则为 <code>feature/name</code> 。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/feature.png" alt="feature.png" title="feature.png"></p><p>&amp;emsp;&amp;emsp;feature节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/feature_in_out.png" alt="feature_in_out.png" title="feature_in_out.png"></p><h3 id="1-4-release分支"><a href="#1-4-release分支" class="headerlink" title="1.4 release分支"></a>1.4 release分支</h3><p>&amp;emsp;&amp;emsp;release分支从develop分支拉取出来，是预发布分支，针对这个分支上的提交进行提测和修改Bug，也即releasef分支可以针对测试发现的Bug继续开发，测试通过后合并到master分支上发布正式版，并且合并到develop分支上继续后续开发。由于属于临时分支，使用完成后可将其删除。<br>&amp;emsp;&amp;emsp;可以有多个release分子，分支命名规则为 <code>release/name</code> 。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/release.png" alt="release.png" title="release.png"></p><p>&amp;emsp;&amp;emsp;release节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/release_in_out.png" alt="release_in_out.png" title="release_in_out.png"></p><h3 id="1-5-hotfix分支"><a href="#1-5-hotfix分支" class="headerlink" title="1.5 hotfix分支"></a>1.5 hotfix分支</h3><p>&amp;emsp;&amp;emsp;针对master分支上出现的Bug，从master分支拉取hotfix分支，创建hotfix分支进行Bug修复，Bug修复完成后合并回master分支上发布正式版，并且合并到develop分支上继续后续开发。<br>&amp;emsp;&amp;emsp;可以有多个hotfix分子，分支命名规则为 <code>hotfix/name</code> 。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/hotfix.png" alt="hotfix.png" title="hotfix.png"></p><p>&amp;emsp;&amp;emsp;hotfix节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/hotfix_in_out.png" alt="hotfix_in_out.png" title="hotfix_in_out.png"></p><h2 id="2-特殊情况下的分支开发"><a href="#2-特殊情况下的分支开发" class="headerlink" title="2 特殊情况下的分支开发"></a>2 特殊情况下的分支开发</h2><h3 id="2-1-紧急上线新功能"><a href="#2-1-紧急上线新功能" class="headerlink" title="2.1 紧急上线新功能"></a>2.1 紧急上线新功能</h3><p>&amp;emsp;&amp;emsp;如果需要紧急上线一个新功能，而develop代码目前存在未完成的开发不能上线，那么此时可以特殊情况特殊处理，从master拉取feature分支进制功能开发，开发完成之后代码合并到master分支。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/master_feature.png" alt="master_feature.png" title="master_feature.png"></p><h3 id="2-2-同时开发的功能出现依赖"><a href="#2-2-同时开发的功能出现依赖" class="headerlink" title="2.2 同时开发的功能出现依赖"></a>2.2 同时开发的功能出现依赖</h3><p>&amp;emsp;&amp;emsp;相互独立的功能开发，应该分别创建feature分支进行功能开发，但若在开发过程中发现这些功能并非完全独立存在依赖，那么就应该将功能存在依赖的feature分支合并后开发。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/feature_feature.png" alt="feature_feature.png" title="feature_feature.png"></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 工具 </category>
-          
-          <category> Git </category>
-          
-          <category> 进阶篇 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Git </tag>
-            
-            <tag> 分支 </tag>
-            
-            <tag> 进阶篇 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Git进阶篇（一）——Git注释规范</title>
       <link href="//docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83/"/>
       <url>//docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83/</url>
@@ -3927,6 +3894,39 @@
             <tag> 注释 </tag>
             
             <tag> Git </tag>
+            
+            <tag> 进阶篇 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git进阶篇（二）——Git分支开发</title>
+      <link href="//docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/"/>
+      <url>//docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git进阶篇（二）——Git分支开发"><a href="#Git进阶篇（二）——Git分支开发" class="headerlink" title="Git进阶篇（二）——Git分支开发"></a><center>Git进阶篇（二）——Git分支开发</center></h1><p><em>前言：</em><br>&amp;emsp;&amp;emsp;<em>灵活的分支开发模式是Git的一大亮点，针对不同的开发任务，创建不同的分支任务。</em></p><h2 id="1-分支构成"><a href="#1-分支构成" class="headerlink" title="1 分支构成"></a>1 分支构成</h2><blockquote><ul><li>master：主分支。是永久分支，与线上版本保持一致；</li><li>develop：开发分支。也是永久分支，是进行代码开发的主要分支，从master分支拉取；</li><li>feature：功能分支。属于临时分支，针对特定功能开发的分支。一般一个独立的功能创建一个feature分支，若几个功能存在依赖关系，则只创建一个feature分支开发它们；</li><li>release：预发布分支。属于临时分支，由develop创建出来的分支，以此分支为基准进行提测；</li><li>hotfix：修补分支。属于临时分支，该分支主要用于修复线上bug；</li></ul></blockquote><p>&amp;emsp;&amp;emsp;master和develop是两条必要的主要分支，前者是正式版本的发布，后者用于日常的开发，而feature、release、hotfix是三条临时分支，用于一些特定目的的版本开发，一般临时分支完成开发后应该删除。其实简化的分支开发管理只需要master和develop两个分支。</p><h3 id="1-1-master分支"><a href="#1-1-master分支" class="headerlink" title="1.1 master分支"></a>1.1 master分支</h3><p>&amp;emsp;&amp;emsp;该分支为永久分支，不可删除。分支上节点与线上版本保持一致。每个提交都有对应的Tag方便检索。<br>&amp;emsp;&amp;emsp;只能有一个master分支。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/master.png" alt="master.png" title="master.png"></p><p>&amp;emsp;&amp;emsp;master节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/master_in_out.png" alt="master_in_out.png" title="master_in_out.png"></p><h3 id="1-2-develop分支"><a href="#1-2-develop分支" class="headerlink" title="1.2 develop分支"></a>1.2 develop分支</h3><p>&amp;emsp;&amp;emsp;该分支为永久分支，不可删除。develop分支从master分支拉取，进行日常的开发。<br>&amp;emsp;&amp;emsp;只能有一个develop分支。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/develop.png" alt="develop.png" title="develop.png"></p><p>&amp;emsp;&amp;emsp;develop节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/develop_in_out.png" alt="develop_in_out.png" title="develop_in_out.png"></p><h3 id="1-3-feature分支"><a href="#1-3-feature分支" class="headerlink" title="1.3 feature分支"></a>1.3 feature分支</h3><p>&amp;emsp;&amp;emsp;进行功能开发时，我们以develop分支为基础拉取一个feature分支进行特定功能开发。当同时有多个功能在开发时，可以针对不同的功能开发同时存在多个feature分支。一般一个独立的功能创建一个feature分支，若几个功能存在依赖关系，则只创建一个feature分支开发它们。当功能开发完成后合并回develop分支。feature分支从develop来，回develop去。由于属于临时分支，使用完成后可将其删除。<br>&amp;emsp;&amp;emsp;可以有多个feature分子，分支命名规则为 <code>feature/name</code> 。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/feature.png" alt="feature.png" title="feature.png"></p><p>&amp;emsp;&amp;emsp;feature节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/feature_in_out.png" alt="feature_in_out.png" title="feature_in_out.png"></p><h3 id="1-4-release分支"><a href="#1-4-release分支" class="headerlink" title="1.4 release分支"></a>1.4 release分支</h3><p>&amp;emsp;&amp;emsp;release分支从develop分支拉取出来，是预发布分支，针对这个分支上的提交进行提测和修改Bug，也即releasef分支可以针对测试发现的Bug继续开发，测试通过后合并到master分支上发布正式版，并且合并到develop分支上继续后续开发。由于属于临时分支，使用完成后可将其删除。<br>&amp;emsp;&amp;emsp;可以有多个release分子，分支命名规则为 <code>release/name</code> 。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/release.png" alt="release.png" title="release.png"></p><p>&amp;emsp;&amp;emsp;release节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/release_in_out.png" alt="release_in_out.png" title="release_in_out.png"></p><h3 id="1-5-hotfix分支"><a href="#1-5-hotfix分支" class="headerlink" title="1.5 hotfix分支"></a>1.5 hotfix分支</h3><p>&amp;emsp;&amp;emsp;针对master分支上出现的Bug，从master分支拉取hotfix分支，创建hotfix分支进行Bug修复，Bug修复完成后合并回master分支上发布正式版，并且合并到develop分支上继续后续开发。<br>&amp;emsp;&amp;emsp;可以有多个hotfix分子，分支命名规则为 <code>hotfix/name</code> 。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/hotfix.png" alt="hotfix.png" title="hotfix.png"></p><p>&amp;emsp;&amp;emsp;hotfix节点入出：</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/hotfix_in_out.png" alt="hotfix_in_out.png" title="hotfix_in_out.png"></p><h2 id="2-特殊情况下的分支开发"><a href="#2-特殊情况下的分支开发" class="headerlink" title="2 特殊情况下的分支开发"></a>2 特殊情况下的分支开发</h2><h3 id="2-1-紧急上线新功能"><a href="#2-1-紧急上线新功能" class="headerlink" title="2.1 紧急上线新功能"></a>2.1 紧急上线新功能</h3><p>&amp;emsp;&amp;emsp;如果需要紧急上线一个新功能，而develop代码目前存在未完成的开发不能上线，那么此时可以特殊情况特殊处理，从master拉取feature分支进制功能开发，开发完成之后代码合并到master分支。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/master_feature.png" alt="master_feature.png" title="master_feature.png"></p><h3 id="2-2-同时开发的功能出现依赖"><a href="#2-2-同时开发的功能出现依赖" class="headerlink" title="2.2 同时开发的功能出现依赖"></a>2.2 同时开发的功能出现依赖</h3><p>&amp;emsp;&amp;emsp;相互独立的功能开发，应该分别创建feature分支进行功能开发，但若在开发过程中发现这些功能并非完全独立存在依赖，那么就应该将功能存在依赖的feature分支合并后开发。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91/feature_feature.png" alt="feature_feature.png" title="feature_feature.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+          <category> Git </category>
+          
+          <category> 进阶篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+            <tag> 分支 </tag>
             
             <tag> 进阶篇 </tag>
             
@@ -5406,9 +5406,9 @@
             
             <tag> 博客 </tag>
             
-            <tag> Hexo </tag>
-            
             <tag> 图床 </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> Gitee </tag>
             
@@ -5439,11 +5439,11 @@
             
             <tag> 博客 </tag>
             
-            <tag> Hexo </tag>
-            
             <tag> 图床 </tag>
             
             <tag> 七牛 </tag>
+            
+            <tag> Hexo </tag>
             
         </tags>
       
@@ -5470,9 +5470,9 @@
       
         <tags>
             
-            <tag> ButterFly </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> ButterFly </tag>
             
             <tag> 站点地图 </tag>
             
@@ -5507,11 +5507,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
-            
-            <tag> Hexo </tag>
             
         </tags>
       
@@ -5538,11 +5538,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
-            
-            <tag> Hexo </tag>
             
             <tag> 功能 </tag>
             
@@ -5571,11 +5571,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
-            
-            <tag> Hexo </tag>
             
             <tag> 美化 </tag>
             
@@ -5604,17 +5604,17 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
             
-            <tag> Hexo </tag>
+            <tag> Gitee </tag>
             
             <tag> 部署 </tag>
             
             <tag> Coding </tag>
-            
-            <tag> Gitee </tag>
             
         </tags>
       
@@ -5641,11 +5641,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> Blog </tag>
             
             <tag> ButterFly </tag>
-            
-            <tag> Hexo </tag>
             
             <tag> 管理 </tag>
             
@@ -7659,6 +7659,17 @@
     
     
     <entry>
+      <title>友链</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title></title>
       <link href="/js/sakura.js"/>
       <url>/js/sakura.js</url>
@@ -7670,11 +7681,11 @@
     
     
     <entry>
-      <title>友链</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>reward</title>
+      <link href="/reward/index.html"/>
+      <url>/reward/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center"><font color=red>老婆</font></td><td align="center">0.1</td><td align="center">2021-10-22</td><td align="center">微信转账</td></tr><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
       
     </entry>
     
@@ -7696,18 +7707,7 @@
       <link href="/music/index.html"/>
       <url>/music/index.html</url>
       
-        <content type="html"><![CDATA[    <div id="aplayer-ZxIHDsXC" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>reward</title>
-      <link href="/reward/index.html"/>
-      <url>/reward/index.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center"><font color=red>老婆</font></td><td align="center">0.1</td><td align="center">2021-10-22</td><td align="center">微信转账</td></tr><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
+        <content type="html"><![CDATA[    <div id="aplayer-FDulRSsj" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
       
     </entry>
     
