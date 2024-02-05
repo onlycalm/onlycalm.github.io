@@ -8,7 +8,7 @@
       <link href="//docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu20.04%E5%AE%89%E8%A3%85qq%E9%9F%B3%E4%B9%90/"/>
       <url>//docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu20.04%E5%AE%89%E8%A3%85qq%E9%9F%B3%E4%B9%90/</url>
       
-        <content type="html"><![CDATA[<h1 id="Ubuntu20-04安装qq音乐"><a href="#Ubuntu20-04安装qq音乐" class="headerlink" title="Ubuntu20.04安装qq音乐"></a><center>Ubuntu20.04安装qq音乐</center></h1><p><em>前言：</em><br>&amp;ensp;&amp;ensp; <em>Ubuntu上使用qq音乐。</em></p><h2 id="1-安装qq音乐"><a href="#1-安装qq音乐" class="headerlink" title="1 安装qq音乐"></a>1 安装qq音乐</h2>]]></content>
+        <content type="html"><![CDATA[<h1 id="Ubuntu20-04安装qq音乐"><a href="#Ubuntu20-04安装qq音乐" class="headerlink" title="Ubuntu20.04安装qq音乐"></a><center>Ubuntu20.04安装qq音乐</center></h1><p><em>前言：</em><br>&amp;emsp;&amp;emsp; <em>Ubuntu上使用qq音乐。</em></p><h2 id="1-安装qq音乐"><a href="#1-安装qq音乐" class="headerlink" title="1 安装qq音乐"></a>1 安装qq音乐</h2><p>&amp;emsp;&amp;emsp;在 <a href="https://y.qq.com/download/download.html" title="qq音乐官网">官网</a> 下载linux版本的qq音乐。</p><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu20.04%E5%AE%89%E8%A3%85qq%E9%9F%B3%E4%B9%90/qqMusic.png" alt="qqMusic.png" title="download.png"></p><h2 id="2-解决闪退问题"><a href="#2-解决闪退问题" class="headerlink" title="2 解决闪退问题"></a>2 解决闪退问题</h2><p>&amp;emsp;&amp;emsp;安装完成后启动会立刻闪退，不能使用。</p><h3 id="2-1-命令行启动"><a href="#2-1-命令行启动" class="headerlink" title="2.1 命令行启动"></a>2.1 命令行启动</h3><p>&amp;emsp;&amp;emsp;可以在命令行启动qq音乐，但该命令行不能关闭，关闭后qq音乐也会被关闭。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qqmusic --no-sandbox</span><br></pre></td></tr></table></figure><h3 id="2-2-桌面快捷方式启动"><a href="#2-2-桌面快捷方式启动" class="headerlink" title="2.2 桌面快捷方式启动"></a>2.2 桌面快捷方式启动</h3><p>&amp;emsp;&amp;emsp;编辑文件 <strong>&#x2F;usr&#x2F;share&#x2F;applications&#x2F;qqmusic.desktop</strong> 。</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Name=qqmusic</span><br><span class="line">Exec=/opt/qqmusic/qqmusic %U</span><br><span class="line">Terminal=false</span><br><span class="line">Type=Application</span><br><span class="line">Icon=qqmusic</span><br><span class="line">StartupWMClass=qqmusic</span><br><span class="line">Comment=Tencent QQMusic</span><br><span class="line">Categories=AudioVideo;</span><br></pre></td></tr></table></figure><p>修改为。</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Name=qqmusic</span><br><span class="line">Exec=/opt/qqmusic/qqmusic --no-sandbox %U</span><br><span class="line">Terminal=false</span><br><span class="line">Type=Application</span><br><span class="line">Icon=qqmusic</span><br><span class="line">StartupWMClass=qqmusic</span><br><span class="line">Comment=Tencent QQMusic</span><br><span class="line">Categories=AudioVideo;</span><br></pre></td></tr></table></figure><p><img src="http://onlycalm.gitee.io/blogimage/docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu20.04%E5%AE%89%E8%A3%85qq%E9%9F%B3%E4%B9%90/qqMusic.png" alt="qqMusic.png" title="qqMusic.png"></p>]]></content>
       
       
       <categories>
@@ -1968,9 +1968,9 @@
             
             <tag> Git </tag>
             
-            <tag> 名称 </tag>
-            
             <tag> 分支 </tag>
+            
+            <tag> 名称 </tag>
             
         </tags>
       
@@ -3865,41 +3865,6 @@
     
     
     <entry>
-      <title>Git基础篇（十一）——Git标签管理</title>
-      <link href="//docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/"/>
-      <url>//docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Git基础篇（十一）——Git标签管理"><a href="#Git基础篇（十一）——Git标签管理" class="headerlink" title="Git基础篇（十一）——Git标签管理"></a><center>Git基础篇（十一）——Git标签管理</center></h1><p><em>前言：</em><br>&amp;emsp;&amp;emsp;<em>为了更方便的对提交进行操作，可以使用Tag，使用它将使得版本迭代关系更清晰，对比较的操作更便捷。</em></p><h2 id="1-Tag有什么用？"><a href="#1-Tag有什么用？" class="headerlink" title="1 Tag有什么用？"></a>1 Tag有什么用？</h2><p>&amp;emsp;&amp;emsp;每个提交都有一个唯一的Hash值与其一一对应，但这是难以记忆的，我们可以给某个提交取“别名”，这样便于区分记忆，也能通过“别名“对该提交进行操作。</p><h2 id="2-Tag创建"><a href="#2-Tag创建" class="headerlink" title="2 Tag创建"></a>2 Tag创建</h2><p>&amp;emsp;&amp;emsp;为当前提交创建一个Tag可以使用指令<code>git tag</code>。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tagname&gt;</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;如果要给过去的提交追加Tag，可以在末尾指定提交的Hash值。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tagname&gt; &lt;hash ID&gt;</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;当前分支添加标签，但此种形式不不会为标签添加注释。如果要新建标签且为标签添加注释可以使用 <code>-a</code> 参数，加上 <code>-m</code> 参数可以在不进入vi模式下进行注释编辑。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a &lt;tagname&gt; -m &quot;comment&quot;</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;同样的，如果要给过去的提交追加Tag，可以在末尾指定提交的Hash值。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a &lt;tagname&gt; -m &quot;comment&quot; &lt;hash ID&gt;</span><br></pre></td></tr></table></figure><h2 id="3-Tag查看"><a href="#3-Tag查看" class="headerlink" title="3 Tag查看"></a>3 Tag查看</h2><p>&amp;emsp;&amp;emsp;查看所有标签，默认按字母顺序排列。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;但上面这条指令不会显示Tag的注释信息，如果想要显示注释信息则可使用 <code>-n</code> 参数。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -n</span><br></pre></td></tr></table></figure><h2 id="4-查找Tag"><a href="#4-查找Tag" class="headerlink" title="4 查找Tag"></a>4 查找Tag</h2><p>&amp;emsp;&amp;emsp;模糊查找Tag，可以使用通配符进行匹配，使用指令 <code>-l</code> 。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -l &quot;v1.*&quot;</span><br></pre></td></tr></table></figure><h2 id="5-将Tag推动到远程"><a href="#5-将Tag推动到远程" class="headerlink" title="5 将Tag推动到远程"></a>5 将Tag推动到远程</h2><p>&amp;emsp;&amp;emsp;默认情况下在本地创建的Tag不会同步到远程服务器上，如果需要推送到远程，必须在本地创建完成后推送到远程仓库上。<br>&amp;emsp;&amp;emsp;将单个标签推送到远程仓库。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;tagname&gt;</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;将所有标签推送到远程服仓库。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure><h2 id="6-删除本地Tag"><a href="#6-删除本地Tag" class="headerlink" title="6 删除本地Tag"></a>6 删除本地Tag</h2><p>&amp;emsp;&amp;emsp;通过使用指令 <code>-d</code> 可以指定要删除Tag。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;tagname&gt;</span><br></pre></td></tr></table></figure><h2 id="7-删除远程Tag"><a href="#7-删除远程Tag" class="headerlink" title="7 删除远程Tag"></a>7 删除远程Tag</h2><p>&amp;emsp;&amp;emsp;将远程仓库的某个标签删除，有两种方式。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete &lt;tagname&gt;</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :refs/tags/tagname</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> 工具 </category>
-          
-          <category> Git </category>
-          
-          <category> 基础篇 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 基础篇 </tag>
-            
-            <tag> Git </tag>
-            
-            <tag> Tag </tag>
-            
-            <tag> 标签 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Git进阶篇（一）——Git注释规范</title>
       <link href="//docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83/"/>
       <url>//docs/%E5%B7%A5%E5%85%B7/Git/%E8%BF%9B%E9%98%B6%E7%AF%87/Git%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83/</url>
@@ -3957,9 +3922,44 @@
             
             <tag> Git </tag>
             
+            <tag> 进阶篇 </tag>
+            
             <tag> 分支 </tag>
             
-            <tag> 进阶篇 </tag>
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git基础篇（十一）——Git标签管理</title>
+      <link href="//docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/"/>
+      <url>//docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git基础篇（十一）——Git标签管理"><a href="#Git基础篇（十一）——Git标签管理" class="headerlink" title="Git基础篇（十一）——Git标签管理"></a><center>Git基础篇（十一）——Git标签管理</center></h1><p><em>前言：</em><br>&amp;emsp;&amp;emsp;<em>为了更方便的对提交进行操作，可以使用Tag，使用它将使得版本迭代关系更清晰，对比较的操作更便捷。</em></p><h2 id="1-Tag有什么用？"><a href="#1-Tag有什么用？" class="headerlink" title="1 Tag有什么用？"></a>1 Tag有什么用？</h2><p>&amp;emsp;&amp;emsp;每个提交都有一个唯一的Hash值与其一一对应，但这是难以记忆的，我们可以给某个提交取“别名”，这样便于区分记忆，也能通过“别名“对该提交进行操作。</p><h2 id="2-Tag创建"><a href="#2-Tag创建" class="headerlink" title="2 Tag创建"></a>2 Tag创建</h2><p>&amp;emsp;&amp;emsp;为当前提交创建一个Tag可以使用指令<code>git tag</code>。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tagname&gt;</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;如果要给过去的提交追加Tag，可以在末尾指定提交的Hash值。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tagname&gt; &lt;hash ID&gt;</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;当前分支添加标签，但此种形式不不会为标签添加注释。如果要新建标签且为标签添加注释可以使用 <code>-a</code> 参数，加上 <code>-m</code> 参数可以在不进入vi模式下进行注释编辑。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a &lt;tagname&gt; -m &quot;comment&quot;</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;同样的，如果要给过去的提交追加Tag，可以在末尾指定提交的Hash值。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a &lt;tagname&gt; -m &quot;comment&quot; &lt;hash ID&gt;</span><br></pre></td></tr></table></figure><h2 id="3-Tag查看"><a href="#3-Tag查看" class="headerlink" title="3 Tag查看"></a>3 Tag查看</h2><p>&amp;emsp;&amp;emsp;查看所有标签，默认按字母顺序排列。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;但上面这条指令不会显示Tag的注释信息，如果想要显示注释信息则可使用 <code>-n</code> 参数。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -n</span><br></pre></td></tr></table></figure><h2 id="4-查找Tag"><a href="#4-查找Tag" class="headerlink" title="4 查找Tag"></a>4 查找Tag</h2><p>&amp;emsp;&amp;emsp;模糊查找Tag，可以使用通配符进行匹配，使用指令 <code>-l</code> 。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -l &quot;v1.*&quot;</span><br></pre></td></tr></table></figure><h2 id="5-将Tag推动到远程"><a href="#5-将Tag推动到远程" class="headerlink" title="5 将Tag推动到远程"></a>5 将Tag推动到远程</h2><p>&amp;emsp;&amp;emsp;默认情况下在本地创建的Tag不会同步到远程服务器上，如果需要推送到远程，必须在本地创建完成后推送到远程仓库上。<br>&amp;emsp;&amp;emsp;将单个标签推送到远程仓库。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;tagname&gt;</span><br></pre></td></tr></table></figure><p>&amp;emsp;&amp;emsp;将所有标签推送到远程服仓库。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure><h2 id="6-删除本地Tag"><a href="#6-删除本地Tag" class="headerlink" title="6 删除本地Tag"></a>6 删除本地Tag</h2><p>&amp;emsp;&amp;emsp;通过使用指令 <code>-d</code> 可以指定要删除Tag。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;tagname&gt;</span><br></pre></td></tr></table></figure><h2 id="7-删除远程Tag"><a href="#7-删除远程Tag" class="headerlink" title="7 删除远程Tag"></a>7 删除远程Tag</h2><p>&amp;emsp;&amp;emsp;将远程仓库的某个标签删除，有两种方式。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete &lt;tagname&gt;</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :refs/tags/tagname</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+          <category> Git </category>
+          
+          <category> 基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 基础篇 </tag>
+            
+            <tag> Git </tag>
+            
+            <tag> Tag </tag>
+            
+            <tag> 标签 </tag>
             
         </tags>
       
@@ -4054,9 +4054,9 @@
             
             <tag> Git </tag>
             
-            <tag> 版本管理 </tag>
-            
             <tag> 分支 </tag>
+            
+            <tag> 版本管理 </tag>
             
         </tags>
       
@@ -4560,41 +4560,6 @@
     
     <entry>
       <title>Vim基础篇（一）——光标跳转</title>
-      <link href="//docs/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%85%89%E6%A0%87%E8%B7%B3%E8%BD%AC/"/>
-      <url>//docs/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%85%89%E6%A0%87%E8%B7%B3%E8%BD%AC/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Vim基础篇（一）——光标跳转"><a href="#Vim基础篇（一）——光标跳转" class="headerlink" title="Vim基础篇（一）——光标跳转"></a><center>Vim基础篇（一）——光标跳转</center></h1><p><em>前言：</em><br>&amp;emsp;&amp;emsp;<em>Vim编辑文本之所以高效的一大原因是其灵活的光标跳转功能，无需鼠标参与，因此有必要熟练掌握Vim中的光标跳转。这篇文章将详细介绍Vim几种模式下的光标切换。</em></p><h2 id="1-普通模式（Normal-mode）"><a href="#1-普通模式（Normal-mode）" class="headerlink" title="1 普通模式（Normal mode）"></a>1 普通模式（Normal mode）</h2><h3 id="1-1-窗口内移动"><a href="#1-1-窗口内移动" class="headerlink" title="1.1 窗口内移动"></a>1.1 窗口内移动</h3><h4 id="1-1-1-行间移动"><a href="#1-1-1-行间移动" class="headerlink" title="1.1.1 行间移动"></a>1.1.1 行间移动</h4><blockquote><ul><li>‘n’ + ‘k’光标向上移动n行，n默认为1</li><li>‘n’ + ‘j’光标向下移动n行，n默认为1</li><li>‘{n}’ + ‘gg’移动到第n行，n省略时移动到第一行的行首</li><li>‘{n}’ + ‘G’移动到第n行，n省略时移动到最后一行的行首</li><li>‘n’ + ‘%’跳转到n%处</li><li>‘n’ + ‘-‘向上移动n行至行首，n默认为1</li><li>‘n’ + ‘+’向下移动n行至行首，n默认为1</li><li>‘H’移动到屏幕可视有效行的第一行行首</li><li>‘M’移动到屏幕可视有效行的中间行行首</li><li>‘L’移动到屏幕可视有效行的最后一行行首</li><li>‘[‘</li></ul></blockquote><p><em>行首：一行的第一个非空白字符。</em><br><em>行末：一行的最后一个非空白字符。</em></p><h4 id="1-1-2-行内移动"><a href="#1-1-2-行内移动" class="headerlink" title="1.1.2 行内移动"></a>1.1.2 行内移动</h4><blockquote><ul><li>‘n’ + ‘h’光标向左移动n列，n默认为1</li><li>‘n’ + ‘l’光标向右移动n列，n默认为1</li><li>‘n’ + ‘space’往右移动n列，n默认为1</li><li>‘0’移动到行第一列</li><li>‘$’移动到行最后一列</li><li>‘^’移动到行首</li><li>‘_’移动到行首</li><li>‘g_’移动到行末</li></ul></blockquote><h4 id="1-1-3-字符串间移动"><a href="#1-1-3-字符串间移动" class="headerlink" title="1.1.3 字符串间移动"></a>1.1.3 字符串间移动</h4><blockquote><ul><li>‘w’或’W’移动到下一个字符串首</li><li>‘b’或’B’移动到上一个字符串首</li><li>‘e’或’E’移动到下一个字符串末</li><li>‘ge’或’gE’移动到上一个字符串末</li></ul></blockquote><p><em>字符串首：字符串的第一个字符。</em><br><em>字符串末：字符串的最后一个字符。</em></p><h3 id="1-2-窗口间移动"><a href="#1-2-窗口间移动" class="headerlink" title="1.2 窗口间移动"></a>1.2 窗口间移动</h3><blockquote><ul><li>‘CTRL-w k’或’CTRL-W k’移动到上方窗口</li><li>‘CTRL-w j’或’CTRL-W j’移动到下方窗口</li><li>‘CTRL-w h’或’CTRL-W h’移动到左方窗口</li><li>‘CTRL-w l’或’CTRL-W l’移动到右方窗口</li><li>‘CTRL-w w’或’CTRL-W w’移动到下一个窗口</li><li>‘CTRL-w p’或’CTRL-W w’移动到上一次访问的窗口（多次按则在当前窗口和上一个窗口之间来回跳转）</li><li>‘CTRL-w t’或’CTRL-W t’跳转到顶部窗口</li><li>‘CTRL-w b’或’CTRL-W b’跳转到底部窗口</li></ul></blockquote><h2 id="2-插入模式（Insert-mode）"><a href="#2-插入模式（Insert-mode）" class="headerlink" title="2 插入模式（Insert mode）"></a>2 插入模式（Insert mode）</h2><h3 id="2-1-窗口内移动"><a href="#2-1-窗口内移动" class="headerlink" title="2.1 窗口内移动"></a>2.1 窗口内移动</h3><h4 id="2-1-1-行间移动"><a href="#2-1-1-行间移动" class="headerlink" title="2.1.1 行间移动"></a>2.1.1 行间移动</h4><blockquote><ul><li><Up> 光标移动到上一行</li><li><Down> 光标移动到下一行</li></ul></blockquote><h4 id="2-1-2-行内移动"><a href="#2-1-2-行内移动" class="headerlink" title="2.1.2 行内移动"></a>2.1.2 行内移动</h4><blockquote><ul><li><Left> 光标向左移动一列</li><li><Right> 光标向右移动一列</li></ul></blockquote><h4 id="2-1-3-字符串间移动"><a href="#2-1-3-字符串间移动" class="headerlink" title="2.1.3 字符串间移动"></a>2.1.3 字符串间移动</h4><h2 id="3-可视模式（Visual-mode）"><a href="#3-可视模式（Visual-mode）" class="headerlink" title="3 可视模式（Visual mode）"></a>3 可视模式（Visual mode）</h2><h2 id="4-选择模式（Select-mode）"><a href="#4-选择模式（Select-mode）" class="headerlink" title="4 选择模式（Select mode）"></a>4 选择模式（Select mode）</h2><h2 id="5-命令模式（Command-line-mode）"><a href="#5-命令模式（Command-line-mode）" class="headerlink" title="5 命令模式（Command line mode）"></a>5 命令模式（Command line mode）</h2><h2 id="6-Ex模式（Ex-mode）"><a href="#6-Ex模式（Ex-mode）" class="headerlink" title="6 Ex模式（Ex mode）"></a>6 Ex模式（Ex mode）</h2>]]></content>
-      
-      
-      <categories>
-          
-          <category> 工具 </category>
-          
-          <category> GVim </category>
-          
-          <category> 基础篇 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 基础篇 </tag>
-            
-            <tag> Vim </tag>
-            
-            <tag> 跳转 </tag>
-            
-            <tag> 光标 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Vim基础篇（一）——光标跳转</title>
       <link href="//docs/%E5%B7%A5%E5%85%B7/GVim/%E8%BF%9B%E9%98%B6%E7%AF%87/Vim%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94LeaderF/"/>
       <url>//docs/%E5%B7%A5%E5%85%B7/GVim/%E8%BF%9B%E9%98%B6%E7%AF%87/Vim%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94LeaderF/</url>
       
@@ -4616,11 +4581,46 @@
             
             <tag> 基础篇 </tag>
             
+            <tag> 跳转 </tag>
+            
+            <tag> 光标 </tag>
+            
             <tag> Vim </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vim基础篇（一）——光标跳转</title>
+      <link href="//docs/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%85%89%E6%A0%87%E8%B7%B3%E8%BD%AC/"/>
+      <url>//docs/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%85%89%E6%A0%87%E8%B7%B3%E8%BD%AC/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Vim基础篇（一）——光标跳转"><a href="#Vim基础篇（一）——光标跳转" class="headerlink" title="Vim基础篇（一）——光标跳转"></a><center>Vim基础篇（一）——光标跳转</center></h1><p><em>前言：</em><br>&amp;emsp;&amp;emsp;<em>Vim编辑文本之所以高效的一大原因是其灵活的光标跳转功能，无需鼠标参与，因此有必要熟练掌握Vim中的光标跳转。这篇文章将详细介绍Vim几种模式下的光标切换。</em></p><h2 id="1-普通模式（Normal-mode）"><a href="#1-普通模式（Normal-mode）" class="headerlink" title="1 普通模式（Normal mode）"></a>1 普通模式（Normal mode）</h2><h3 id="1-1-窗口内移动"><a href="#1-1-窗口内移动" class="headerlink" title="1.1 窗口内移动"></a>1.1 窗口内移动</h3><h4 id="1-1-1-行间移动"><a href="#1-1-1-行间移动" class="headerlink" title="1.1.1 行间移动"></a>1.1.1 行间移动</h4><blockquote><ul><li>‘n’ + ‘k’光标向上移动n行，n默认为1</li><li>‘n’ + ‘j’光标向下移动n行，n默认为1</li><li>‘{n}’ + ‘gg’移动到第n行，n省略时移动到第一行的行首</li><li>‘{n}’ + ‘G’移动到第n行，n省略时移动到最后一行的行首</li><li>‘n’ + ‘%’跳转到n%处</li><li>‘n’ + ‘-‘向上移动n行至行首，n默认为1</li><li>‘n’ + ‘+’向下移动n行至行首，n默认为1</li><li>‘H’移动到屏幕可视有效行的第一行行首</li><li>‘M’移动到屏幕可视有效行的中间行行首</li><li>‘L’移动到屏幕可视有效行的最后一行行首</li><li>‘[‘</li></ul></blockquote><p><em>行首：一行的第一个非空白字符。</em><br><em>行末：一行的最后一个非空白字符。</em></p><h4 id="1-1-2-行内移动"><a href="#1-1-2-行内移动" class="headerlink" title="1.1.2 行内移动"></a>1.1.2 行内移动</h4><blockquote><ul><li>‘n’ + ‘h’光标向左移动n列，n默认为1</li><li>‘n’ + ‘l’光标向右移动n列，n默认为1</li><li>‘n’ + ‘space’往右移动n列，n默认为1</li><li>‘0’移动到行第一列</li><li>‘$’移动到行最后一列</li><li>‘^’移动到行首</li><li>‘_’移动到行首</li><li>‘g_’移动到行末</li></ul></blockquote><h4 id="1-1-3-字符串间移动"><a href="#1-1-3-字符串间移动" class="headerlink" title="1.1.3 字符串间移动"></a>1.1.3 字符串间移动</h4><blockquote><ul><li>‘w’或’W’移动到下一个字符串首</li><li>‘b’或’B’移动到上一个字符串首</li><li>‘e’或’E’移动到下一个字符串末</li><li>‘ge’或’gE’移动到上一个字符串末</li></ul></blockquote><p><em>字符串首：字符串的第一个字符。</em><br><em>字符串末：字符串的最后一个字符。</em></p><h3 id="1-2-窗口间移动"><a href="#1-2-窗口间移动" class="headerlink" title="1.2 窗口间移动"></a>1.2 窗口间移动</h3><blockquote><ul><li>‘CTRL-w k’或’CTRL-W k’移动到上方窗口</li><li>‘CTRL-w j’或’CTRL-W j’移动到下方窗口</li><li>‘CTRL-w h’或’CTRL-W h’移动到左方窗口</li><li>‘CTRL-w l’或’CTRL-W l’移动到右方窗口</li><li>‘CTRL-w w’或’CTRL-W w’移动到下一个窗口</li><li>‘CTRL-w p’或’CTRL-W w’移动到上一次访问的窗口（多次按则在当前窗口和上一个窗口之间来回跳转）</li><li>‘CTRL-w t’或’CTRL-W t’跳转到顶部窗口</li><li>‘CTRL-w b’或’CTRL-W b’跳转到底部窗口</li></ul></blockquote><h2 id="2-插入模式（Insert-mode）"><a href="#2-插入模式（Insert-mode）" class="headerlink" title="2 插入模式（Insert mode）"></a>2 插入模式（Insert mode）</h2><h3 id="2-1-窗口内移动"><a href="#2-1-窗口内移动" class="headerlink" title="2.1 窗口内移动"></a>2.1 窗口内移动</h3><h4 id="2-1-1-行间移动"><a href="#2-1-1-行间移动" class="headerlink" title="2.1.1 行间移动"></a>2.1.1 行间移动</h4><blockquote><ul><li><Up> 光标移动到上一行</li><li><Down> 光标移动到下一行</li></ul></blockquote><h4 id="2-1-2-行内移动"><a href="#2-1-2-行内移动" class="headerlink" title="2.1.2 行内移动"></a>2.1.2 行内移动</h4><blockquote><ul><li><Left> 光标向左移动一列</li><li><Right> 光标向右移动一列</li></ul></blockquote><h4 id="2-1-3-字符串间移动"><a href="#2-1-3-字符串间移动" class="headerlink" title="2.1.3 字符串间移动"></a>2.1.3 字符串间移动</h4><h2 id="3-可视模式（Visual-mode）"><a href="#3-可视模式（Visual-mode）" class="headerlink" title="3 可视模式（Visual mode）"></a>3 可视模式（Visual mode）</h2><h2 id="4-选择模式（Select-mode）"><a href="#4-选择模式（Select-mode）" class="headerlink" title="4 选择模式（Select mode）"></a>4 选择模式（Select mode）</h2><h2 id="5-命令模式（Command-line-mode）"><a href="#5-命令模式（Command-line-mode）" class="headerlink" title="5 命令模式（Command line mode）"></a>5 命令模式（Command line mode）</h2><h2 id="6-Ex模式（Ex-mode）"><a href="#6-Ex模式（Ex-mode）" class="headerlink" title="6 Ex模式（Ex mode）"></a>6 Ex模式（Ex mode）</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+          <category> GVim </category>
+          
+          <category> 基础篇 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 基础篇 </tag>
             
             <tag> 跳转 </tag>
             
             <tag> 光标 </tag>
+            
+            <tag> Vim </tag>
             
         </tags>
       
@@ -6934,9 +6934,9 @@
             
             <tag> 基础篇 </tag>
             
-            <tag> GVim </tag>
-            
             <tag> Vim </tag>
+            
+            <tag> GVim </tag>
             
             <tag> 复制 </tag>
             
@@ -7365,9 +7365,9 @@
             
             <tag> 基础篇 </tag>
             
-            <tag> GVim </tag>
-            
             <tag> Vim </tag>
+            
+            <tag> GVim </tag>
             
             <tag> 配置 </tag>
             
@@ -7402,11 +7402,11 @@
             
             <tag> 基础篇 </tag>
             
-            <tag> GVim </tag>
+            <tag> 跳转 </tag>
             
             <tag> Vim </tag>
             
-            <tag> 跳转 </tag>
+            <tag> GVim </tag>
             
         </tags>
       
@@ -7437,9 +7437,9 @@
             
             <tag> 基础篇 </tag>
             
-            <tag> GVim </tag>
-            
             <tag> Vim </tag>
+            
+            <tag> GVim </tag>
             
             <tag> 常用 </tag>
             
@@ -7476,11 +7476,11 @@
             
             <tag> 基础篇 </tag>
             
+            <tag> Vim </tag>
+            
             <tag> 工程 </tag>
             
             <tag> GVim </tag>
-            
-            <tag> Vim </tag>
             
         </tags>
       
@@ -7511,9 +7511,9 @@
             
             <tag> 基础篇 </tag>
             
-            <tag> GVim </tag>
-            
             <tag> Vim </tag>
+            
+            <tag> GVim </tag>
             
             <tag> NerdTree </tag>
             
@@ -7668,22 +7668,22 @@
     
     
     <entry>
-      <title></title>
-      <link href="/css/butterfly.css"/>
-      <url>/css/butterfly.css</url>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[@keyframes gradientBG {    0% {        background-position: 0% 50%;    }    50% {        background-position: 100% 50%;    }    100% {        background-position: 0% 50%;    }}#web_bg {    background: linear-gradient(-45deg, #ead1dc, #cfe2f3, #fff2cc, #d9d2e9);    background-size: 400% 400%;    animation: gradientBG 15s ease infinite;}/*页脚背景设置白色透明*/#footer {    background: rgba(255,255,255,.3);}/*页脚 字体默认设为黑色*/#footer-wrap {    color: rgb(0,0,0);}/*页脚 a 标签字体默认设为蓝色*/#footer-wrap a {    color: rgb(0,0,255);}/*文章背景*/.layout_post>#post {    background: rgba(255,255,255,.7);}/*其他背景*/#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    background: rgba(255,255,255,.7);}]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title></title>
+      <link href="/css/butterfly.css"/>
+      <url>/css/butterfly.css</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[@keyframes gradientBG {    0% {        background-position: 0% 50%;    }    50% {        background-position: 100% 50%;    }    100% {        background-position: 0% 50%;    }}#web_bg {    background: linear-gradient(-45deg, #ead1dc, #cfe2f3, #fff2cc, #d9d2e9);    background-size: 400% 400%;    animation: gradientBG 15s ease infinite;}/*页脚背景设置白色透明*/#footer {    background: rgba(255,255,255,.3);}/*页脚 字体默认设为黑色*/#footer-wrap {    color: rgb(0,0,0);}/*页脚 a 标签字体默认设为蓝色*/#footer-wrap a {    color: rgb(0,0,255);}/*文章背景*/.layout_post>#post {    background: rgba(255,255,255,.7);}/*其他背景*/#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    background: rgba(255,255,255,.7);}]]></content>
       
     </entry>
     
@@ -7727,18 +7727,7 @@
       <link href="/music/index.html"/>
       <url>/music/index.html</url>
       
-        <content type="html"><![CDATA[    <div id="aplayer-hTeGcvFp" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>reward</title>
-      <link href="/reward/index.html"/>
-      <url>/reward/index.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center"><font color=red>老婆</font></td><td align="center">0.1</td><td align="center">2021-10-22</td><td align="center">微信转账</td></tr><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
+        <content type="html"><![CDATA[    <div id="aplayer-dSIfGosc" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="7642168633" data-server="tencent" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#b4a7d6"    ></div>]]></content>
       
     </entry>
     
@@ -7750,6 +7739,17 @@
       <url>/tags/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>reward</title>
+      <link href="/reward/index.html"/>
+      <url>/reward/index.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>感谢以下网友的打赏</p></blockquote><table><thead><tr><th align="center">网名</th><th align="center">金额</th><th align="center">日期</th><th align="center">方式</th></tr></thead><tbody><tr><td align="center"><font color=red>老婆</font></td><td align="center">0.1</td><td align="center">2021-10-22</td><td align="center">微信转账</td></tr><tr><td align="center">-</td><td align="center">-</td><td align="center">-</td><td align="center">-</td></tr></tbody></table><blockquote><p>打赏方式</p></blockquote><h2 id="微信打赏"><a href="#微信打赏" class="headerlink" title="微信打赏"></a>微信打赏</h2><p><img src="http://onlycalm.gitee.io/blogimage/res/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="微信收款码.jpg"></p><h2 id="支付宝打赏"><a href="#支付宝打赏" class="headerlink" title="支付宝打赏"></a>支付宝打赏</h2><p><img src="http://onlycalm.gitee.io/blogimage/res/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg" alt="支付宝收款码.jpg"></p>]]></content>
       
     </entry>
     
