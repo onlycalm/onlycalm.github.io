@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OnlyCalm's Blog - onlycalm</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="自娱自乐，做大娱乐家"><link rel="shortcut icon" href="http://onlycalm.gitee.io/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://onlycalm.cn/page/12/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'OnlyCalm\'s Blog',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-07 11:38:42'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/Avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">229</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">327</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">53</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('http://onlycalm.gitee.io/blogimage/res/Cover%20main.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="OnlyCalm's Blog"><span class="site-name">OnlyCalm's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">OnlyCalm's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%96%B0%E8%87%B3v3.7.0/" title="自娱自乐，我的博客（十二）——Butterfly主题更新至v3.7.0"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自娱自乐，我的博客（十二）——Butterfly主题更新至v3.7.0"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%96%B0%E8%87%B3v3.7.0/" title="自娱自乐，我的博客（十二）——Butterfly主题更新至v3.7.0">自娱自乐，我的博客（十二）——Butterfly主题更新至v3.7.0</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-28T13:30:00.000Z" title="发表于 2021-03-28 21:30:00">2021-03-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Hexo/">Hexo</a></span></div><div class="content">自娱自乐，我的博客（十二）——Butterfly主题更新至v3.7.0前言：&amp;emsp;&amp;emsp;一年多没升级主题了，作者添加了一些新特性，我目前的Butterfly版本是v3.0.0，而最新已经到v3.7.0了。一起来看看有什么新特性吧。
+1 升级npm、Node.js、Hexo&amp;emsp;&amp;emsp;Hexo依赖Nodejs和Git环境，因此建议升级Hexo之前先将这两个也升级到最新版本。由于我的Git已经是最新版本了所以不用升级。如果是Windos平台需要升级Git，在命令上中输入以下指令即可。
+1git update-git-for-windows
+
+&amp;emsp;&amp;emsp;
+1.1 升级Node.js和npm&amp;emsp;&amp;emsp;在命令行中输入以下指令查看自己的Nodejs版本。
+1node -v
+
+&amp;emsp;&amp;emsp;在命令行中输入以下指令查看自己的npm版本。
+1npm -v
+
+&amp;emsp;&amp;emsp;我现在的Nodejs版本是v12.16.1，而 Nodejs 官网显 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/docs/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%BC%96%E7%A8%8B%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" title="c进阶篇（二）——编程命名规范"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c进阶篇（二）——编程命名规范"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%BC%96%E7%A8%8B%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" title="c进阶篇（二）——编程命名规范">c进阶篇（二）——编程命名规范</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-27T10:37:00.000Z" title="发表于 2021-03-27 18:37:00">2021-03-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/c/">c</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/">进阶篇</a></span></div><div class="content">c进阶篇（二）——编程命名规范前言：&amp;emsp;&amp;emsp;目前嵌入式常用的编程命名规范有驼峰命名法、匈牙利命名法、下划线命名法等。几种命名规范各有特色，但原则是开发人员之间保持统一的一套规范，如果是在现有的代码上开发，那么最好继续保持代码当前使用的编程规范，而不是盲目坚持自己的习惯。换句话说建议对几种常用命名规范都有所熟悉。有些公司是针对不同的“对象”使用不同的命名规范，比如变量名、方法名、类名等，结合多种命名规范各自的优势。写代码也有很多年了，有必要对编程命名规范进行一次整理总结。
+1 常见命名规范&amp;emsp;&amp;emsp;如何增强代码的可读性，除了良好的架构设计、合理的模块划分、适当的抽象化设计、简洁明了的规范注释等外，命名规范也在可读性上发挥了至关重要的作用。好的编程习惯在多人协作开发和代码维护时十分重要，编程人员按照统一的规范“表达”便于彼此理解交流。&amp;emsp;&amp;emsp;好的编程命名规范应该具有以下特性。
+
+
+见名知意：命名能表达出实际含义，如MaxLenth、MinLenth，好的命名不需要过多的注释说明；
+长短适中：过短的 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Vercel/" title="自娱自乐，我的博客（十一）——Hexo静态网页部署到Vercel"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自娱自乐，我的博客（十一）——Hexo静态网页部署到Vercel"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Vercel/" title="自娱自乐，我的博客（十一）——Hexo静态网页部署到Vercel">自娱自乐，我的博客（十一）——Hexo静态网页部署到Vercel</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-27T02:50:00.000Z" title="发表于 2021-03-27 10:50:00">2021-03-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Hexo/">Hexo</a></span></div><div class="content">自娱自乐，我的博客（十一）——Hexo静态网页部署到Vercel前言：&amp;emsp;&amp;emsp;之前将博客部署在Coding是因为其免费且可绑定域名，但是最近Coding开始变相收费，COS和CDN采用用量计费模式，作为一个“称职”的白嫖玩家，现在又找到一个免费好用的静态网页部署网站Vercel，也可以绑定域名。下面开始白嫖教程。
+1 注册登录&amp;emsp;&amp;emsp;登录 Vercel 官网，点击“Sign up”登录。
+自娱自乐，我的博客（十一）——Hexo静态网页部署到Vercel前言：&amp;emsp;&amp;emsp;之前将博客部署在Coding是因为其免费且可绑定域名，但是最近Coding开始变相收费，COS和CDN采用用量计费模式，作为一个“称职”的白嫖玩家，现在又找到一个免费好用的静态网页部署网站Vercel，也可以绑定域名。下面开始白嫖教程。
+1 注册登录&amp;emsp;&amp;emsp;登录 Vercel 官网，点击“Sign up”登录。
+
+&amp;emsp;&amp;emsp;建议使用GitHub账号登录，这样可以方便关联 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/" title="Git基础篇（十五）——Git远程仓库分支管理"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基础篇（十五）——Git远程仓库分支管理"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/" title="Git基础篇（十五）——Git远程仓库分支管理">Git基础篇（十五）——Git远程仓库分支管理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-21T03:29:00.000Z" title="发表于 2021-03-21 11:29:00">2021-03-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/">Git</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a></span></div><div class="content">Git基础篇（十五）——Git远程仓库分支管理前言：&amp;emsp;&amp;emsp;前面我们讲过了在本地仓库对分支的管理和开发，那么这些分支如何提交到远程仓库吗？提交后其他开发者能获取并继续开发这些分支吗？如果使用github作为远程仓库，如何管理这些分支。
+1 将指定分支推送到远程仓库&amp;emsp;&amp;emsp;现在github一般将主分支命名为”main”，我们在本地创建一个新的分支“dev”。
+1git branch dev
+
+&amp;emsp;&amp;emsp;切换到该分支。
+1git switch dev
+
+&amp;emsp;&amp;emsp;查看仓库当前的分支，可以发现已经新建了“dev”分支，并且处于该分支下。
+1git branch
+
+&amp;emsp;&amp;emsp;为了演示我们在dev分支下进行一下修改，然后 add 这些变化。
+1git add --all
+
+&amp;emsp;&amp;emsp;在dev分支下 commit 一个版本。
+1git commit -m &quot;dev分支下提交&quot;
+
+&amp;emsp ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%B0%86%E6%9C%AC%E5%9C%B0%E5%B7%B2%E6%9C%89%E4%BB%93%E5%BA%93%E6%8F%90%E4%BA%A4%E5%88%B0Github%E6%96%B0%E4%BB%93%E5%BA%93/" title="Git基础篇（十六）——将本地已有仓库提交到Github新仓库"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基础篇（十六）——将本地已有仓库提交到Github新仓库"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%B0%86%E6%9C%AC%E5%9C%B0%E5%B7%B2%E6%9C%89%E4%BB%93%E5%BA%93%E6%8F%90%E4%BA%A4%E5%88%B0Github%E6%96%B0%E4%BB%93%E5%BA%93/" title="Git基础篇（十六）——将本地已有仓库提交到Github新仓库">Git基础篇（十六）——将本地已有仓库提交到Github新仓库</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-21T03:29:00.000Z" title="发表于 2021-03-21 11:29:00">2021-03-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/">Git</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a></span></div><div class="content">Git基础篇（十六）——将本地已有仓库提交到Github新仓库前言：&amp;emsp;&amp;emsp;又是我们在其他平台管理的Git项目希望移交到Github管理，也可能在本地或公司内网开发的Git项目希望提交到Github上远程管理，总之是现有项目提交到Github新仓库管理，那么请看这篇文章。
+1 在Github创建一个新仓库&amp;emsp;&amp;emsp;首先在登录Github账号，在Github上创建一个新的 Repositories 。根据需要选择为 Public 或 Private 。要注意的是不要勾选 Add a README file 、 Add .gitignore 、 Choose a license ，既然是提交已有的仓库，这些应该取决于现有的仓库。
+Git基础篇（十六）——将本地已有仓库提交到Github新仓库前言：&amp;emsp;&amp;emsp;又是我们在其他平台管理的Git项目希望移交到Github管理，也可能在本地或公司内网开发的Git项目希望提交到Github上远程管理，总之是现有项目提交到Github新仓库管理，那么请看这篇文章。 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%AD%A3%E6%8F%90%E4%BA%A4/" title="Git基础篇（十四）——Git修正提交"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基础篇（十四）——Git修正提交"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Git%E4%BF%AE%E6%AD%A3%E6%8F%90%E4%BA%A4/" title="Git基础篇（十四）——Git修正提交">Git基础篇（十四）——Git修正提交</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-20T08:34:00.000Z" title="发表于 2021-03-20 16:34:00">2021-03-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/">Git</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a></span></div><div class="content">Git基础篇（十四）——Git修正提交前言：&amp;emsp;&amp;emsp;有时候git的提交存在缺陷，想要重新提交，想在最新的提交上修正这个缺陷然后重新提交，不需要为其在分支路线上生成一个节点，这时候可以使用amend指令。
+1 修改最新提交的运用场景&amp;emsp;&amp;emsp;有时候我们最新的commit发现存在某些问题，需要修改后重新提交，这时候有两种解决思路，通过 git reset HEAD^ 退回到上一个版本然后重新提交，或者通过 git commit --amend 修改最新的提交。建议使用第二种方式在修改最新的提交，这样可以保持分支上的节点尽可能的“干净”。&amp;emsp;&amp;emsp;以下几种情况会使得我们想要去修改最新提交。
+
+
+需要修改commit message；
+需要删除或新增文件；
+需要修改文件内容；
+
+
+2 amend使用演示&amp;emsp;&amp;emsp;只要满足以上三种的任一一种情况就可以修改最新提交，下面演示同时对这三种情况进行最新提交的修改。&amp;emsp;&amp;emsp;我们在github上创建一个仓 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/docs/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/" title="c进阶篇（一）——移位操作详解"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c进阶篇（一）——移位操作详解"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/" title="c进阶篇（一）——移位操作详解">c进阶篇（一）——移位操作详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-14T06:00:00.000Z" title="发表于 2021-03-14 14:00:00">2021-03-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/c/">c</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/">进阶篇</a></span></div><div class="content">c进阶篇（一）——移位操作详解前言：&amp;emsp;&amp;emsp;嵌入式编程中，很多时候都要进行比特级的操作，移位运算可以简化一些乘除操作。这篇文章带你真正了解移位操作。
+1 数据的存储&amp;emsp;&amp;emsp;对数据进行移位操作，首先要了解数据在计算机中是如何存储的。计算机关于数据涉及到原码、反码、补码三种。
+1.1 原码&amp;emsp;&amp;emsp;原码是对数字的二进制表示方法。有符号数的原码最高位是符号位，其余为数值域；无符号数则只有数值域，没有符号位。符号位用0表示非负数（0和正数），1表示复数。&amp;emsp;&amp;emsp;由于无符号数没有符号位，因此数据域比有符号数多一位，不能表示负数但能表示更多的非负数。&amp;emsp;&amp;emsp;表示的数值范围是偶数（2^N），比如int8_t能表示256个数，int16_t能表示65536个数等。由于实际运用中不需要-0，便人为规定将-0当做值最小的负数处理，因此int8_t表示的数值范围为-128127，int16_t表示的数值范围为-3276832767。
+
+
+
+int8_t ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BAADC%E9%87%87%E6%A0%B7/" title="单片机ADC采样"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="单片机ADC采样"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BAADC%E9%87%87%E6%A0%B7/" title="单片机ADC采样">单片机ADC采样</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-13T02:01:00.000Z" title="发表于 2021-03-13 10:01:00">2021-03-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%A1%8C%E4%B8%9A/">行业</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></span></div><div class="content">单片机ADC采样前言：&amp;emsp;&amp;emsp;ADC是单片机中将模拟量转换为数字量的器件，我们称之为魔术转换器，简称ADC。模拟量是指变量在一定时间范围连续变化的量，数字量在时间上是不连续的，离散的。
+1 ADC采样原理&amp;emsp;&amp;emsp;将模拟量转换为数字量的过程一般可分为：采样、保持、量化、编码四个步骤。在实际的转换过程中，这些过程有时是合并进行，比如取样和保持，量化和编码可同时进行。
+单片机ADC采样前言：&amp;emsp;&amp;emsp;ADC是单片机中将模拟量转换为数字量的器件，我们称之为魔术转换器，简称ADC。模拟量是指变量在一定时间范围连续变化的量，数字量在时间上是不连续的，离散的。
+1 ADC采样原理&amp;emsp;&amp;emsp;将模拟量转换为数字量的过程一般可分为：采样、保持、量化、编码四个步骤。在实际的转换过程中，这些过程有时是合并进行，比如取样和保持，量化和编码可同时进行。
+
+1.1 采样&amp;emsp;&amp;emsp;将时间连续变化的模拟量转换为时间离散的模拟量。通过控制采样电路开关，使得连续的模拟采样 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0/" title="Git基础篇（十三）——Git版本更新"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基础篇（十三）——Git版本更新"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0/" title="Git基础篇（十三）——Git版本更新">Git基础篇（十三）——Git版本更新</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-06T12:35:00.000Z" title="发表于 2021-03-06 20:35:00">2021-03-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/">Git</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a></span></div><div class="content">Git基础篇（十三）——Git版本更新前言：&amp;emsp;&amp;emsp;Git已经经历了多个版本迭代，目前最新的版本是v2.30.1。新的版本会添加新的命令和功能，需要升级到新的版本才能使用这些命令，建议更新使用最新的版本。
+1 查看Git版本&amp;emsp;&amp;emsp;可以通过指令来查看Git的当前版本。
+1git --version
+
+&amp;emsp;&amp;emsp;指令也可简写为以下形式。
+1git version
+
+
+Git基础篇（十三）——Git版本更新前言：&amp;emsp;&amp;emsp;Git已经经历了多个版本迭代，目前最新的版本是v2.30.1。新的版本会添加新的命令和功能，需要升级到新的版本才能使用这些命令，建议更新使用最新的版本。
+1 查看Git版本&amp;emsp;&amp;emsp;可以通过指令来查看Git的当前版本。
+1git --version
+
+&amp;emsp;&amp;emsp;指令也可简写为以下形式。
+1git version
+
+
+2 更新Git版本2.1 v2.17.1之前的版本更新&amp;emsp;& ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81/" title="Git基础篇（十二）——Git解决冲突"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基础篇（十二）——Git解决冲突"></a></div><div class="recent-post-info"><a class="article-title" href="/docs/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81/" title="Git基础篇（十二）——Git解决冲突">Git基础篇（十二）——Git解决冲突</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-06T09:53:00.000Z" title="发表于 2021-03-06 17:53:00">2021-03-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/">Git</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a></span></div><div class="content">Git基础篇（十二）——Git解决冲突前言：&amp;emsp;&amp;emsp;Git是多分支开发的，当然也是多人协作开发的，因此在实际的开发修改中时常会出现冲突，冲突不可怕，重要的是找到冲突的原因和解决冲突。
+1 冲突的原因&amp;emsp;&amp;emsp;冲突的产生可以分为两种。
+
+
+分支合并冲突；
+合并的分支对相同文件进行了不同的修改；
+
+
+分支推送冲突；
+
+
+2 关于分支合并冲突&amp;emsp;&amp;emsp;要了解为什么分支合并会产生冲突，我们最好从实际运用场景中看哪些情况会冲突，哪些情况合并分支不会冲突。
+2.1 不冲突情况2.1.1 合并的分支新增了其他分支没有的文件&amp;emsp;&amp;emsp;如果A分支中新增了文件a.c，而B分支中增加了b.c文件，此时将A分支与B分支合并，不会产生冲突。
+Git基础篇（十二）——Git解决冲突前言：&amp;emsp;&amp;emsp;Git是多分支开发的，当然也是多人协作开发的，因此在实际的开发修改中时常会出现冲突，冲突不可怕，重要的是找到冲突的原因和解决冲突。
+1 冲突的原因&amp;emsp;&a ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/11/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#content-inner">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/#content-inner">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/#content-inner">23</a><a class="extend next" rel="next" href="/page/13/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://onlycalm.gitee.io/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">OnlyCalm</div><div class="author-info__description">自娱自乐，做大娱乐家</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">229</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">327</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">53</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/onlycalm"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%85%BE%E8%AE%AF%E4%BA%91SSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7/" title="自娱自乐，我的博客（十七）——腾讯云SSL证书申请"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自娱自乐，我的博客（十七）——腾讯云SSL证书申请"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%85%BE%E8%AE%AF%E4%BA%91SSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7/" title="自娱自乐，我的博客（十七）——腾讯云SSL证书申请">自娱自乐，我的博客（十七）——腾讯云SSL证书申请</a><time datetime="2024-02-06T06:08:00.000Z" title="发表于 2024-02-06 14:08:00">2024-02-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%8D%9A%E5%AE%A2%E6%89%98%E7%AE%A1%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91/" title="自娱自乐，我的博客（十六）——博客托管到腾讯云"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自娱自乐，我的博客（十六）——博客托管到腾讯云"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%8D%9A%E5%AE%A2%E6%89%98%E7%AE%A1%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91/" title="自娱自乐，我的博客（十六）——博客托管到腾讯云">自娱自乐，我的博客（十六）——博客托管到腾讯云</a><time datetime="2024-02-06T03:43:00.000Z" title="发表于 2024-02-06 11:43:00">2024-02-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E5%9F%9F%E5%90%8DICP%E5%A4%87%E6%A1%88/" title="自娱自乐，我的博客（十五）——域名ICP备案"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自娱自乐，我的博客（十五）——域名ICP备案"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E5%9F%9F%E5%90%8DICP%E5%A4%87%E6%A1%88/" title="自娱自乐，我的博客（十五）——域名ICP备案">自娱自乐，我的博客（十五）——域名ICP备案</a><time datetime="2024-02-05T11:37:00.000Z" title="发表于 2024-02-05 19:37:00">2024-02-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu20.04%E5%AE%89%E8%A3%85qq%E9%9F%B3%E4%B9%90/" title="Ubuntu20.04安装qq音乐"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_12.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ubuntu20.04安装qq音乐"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Ubuntu/Ubuntu20.04%E5%AE%89%E8%A3%85qq%E9%9F%B3%E4%B9%90/" title="Ubuntu20.04安装qq音乐">Ubuntu20.04安装qq音乐</a><time datetime="2024-02-04T15:38:00.000Z" title="发表于 2024-02-04 23:38:00">2024-02-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/docs/%E5%B7%A5%E5%85%B7/Vim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E7%BB%88%E7%AB%AF%E6%8F%92%E4%BB%B6vim-floaterm/" title="Vim基础篇（二十八）——终端插件vim-floaterm"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://onlycalm.gitee.io/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim基础篇（二十八）——终端插件vim-floaterm"/></a><div class="content"><a class="title" href="/docs/%E5%B7%A5%E5%85%B7/Vim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%E5%8D%81%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E7%BB%88%E7%AB%AF%E6%8F%92%E4%BB%B6vim-floaterm/" title="Vim基础篇（二十八）——终端插件vim-floaterm">Vim基础篇（二十八）——终端插件vim-floaterm</a><time datetime="2023-01-20T12:05:00.000Z" title="发表于 2023-01-20 20:05:00">2023-01-20</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/"><span class="card-category-list-name">兴趣</span><span class="card-category-list-count">25</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/English/"><span class="card-category-list-name">English</span><span class="card-category-list-count">7</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/English/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><span class="card-category-list-name">基础语法</span><span class="card-category-list-count">7</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/"><span class="card-category-list-name">国家软考</span><span class="card-category-list-count">17</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/"><span class="card-category-list-name">中级嵌入式系统设计师</span><span class="card-category-list-count">17</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90/"><span class="card-category-list-name">自娱自乐</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">工具</span><span class="card-category-list-count">117</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/GCC/"><span class="card-category-list-name">GCC</span><span class="card-category-list-count">1</span></a></li></ul></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%9B%BE%E6%A0%87/" style="font-size: 1.1em; color: #999">图标</a> <a href="/tags/ripgrep/" style="font-size: 1.1em; color: #999">ripgrep</a> <a href="/tags/%E5%8A%A8%E9%9D%99%E6%80%81/" style="font-size: 1.1em; color: #999">动静态</a> <a href="/tags/%E4%B8%83%E7%89%9B/" style="font-size: 1.1em; color: #999">七牛</a> <a href="/tags/%E6%98%BE%E5%8D%A1/" style="font-size: 1.1em; color: #999">显卡</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%A4%A7%E5%85%A8/" style="font-size: 1.1em; color: #999">代码大全</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 1.1em; color: #999">标签</a> <a href="/tags/QDialog/" style="font-size: 1.1em; color: #999">QDialog</a> <a href="/tags/QMessageBox/" style="font-size: 1.1em; color: #999">QMessageBox</a> <a href="/tags/Qt-Creator/" style="font-size: 1.1em; color: #999">Qt Creator</a> <a href="/tags/Rom/" style="font-size: 1.1em; color: #999">Rom</a> <a href="/tags/%E6%96%BD%E5%AF%86%E7%89%B9%E6%BB%A4%E6%B3%A2/" style="font-size: 1.1em; color: #999">施密特滤波</a> <a href="/tags/vim-multiple-cursors/" style="font-size: 1.1em; color: #999">vim-multiple-cursors</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 1.1em; color: #999">硬盘</a> <a href="/tags/%E7%A1%85%E8%83%B6/" style="font-size: 1.1em; color: #999">硅胶</a> <a href="/tags/Python/" style="font-size: 1.5em; color: #99a9bf">Python</a> <a href="/tags/DRam/" style="font-size: 1.1em; color: #999">DRam</a> <a href="/tags/CMakeLists/" style="font-size: 1.1em; color: #999">CMakeLists</a> <a href="/tags/vim-startify/" style="font-size: 1.1em; color: #999">vim-startify</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%9D%97/" style="font-size: 1.1em; color: #999">代码块</a> <a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 1.1em; color: #999">文件</a> <a href="/tags/PyQt/" style="font-size: 1.43em; color: #99a6b9">PyQt</a> <a href="/tags/%E9%80%89%E5%9E%8B/" style="font-size: 1.3em; color: #99a1ac">选型</a> <a href="/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/" style="font-size: 1.37em; color: #99a4b2">版本管理</a> <a href="/tags/ale/" style="font-size: 1.1em; color: #999">ale</a> <a href="/tags/%E4%BD%8E%E5%8A%9F%E8%80%97/" style="font-size: 1.17em; color: #999c9f">低功耗</a> <a href="/tags/%E8%AF%81%E4%B9%A6/" style="font-size: 1.1em; color: #999">证书</a> <a href="/tags/vim-surround/" style="font-size: 1.1em; color: #999">vim-surround</a> <a href="/tags/AES/" style="font-size: 1.1em; color: #999">AES</a> <a href="/tags/commit/" style="font-size: 1.1em; color: #999">commit</a> <a href="/tags/QSpinBox/" style="font-size: 1.1em; color: #999">QSpinBox</a> <a href="/tags/%E4%BF%AE%E6%94%B9/" style="font-size: 1.1em; color: #999">修改</a> <a href="/tags/ICP/" style="font-size: 1.1em; color: #999">ICP</a> <a href="/tags/%E4%BF%A1%E5%8F%B7/" style="font-size: 1.1em; color: #999">信号</a> <a href="/tags/English/" style="font-size: 1.23em; color: #999ea6">English</a> <a href="/tags/2021/" style="font-size: 1.1em; color: #999">2021</a> <a href="/tags/Google/" style="font-size: 1.17em; color: #999c9f">Google</a> <a href="/tags/%E5%90%8D%E7%A7%B0/" style="font-size: 1.1em; color: #999">名称</a> <a href="/tags/GCC/" style="font-size: 1.1em; color: #999">GCC</a> <a href="/tags/Ram/" style="font-size: 1.1em; color: #999">Ram</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/01/"><span class="card-archive-list-date">一月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">十月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">五月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">三月 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/02/"><span class="card-archive-list-date">二月 2022</span><span class="card-archive-list-count">10</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">229</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2020-07-10T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">3119.6k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-07-07T03:38:33.108Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://onlycalm.cn">OnlyCalm</a> 的博客</br>粤ICP备2024183071号-1</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["纪念我过去 为人如此风趣","活得精彩 结尾切勿流眼泪","友情爱情两边都发现 亏欠","没求过你 你就当我骄傲","离时代远远 无人间烟火","从今天开始 相识当做别离","做喜欢的工作和享受游戏 一死了 怎细味"])
+  } else {
+    document.getElementById("subtitle").textContent = "纪念我过去 为人如此风趣"
+  }
+}
+typedJSFn.run(subtitleType)</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.19.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=wavatar'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://uoaDTvEN.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+        "X-LC-Key": 'f2158LsoEVzRzMS8EG7rvFSs',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script src="/js/sakura.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>
