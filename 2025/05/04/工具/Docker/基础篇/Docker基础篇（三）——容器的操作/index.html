@@ -1,0 +1,514 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Docker基础篇（三）——容器的操作 | OnlyCalm's Blog</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Docker基础篇（三）——容器的操作前言：阅读这篇文章我能学到什么？&emsp;&emsp; 这篇介绍容器有关的操作。 1 创建容器1.1 创建但不运行&emsp;&emsp;根据指定镜像创建容器，但不运行该容器。&emsp;&emsp;指定镜像名称创建容器。-it 表示该容器启用交互式终端。 1docker create -it --name container_name image_name">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker基础篇（三）——容器的操作">
+<meta property="og:url" content="http://www.onlycalm.cn/2025/05/04/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E5%AE%B9%E5%99%A8%E7%9A%84%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="OnlyCalm&#39;s Blog">
+<meta property="og:description" content="Docker基础篇（三）——容器的操作前言：阅读这篇文章我能学到什么？&emsp;&emsp; 这篇介绍容器有关的操作。 1 创建容器1.1 创建但不运行&emsp;&emsp;根据指定镜像创建容器，但不运行该容器。&emsp;&emsp;指定镜像名称创建容器。-it 表示该容器启用交互式终端。 1docker create -it --name container_name image_name">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg">
+<meta property="article:published_time" content="2025-05-04T09:34:00.000Z">
+<meta property="article:modified_time" content="2025-05-04T09:34:00.000Z">
+<meta property="article:author" content="OnlyCalm">
+<meta property="article:tag" content="工具">
+<meta property="article:tag" content="基础篇">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="镜像">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Docker基础篇（三）——容器的操作",
+  "url": "http://www.onlycalm.cn/2025/05/04/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E5%AE%B9%E5%99%A8%E7%9A%84%E6%93%8D%E4%BD%9C/",
+  "image": "https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg",
+  "datePublished": "2025-05-04T09:34:00.000Z",
+  "dateModified": "2025-05-04T09:34:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "OnlyCalm",
+      "url": "http://www.onlycalm.cn/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://www.onlycalm.cn/2025/05/04/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E5%AE%B9%E5%99%A8%E7%9A%84%E6%93%8D%E4%BD%9C/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: OnlyCalm","link":"链接: ","source":"来源: OnlyCalm's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Docker基础篇（三）——容器的操作',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #d9d9d9;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OnlyCalm's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">Docker基础篇（三）——容器的操作</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Docker基础篇（三）——容器的操作</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-04T09:34:00.000Z" title="发表于 2025-05-04 17:34:00">2025-05-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-04T09:34:00.000Z" title="更新于 2025-05-04 17:34:00">2025-05-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/Docker/">Docker</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Docker基础篇（三）——容器的操作"><a href="#Docker基础篇（三）——容器的操作" class="headerlink" title="Docker基础篇（三）——容器的操作"></a><center>Docker基础篇（三）——容器的操作</center></h1><p><em>前言：</em><br><em>阅读这篇文章我能学到什么？</em><br>&emsp;&emsp; <em>这篇介绍容器有关的操作。</em></p>
+<h2 id="1-创建容器"><a href="#1-创建容器" class="headerlink" title="1 创建容器"></a>1 创建容器</h2><h3 id="1-1-创建但不运行"><a href="#1-1-创建但不运行" class="headerlink" title="1.1 创建但不运行"></a>1.1 创建但不运行</h3><p>&emsp;&emsp;根据指定镜像创建容器，但不运行该容器。<br>&emsp;&emsp;指定镜像名称创建容器。<code>-it</code> 表示该容器启用交互式终端。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker create -it --name container_name image_name:tag</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;指定镜像名称创建容器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker create -it --name container_name image_id</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-创建并运行"><a href="#1-2-创建并运行" class="headerlink" title="1.2 创建并运行"></a>1.2 创建并运行</h3><p>&emsp;&emsp;根据指定镜像创建容器，且运行该新容器。<br>&emsp;&emsp;指定镜像名称创建容器。 <code>-it</code> 表示该容器启用交互式终端。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --name container_name image_name:tag /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在容器终端中执行 <code>exit</code> 将推出容器的运行。更多的指令可选项见以下。</p>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">功能描述</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>-i</code></td>
+<td align="center">保持标准输入（STDIN）开启，支持交互操作</td>
+<td align="center"><code>-i</code>（常与 <code>-t</code> 联用）</td>
+</tr>
+<tr>
+<td align="center"><code>-t</code></td>
+<td align="center">分配伪终端（TTY）</td>
+<td align="center"><code>-t</code>（与 <code>-i</code> 结合启动交互式容器）</td>
+</tr>
+<tr>
+<td align="center"><code>-d</code></td>
+<td align="center">后台运行容器（守护模式）</td>
+<td align="center"><code>-d</code>（如运行 Nginx 服务）</td>
+</tr>
+<tr>
+<td align="center"><code>--name</code></td>
+<td align="center">指定容器名称</td>
+<td align="center"><code>--name my-container</code></td>
+</tr>
+<tr>
+<td align="center"><code>-p</code></td>
+<td align="center">端口映射（主机端口:容器端口）</td>
+<td align="center"><code>-p 8080:80</code>（映射 Web 服务）</td>
+</tr>
+<tr>
+<td align="center"><code>-v</code></td>
+<td align="center">挂载数据卷（主机目录:容器目录）</td>
+<td align="center"><code>-v /host/data:/container/data</code></td>
+</tr>
+<tr>
+<td align="center"><code>--rm</code></td>
+<td align="center">容器停止后自动删除</td>
+<td align="center"><code>--rm</code>（临时测试场景）</td>
+</tr>
+</tbody></table>
+<h2 id="2-查看容器"><a href="#2-查看容器" class="headerlink" title="2 查看容器"></a>2 查看容器</h2><p>&emsp;&emsp;查看本地容器。会列出容器的ID、关联的镜像名、创建的时间、容器状态、容器名称。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E5%AE%B9%E5%99%A8%E7%9A%84%E6%93%8D%E4%BD%9C/container.png" alt="container.png" title="container"></p>
+<h2 id="3-删除容器"><a href="#3-删除容器" class="headerlink" title="3 删除容器"></a>3 删除容器</h2><p>&emsp;&emsp;根据名称删除容器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm container_name</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据ID删除容器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm container_id</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-容器导出镜像"><a href="#4-容器导出镜像" class="headerlink" title="4 容器导出镜像"></a>4 容器导出镜像</h2><p>&emsp;&emsp;将容器直接导出为镜像tar文件，不会带有镜像的历史记录和分层信息，文件内容比较小。<br>&emsp;&emsp;根据容器名称导出。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export -o tar_name.tar container_name</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID导出。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export -o tar_name.tar container_id</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-导入镜像"><a href="#5-导入镜像" class="headerlink" title="5 导入镜像"></a>5 导入镜像</h2><p>&emsp;&emsp;导入 <code>docker export</code> 导出的tar文件的镜像，这种方式导入的镜像不带有完整的镜像信息，因此这种方式导入时可指定镜像的新名称。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import tar_name.tar image_name:tag</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-修改容器名"><a href="#6-修改容器名" class="headerlink" title="6 修改容器名"></a>6 修改容器名</h2><p>&emsp;&emsp;根据容器名称修改名称。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rename container_name_old container_name_new</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID修改名称。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rename container_id container_name_new</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-提交镜像"><a href="#7-提交镜像" class="headerlink" title="7 提交镜像"></a>7 提交镜像</h2><p>&emsp;&emsp;将容器的当前状态提交为新的容器。 <code>-a</code> 表示作者名， <code>-m</code> 表示提交log，这两项是可选的。容器提交创建镜像后，该容器关联的镜像不会改变，不会变为关联新镜像。<br>&emsp;&emsp;根据容器名称提交创建镜像。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -a &quot;Author&quot; -m &quot;comment&quot; container_name image_name:tag</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID提交创建镜像。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -a &quot;Author&quot; -m &quot;comment&quot; container_id image_name:tag</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;查看镜像最新一层的修改作者。<br>&emsp;&emsp;根据镜像名称查看作者。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect --format=&#x27;&#123;&#123;.Author&#125;&#125;&#x27; image_name:tag</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据镜像ID查看作者。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect --format=&#x27;&#123;&#123;.Author&#125;&#125;&#x27; image_id</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-启动容器"><a href="#8-启动容器" class="headerlink" title="8 启动容器"></a>8 启动容器</h2><p>&emsp;&emsp;启动已存在的容器。<br>&emsp;&emsp;根据容器名称启动。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start -ai container_name</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID启动。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start -ai container_id</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;如果想启动并在后台运行容器，则无需开启交互终端，去掉 <code>-ai</code> 选项即可，容器的状态会显示在状态栏一列，通过 <code>docker ps -a</code> 指令查看。</p>
+<h2 id="9-停止容器"><a href="#9-停止容器" class="headerlink" title="9 停止容器"></a>9 停止容器</h2><p>&emsp;&emsp;根据容器名称停止容器运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop container_name</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID停止容器运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop container_id</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-重启容器"><a href="#10-重启容器" class="headerlink" title="10 重启容器"></a>10 重启容器</h2><p>&emsp;&emsp;根据容器名称重启容器运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart container_name</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID重启容器运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart container_id</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-暂停容器"><a href="#11-暂停容器" class="headerlink" title="11 暂停容器"></a>11 暂停容器</h2><p>&emsp;&emsp;根据容器名称暂停容器运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pause container_name</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID暂停容器运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pause container_id</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-接触暂停容器"><a href="#11-接触暂停容器" class="headerlink" title="11 接触暂停容器"></a>11 接触暂停容器</h2><p>&emsp;&emsp;根据容器名称解除暂停容器运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker unpause container_name</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID解除暂停容器运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker unpause container_id</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-进入已经运行的容器"><a href="#12-进入已经运行的容器" class="headerlink" title="12 进入已经运行的容器"></a>12 进入已经运行的容器</h2><p>&emsp;&emsp;根据容器名称进入已经运行的容器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it container_name /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID进入已经运行的容器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it container_id /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="13-挂载目录"><a href="#13-挂载目录" class="headerlink" title="13 挂载目录"></a>13 挂载目录</h2><h3 id="13-1-新建容器并挂载"><a href="#13-1-新建容器并挂载" class="headerlink" title="13.1 新建容器并挂载"></a>13.1 新建容器并挂载</h3><p>&emsp;&emsp;可以将本地电脑的目录挂载到容器中，挂载后任意一边的修改都会实时同步到另一边，非常适合本地编写代码，然后修改实时同步到容器中，在容易中进行编译调试（通常编译或运行环境在容器中）。<br>&emsp;&emsp;根据容器名称通过 <code>docker run</code> 指令挂载目录。注意，容器这段的路径必须写绝对路径，比如 <code>~</code> 这样的相对路径是不允许的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v local_path:container_path --name container_name -it image_name:tag /bin/bas</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID通过 <code>docker run</code> 指令挂载目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v local_path:container_path --name container_name -it image_id /bin/bas</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;同理， <code>docker create</code> 指令也类似。<br>&emsp;&emsp;根据容器名称通过 <code>docker create</code> 指令挂载目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker create -v local_path:container_path --name container_name -it image_name:tag /bin/bas</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据容器ID通过 <code>docker create</code> 指令挂载目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker create -v local_path:container_path --name container_name -it image_id /bin/bas</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-2-已有容器挂载"><a href="#13-2-已有容器挂载" class="headerlink" title="13.2 已有容器挂载"></a>13.2 已有容器挂载</h3><p>&emsp;&emsp;容器已创建想要挂载目录，linux系统下可以使用 <strong>bind mount</strong> 动态挂载。通常我建议重新建一个容器，在创建时挂载。<br>&emsp;&emsp;通过以下指令查看容器进程ID。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect --format &#x27;&#123;&#123;.State.Pid&#125;&#125;&#x27; container_name</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;进入容器的mount命名空间。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nsenter -m -t container_pid</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在容器内执行目录挂载指令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount --bind local_path container_path</span><br></pre></td></tr></table></figure>
+
+<h2 id="14-目录复制"><a href="#14-目录复制" class="headerlink" title="14 目录复制"></a>14 目录复制</h2><h3 id="14-1-本地复制到容器"><a href="#14-1-本地复制到容器" class="headerlink" title="14.1 本地复制到容器"></a>14.1 本地复制到容器</h3><p>&emsp;&emsp;将指定的本地目录整个复制到容器指定路径下。<br>&emsp;&emsp;通过容器名称指定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp local_path container_name:container_path</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;通过容器ID指定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp local_path container_id:container_path</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-2-容器复制到本地"><a href="#14-2-容器复制到本地" class="headerlink" title="14.2 容器复制到本地"></a>14.2 容器复制到本地</h3><p>&emsp;&emsp;将指定的容器目录整个复制到本地指定路径下。<br>&emsp;&emsp;通过容器名称指定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp container_name:container_path local_path</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;通过容器ID指定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp container_id:container_path local_path</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn">OnlyCalm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn/2025/05/04/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E5%AE%B9%E5%99%A8%E7%9A%84%E6%93%8D%E4%BD%9C/">http://www.onlycalm.cn/2025/05/04/工具/Docker/基础篇/Docker基础篇（三）——容器的操作/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://www.onlycalm.cn" target="_blank">OnlyCalm's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a><a class="post-meta__tags" href="/tags/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a><a class="post-meta__tags" href="/tags/Docker/">Docker</a><a class="post-meta__tags" href="/tags/%E9%95%9C%E5%83%8F/">镜像</a></div><div class="post-share"><div class="social-share" data-image="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/05/04/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85/" title="Docker基础篇（一）——安装"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Docker基础篇（一）——安装</div></div><div class="info-2"><div class="info-item-1">Docker基础篇（一）——安装前言：阅读这篇文章我能学到什么？&emsp;&emsp; Linux环境下开发，经常会用到Docker，本片文章介绍如何安装Docker。 1 介绍&emsp;&emsp;Docker是一种开源的容器化平台，用于开发、部署和运行应用程序。它通过容器技术将应用程序及其依赖项打包到一个轻量级、可移植的虚拟环境中，从而实现快速部署和跨平台运行。Docker的核心组件是开源免费的。&emsp;&emsp;Docker的核心概念是容器、镜像、仓库，详细可查阅 [Docker官网](https://docs.docker.com/ “Docker官网”) 。  镜像: 通过容器的静态模板，其包含了运行所需的所有文件和配置。 容器: Docker是轻量级的虚拟化单元，包含应用程序及其运行环境，容器共享主机的操作系统内核，比虚拟机更加高校，运行更快。 仓库: 集中化存储和分发镜像的平台，分为公共仓库（如Docker...</div></div></div></a><a class="pagination-related" href="/2025/05/04/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E9%95%9C%E5%83%8F%E7%9A%84%E6%93%8D%E4%BD%9C/" title="Docker基础篇（四）——镜像的操作"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Docker基础篇（四）——镜像的操作</div></div><div class="info-2"><div class="info-item-1">Docker基础篇（四）——镜像的操作前言：阅读这篇文章我能学到什么？&emsp;&emsp; 这篇介绍镜像有关的操作。 1 拉取镜像&emsp;&emsp;从 Docker镜像仓库 拉取现有的仓库。&emsp;&emsp;从Docker仓库拉取镜像的指令如下。 1docker pull username/image_name:tag  &emsp;&emsp;指令可以省写，当 username 部分省略时，表示从Docker官方的仓库中拉取，否则是拉取某个具体用户上传的镜像。当 tag 省略时，会自动拉取最新的版本。&emsp;&emsp;比如我们从官网方Docker仓库拉取纯净版本的Ubuntu22.04。 1docker pull ubuntu:22.04  2 查看镜像&emsp;&emsp;镜像拉取完后执行以下指令可查看本地有哪些镜像。会显示镜像的名称、tag、ID、创建日期、大小信息。 1docker images  &emsp;&emsp;或者。 1docker images ls   3...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/05/04/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E9%95%9C%E5%83%8F%E7%9A%84%E6%93%8D%E4%BD%9C/" title="Docker基础篇（四）——镜像的操作"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_11.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-04</div><div class="info-item-2">Docker基础篇（四）——镜像的操作</div></div><div class="info-2"><div class="info-item-1">Docker基础篇（四）——镜像的操作前言：阅读这篇文章我能学到什么？&emsp;&emsp; 这篇介绍镜像有关的操作。 1 拉取镜像&emsp;&emsp;从 Docker镜像仓库 拉取现有的仓库。&emsp;&emsp;从Docker仓库拉取镜像的指令如下。 1docker pull username/image_name:tag  &emsp;&emsp;指令可以省写，当 username 部分省略时，表示从Docker官方的仓库中拉取，否则是拉取某个具体用户上传的镜像。当 tag 省略时，会自动拉取最新的版本。&emsp;&emsp;比如我们从官网方Docker仓库拉取纯净版本的Ubuntu22.04。 1docker pull ubuntu:22.04  2 查看镜像&emsp;&emsp;镜像拉取完后执行以下指令可查看本地有哪些镜像。会显示镜像的名称、tag、ID、创建日期、大小信息。 1docker images  &emsp;&emsp;或者。 1docker images ls   3...</div></div></div></a><a class="pagination-related" href="/2025/05/04/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85/" title="Docker基础篇（一）——安装"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_6.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-04</div><div class="info-item-2">Docker基础篇（一）——安装</div></div><div class="info-2"><div class="info-item-1">Docker基础篇（一）——安装前言：阅读这篇文章我能学到什么？&emsp;&emsp; Linux环境下开发，经常会用到Docker，本片文章介绍如何安装Docker。 1 介绍&emsp;&emsp;Docker是一种开源的容器化平台，用于开发、部署和运行应用程序。它通过容器技术将应用程序及其依赖项打包到一个轻量级、可移植的虚拟环境中，从而实现快速部署和跨平台运行。Docker的核心组件是开源免费的。&emsp;&emsp;Docker的核心概念是容器、镜像、仓库，详细可查阅 [Docker官网](https://docs.docker.com/ “Docker官网”) 。  镜像: 通过容器的静态模板，其包含了运行所需的所有文件和配置。 容器: Docker是轻量级的虚拟化单元，包含应用程序及其运行环境，容器共享主机的操作系统内核，比虚拟机更加高校，运行更快。 仓库: 集中化存储和分发镜像的平台，分为公共仓库（如Docker...</div></div></div></a><a class="pagination-related" href="/2025/05/04/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E6%BA%90/" title="Docker基础篇（二）——配置镜像源"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-04</div><div class="info-item-2">Docker基础篇（二）——配置镜像源</div></div><div class="info-2"><div class="info-item-1">Docker基础篇（二）——配置镜像源前言：阅读这篇文章我能学到什么？&emsp;&emsp; 国内访问Docker比较慢，本文章提供一种从仓库拉取镜像加速的方法。 1 镜像加速&emsp;&emsp;在国内访问Docker官网网速很慢，特别从官方Docker仓库拉取镜像时，经常由于网速问题拉取失败，可以配置国内的镜像源使得拉取镜像加速。&emsp;&emsp;执行以下指令配置镜像源，如果文件或路径不存在则新建。该指令会将 &#123;&#125; 内的内容写到 daemon.json文件中。 12345678sudo tee /etc/docker/daemon.json &lt;&lt;EOF&#123;  &quot;registry-mirrors&quot;: [        &quot;https://docker.domys.cc&quot;,        &quot;https://hub.domys.cc&quot;  ]&#125;EOF  &emsp;&emsp;重启Docker使得配置生效，执行以下指令。 12sudo systemctl...</div></div></div></a><a class="pagination-related" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-05</div><div class="info-item-2">Docker基础篇（五）——vscode使用docker插件</div></div><div class="info-2"><div class="info-item-1">Docker基础篇（五）——vscode使用docker插件前言：阅读这篇文章我能学到什么？&emsp;&emsp; vscode对docker有良好的插件支持，提供便捷的可视化操作。 1 安装插件&emsp;&emsp;在vscode商店中安装Docker插件。  2 配置权限&emsp;&emsp;没有权限vscode无法打开docker的images和container。进行以下配置赋予vscode操作Docker的权限。 1sudo usermod -aG docker user_name  &emsp;&emsp;配置docker.sock文件权限。 1sudo chmod 666 /var/run/docker.sock  &emsp;&emsp;重启Docker生效配置。 1sudo systemctl restart docker  3...</div></div></div></a><a class="pagination-related" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-01</div><div class="info-item-2">Github Actions配置CI和CD</div></div><div class="info-2"><div class="info-item-1">Github Actions配置CI和CD前言：阅读这篇文章我能学到什么？&emsp;&emsp;GitHub Actions 是 GitHub 提供的自动化工作流工具，对开源仓库完全免费所有功能，并且基于用户的资源是相对比较慷慨的。 1 介绍&emsp;&emsp;GitHub Actions是GitHub提供的持续集成和持续部署 (CI&#x2F;CD) 平台，允许开发者自动化代码构建、测试、打包和部署流程。它通过 YAML 配置文件定义工作流（Workflow），在代码推送、PR 提交或定时任务等事件触发时自动执行任务。这些操作人工也能完成，但使用Actions在特定的场景自动触发完成，将大大提高开发效率。&emsp;&emsp;GitHub Actions是GitHub提供的自动化工作流工具，主要功能如下。  自动运行测试（CI） 自动部署代码（CD） 定时执行任务（如每日构建） 响应GitHub事件（如...</div></div></div></a><a class="pagination-related" href="/2020/10/09/%E5%B7%A5%E5%85%B7/Tortoise/%E8%A7%A3%E5%86%B3TortoiseSVN%E5%92%8CTortoiseGit%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" title="解决TortoiseSVN和TortoiseGit图标不显示问题"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_18.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-10-09</div><div class="info-item-2">解决TortoiseSVN和TortoiseGit图标不显示问题</div></div><div class="info-2"><div class="info-item-1">解决TortoiseSVN和TortoiseGit图标不显示问题前言：&emsp;&emsp;SVN和Git是程序员常用的代码托管工具，为了避免记忆较为繁琐的指令，方便操作，我们通常会安装TortoiseSVN和TortoiseGit这两个工具，他们可以文件的状态通过文件和文件夹图标显示出现，非常直观。在使用过程中你可能遇到某次电脑重启后Tortoise图标突然不显示的问题，这篇文章就是为了解决这个问题，请读下去。 1 为什么电脑重启后图标突然不显示了&emsp;&emsp;在Windows中，Explorer只支持15个Icon...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">OnlyCalm</div><div class="author-info-description">自娱自乐，做大娱乐家。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E5%AE%B9%E5%99%A8%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-text">Docker基础篇（三）——容器的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="toc-text">1 创建容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%88%9B%E5%BB%BA%E4%BD%86%E4%B8%8D%E8%BF%90%E8%A1%8C"><span class="toc-text">1.1 创建但不运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%90%E8%A1%8C"><span class="toc-text">1.2 创建并运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8"><span class="toc-text">2 查看容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8"><span class="toc-text">3 删除容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AE%B9%E5%99%A8%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F"><span class="toc-text">4 容器导出镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AF%BC%E5%85%A5%E9%95%9C%E5%83%8F"><span class="toc-text">5 导入镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BF%AE%E6%94%B9%E5%AE%B9%E5%99%A8%E5%90%8D"><span class="toc-text">6 修改容器名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%8F%90%E4%BA%A4%E9%95%9C%E5%83%8F"><span class="toc-text">7 提交镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-text">8 启动容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8"><span class="toc-text">9 停止容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8"><span class="toc-text">10 重启容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E6%9A%82%E5%81%9C%E5%AE%B9%E5%99%A8"><span class="toc-text">11 暂停容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E6%8E%A5%E8%A7%A6%E6%9A%82%E5%81%9C%E5%AE%B9%E5%99%A8"><span class="toc-text">11 接触暂停容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E8%BF%9B%E5%85%A5%E5%B7%B2%E7%BB%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="toc-text">12 进入已经运行的容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E6%8C%82%E8%BD%BD%E7%9B%AE%E5%BD%95"><span class="toc-text">13 挂载目录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1-%E6%96%B0%E5%BB%BA%E5%AE%B9%E5%99%A8%E5%B9%B6%E6%8C%82%E8%BD%BD"><span class="toc-text">13.1 新建容器并挂载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2-%E5%B7%B2%E6%9C%89%E5%AE%B9%E5%99%A8%E6%8C%82%E8%BD%BD"><span class="toc-text">13.2 已有容器挂载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E7%9B%AE%E5%BD%95%E5%A4%8D%E5%88%B6"><span class="toc-text">14 目录复制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#14-1-%E6%9C%AC%E5%9C%B0%E5%A4%8D%E5%88%B6%E5%88%B0%E5%AE%B9%E5%99%A8"><span class="toc-text">14.1 本地复制到容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-2-%E5%AE%B9%E5%99%A8%E5%A4%8D%E5%88%B6%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-text">14.2 容器复制到本地</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（三）——搭建linux工程"/></a><div class="content"><a class="title" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程">FreeRTOS基础篇（三）——搭建linux工程</a><time datetime="2025-08-17T11:26:00.000Z" title="发表于 2025-08-17 19:26:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（一）——介绍"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍">FreeRTOS基础篇（一）——介绍</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（二）——QEMU"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU">FreeRTOS基础篇（二）——QEMU</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Actions配置CI和CD"/></a><div class="content"><a class="title" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD">Github Actions配置CI和CD</a><time datetime="2025-05-31T16:01:00.000Z" title="发表于 2025-06-01 00:01:00">2025-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础篇（五）——vscode使用docker插件"/></a><div class="content"><a class="title" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件">Docker基础篇（五）——vscode使用docker插件</a><time datetime="2025-05-04T16:18:00.000Z" title="发表于 2025-05-05 00:18:00">2025-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://www.onlycalm.cn">OnlyCalm</a> 的博客</br> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024183071号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+      appKey: 'f2158LsoEVzRzMS8EG7rvFSs',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: '0b3f5b76c03e1d9ecca0',
+      clientSecret: '94ba0623c1599038f16bc6ecbdf0c9015c735fe5',
+      repo: 'blogtalk',
+      owner: 'onlycalm',
+      admin: ['onlycalm'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '5d6f999d5b964ed2b51bc3aa3ae40e51'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Valine' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/sakura.js"></script><div class="aplayer no-destroy" data-id="7642168633" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人,张氏情歌,夕阳无限好,单车,心的距离,婚礼祝福,积木,我们,苦瓜" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>

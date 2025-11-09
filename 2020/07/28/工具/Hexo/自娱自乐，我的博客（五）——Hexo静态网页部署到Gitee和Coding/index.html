@@ -1,0 +1,429 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding | OnlyCalm's Blog</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding前言：&emsp;&emsp;之前是将博客部署到Github Pages上，虽然国内访问很慢但是也就凑合用了，但是最近Github Pages被墙了导致无法访问，已经持续半个多月了，于是决定将博客源文件依旧存在Github，但是静态网页上传到Gitee和Coding上。Gitee和Coding也是可免费部署静态网页的平台，而">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding">
+<meta property="og:url" content="http://www.onlycalm.cn/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/index.html">
+<meta property="og:site_name" content="OnlyCalm&#39;s Blog">
+<meta property="og:description" content="自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding前言：&emsp;&emsp;之前是将博客部署到Github Pages上，虽然国内访问很慢但是也就凑合用了，但是最近Github Pages被墙了导致无法访问，已经持续半个多月了，于是决定将博客源文件依旧存在Github，但是静态网页上传到Gitee和Coding上。Gitee和Coding也是可免费部署静态网页的平台，而">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_9.jpg">
+<meta property="article:published_time" content="2020-07-28T10:15:12.000Z">
+<meta property="article:modified_time" content="2020-08-09T07:10:00.000Z">
+<meta property="article:author" content="OnlyCalm">
+<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="ButterFly">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="部署">
+<meta property="article:tag" content="Coding">
+<meta property="article:tag" content="Gitee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_9.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding",
+  "url": "http://www.onlycalm.cn/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/",
+  "image": "https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_9.jpg",
+  "datePublished": "2020-07-28T10:15:12.000Z",
+  "dateModified": "2020-08-09T07:10:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "OnlyCalm",
+      "url": "http://www.onlycalm.cn/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://www.onlycalm.cn/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: OnlyCalm","link":"链接: ","source":"来源: OnlyCalm's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #d9d9d9;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_9.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OnlyCalm's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-28T10:15:12.000Z" title="发表于 2020-07-28 18:15:12">2020-07-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-08-09T07:10:00.000Z" title="更新于 2020-08-09 15:10:00">2020-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/Hexo/">Hexo</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding"><a href="#自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding" class="headerlink" title="自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding"></a><center>自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding</center></h1><p><em>前言：</em><br>&emsp;&emsp;<em>之前是将博客部署到Github Pages上，虽然国内访问很慢但是也就凑合用了，但是最近Github Pages被墙了导致无法访问，已经持续半个多月了，于是决定将博客源文件依旧存在Github，但是静态网页上传到Gitee和Coding上。Gitee和Coding也是可免费部署静态网页的平台，而且在国内访问速度会不错，Gitee缺点是每次修改博客后都需要手动更新才会生效，而Coding像Github那样可以自动更新，Coding也支持设置为手动部署。另外Gitee目前需要花钱购买Gitee Pages Pro服务才支持自定义域名，而Coding和Github一样是可免费绑定自己的域名的。</em></p>
+<h2 id="1-将静态网页部署到Gitee上"><a href="#1-将静态网页部署到Gitee上" class="headerlink" title="1 将静态网页部署到Gitee上"></a>1 将静态网页部署到Gitee上</h2><h3 id="1-1-在Gitee上创建仓库"><a href="#1-1-在Gitee上创建仓库" class="headerlink" title="1.1 在Gitee上创建仓库"></a>1.1 在Gitee上创建仓库</h3><p>&emsp;&emsp;这篇文章假定你已经知道如何使用hexo，并且能成功在本地生成和预览静态网页了，如果不清楚可以先去阅读我的另一篇博客《自娱自乐，我的博客(一)——hexo + github pages搭建个人Blog》。<br>&emsp;&emsp;要使用<a target="_blank" rel="noopener" href="https://gitee.com/" title="转到Gitee官网">Gitee</a>的服务首先当然要注册一个账号并登陆它。点击头像旁的 <strong>+</strong> 选择 <strong>创建仓库</strong>。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Gitee%20new%20repository.png" alt="Gitee new repository.png" title="Gitee new repository"></p>
+<p>&emsp;&emsp;注意这是一个特殊仓库，仓库名必须是用户名。必须是公开的仓库。最后点击 <strong>创建仓库</strong> 即可。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Gitee%20repository%20information.png" alt="Gitee repository information.png" title="Gitee repository information"></p>
+<p>&emsp;&emsp;之后给Gitee添加你的SSH。如果你还没有SSH，请在cmd中输入如下指令生成SSH公钥和私钥，请将 <code>&lt;email address&gt;</code> 改成你的邮箱地址。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;&lt;email address&gt;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;Windows系统可以在如下路径中去找到生成的公钥和私钥文件。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">Administrator</span>\.<span class="title">ssh</span></span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;用记事本打开公钥文件 <strong>id_rsa.pub</strong>。<br>&emsp;&emsp;在设置中选择SSH公钥，添加自己的公钥。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Gitee%20add%20SSH.png" alt="Gitee add SSH.png" title="Gitee add SSH"></p>
+<h3 id="1-2-启动Gitee-Pages服务"><a href="#1-2-启动Gitee-Pages服务" class="headerlink" title="1.2 启动Gitee Pages服务"></a>1.2 启动Gitee Pages服务</h3><p>&emsp;&emsp;创建好了用于存放静态站点文件的仓库后，需要为这个仓库启动Gitee Pages服务，这样在访问时才会解析其文件以网页形式展现出来。点击 <strong>服务</strong> 下的 <strong>Gitte Pages</strong>，建议勾上 <strong>强制使用HTTPS</strong>，防止以HTTP形式访问时页面效果显示出问题。最后点击 <strong>启动</strong> 即可。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Gitee%20start%20repository.png" alt="Gitee start repository.png" title="Gitee start repository"></p>
+<p>&emsp;&emsp;启动之后，Gitee Pages服务会为你的站点生成网址，通过该网址你可以访问它。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Gitee%20address.png" alt="Gitee address.png" title="Gitee address"></p>
+<h3 id="1-3-手动更新Gitee-Pages"><a href="#1-3-手动更新Gitee-Pages" class="headerlink" title="1.3 手动更新Gitee Pages"></a>1.3 手动更新Gitee Pages</h3><p>&emsp;&emsp;仓库已经创建好，接下来要将静态网页部署到仓库中并更新它。</p>
+<h4 id="1-3-1-静态网页"><a href="#1-3-1-静态网页" class="headerlink" title="1.3.1 静态网页"></a>1.3.1 静态网页</h4><p>&emsp;&emsp;找到自己仓库的代码下载按钮，点击并选择 <strong>SSH</strong> 方式，点击 <strong>复制</strong>，我们需要这个地址。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Gitee%20SSH%20address.png" alt="Gitee SSH address.png" title="Gitee SSH address"></p>
+<p>&emsp;&emsp;打开Hexo根目录下的配置文件_config.yml，添加 <code>repo</code> 填入刚才复制的地址。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/工具/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span></span><br><span class="line">      <span class="attr">github:</span> <span class="string">git@github.com:onlycalm/onlycalm.github.io.git</span></span><br><span class="line">      <span class="attr">gitee:</span> <span class="string">git@gitee.com:onlycalm/onlycalm.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;我这里填写了两个 <code>repo</code>，是的，可以同时部署到多个平台。然后执行 <code>hexo d</code> 即可将本地的静态网页部署到远程仓库中。<br>&emsp;&emsp;现在访问将无法看到最新传上去的修改内容，因为Gitee需要手动更新，这是Gitee比较不方便的一点，Github是不需要手动更新的。</p>
+<h4 id="1-3-2-手动更新"><a href="#1-3-2-手动更新" class="headerlink" title="1.3.2 手动更新"></a>1.3.2 手动更新</h4><p>&emsp;&emsp;再次打开仓库的Gitee Pages服务，这时候可以看到之前显示为 <strong>启动</strong> 的按钮变成 <strong>更新</strong> 按钮了，没错以后每次上传后都需要在这里点击更新才会使得Gitee Pages更新内容。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Gitee%20update.png" alt="Gitee update.png" title="Gitee update"></p>
+<h2 id="2-将静态网页部署到Coding上"><a href="#2-将静态网页部署到Coding上" class="headerlink" title="2 将静态网页部署到Coding上"></a>2 将静态网页部署到Coding上</h2><h3 id="2-1-在Coding上创建项目"><a href="#2-1-在Coding上创建项目" class="headerlink" title="2.1 在Coding上创建项目"></a>2.1 在Coding上创建项目</h3><p>&emsp;&emsp;同样的你需要先去注册一个<a target="_blank" rel="noopener" href="https://coding.net/" title="转到Coding官网">Coding</a>账号然后登陆它。继续给Coding添加上SSH公钥，在 <strong>个人账户设置</strong> 中点击 <strong>SSH公钥</strong>，填入SSH公钥信息。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Coding%20add%20SSH.png" alt="Coding add SSH.png" title="Coding add SSH"></p>
+<p>&emsp;&emsp;点击头像旁的文件图标，选择 <strong>创建项目</strong>，然后选择 <strong>DevOps项目</strong>。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Coding%20new%20repository.png" alt="Coding new repository.png" title="Coding new repository"></p>
+<p>&emsp;&emsp;注意这是一个特殊项目，项目名必须是用户名。最后点击 <strong>完成创建</strong> 即可。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Coding%20repository%20information.png" alt="Coding repository information.png" title="Coding repository information"></p>
+<h3 id="2-2-将项目配置为静态网站并部署"><a href="#2-2-将项目配置为静态网站并部署" class="headerlink" title="2.2 将项目配置为静态网站并部署"></a>2.2 将项目配置为静态网站并部署</h3><p>&emsp;&emsp;创建之后点击左上角图标，在界面中选择 <strong>项目</strong> 即可看到刚才新建的项目，然后点击打开它。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Coding%20choose%20repository.png" alt="Coding choose repository.png" title="Coding choose repository"></p>
+<p>&emsp;&emsp;打开项目后点击左侧 <strong>持续部署</strong> 下的 <strong>静态网站</strong> 选项。第一次需要实名认证，之后就可以创建静态网站了。需要填写如下信息。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Coding%20repository%20new%20website.png" alt="Coding repository new website.png" title="Coding repository new website"></p>
+<p>&emsp;&emsp;保存之后会看到一个访问地址，这个地址就是你之后网站的访问地址了。<br>&emsp;&emsp;现在需要将项目的SSH网址加入到本地Hexo配置文件_config.yml中。我们找到项目地址并复制它。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Coding%20SSH%20address.png" alt="Coding SSH address.png" title="Coding SSH address"></p>
+<p>&emsp;&emsp;将这个地址添加到_config.yml如下位置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/工具/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span></span><br><span class="line">      <span class="attr">github:</span> <span class="string">git@github.com:onlycalm/onlycalm.github.io.git</span></span><br><span class="line">      <span class="attr">gitee:</span> <span class="string">git@gitee.com:onlycalm/onlycalm.git</span></span><br><span class="line">      <span class="attr">coding:</span> <span class="string">git@e.coding.net:onlycalm/onlycalm/onlycalm.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;之后在命令行执行 <code>Hexo d</code> 即可同时部署到三个平台上。现在你可以尝试访问自己的博客了。</p>
+<h3 id="2-3-自定义域名"><a href="#2-3-自定义域名" class="headerlink" title="2.3 自定义域名"></a>2.3 自定义域名</h3><h4 id="2-3-1-购买域名"><a href="#2-3-1-购买域名" class="headerlink" title="2.3.1 购买域名"></a>2.3.1 购买域名</h4><p>&emsp;&emsp;首先你需要拥有一个自己的域名，可以上<a target="_blank" rel="noopener" href="https://www.aliyun.com/?spm=5176.12825654.amxosvpfn.2.3dbd2c4abYoP8E" title="转到阿里云官网">阿里云</a>购买一定期限的域名使用权。我是在阿里云上购买的域名，因此我这里以阿里云配置域名解析讲解，其他平台购买的域名操作也是类似的。</p>
+<h4 id="2-3-2-域名解析设置"><a href="#2-3-2-域名解析设置" class="headerlink" title="2.3.2 域名解析设置"></a>2.3.2 域名解析设置</h4><p>&emsp;&emsp;登录你的阿里云账号后点击 <strong>控制台</strong>，在左侧弹出框中选择 <strong>域名</strong>，这时候你就可以看到自己的域名了，点击 <strong>解析</strong>。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Domain%20name.png" alt="Domain name.png" title="Domain name"></p>
+<p>&emsp;&emsp;域名解析需要填写你的博客域名以及IP地址，我们打开cmd通过ping指令获取你的博客IP地址，请将下面命令的 <code>&lt;Your Domain name&gt;</code> 换成你的博客域名。之后可以看到自己的IP地址，记住它后面解析要用。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ping</span> &lt;Your Domain name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Ping%20domain%20name.png" alt="Ping domain name.png" title="Ping domain name"></p>
+<p>&emsp;&emsp;回到阿里云上，域名解析我们需要添加两条记录，相应的将记录值改为你的域名和IP地址。</p>
+<table>
+<thead>
+<tr>
+<th align="center">主机记录</th>
+<th align="center">记录类型</th>
+<th align="center">记录值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">@</td>
+<td align="center">CNAME</td>
+<td align="center">你的博客域名</td>
+</tr>
+<tr>
+<td align="center">www</td>
+<td align="center">A</td>
+<td align="center">IP地址</td>
+</tr>
+</tbody></table>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Add%20record.png" alt="Add record.png" title="Add record"></p>
+<p>&emsp;&emsp;最后还需要在Hexo根目录下source文件夹内新建一个名为 <strong>CNAME</strong> 的文件（必须大写且不带后缀）。文件内容填写自己的自定义域名，比如我的 <code>onlycalm.cn</code>。</p>
+<h4 id="2-3-3-Coding绑定自定义域名"><a href="#2-3-3-Coding绑定自定义域名" class="headerlink" title="2.3.3 Coding绑定自定义域名"></a>2.3.3 Coding绑定自定义域名</h4><p>&emsp;&emsp;再次回到Coding创建的博客项目上，左边侧边栏选择 <strong>静态网站</strong>，往下翻找到 <strong>自定义域名栏</strong>，在 <strong>绑定新域名</strong> 编辑框中输入你的自定义域名（务必把 <code>onlycalm.cn</code> 和 <code>www.onlycalm.cn</code> 都添加上，这样可以保证更多的网址写法能访问到你的域名），然后点击 <strong>绑定</strong>，之后在 <strong>已绑定的域名</strong> 处即可看到新增加的自定义域名，留意 <strong>证书状态</strong>，如果证书状态为“申请失败”这里会出现“申请”证书按钮，点击后可恢复正常。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/Binding%20domain%20name.png" alt="Binding domain name.png" title="Binding domain name"></p>
+<p>&emsp;&emsp;好了，现在试着访问你的新域名吧。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn">OnlyCalm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/">http://www.onlycalm.cn/2020/07/28/工具/Hexo/自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://www.onlycalm.cn" target="_blank">OnlyCalm's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Blog/">Blog</a><a class="post-meta__tags" href="/tags/ButterFly/">ButterFly</a><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/%E9%83%A8%E7%BD%B2/">部署</a><a class="post-meta__tags" href="/tags/Coding/">Coding</a><a class="post-meta__tags" href="/tags/Gitee/">Gitee</a></div><div class="post-share"><div class="social-share" data-image="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_9.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/" title="自娱自乐，我的博客（二）——Butterfly主题与博客美化"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">自娱自乐，我的博客（二）——Butterfly主题与博客美化</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（二）——Butterfly主题与博客美化前言：阅读这篇文章我能学到什么？&emsp;&emsp;上一篇讲了如何搭建个人博客，我们期望博客更美观和个性化，因此之后的几篇文章都会讲解如何去美化我们的博客。即便是程序员懂网页前端的只是一小部分，另外也是使我们更简单容易的维护博客，通常我们都会选择一个喜欢的主体并在此基础上进行个性化设置。我推荐Butterfly作为博客主题，非常美观且配置丰富。 1 更换博客主题&emsp;&emsp;Butterfly主题你可以在Hexo官网的主题页搜索找到它，或者直接访问Butterfly 主题的首页，你可以先一览它的“美貌”，并且里面有关于该主题的使用教程。 1.1 安装Butterfly&emsp;&emsp;在你的hexo工作的根目录里执行cmd指令下载安装Butterfly主题。 1git clone -b master https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly  1.2...</div></div></div></a><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86/" title="自娱自乐，我的博客（四）——Hexo文章管理"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">自娱自乐，我的博客（四）——Hexo文章管理</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（四）——Hexo文章管理前言：阅读这篇文章我能学到什么？&emsp;&emsp;通过Hexo搭建一个博客网站并不算难，网站搭建好后如何规范的管理我们的文章，如何维护它们也是一个问题。 1 资源文件和文章的存储位置&emsp;&emsp;为了对文章进行分类管理，我们可以在Hexo根目录的source&#x2F;_posts文件夹下手动创建文件夹将md文件放在文件夹里，但是对应的资源文件比如图片全部放在source&#x2F;images文件夹下显得过于杂乱，最好是对应上md文件。为了实现分类管理需要修改_config.yml文件的配置。 1post_asset_folder: true  &emsp;&emsp;配置之后可以在Hexo根目录通过执行指令 1hexo new post...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Hexo%20+%20github%20pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BABlog/" title="自娱自乐，我的博客（一）——Hexo + github pages搭建个人Blog"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_14.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-28</div><div class="info-item-2">自娱自乐，我的博客（一）——Hexo + github pages搭建个人Blog</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（一）——Hexo + github pages搭建个人Blog前言：阅读这篇文章我能学到什么？&emsp;&emsp;这篇文章介绍通过hexo在github pages上搭建个人博客的方法。hexo是免费的博客框架（如果钱多可以去捐赠），它使得搭建个人博客更简便且满足个性化。最初是由Tommy Chen于2012年开始创建维护，截止目前（2020-07-04）该项目在Github上已经拥有超过31k STARS。GitHub Pages可以访问GitHub上的仓库并以静态网页的形式呈现出来，也就是说GitHub Pages使得你可以直接从GitHub仓库创建网站，不需要你再单独去租用虚拟主机或域名。所以，Hexo作为博客框架，GitHub作为仓库，GitHub Pages将仓库呈现为静态网站，也就顺理成章的能够搭建个人的免费博客了。 1 初识Hexo&emsp;&emsp;一种免费、简洁、快速、易用、的博客框架。它支持解析渲染Markdown格式文件为静态网页。个性化较高，可替换主题或直接修改源码实现网页自定制。&emsp;&emsp;Hexo...</div></div></div></a><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E5%8A%9F%E8%83%BD%E6%89%A9%E5%B1%95/" title="自娱自乐，我的博客（三）——Butterfly主题与博客功能扩展"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_18.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-28</div><div class="info-item-2">自娱自乐，我的博客（三）——Butterfly主题与博客功能扩展</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（三）——Butterfly主题与博客功能扩展前言：阅读这篇文章我能学到什么？&emsp;&emsp;Hexo还支持给博客安装各种免费的第三方插件，这篇文章主要介绍一些优秀的插件安装和使用，使得我们的个人博客更加的功能完善好用。 1 安装本地搜索插件&emsp;&emsp;先在我们个人博客的根目录执行指令安装本地搜索插件wzpan&#x2F;hexo-generator-search。 1npm install hexo-generator-search --save  &emsp;&emsp;在博客根目录的配置文件中添加下面这段配置 1234search:  path: search.xml  field: all  content: true  &emsp;&emsp;关于这几个参数的具体作用请查阅GitHub上该项目的说明。接着还需要开启主题的站内搜索功能。在博客主题的配置文件butterfly.yml中查找关键字 local_search 进行如下配置。 12345local_search:  enable: true  labels:   ...</div></div></div></a><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/" title="自娱自乐，我的博客（二）——Butterfly主题与博客美化"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-28</div><div class="info-item-2">自娱自乐，我的博客（二）——Butterfly主题与博客美化</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（二）——Butterfly主题与博客美化前言：阅读这篇文章我能学到什么？&emsp;&emsp;上一篇讲了如何搭建个人博客，我们期望博客更美观和个性化，因此之后的几篇文章都会讲解如何去美化我们的博客。即便是程序员懂网页前端的只是一小部分，另外也是使我们更简单容易的维护博客，通常我们都会选择一个喜欢的主体并在此基础上进行个性化设置。我推荐Butterfly作为博客主题，非常美观且配置丰富。 1 更换博客主题&emsp;&emsp;Butterfly主题你可以在Hexo官网的主题页搜索找到它，或者直接访问Butterfly 主题的首页，你可以先一览它的“美貌”，并且里面有关于该主题的使用教程。 1.1 安装Butterfly&emsp;&emsp;在你的hexo工作的根目录里执行cmd指令下载安装Butterfly主题。 1git clone -b master https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly  1.2...</div></div></div></a><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86/" title="自娱自乐，我的博客（四）——Hexo文章管理"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-28</div><div class="info-item-2">自娱自乐，我的博客（四）——Hexo文章管理</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（四）——Hexo文章管理前言：阅读这篇文章我能学到什么？&emsp;&emsp;通过Hexo搭建一个博客网站并不算难，网站搭建好后如何规范的管理我们的文章，如何维护它们也是一个问题。 1 资源文件和文章的存储位置&emsp;&emsp;为了对文章进行分类管理，我们可以在Hexo根目录的source&#x2F;_posts文件夹下手动创建文件夹将md文件放在文件夹里，但是对应的资源文件比如图片全部放在source&#x2F;images文件夹下显得过于杂乱，最好是对应上md文件。为了实现分类管理需要修改_config.yml文件的配置。 1post_asset_folder: true  &emsp;&emsp;配置之后可以在Hexo根目录通过执行指令 1hexo new post...</div></div></div></a><a class="pagination-related" href="/2021/06/20/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Coding%E6%94%B9%E7%89%88%E5%90%8E%E7%9A%84%E9%83%A8%E7%BD%B2/" title="自娱自乐，我的博客（十四）——Coding改版后的部署"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-20</div><div class="info-item-2">自娱自乐，我的博客（十四）——Coding改版后的部署</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（十四）——Coding改版后的部署前言：&emsp;&emsp;Coding已经改版一段时间了，改版最大的变动就是开始对网站部署收费。好在新用户从第一次部署开始前6个月免费，而最近Vercel也被墙了国内访问不了，所以这篇文章教你怎么在重新回到改版后的Coding上部署，本篇文章假设你已经在有过一些基础部署经验 1 重回Coding部署的原因&emsp;&emsp;之前我已经在Coding上部署过（改版前），当时Coding免费且支持绑定自定义域名，而且访问速度还过得去（服务器在国内），后来收费所以跑到Vercel上部署，但Vercel近期被墙并且看不到恢复的希望，因此重新回到Coding好好利用它前六个月的免费期，六个月之后怎么办？到时候再说吧，懒得折腾到时候可能就付费了。 2 在Coding上新建网站&emsp;&emsp;登录Coding官网，点开部署的项目仓库，点击左侧的 网站托管 ，然后点击页面的 新建网站 。  &emsp;&emsp;填写自己站点的信息，网站类型选静态仓库，网站类型选静态网站。节点如果网站已经备案选哪里随你，如果没有备案过智能选...</div></div></div></a><a class="pagination-related" href="/2024/02/06/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%85%BE%E8%AE%AF%E4%BA%91SSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7/" title="自娱自乐，我的博客（十七）——腾讯云SSL证书申请"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-06</div><div class="info-item-2">自娱自乐，我的博客（十七）——腾讯云SSL证书申请</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（十七）——腾讯云SSL证书申请前言：&emsp;&emsp; 在腾讯云上可以免费申请SSL证书，本篇文章介绍如何申请并配置SSL证书。 1 介绍&emsp;&emsp;SSL证书（Secure Sockets Layer，现在通常指TLS证书，即Transport Layer Security）的主要作用是为网站提供安全的数据传输服务。主要包含以下几个用途。  数据加密。 身份识别。 防止中间人攻击。 HTTPS标识。 建立信任。  &emsp;&emsp;在腾讯云使用个人域名，必须要要绑定证书。通常证书有效期是一年，到期后需要重新申请新的证书并绑定。 2 证书申请&emsp;&emsp;登录腾讯云 SSL证书申请 界面。提交证书申请，填写要绑定的个人域名。  &emsp;&emsp;要成功绑定域名，还需要添加一条域名解析记录，我是在阿里云购买的域名，因此我在阿里云的域名配置中添加以下记录。  &emsp;&emsp;后在腾讯云点击 验证域名 观察验证是否通过。  &emsp;&emsp;证书申请成功后会显示 已签发 。  3 绑定域名3.1...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">OnlyCalm</div><div class="author-info-description">自娱自乐，做大娱乐家。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding"><span class="toc-text">自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B0%86%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E4%B8%8A"><span class="toc-text">1 将静态网页部署到Gitee上</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%9C%A8Gitee%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-text">1.1 在Gitee上创建仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%90%AF%E5%8A%A8Gitee-Pages%E6%9C%8D%E5%8A%A1"><span class="toc-text">1.2 启动Gitee Pages服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%89%8B%E5%8A%A8%E6%9B%B4%E6%96%B0Gitee-Pages"><span class="toc-text">1.3 手动更新Gitee Pages</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-1-%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5"><span class="toc-text">1.3.1 静态网页</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2-%E6%89%8B%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="toc-text">1.3.2 手动更新</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B0%86%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Coding%E4%B8%8A"><span class="toc-text">2 将静态网页部署到Coding上</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%9C%A8Coding%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-text">2.1 在Coding上创建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%B0%86%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E4%B8%BA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E5%B9%B6%E9%83%A8%E7%BD%B2"><span class="toc-text">2.2 将项目配置为静态网站并部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">2.3 自定义域名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-%E8%B4%AD%E4%B9%B0%E5%9F%9F%E5%90%8D"><span class="toc-text">2.3.1 购买域名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%AE%BE%E7%BD%AE"><span class="toc-text">2.3.2 域名解析设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-Coding%E7%BB%91%E5%AE%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">2.3.3 Coding绑定自定义域名</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（三）——搭建linux工程"/></a><div class="content"><a class="title" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程">FreeRTOS基础篇（三）——搭建linux工程</a><time datetime="2025-08-17T11:26:00.000Z" title="发表于 2025-08-17 19:26:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（一）——介绍"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍">FreeRTOS基础篇（一）——介绍</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（二）——QEMU"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU">FreeRTOS基础篇（二）——QEMU</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Actions配置CI和CD"/></a><div class="content"><a class="title" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD">Github Actions配置CI和CD</a><time datetime="2025-05-31T16:01:00.000Z" title="发表于 2025-06-01 00:01:00">2025-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础篇（五）——vscode使用docker插件"/></a><div class="content"><a class="title" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件">Docker基础篇（五）——vscode使用docker插件</a><time datetime="2025-05-04T16:18:00.000Z" title="发表于 2025-05-05 00:18:00">2025-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://www.onlycalm.cn">OnlyCalm</a> 的博客</br> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024183071号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+      appKey: 'f2158LsoEVzRzMS8EG7rvFSs',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: '0b3f5b76c03e1d9ecca0',
+      clientSecret: '94ba0623c1599038f16bc6ecbdf0c9015c735fe5',
+      repo: 'blogtalk',
+      owner: 'onlycalm',
+      admin: ['onlycalm'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '9c6313347439a738172951d6601fec42'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Valine' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/sakura.js"></script><div class="aplayer no-destroy" data-id="7642168633" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人,张氏情歌,夕阳无限好,单车,心的距离,婚礼祝福,积木,我们,苦瓜" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>

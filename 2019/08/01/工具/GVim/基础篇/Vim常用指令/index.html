@@ -1,0 +1,583 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Vim常用指令 | OnlyCalm's Blog</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Vim常用指令前言：&emsp;&emsp;这篇博文整理记录常用的Vim指令，方便查询。  设置tab为4个空格  :set tabstop&#x3D;4  设置换行自动缩进为4个空格  :set shiftwidth&#x3D;4  设置显示行号  :set number  撤销指令（undo）  普通模式下按u  以root权限运行gvim（否则无文件写入权限）  保存文件  :w :w!  退出gvim  :q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim常用指令">
+<meta property="og:url" content="http://www.onlycalm.cn/2019/08/01/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="OnlyCalm&#39;s Blog">
+<meta property="og:description" content="Vim常用指令前言：&emsp;&emsp;这篇博文整理记录常用的Vim指令，方便查询。  设置tab为4个空格  :set tabstop&#x3D;4  设置换行自动缩进为4个空格  :set shiftwidth&#x3D;4  设置显示行号  :set number  撤销指令（undo）  普通模式下按u  以root权限运行gvim（否则无文件写入权限）  保存文件  :w :w!  退出gvim  :q">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg">
+<meta property="article:published_time" content="2019-08-01T02:13:16.000Z">
+<meta property="article:modified_time" content="2020-08-09T07:10:00.000Z">
+<meta property="article:author" content="OnlyCalm">
+<meta property="article:tag" content="基础篇">
+<meta property="article:tag" content="Vim">
+<meta property="article:tag" content="GVim">
+<meta property="article:tag" content="常用">
+<meta property="article:tag" content="指令">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vim常用指令",
+  "url": "http://www.onlycalm.cn/2019/08/01/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/",
+  "image": "https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg",
+  "datePublished": "2019-08-01T02:13:16.000Z",
+  "dateModified": "2020-08-09T07:10:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "OnlyCalm",
+      "url": "http://www.onlycalm.cn/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://www.onlycalm.cn/2019/08/01/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: OnlyCalm","link":"链接: ","source":"来源: OnlyCalm's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vim常用指令',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #d9d9d9;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OnlyCalm's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">Vim常用指令</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Vim常用指令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-08-01T02:13:16.000Z" title="发表于 2019-08-01 10:13:16">2019-08-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-08-09T07:10:00.000Z" title="更新于 2020-08-09 15:10:00">2020-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/GVim/">GVim</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">3.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Vim常用指令"><a href="#Vim常用指令" class="headerlink" title="Vim常用指令"></a><center>Vim常用指令</center></h1><p><em>前言：</em><br>&emsp;&emsp;<em>这篇博文整理记录常用的Vim指令，方便查询。</em></p>
+<ul>
+<li><p>设置tab为4个空格<br>  <code>:set tabstop=4</code></p>
+</li>
+<li><p>设置换行自动缩进为4个空格<br>  <code>:set shiftwidth=4</code></p>
+</li>
+<li><p>设置显示行号<br>  <code>:set number</code></p>
+</li>
+<li><p>撤销指令（undo）<br>  普通模式下按<code>u</code></p>
+</li>
+<li><p>以root权限运行gvim（否则无文件写入权限）</p>
+</li>
+<li><p>保存文件<br>  <code>:w</code> <code>:w!</code></p>
+</li>
+<li><p>退出gvim<br>  <code>:q</code> <code>:q!</code></p>
+</li>
+<li><p>插入模式<br>  光标字符前进入插入模式: <code>i</code><br>  光标字符后进入插入模式: <code>a</code></p>
+<p>  光标所在行行首进入插入模式: <code>I</code><br>  光标所在行行末进入插入模式: <code>A</code></p>
+<p>  光标下插入新行进入插入模式<code>o</code><br>  光标上插入新行进入插入模式<code>O</code></p>
+</li>
+<li><p>运行dos指令<br>  <code>:!cmd</code><br>  <code>:! dir /w</code></p>
+</li>
+<li><p>切换目录<br>  <code>:cd E:\</code></p>
+</li>
+<li><p>打开文件<br>  <code>:edit .\DebugLog.h</code>不错在则新建</p>
+</li>
+<li><p>隐藏或显示菜单栏<br>  <code>:set guioptions-=m</code>（m小写）<br>  <code>:set guioptions+=m</code></p>
+</li>
+<li><p>隐藏或显示工具栏<br>  <code>:set guioptions-=T</code>（T大写）<br>  <code>:set guioptions+=T</code></p>
+</li>
+<li><p>左右缩进<br>  <code>【shift】  &lt;&lt;/&lt;&lt;</code></p>
+<p>  多行缩进：<br>  在可是模式下选中多行<code>【shift】 &gt;/&lt;</code></p>
+</li>
+<li><p>分屏打开文件（文件不存在则新建）<br>  水平分屏<code>:split .\Debug.c</code><br>  垂直分屏<code>:vsplit .\Debug.c</code></p>
+</li>
+<li></li>
+<li><p>Undo和Redo<br>  Undo：普通模式下按<code>u</code><br>  Redo：普通模式下按<code>【ctr】 + r</code></p>
+</li>
+<li><p>分屏切换<br>  循环切换<code>ctr w + w</code><br>  按方向切换窗口<code>ctr w + k/j/h/l</code></p>
+</li>
+<li><p>分屏窗口移动<br>  按方向移动窗口（移动到最边上）<code>ctr w + K/J/H/L</code>（编程大写）</p>
+</li>
+<li><p>文件浏览器<br>  <code>Explore</code><br>  窗口浏览器中打开选中的文件（当前路径）：<br>  按回车则打开选中文件（不分屏打开文件，如果是目录则进入该目录）<br>  按<code>o</code>则水平分屏打开选中文件<br>  按<code>v</code>则垂直分屏打开选中文件</p>
+</li>
+<li><p>可是模式下复制选中的文本<br>  <code>y</code></p>
+</li>
+<li><p>删除游标所在位置的一个单词<br>  <code>daw</code>（会放入缓存）</p>
+</li>
+<li><p>复制游标坐在位置的一个单词<br>  <code>yaw</code></p>
+</li>
+<li><p>复制游标所在整行（结尾带换行符）<br>  <code>yy</code></p>
+</li>
+<li><p>分屏窗口修改高度和宽度<br>  修改高度：<br>  游标所在需要移动的窗口内输入指令<code>ctr w + -/+</code>注意是+号不是&#x3D;，需要按住shift打出+号。<br>  修改宽度：<br>  游标所在需要移动的窗口内输入指令<code>ctr w + &lt;/&gt;</code></p>
+</li>
+<li><p>屏幕行与实际行的游标移动<br>  实际行移动：<code>k/j/h/l</code> 对应上下左右</p>
+<p>  屏幕行移动：<code>g + k/j</code> 对应上下移动行； <code>g + 0/$</code> 对应移至屏幕行行首和尾。</p>
+</li>
+<li><p>屏幕滚动一行<br>  往下：<code>ctr + e</code><br>  往上：<code>ctr + y</code></p>
+</li>
+<li><p>跳转到指定行<br>  普通模式下<code>行数 + G</code><br>  命令模式下<code>:行数</code></p>
+</li>
+<li><p>快速跳转到文件首尾巴<br>  跳转到文件首: <code>gg</code><br>  跳转到文件尾: <code>G</code></p>
+</li>
+<li><p>显示行末换行符<br>  显示: <code>set list</code><br>  不显示: <code>set nolist</code></p>
+</li>
+<li><p>替换游标处的一个字符，并且仍然处于普通模式<br>  <code>r</code></p>
+</li>
+<li><p>删除游标处一个字符，并且删除后在该位置进入编辑模式<br>  <code>s</code></p>
+</li>
+<li><p>当前文件搜索游标处字符串<br>  <code>shift + *</code></p>
+</li>
+<li><p>复制从游标开始往下的n行到缓冲区<br>  <code>nyy</code> <code>yny</code></p>
+</li>
+<li><p>删除n行<br>  <code>dnd</code></p>
+</li>
+<li><p>游标移动到行首（普通模式）<br>  移动到下一行行首: <code>+</code><br>  移动到上一行行首: <code>-</code></p>
+</li>
+<li><p>从当前游标位置开始复制到行首或行末<br>  复制至行首（不含游标所在处字符）: <code>y0</code><br>  复制至行末（含游标所在处字符）: ·y$&#96;</p>
+</li>
+<li><p>从当前游标位置开始删除到行首或行末<br>  删除至行首（不含游标所在处字符）: <code>d0</code><br>  删除至行末（含游标所在处字符）: ·d$&#96;</p>
+</li>
+<li><p>游标移动到行末（首）（普通模式）<br>  行末<code>$</code><br>  行首<code>0</code></p>
+</li>
+<li><p>跳到下（上）一个字符串的首（尾）部<br>  下一个字符串首: <code>w</code><br>  上一个字符串首: <code>b</code><br>  下一个字符串尾: <code>e</code><br>  上一个字符串尾: <code>ge</code></p>
+</li>
+<li><p>文件内字符串全替换<br>  把字符串abc全部替换为123: <code>%s/abc/123/g</code></p>
+</li>
+<li><p>选中多行的列<br>  <code>ctr + v</code></p>
+</li>
+<li><p>分屏高度调为最大<br>  <code>ctr w + _</code></p>
+</li>
+<li><p>分屏宽调为最大<br>  <code>ctr w + |</code></p>
+</li>
+<li><p>当前文件内搜索字符串<br>  命令模式下输入<code>/string</code>即可语法高亮string字符串，高亮后普通模式下<code>n</code>跳到下一个搜索结果，<code>N</code>跳到上一个。</p>
+</li>
+<li><p>选中游标位置至词末<br>  普通模式下<code>v + e</code></p>
+</li>
+<li><p>改变光标处字母的大小写<br>  <code>~</code></p>
+</li>
+<li><p>光标跳转到上一次跳转的位置<br>  按两次&#96;</p>
+</li>
+<li><p>代码折叠<br>  在可是模式下选中代码块输入<code>zf</code>即可折叠代码，输入空格即可展开折叠。</p>
+</li>
+<li><p>头文件与源文件之间切换（需要安装插件a.vim，官网下载后直接拷贝到插件目录plugin文件夹中，注：vim需要重启一下插件才能生效。下载地址：<a target="_blank" rel="noopener" href="https://www.vim.org/scripts/script.php?script_id=31%EF%BC%89">https://www.vim.org/scripts/script.php?script_id=31）</a><br>  :A    在新Buffer中切换到c&#x2F;h文件<br>  :AS    横向分割窗口并打开c&#x2F;h文件<br>  :AV    纵向分割窗口并打开c&#x2F;h文件<br>  :AT    新建一个标签页并打开c&#x2F;h文件</p>
+</li>
+<li><p>标签页操作<br>  在新标签呀打开编辑一个文件<code>:tabedit filename</code><br>  跳转到下一个标签页<code>gt</code><br>  跳转到上一个标签页<code>gT</code></p>
+</li>
+<li><p>在定义和声明处跳转（需要安装插件ctags.exe，官网下载后解压，解压可看到一堆文件而我们只需要把ctags.exe拷贝到gvim的安装根目录下即可，若要拷贝到其他路径则需要让gvim能找到它而修改vimrc文件或者添加路径到环境变量里。注：插件需要重启gvim才能生效。下载地址：<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/ctags/files/ctags/5.8/ctags58.zip/download%EF%BC%89">https://sourceforge.net/projects/ctags/files/ctags/5.8/ctags58.zip/download）</a></p>
+<ul>
+<li>在使用跳转命令前请将gvim给cd到你的工程目录（最好是根目录）然后执行一次命令<code>:!ctags -R</code>就会在路径下生成文件tags，该文件记录了相关的关键词跳转信息。注：修改了代码后需要再次执行该命令来更新ctags文件，也即更新跳转的信息。</li>
+<li>有了ctags后跳转命令为<code>ctr + ]</code></li>
+</ul>
+</li>
+<li><p>使用TagList浏览代码（需要安装插件taglist.vim，官网下载后解压，里面有帮助文档taglist.txt和taglist.vim脚本文件，将其放到gvim相应路径（doc、plugin）下即可使用，注：插件需要重启gvim才能生效。下载地址：<a target="_blank" rel="noopener" href="https://www.vim.org/scripts/script.php?script_id=273%EF%BC%89">https://www.vim.org/scripts/script.php?script_id=273）</a><br>  注意：使用此插件之间需要先安装ctags<br>  注意：taglist.txt直接拷贝到doc路径下，在vim中执行指令<code>:help taglist.txt</code>并不会打开帮助文档，需要先把它加入到doc下的tags文件里，也即生成帮助标签，执行指令如<code>helptags C:\cpy\Softs\Install\gvim81\Vim\vim81\doc</code>，后面是doc的路径。</p>
+<p>  打开taglist视图<code>:TlistOpen</code></p>
+<p>  在_vimrc文件中添加指令<code>let Tlist_Show_One_File = 1</code>则可使taglist中一次只显示一个文件的信息。</p>
+<p>  折叠taglist中一项<code>-</code>。<br>  展开taglist中一项<code>+</code>。<br>  折叠taglist中全部项<code>=</code>。<br>  展开taglist中全部项<code>*</code>。</p>
+</li>
+<li><p>快速打开编辑_vimrc文件。<br>  输入指令<code>:edit $vim/_vimrc</code></p>
+</li>
+<li><p>语法补全<br>  gvim81似乎已经自带相关插件了，可以直接使用<code>ctr + x, ctr + n</code>自动补全功能。<br>  为了方便和美观我们在_vimrc文件中添加如下设置。</p>
+<pre><code>  imap &lt;TAB&gt; &lt;C-X&gt;&lt;C-N&gt;
+  highlight Pmenu    guibg=darkgrey  guifg=black
+  highlight PmenuSel guibg=lightgrey guifg=black
+</code></pre>
+<p>  如此就能改变框的颜色和将自动补全快捷键设置为tab键了。</p>
+<p>  向后切换成员: <code>Ctrl+N</code><br>  向前切换成员: <code>Ctrl+P</code></p>
+</li>
+<li><p>分隔当前窗口<br>  水平分割: <code>split</code><br>  垂直分割: <code>vsplit</code></p>
+</li>
+<li><p>当前分屏和下一个分屏交换位置<br>  <code>ctr + w  x</code></p>
+</li>
+<li><p>关闭当前文件并打开上次打开的文件（多次按可继续打开之前打开过的文件）<br>  <code>ctr + o</code></p>
+</li>
+<li><p>当前文件跳转到光标所在字符串的定义处，并高亮文件内该字符串。<br>  <code>gd</code></p>
+</li>
+<li><p>打开上次关闭gim时的文件。这个功能需要安装一个插件mru.vim，下载好后直接拷贝到pulugin目录下即可（下载地址: <a target="_blank" rel="noopener" href="https://www.vim.org/scripts/script.php?script_id=521%EF%BC%89">https://www.vim.org/scripts/script.php?script_id=521）</a><br>  <code>MRU</code>输入该指令会将上次关闭vim时还处于打开的文件列表显示。</p>
+</li>
+<li><p>打开vim保持上次关闭的设置（保持窗口视图、全局设置、文件打开状态，也即窗口布局和上次关闭时一致）<br>  输入指令: mks! Session.vim<code>会自动在当前目录下创建一个文件Session.vim，该文件记录窗口的布局，下次打开vim只需加载该文件就能还原。   打开指令，在windows下输入cmd指令</code>gvim -S Session.vim&#96;<br>  注意Tlist和Explore窗口并不会记录打开，要想启动vim自动打开需要在_vimrc文件中添加指令</p>
+</li>
+<li><p>修改分屏宽度<br>  <code>vertical res 30</code></p>
+</li>
+<li><p>推出vim软件<br>  <code>exit</code></p>
+</li>
+<li><p>vim显示目录树（实现该功能需要安装插件NERD_tree.vim，该插件可以将文件夹里的文件折叠或展开显示，而vim自带的文件浏览器<code>Explore</code>一次只能浏览一个文件夹下的文件，下载地址为：<a target="_blank" rel="noopener" href="https://www.vim.org/scripts/script.php?script_id=1658%EF%BC%89">https://www.vim.org/scripts/script.php?script_id=1658）</a><br>  解压压缩包，解压出的文件将其拷贝到vim安装路径下的对应目录中即可，注插件要重启vim才能生效）<br>  重启vim时会报错，错误如下：<br>  “处理 C:\cpy\Softs\Install\gvim81\Vim\vim81\plugin\NE<br>  RD_tree.vim 时发生错误:<br><br>  第   68 行:<br><br>  E117: Unknown function: nerdtree#runningWindows<br><br>  E116: Invalid arguments for function <SNR>22_initVari<br>  able<br><br>  第   69 行:<br><br>  E114: 缺少引号: “鈻?)<br><br>  E116: Invalid arguments for function <SNR>22_initVari<br>  able<br><br>  第   70 行:<br><br>  E114: 缺少引号: “鈻?)<br><br>  E116: Invalid arguments for function <SNR>22_initVari<br>  able<br><br>  第   96 行:<br><br>  E117: Unknown function: nerdtree#runningWindows<br><br>  E15: 无效的表达式: nerdtree#runningWindows()<br><br>  第  141 行:<br><br>  E117: Unknown function: nerdtree#loadClassFiles<br><br>  第  145 行:<br><br>  E117: Unknown function: nerdtree#ui_glue#setupCom<br>  mands<br><br>  第  151 行:<br><br>  E121: 未定义的变量: g:NERDTreeCreator<br><br>  E15: 无效的表达式: “autocmd BufLeave “. g:NERDTreeCr<br>  eator.BufNamePrefix() .”* if g:NERDTree.IsOpen() | call<br>  b:NERDTree.ui.saveScreenState() | endif”<br><br>  第  154 行:<br><br>  E121: 未定义的变量: g:NERDTreeCreator<br><br>  E15: 无效的表达式: “autocmd BufEnter “. g:NERDTreeCr<br>  eator.BufNamePrefix() .”* stopinsert”<br><br>  第  205 行:<br><br>  E117: Unknown function: nerdtree#postSourceActions<br>  ”<br>  这是由于文件内有一些无法识别的符号，可以尝试使vim支持显示这些字符或者将这些字符修改为vim能支持的。</p>
+<p>  使其支持这些符号的办法是在_vimrc中添加如下代码：</p>
+<pre><code>  set encoding=utf-8
+  set termencoding=utf-8
+  set fileencoding=chinese
+  set fileencodings=ucs-bom,utf-8,chinese
+  set langmenu=zh_CN.utf-8
+  source $VIMRUNTIME/delmenu.vim
+  source $VIMRUNTIME/menu.vim
+  language messages zh_cn.utf-8
+</code></pre>
+<p>  如果折叠或展开的三角形字符显示出错，应该是当前使用的字体不出吃显示该字符，可以修改字体如：<br>  <code>set guifont=Consolas:h10</code></p>
+<p>  其他一些设置可以如下：</p>
+<pre><code>  &quot;Show line number.
+  let g:NERDTreeShowlineNumber=1
+  &quot;Show hide file.
+  let g:NERDTreeHidden=0
+  &quot;Show Node model.
+  let NERDTreeDirArrows=1
+</code></pre>
+<p>  注意帮助文档NERD_tree.txt拷贝到doc目录下，在vim中运行指令<code>help NERD_tree.txt</code>并不能打开它，需要输入指令更行tags文件，指令为：<code>helptags C:\cpy\Softs\Install\gvim81\Vim\vim81\doc</code></p>
+</li>
+<li><p>设置vim窗口大小<br>  <code>set lines=30</code><br>  <code>set columns=120</code></p>
+</li>
+<li><p>安装配置好的vim可以将整个路径连同相关配置文件拷贝到其他电脑使用，免安装。</p>
+</li>
+<li><p>使用winmanager插件将NERDTree和TagList合并显示（需要安装插件winmanager.vim，下载地址为：<a target="_blank" rel="noopener" href="https://www.vim.org/scripts/script.php?script_id=95%EF%BC%8C%E5%B0%86%E5%AE%89%E8%A3%85%E5%8C%85%E5%8A%A0%E5%8E%8B%E5%90%8E%E6%96%87%E4%BB%B6%E4%B8%A2%E5%88%B0vim%E7%9B%B8%E5%BA%94%E8%B7%AF%E5%BE%84%E4%B8%8B%E5%8D%B3%E5%8F%AF%EF%BC%8C%E6%8F%92%E4%BB%B6%E9%9C%80%E8%A6%81%E9%87%8D%E5%90%AFvim%E6%89%8D%E4%BC%9A%E7%94%9F%E6%95%88%EF%BC%89%E3%80%82">https://www.vim.org/scripts/script.php?script_id=95，将安装包加压后文件丢到vim相应路径下即可，插件需要重启vim才会生效）。</a><br>  一下是我的winmanager配置：</p>
+<pre><code>  let g:NERDTree_title=&#39;[NERDTree]&#39;
+  let g:winManagerWindowLayout=&quot;NERDTree|TagList&quot;
+  let g:winManagerWidth=30
+  let g:AutoOpenWinManager=1
+  nmap &lt;silent&gt; &lt;F2&gt; :if IsWinManagerVisible() &lt;BAR&gt; WMToggle&lt;CR&gt; &lt;BAR&gt; else &lt;BAR&gt; WMToggle&lt;CR&gt;:q&lt;CR&gt; endif &lt;CR&gt;&lt;CR&gt;
+
+  function! NERDTree_Start()
+      exec &#39;NERDTree&#39;
+  endfunction
+
+  function! NERDTree_IsValid()
+      return 1
+  endfunction
+</code></pre>
+<p>  用winmanager打开NERDTree会自动打开一个空白的窗口，为了将其关闭所以在快捷键处设置。</p>
+</li>
+<li><p>禁止vim生成备份文件<br>  <code>set noundofile</code><br>  <code>set nobackup</code><br>  <code>set noswapfile</code></p>
+</li>
+<li><p>安装YouCompleteMe</p>
+<p>  安装YCM前首先安装git和Vundle。</p>
+<p>  github在国内重官网下载非常慢，可以选择从代理服务器下载：<a target="_blank" rel="noopener" href="http://npm.taobao.org/mirrors/git-for-windows/">http://npm.taobao.org/mirrors/git-for-windows/</a></p>
+<p>  在vim的安装路径下执行cmd命令：<code>git clone https://github.com/VundleVim/Vundle.vim.git vimfiles/bundle/Vundle.vim</code>即可完成Vundle下载</p>
+<p>  在_vimrc文件开头插入如下配置：</p>
+<pre><code>  set nocompatible              &quot; be iMproved, required
+  filetype off                  &quot; required
+
+  set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
+  call vundle#begin(&#39;$VIM/vimfiles/bundle/&#39;)
+
+  &quot; let Vundle manage Vundle, required
+  Plugin &#39;VundleVim/Vundle.vim&#39;
+
+  &quot; All of your Plugins must be added before the following line
+  call vundle#end()            &quot; required
+  filetype plugin indent on    &quot; required
+</code></pre>
+<p>  vim中输入指令<code>VundleInstall</code>安装插件。</p>
+<p>  然后安装好python、LLVM和cmake并添加好环境变量。</p>
+<p>  LLVM的安装（有两种形式，一种是下载源码后自己编译，但这种办法可能存在编译报错而且编译很慢。另一种办法是下载官方编译好后的二进制文件）：</p>
+<p>  下载源码自己编译：</p>
+<p>  先下载源码（不推荐此法）：<br>  <a target="_blank" rel="noopener" href="http://releases.llvm.org/download.html">http://releases.llvm.org/download.html</a><br>  LLVM source code<br>  Clang source code<br>  compiler-rt source code</p>
+<p>  将llvm-6.0.0.src.tar.xz解压，将cfe-6.0.0.src.tar.xz解压，文件夹重命名为clang，然后放到llvm-6.0.0.src&#x2F;tools目录下，将compiler-rt-6.0.0.src.tar.xz解压，文件夹重命名为compiler-rt，放置到llvm-6.0.0.src&#x2F;projects目录下。创建build文件夹。</p>
+<p>  下载二进制文件，直接解压即可（其实只是为了要libclang.lib这个文件）。</p>
+<p>  cmake安装：</p>
+<p>  下载路径：<a target="_blank" rel="noopener" href="https://cmake.org/download/">https://cmake.org/download/</a> （国外网站特别慢）</p>
+<p>  下载windows版64位压缩包格式即可。</p>
+<p>  按此博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/pl19920614/article/details/54143499?utm_source=blogxgwz1%E4%B8%AD%E7%9A%84%E8%AE%BE%E7%BD%AE%E7%BC%96%E8%AF%91%E3%80%82">https://blog.csdn.net/pl19920614/article/details/54143499?utm_source=blogxgwz1中的设置编译。</a></p>
+<p>  最后用vs打开生成的LLVM.sln，使用Release模式编译，最后生成的结果在Release文件夹下（注意第一次编译时间会非常长，我自己的电脑用了快一个小时才编译完！）。</p>
+<p>  编译：</p>
+<p>  在YouCompleteMe\third_party路径下新建build文件夹即YouCompleteMe\third_party\build在该路径下执行指令：<code>cmake -G &quot;Visual Studio 15 2017 Win64&quot; -EXTERNAL_LIBCLANG_PATH=&quot;C:\cpy\Softs\Install\LLVM\bin\libclang.dll&quot; -DUSE_SYSTEM_LIBCLANG=ON -DPATH_TO_LLVM_ROOT=&quot;C:\cpy\Softs\Install\LLVM&quot;  ..\ycmd\cpp</code></p>
+<p>  成功后可以看到build路径下有个*.sln文件，用vs打开它编译（建议也在release模式下，当然也可是使用输入指令用cmake编译），选中ALL_BUILD这项编译。编译成功后在ymd路径下release目录里有。我这里没用vs编译，而是继续在build目录下使用指令<code>cmake --build . --target ycm_core --config Release</code> third_party\ycmd目录下出现ycm_core.pyd</p>
+<p>  运行gvim结果有红色的字报错，提示ycm挂掉了。<code>The ycmd server SHUT DOWN (restart with &#39;:YcmRestartServer&#39;). Unexpected exit code 1. Type &#39;:YcmTogglelogs ycmd_51691_stderr_em_jpj.log&#39; to check the logs.</code><br>  我们在gvim里输入<code>:YcmDebugInfo</code>可以看到一些log日志的保存位置，我们打开详细看看错误原因，试了下文件都是空的！试者到YCm根目录执行指令<code>python install.py --clang-completer</code>发现一闪而过(这个命令是编译c++补全支持的）</p>
+<p>  报这个错的原因其实是python还差一个模块urllib3未安装，去下载（<a target="_blank" rel="noopener" href="https://github.com/urllib3/urllib3%EF%BC%89%E5%A5%BD%E5%90%8E%E6%89%A7%E8%A1%8C%E5%88%B0%E8%A7%A3%E5%8E%8B%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%A7%E8%A1%8C%E6%8C%87%E4%BB%A4%60python">https://github.com/urllib3/urllib3）好后执行到解压目录下执行指令`python</a> setup.py install<code>安装即可。继续执行之前的指令</code>python install.py –clang-completer&#96;这次就能正确的执行安装了。</p>
+<p>  重新执行指令<code>python install.py</code>虽然没有报错，但是打开gvim后下方还是有红色字体报错:The ycmd server SHUT DOWN (restart with ‘:YcmRestartServer’). Unexpected exit code 1. Type ‘:YcmTogglelogs ycmd_51691_stderr_em_jpj.log’ to check the logs.</p>
+<p>  试者执行指令<code>python install.py --rust-completer</code>,发现报错：ERROR: Unable to find executable ‘cargo’. cargo is required for the Rust completer.</p>
+<p>  应该是缺文件了，果断重新装。</p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn">OnlyCalm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn/2019/08/01/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">http://www.onlycalm.cn/2019/08/01/工具/GVim/基础篇/Vim常用指令/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://www.onlycalm.cn" target="_blank">OnlyCalm's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a><a class="post-meta__tags" href="/tags/Vim/">Vim</a><a class="post-meta__tags" href="/tags/GVim/">GVim</a><a class="post-meta__tags" href="/tags/%E5%B8%B8%E7%94%A8/">常用</a><a class="post-meta__tags" href="/tags/%E6%8C%87%E4%BB%A4/">指令</a></div><div class="post-share"><div class="social-share" data-image="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2019/08/01/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%87%A0%E7%A7%8D%E8%B7%B3%E8%BD%AC%E6%96%B9%E5%BC%8F/" title="Vim几种跳转方式"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_13.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Vim几种跳转方式</div></div><div class="info-2"><div class="info-item-1">Vim几种跳转方式前言：&emsp;&emsp;以下时我常用的一些跳转指令，用于参考和复习记忆。还有一些后续会更新。 1 文件内跳转1.1 移动光标 普通模式下左h，右l，上k，下j。（可以使用数字+hlkj，实现跳跃式移动）。  1.2 字符间跳转 跳转到当前字符的前面：普通模式下i。  跳转到当前字符的后面：不同模式下a。  字符串间跳转  向右跳：普通模式下跳转到串首w，普通模式下跳转到串尾e。 向左跳：普通模式下跳转到串首b，普通模式下跳转到串尾be（这个似乎没有专门的指令）。 高亮文件内的某字符串所有出现处，并在高亮处跳转：先将光标移动值至目标字符串处按*。 高亮匹配结果中往下跳：n。 高亮匹配结果中往上跳：N。  &emsp;&emsp;关闭高亮：noh。      1.3 行内跳转 跳转到行末：普通模式下键入$光标移至行末，普通模式下键入A光标移至行末且进入插入模式。 跳转到行首：普通模式下键入0（^会忽略行首的空格，跳到第一个非空格字符处，0则跳到第一列）光标移至行首，普通模式下键入I光标移至行首且进入插入模式。 跳转到行内某个字符(比如字符a）：往后跳f +...</div></div></div></a><a class="pagination-related" href="/2019/08/12/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E6%A8%A1%E6%8B%9FPWM%E6%B3%A2%E7%9A%84%E8%87%AA%E9%80%82%E5%BA%94%E5%8F%96%E9%98%88%E5%80%BC%E7%AE%97%E6%B3%95/" title="模拟PWM波的自适应取阈值算法"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">模拟PWM波的自适应取阈值算法</div></div><div class="info-2"><div class="info-item-1">模拟PWM波的自适应取阈值算法前言：&emsp;&emsp;单片机开发中，我们常常接触到的波形就是PWM波，一般都是0~3.3V的数字PWM波，很少涉及模拟PWM波。两者有什么不同呢？模拟PWM波不只有高低电平，还有中间的一些变化过程，且波形可能也不是规整的矩形波，再者它的电压可能超过3.3v导致无法直接用单片机IO口识别，PWM无法直接捕获到上升下降沿。&emsp;&emsp;如果你预算充足，开发的设备也不是非常的小型话，可以容纳额外的电路，那么你可以考虑从硬件上增加一些运放电路或整形电路，尽可能将模拟PWM变为数字PWM，如果不行就得考虑串联电阻来分压，然后代码中通过AD采样到数据后进行算法处理。 1 自适应算法1.1 自适应取阈值算法思路： 这里的MAX，MIN，LOW电压值都是不确定的，受传输距离和干扰影响。 1.2...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2019/07/27/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/GVim%E7%AE%A1%E7%90%86%E2%80%9C%E5%B7%A5%E7%A8%8B%E2%80%9D%EF%BC%9F/" title="GVim管理“工程”？"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_9.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-27</div><div class="info-item-2">GVim管理“工程”？</div></div><div class="info-2"><div class="info-item-1">GVim管理”工程“？前言：&emsp;&emsp;经常看到新手朋友问Vim怎么管理工程之类的问题，其实这是对Vim的误解，它只是个编辑器而不是IDE，它不负责工程管理。工程管理应该交给CMake之类的（不然你还指望能像vscode那样有WorkSpace功能吗？目前我没发现）。如果你只是想用GVim方便的管理文件和文件夹的话还是能做到的，具体可以用Vim自带的目录树管理插件或用NerdTree之类的插件。&emsp;&emsp;用过之后你可能会郁闷遇到“如何让GVim启动就默认打开某个目录或文件？”，更方便点“如何想让哪个文件或文件夹用GVim启动就能立刻启动？”。这篇博客就是回答这两个问题的。 1 如何让GVim启动就默认打开某个目录或文件？1.1...</div></div></div></a><a class="pagination-related" href="/2019/07/21/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/GVim%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84NerdTree/" title="GVim配置一个漂亮的NerdTree"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-21</div><div class="info-item-2">GVim配置一个漂亮的NerdTree</div></div><div class="info-2"><div class="info-item-1">GVim配置一个漂亮的NerdTree前言：&emsp;&emsp;GVim使用也有一段时间了，有空写几个简单的教程帮助新手快速上手，定制一个个性化的编辑器把。以下是我的NerdTree效果展示。  1 NerdTree插件1.1 NerdTree下载安装&emsp;&emsp;如果你安装了插件管理器的化安装就很简单了，如果没有安装使用任何插件管理器，那我建议你还是装一个，因为vim你会用到的插件挺多的，有个管理器很方便。&emsp;&emsp;将这句添加到vimrc中Plugin &#39;scrooloose/nerdtree&#39;，随后重启下vim然后命令模式下执行:BundleInstall（具体根据你装的插件，我装的是Bundle。）安装指令，完毕后最好再重启一次vim。 1.2 NerdTree配置&emsp;&emsp;ps:...</div></div></div></a><a class="pagination-related" href="/2019/08/01/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Leaderf%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/" title="Leaderf的安装与配置使用"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_18.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-08-01</div><div class="info-item-2">Leaderf的安装与配置使用</div></div><div class="info-2"><div class="info-item-1">Leaderf的安装与配置使用前言：&emsp;&emsp;Leaderf使得Vim可以实现像IDE那样的模糊搜索功能，这篇文章介绍配置和使用的方法。 1 下载安装Leaderf&emsp;&emsp;如果你安装了Vundle, 那么直接再Vimrc中添加指令Plugin &#39;Yggdroot/LeaderF&#39;等待安装完成即可，如果你没有装Vundle，那直接去github上下载并解压拷贝即可。 &emsp;&emsp;需要注意的是Leaderf还依赖与ctags和rg（这个插件全名是Rigrep）插件，如果你还没有装可以去github上直接下载Release版的，将其中的*.exe文件拷贝到与GVim.exe同级目录即可。 2 Leaderf常用指令2.1 查询文件：:Leaderf file&emsp;&emsp;默认是从根目录内的文件中查找。  2.2 查询函数: :Leaderf function&emsp;&emsp;默认是再当前文件中查找函数。  2.3 模糊查询字符串: Leaderf...</div></div></div></a><a class="pagination-related" href="/2019/08/01/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%87%A0%E7%A7%8D%E8%B7%B3%E8%BD%AC%E6%96%B9%E5%BC%8F/" title="Vim几种跳转方式"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_13.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-08-01</div><div class="info-item-2">Vim几种跳转方式</div></div><div class="info-2"><div class="info-item-1">Vim几种跳转方式前言：&emsp;&emsp;以下时我常用的一些跳转指令，用于参考和复习记忆。还有一些后续会更新。 1 文件内跳转1.1 移动光标 普通模式下左h，右l，上k，下j。（可以使用数字+hlkj，实现跳跃式移动）。  1.2 字符间跳转 跳转到当前字符的前面：普通模式下i。  跳转到当前字符的后面：不同模式下a。  字符串间跳转  向右跳：普通模式下跳转到串首w，普通模式下跳转到串尾e。 向左跳：普通模式下跳转到串首b，普通模式下跳转到串尾be（这个似乎没有专门的指令）。 高亮文件内的某字符串所有出现处，并在高亮处跳转：先将光标移动值至目标字符串处按*。 高亮匹配结果中往下跳：n。 高亮匹配结果中往上跳：N。  &emsp;&emsp;关闭高亮：noh。      1.3 行内跳转 跳转到行末：普通模式下键入$光标移至行末，普通模式下键入A光标移至行末且进入插入模式。 跳转到行首：普通模式下键入0（^会忽略行首的空格，跳到第一个非空格字符处，0则跳到第一列）光标移至行首，普通模式下键入I光标移至行首且进入插入模式。 跳转到行内某个字符(比如字符a）：往后跳f +...</div></div></div></a><a class="pagination-related" href="/2020/03/28/%E5%B7%A5%E5%85%B7/GVim/%E5%9F%BA%E7%A1%80%E7%AF%87/Vim%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C%E2%80%94%E2%80%94%E5%A4%8D%E5%88%B6_%E7%B2%98%E8%B4%B4_%E5%89%AA%E5%88%87%EF%BC%88%E6%B7%B1%E5%85%A5Vim%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/" title="Vim常规操作——复制_粘贴_剪切（深入Vim寄存器）"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_17.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-28</div><div class="info-item-2">Vim常规操作——复制_粘贴_剪切（深入Vim寄存器）</div></div><div class="info-2"><div class="info-item-1">Vim常规操作——复制、粘贴、剪切（深入Vim寄存器）前言：阅读这篇文章我能学到什么？&emsp;&emsp;你可能想知道其他软件与vim之间，vim与其命令行之间如何进行复制、粘贴、剪切问题，那么就请阅读这篇文章。这篇文章将从Vim寄存器的作用角度解答你使用vim过程中进行复制、粘贴、剪切如何操作的问题，将会非常详细。 1. Vim寄存器&emsp;&emsp;vim有很多寄存器，我们进行的复制粘贴操作实际就是往这些寄存器写或者读取内容的操作，要想更好的使用复制粘贴功能，需要对这些寄存器有基本的了解。这些寄存器各有其功能，以我现在使用的 gvim_8.2.0318_x64_signed 举例（不排除未来会有版本差异），它具有这么几类寄存器：   无名寄存器 “：缓存最近一次的内容，也是复制粘贴最常用的寄存器； 编号寄存器 0~9：缓存最近操作内容。其中0号寄存器有别其他，它缓存最近一次复制的内容，1~9缓存最近9次删除的内容。 命名寄存器 a~z或A~Z：指定名称的寄存器，可以由用户自由选择内容缓存进去。要注意的是大小写虽然对应同一个寄存器，但是功能有差异。 只读寄存器...</div></div></div></a><a class="pagination-related" href="/2021/01/23/%E5%B7%A5%E5%85%B7/GVim/%E8%BF%9B%E9%98%B6%E7%AF%87/Vim%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94LeaderF/" title="Vim基础篇（一）——光标跳转"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_17.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-23</div><div class="info-item-2">Vim基础篇（一）——光标跳转</div></div><div class="info-2"><div class="info-item-1">Vim基础篇（一）——光标跳转前言：&emsp;&emsp;Vim编辑文本之所以高效的一大原因是其灵活的光标跳转功能，无需鼠标参与，因此有必要熟练掌握Vim中的光标跳转。这篇文章将详细介绍Vim几种模式下的光标切换。 1 普通模式（Normal mode）1.1 窗口内移动1.1.1 行间移动  ‘n’ + ‘k’光标向上移动n行，n默认为1 ‘n’ + ‘j’光标向下移动n行，n默认为1 ‘{n}’ + ‘gg’移动到第n行，n省略时移动到第一行的行首 ‘{n}’ + ‘G’移动到第n行，n省略时移动到最后一行的行首 ‘n’ + ‘%’跳转到n%处 ‘n’ + ‘-‘向上移动n行至行首，n默认为1 ‘n’ + ‘+’向下移动n行至行首，n默认为1 ‘H’移动到屏幕可视有效行的第一行行首 ‘M’移动到屏幕可视有效行的中间行行首 ‘L’移动到屏幕可视有效行的最后一行行首 ‘[‘   行首：一行的第一个非空白字符。行末：一行的最后一个非空白字符。 1.1.2 行内移动  ‘n’ + ‘h’光标向左移动n列，n默认为1 ‘n’ + ‘l’光标向右移动n列，n默认为1 ‘n’ +...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">OnlyCalm</div><div class="author-info-description">自娱自乐，做大娱乐家。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vim%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="toc-text">Vim常用指令</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（三）——搭建linux工程"/></a><div class="content"><a class="title" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程">FreeRTOS基础篇（三）——搭建linux工程</a><time datetime="2025-08-17T11:26:00.000Z" title="发表于 2025-08-17 19:26:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（一）——介绍"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍">FreeRTOS基础篇（一）——介绍</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（二）——QEMU"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU">FreeRTOS基础篇（二）——QEMU</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Actions配置CI和CD"/></a><div class="content"><a class="title" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD">Github Actions配置CI和CD</a><time datetime="2025-05-31T16:01:00.000Z" title="发表于 2025-06-01 00:01:00">2025-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础篇（五）——vscode使用docker插件"/></a><div class="content"><a class="title" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件">Docker基础篇（五）——vscode使用docker插件</a><time datetime="2025-05-04T16:18:00.000Z" title="发表于 2025-05-05 00:18:00">2025-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://www.onlycalm.cn">OnlyCalm</a> 的博客</br> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024183071号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+      appKey: 'f2158LsoEVzRzMS8EG7rvFSs',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: '0b3f5b76c03e1d9ecca0',
+      clientSecret: '94ba0623c1599038f16bc6ecbdf0c9015c735fe5',
+      repo: 'blogtalk',
+      owner: 'onlycalm',
+      admin: ['onlycalm'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || 'b5d3928b0ad601436ee5bd4697f8890d'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Valine' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/sakura.js"></script><div class="aplayer no-destroy" data-id="7642168633" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人,张氏情歌,夕阳无限好,单车,心的距离,婚礼祝福,积木,我们,苦瓜" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>

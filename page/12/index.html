@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OnlyCalm's Blog - OnlyCalm</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="自娱自乐，做大娱乐家。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OnlyCalm&#39;s Blog">
+<meta property="og:url" content="http://www.onlycalm.cn/page/12/index.html">
+<meta property="og:site_name" content="OnlyCalm&#39;s Blog">
+<meta property="og:description" content="自娱自乐，做大娱乐家。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png">
+<meta property="article:author" content="OnlyCalm">
+<meta property="article:tag" content="OnlyCalm, Calm, Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png"><link rel="shortcut icon" href="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://www.onlycalm.cn/page/12/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: OnlyCalm","link":"链接: ","source":"来源: OnlyCalm's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'OnlyCalm\'s Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #d9d9d9;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover%20main.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OnlyCalm's Blog</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">OnlyCalm's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2021/07/31/%E7%BC%96%E7%A8%8B/Doxygen/%E5%9F%BA%E7%A1%80%E7%AF%87/Doxygen%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85Doxygen/" title="Doxygen基础篇（一）——安装Doxygen"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Doxygen基础篇（一）——安装Doxygen"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/31/%E7%BC%96%E7%A8%8B/Doxygen/%E5%9F%BA%E7%A1%80%E7%AF%87/Doxygen%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85Doxygen/" title="Doxygen基础篇（一）——安装Doxygen">Doxygen基础篇（一）——安装Doxygen</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-31T15:52:00.000Z" title="发表于 2021-07-31 23:52:00">2021-07-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/Doxygen/">Doxygen</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/Doxygen/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a></span></div><div class="content">Doxygen基础篇（一）——安装Doxygen前言：&emsp;&emsp;Doxygen可以像JavaDoc那样提取代码中的注释生成文档手册，它不仅是一种文档生成工具，更是一种注释的规范，要写出规范的代码掌握Doxygen是必要的。 1 Doxygen简介&emsp;&emsp; Doxygen 是一种开源跨平台的代码文档生成工具。Doxygen可将按照其规定格式编辑的注释信息提取转换生成方便阅读的说明文档，文档格式有LATEX、RTF等，支持C, Objective-C, C#, PHP, Java, Python等语言。 2 安装Doxygen2.1 Windows下安装Doxygen&emsp;&emsp;Windows下载官网找到exe文件下载安装，它捆绑了32位和64位版本，根据操作系统自动选择合适的版本安装。里面包含了手册和GUI。  &emsp;&emsp;在点击 I accept the agreement 然后点击 Next...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/07/31/%E5%B7%A5%E5%85%B7/Vim/%E5%85%B6%E4%BB%96/%E8%A7%A3%E5%86%B3vim-translator%E6%8F%90%E7%A4%BApySocks%E9%97%AE%E9%A2%98/" title="解决vim-translator提示pySocks问题"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="解决vim-translator提示pySocks问题"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/31/%E5%B7%A5%E5%85%B7/Vim/%E5%85%B6%E4%BB%96/%E8%A7%A3%E5%86%B3vim-translator%E6%8F%90%E7%A4%BApySocks%E9%97%AE%E9%A2%98/" title="解决vim-translator提示pySocks问题">解决vim-translator提示pySocks问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-31T02:22:00.000Z" title="发表于 2021-07-31 10:22:00">2021-07-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Vim/">Vim</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Vim/%E5%85%B6%E4%BB%96/">其他</a></span></div><div class="content">解决vim-translator提示pySocks问题前言：&emsp;&emsp;vim-translator是比较好用的Vim翻译插件，使用浮动窗口显示翻译结果时，提示pySocks没有安装，本篇文章将带你解决这个问题。 1 问题描述&emsp;&emsp;在安装了 vim-translator 后，在浮动窗口中显示翻译结果会得到下图的报错信息。  &emsp;&emsp; pySocks module should installed ， 2 安装pySocks&emsp;&emsp;如果使用的是python3，在Ubuntu下需要先执行以下指令安装 python3-pip 。 1sudo apt-get install python3-pip  &emsp;&emsp;python3-pip安装完成后，通过 pip 安装pySocks。Ubuntu终端中运行以下指令进行安装。 1pip install pysocks  &emsp;&emsp;再次在浮动窗口中显示翻译结果，现在没有报错了。 </div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/07/24/%E5%B7%A5%E5%85%B7/Shields/Shields%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="Shields使用教程"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Shields使用教程"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/24/%E5%B7%A5%E5%85%B7/Shields/Shields%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="Shields使用教程">Shields使用教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-24T03:15:00.000Z" title="发表于 2021-07-24 11:15:00">2021-07-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Shields/">Shields</a></span></div><div class="content">Shields使用教程前言：&emsp;&emsp;Shields是制作徽章的工具，在各大代码托管平台上被广泛使用，掌握它将利于我们编写出更加漂亮规范的README说明。 1 Shields&emsp;&emsp; Shields 是目前主流的徽章制作工具，简介快速生成徽章，可以嵌入到网页或Markdown中。  2 生成徽章2.1 编辑链接生成徽章 1![label-message-red](https://img.shields.io/badge/label-message-red &#x27;label-message-red&#x27;)  &emsp;&emsp;语法格式如下： 1https://img.shields.io/badge/&lt;LABEL&gt;-&lt;MESSAGE&gt;-&lt;COLOR&gt;  &emsp;&emsp;通过Shields语法规则生成徽章非常简单，&lt;LABEL&gt;-&lt;MESSAGE&gt;-&lt;COLOR&gt; 由三部分构成，中间通过 - 分隔。   &lt;LABEL&gt; :...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/07/18/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/%E8%A7%84%E8%8C%83%E7%9A%84README/" title="规范的README"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_18.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="规范的README"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/18/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/%E8%A7%84%E8%8C%83%E7%9A%84README/" title="规范的README">规范的README</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-18T09:20:00.000Z" title="发表于 2021-07-18 17:20:00">2021-07-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/">规范</a></span></div><div class="content">规范的README前言：&emsp;&emsp;Github上浏览开源项目时通常项目根目录都有一个字说明文件README.md，该文件可以帮助开发或使用者快速的熟悉和使用这个项目。为项目写出规范的README文件是有必要的。 1 README的作用&emsp;&emsp;README是项目的自述文件，通常它 README.md 是项目的第一个入口文件，而不是急着看代码。阅读它能使得开发或使用者快速熟悉和使用该项目。 2 README应该有哪些内容&emsp;&emsp;README应该告诉阅读者如何使用你的模块或工程，如果安装和使用它。标准的方式编写README将使得阅读理解它更轻松，维护更加方便。&emsp;&emsp;在Github上有一个关于README的开源项目 RichardLitt&#x2F;standard-readme ，可以访问它，本篇文章也是基于此规范进行讨论。&emsp;&emsp;以下是一个好的README应该具有的内容。 3...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/07/17/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F/" title="c进阶篇（六）——结构体位域"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c进阶篇（六）——结构体位域"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/17/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F/" title="c进阶篇（六）——结构体位域">c进阶篇（六）——结构体位域</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-17T06:58:00.000Z" title="发表于 2021-07-17 14:58:00">2021-07-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/c/">c</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/">进阶篇</a></span></div><div class="content">c进阶篇（六）——结构体位域前言：&emsp;&emsp;结构体位域可以方便对Bit级数据的操作，可以更有效的利用Bit数据空间。 1 数据存储大小端&emsp;&emsp;大小端表示数据在计算机中的存放顺序。   小端模式：低字节保存在内存低地址，高字节保存在内存高地址。 大端模式：低字节保存在内存高地址，高字节保存在内存低地址。   &emsp;&emsp;在使用结构体位域操作和联合嵌套结构体时尤其需要注意数据存储的大小端问题。如果使用的是单片机，可以查看用户手册了解所用型号的单片机。 2 定义位域结构体&emsp;&emsp; 在符号 : 之后给出数据类型所占的Bit数，对数据位域长度进行限制，以下为了方便均假设数据存储为小段模式，即结构体中先定义的成员变量存储在低地址和低Bit字段。 123456789101112131415161718192021#include &lt;stdio.h&gt;#include &lt;stdint.h&gt;typedef uint8_t Byte;typedef uint16_t Word;typedef uint32_t...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/07/17/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%BB%93%E6%9E%84%E4%BD%93/" title="c进阶篇（五）——匿名结构体"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c进阶篇（五）——匿名结构体"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/17/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%BB%93%E6%9E%84%E4%BD%93/" title="c进阶篇（五）——匿名结构体">c进阶篇（五）——匿名结构体</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-17T03:04:00.000Z" title="发表于 2021-07-17 11:04:00">2021-07-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/c/">c</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/">进阶篇</a></span></div><div class="content">c进阶篇（五）——匿名结构体前言：&emsp;&emsp;对c&#x2F;c++程序员来说，结构体是非常常用的自定义数据类型，它对数据进行封装，使用匿名结构体可进一步增强数据的封装性。 1 什么是匿名结构体&emsp;&emsp;以下是正常定义一个带名称的结构体示范。 12345typedef struct Rect&#123;    Byte byLen;    Byte byWide;&#125;STRect;  &emsp;&emsp;名为 STRect 的结构体拥有两个成员 byLen 和 byWide ，要对其访问可以通过一个成员运算符即可访问 stRect.byLen 或 stRect.byWide 。&emsp;&emsp;如果成员多几个 类别 ，往往会进行二次封装，比如矩形有关于尺寸的成员变量，也有关于颜色的成员变量。 1234567891011121314151617181920212223242526272829#include &lt;stdio.h&gt;#include &lt;stdint.h&gt;typedef uint8_t...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/06/27/%E7%BC%96%E7%A8%8B/CMake/%E5%9F%BA%E7%A1%80%E7%AF%87/CMake%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85CMake/" title="CMake基础篇（一）——安装CMake"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CMake基础篇（一）——安装CMake"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/06/27/%E7%BC%96%E7%A8%8B/CMake/%E5%9F%BA%E7%A1%80%E7%AF%87/CMake%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85CMake/" title="CMake基础篇（一）——安装CMake">CMake基础篇（一）——安装CMake</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-27T12:36:00.000Z" title="发表于 2021-06-27 20:36:00">2021-06-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/CMake/">CMake</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/CMake/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a></span></div><div class="content">CMake基础篇（一）——安装CMake前言：&emsp;&emsp; 作为c&#x2F;c++的深度使用者，有必要对编译器有一定了解，而CMake就是一种知名的跨平台编译工具。 1 CMake简介&emsp;&emsp;CMake是一种跨平台的编译工具，它语法简单，可以输出各种各样的makefile或project文件。CMake用于产生标准的构建档，使得开发者可以在不同的平台用标准的方式构建软件，实现一次编写编译规则，多个平台相同编译。&emsp;&emsp;官方有详细的 介绍文档 供学习。  2 安装CMake2.1 Windows下安装CMake&emsp;&emsp;Windows下可以直接选择 CMake 的二进制文件安装，在 CMake下载 界面中找到最新版的msi下载。  &emsp;&emsp;下载后双击msi文件开始安装，安装很简单，一路 next 就行了。  2.2 Ubuntu下安装CMake&emsp;&emsp;在Ubuntu下安装就简单多了，直接执行指令即可完成安装。 1sudo apt-get install...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/06/22/%E5%B7%A5%E5%85%B7/Vim/%E5%85%B6%E4%BB%96/%E8%A7%A3%E5%86%B3Vim-visual-multi%E5%92%8Ccoc.nvim%E6%8F%92%E4%BB%B6%E5%86%B2%E7%AA%81/" title="解决Vim-visual-multi和coc.nvim插件冲突"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="解决Vim-visual-multi和coc.nvim插件冲突"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/06/22/%E5%B7%A5%E5%85%B7/Vim/%E5%85%B6%E4%BB%96/%E8%A7%A3%E5%86%B3Vim-visual-multi%E5%92%8Ccoc.nvim%E6%8F%92%E4%BB%B6%E5%86%B2%E7%AA%81/" title="解决Vim-visual-multi和coc.nvim插件冲突">解决Vim-visual-multi和coc.nvim插件冲突</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-22T14:56:00.000Z" title="发表于 2021-06-22 22:56:00">2021-06-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Vim/">Vim</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Vim/%E5%85%B6%E4%BB%96/">其他</a></span></div><div class="content">解决Vim-visual-multi和coc.nvim插件冲突前言：&emsp;&emsp;Vim-visual-multi是一款非常好用的多光标插件，而coc.nvim更是一款功能强大的插件，它已不止用来补全和语法提示，这么好用的插件如果无法同时使用将是巨大的悲哀。 1 冲突问题&emsp;&emsp;在同时安装了插件 vim-visual-multi 和 coc.nvim 后，若Coc检测到语法错误或警告并提示，那么此时在多光标模式下的操作存在两种错误，一种是按退格键一次性删除多个字符。  &emsp;&emsp;另一种错误是在多光标模式下按下 d 或 x 键出现异常报错，无法深处字符。  &emsp;&emsp;这个两个插件的冲突我已经在Github上向原作者提出了 mg979&#x2F;vim-visual-multi&#x2F;issues&#x2F;172 。 2 运行环境  Win10 WSL Ubuntu 20.04LTS； Vim v8.1； vim-visual-multi master Git hash: 8566a31； coc.nvim master...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/06/20/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Coding%E6%94%B9%E7%89%88%E5%90%8E%E7%9A%84%E9%83%A8%E7%BD%B2/" title="自娱自乐，我的博客（十四）——Coding改版后的部署"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自娱自乐，我的博客（十四）——Coding改版后的部署"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/06/20/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Coding%E6%94%B9%E7%89%88%E5%90%8E%E7%9A%84%E9%83%A8%E7%BD%B2/" title="自娱自乐，我的博客（十四）——Coding改版后的部署">自娱自乐，我的博客（十四）——Coding改版后的部署</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-20T13:51:00.000Z" title="发表于 2021-06-20 21:51:00">2021-06-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Hexo/">Hexo</a></span></div><div class="content">自娱自乐，我的博客（十四）——Coding改版后的部署前言：&emsp;&emsp;Coding已经改版一段时间了，改版最大的变动就是开始对网站部署收费。好在新用户从第一次部署开始前6个月免费，而最近Vercel也被墙了国内访问不了，所以这篇文章教你怎么在重新回到改版后的Coding上部署，本篇文章假设你已经在有过一些基础部署经验 1 重回Coding部署的原因&emsp;&emsp;之前我已经在Coding上部署过（改版前），当时Coding免费且支持绑定自定义域名，而且访问速度还过得去（服务器在国内），后来收费所以跑到Vercel上部署，但Vercel近期被墙并且看不到恢复的希望，因此重新回到Coding好好利用它前六个月的免费期，六个月之后怎么办？到时候再说吧，懒得折腾到时候可能就付费了。 2 在Coding上新建网站&emsp;&emsp;登录Coding官网，点开部署的项目仓库，点击左侧的 网站托管 ，然后点击页面的 新建网站 。  &emsp;&emsp;填写自己站点的信息，网站类型选静态仓库，网站类型选静态网站。节点如果网站已经备案选哪里随你，如果没有备案过智能选...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/06/19/%E5%B7%A5%E5%85%B7/Vim/%E5%85%B6%E4%BB%96/Vim%E8%A7%A3%E5%86%B3Not%20an%20editor%20command%20%5EM/" title="Vim解决Not an editor command ^M"><img class="post-bg" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim解决Not an editor command ^M"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/06/19/%E5%B7%A5%E5%85%B7/Vim/%E5%85%B6%E4%BB%96/Vim%E8%A7%A3%E5%86%B3Not%20an%20editor%20command%20%5EM/" title="Vim解决Not an editor command ^M">Vim解决Not an editor command ^M</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-19T13:23:00.000Z" title="发表于 2021-06-19 21:23:00">2021-06-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Vim/">Vim</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7/Vim/%E5%85%B6%E4%BB%96/">其他</a></span></div><div class="content">Vim解决Not an editor command ^M前言：&emsp;&emsp;本篇文章解决提示Not an editor command ^M的异常问题。 1 为什么会产生这个错误？&emsp;&emsp;在Windows系统中换行符表示为 \r\n ，而在Unix系统中换行符表示为 \n ，这里的 ^M 其实就是Unix中的 \r ，当Windows下的文件在Unix中打开就会遇到换行符不同而无法识别的问题。 2 通过替换指令解决&emsp;&emsp;可以在Vim中通过指令将 \r 删除掉，这样在Unix中就不会报错了。 1:%s/\r//g  &emsp;&emsp;这个方法也是网上很多人给出的方法，但我亲测了无效。 3 修改文件格式&emsp;&emsp;更好的方法是直接修改文件格式（注意是 fileformat 不是 fileencoding ），在Windows下创建的文件默认器 fileformat 是 dos ，我们通过Vim打开该文件将其改为 unix 即可。 1:set fileformat=unix </div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/11/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#content-inner">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/#content-inner">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/#content-inner">27</a><a class="extend next" rel="next" href="/page/13/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">OnlyCalm</div><div class="author-info-description">自娱自乐，做大娱乐家。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（三）——搭建linux工程"/></a><div class="content"><a class="title" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程">FreeRTOS基础篇（三）——搭建linux工程</a><time datetime="2025-08-17T11:26:00.000Z" title="发表于 2025-08-17 19:26:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（一）——介绍"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍">FreeRTOS基础篇（一）——介绍</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（二）——QEMU"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU">FreeRTOS基础篇（二）——QEMU</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Actions配置CI和CD"/></a><div class="content"><a class="title" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD">Github Actions配置CI和CD</a><time datetime="2025-05-31T16:01:00.000Z" title="发表于 2025-06-01 00:01:00">2025-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础篇（五）——vscode使用docker插件"/></a><div class="content"><a class="title" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件">Docker基础篇（五）——vscode使用docker插件</a><time datetime="2025-05-04T16:18:00.000Z" title="发表于 2025-05-05 00:18:00">2025-05-05</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/"><span class="card-category-list-name">兴趣</span><span class="card-category-list-count">25</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/English/"><span class="card-category-list-name">English</span><span class="card-category-list-count">7</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/English/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><span class="card-category-list-name">基础语法</span><span class="card-category-list-count">7</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/"><span class="card-category-list-name">国家软考</span><span class="card-category-list-count">17</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/"><span class="card-category-list-name">中级嵌入式系统设计师</span><span class="card-category-list-count">17</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90/"><span class="card-category-list-name">自娱自乐</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">工具</span><span class="card-category-list-count">126</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">5</span></a></li></ul></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Tag/" style="font-size: 1.1em; color: #999">Tag</a> <a href="/tags/CPU/" style="font-size: 1.3em; color: #99a1ac">CPU</a> <a href="/tags/Action/" style="font-size: 1.1em; color: #999">Action</a> <a href="/tags/%E7%A7%BB%E4%BD%8D/" style="font-size: 1.1em; color: #999">移位</a> <a href="/tags/TortoiseGit/" style="font-size: 1.2em; color: #999da3">TortoiseGit</a> <a href="/tags/%E7%A1%85%E8%83%B6/" style="font-size: 1.1em; color: #999">硅胶</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.4em; color: #99a5b6">工具</a> <a href="/tags/%E4%B8%AD%E6%96%87/" style="font-size: 1.1em; color: #999">中文</a> <a href="/tags/%E7%BC%96%E7%A0%81/" style="font-size: 1.1em; color: #999">编码</a> <a href="/tags/%E6%A0%A1%E5%87%86/" style="font-size: 1.1em; color: #999">校准</a> <a href="/tags/%E5%AF%BC%E8%88%AA%E7%AA%97%E5%8F%A3/" style="font-size: 1.2em; color: #999da3">导航窗口</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 1.1em; color: #999">数据类型</a> <a href="/tags/%E6%8C%87%E4%BB%A4/" style="font-size: 1.1em; color: #999">指令</a> <a href="/tags/BPSK/" style="font-size: 1.1em; color: #999">BPSK</a> <a href="/tags/fetch/" style="font-size: 1.1em; color: #999">fetch</a> <a href="/tags/%E5%8A%A0%E6%9D%83%E6%BB%A4%E6%B3%A2/" style="font-size: 1.1em; color: #999">加权滤波</a> <a href="/tags/SVN/" style="font-size: 1.1em; color: #999">SVN</a> <a href="/tags/WSL/" style="font-size: 1.1em; color: #999">WSL</a> <a href="/tags/20-04/" style="font-size: 1.1em; color: #999">20.04</a> <a href="/tags/DRam/" style="font-size: 1.1em; color: #999">DRam</a> <a href="/tags/%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/" style="font-size: 1.1em; color: #999">逻辑电路</a> <a href="/tags/QCheckBox/" style="font-size: 1.2em; color: #999da3">QCheckBox</a> <a href="/tags/AES/" style="font-size: 1.1em; color: #999">AES</a> <a href="/tags/%E4%BF%AE%E6%AD%A3/" style="font-size: 1.1em; color: #999">修正</a> <a href="/tags/%E5%88%9B%E5%BB%BA/" style="font-size: 1.1em; color: #999">创建</a> <a href="/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/" style="font-size: 1.1em; color: #999">装饰器</a> <a href="/tags/%E4%B8%83%E7%89%9B/" style="font-size: 1.1em; color: #999">七牛</a> <a href="/tags/%E6%8B%89%E5%8F%96/" style="font-size: 1.1em; color: #999">拉取</a> <a href="/tags/%E8%BF%9B%E9%98%B6%E7%AF%87/" style="font-size: 1.5em; color: #99a9bf">进阶篇</a> <a href="/tags/jsDelivr/" style="font-size: 1.1em; color: #999">jsDelivr</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 1.1em; color: #999">硬盘</a> <a href="/tags/%E7%9C%8B%E6%9D%BF%E5%A8%98/" style="font-size: 1.1em; color: #999">看板娘</a> <a href="/tags/vim-cursorword/" style="font-size: 1.1em; color: #999">vim-cursorword</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 1.1em; color: #999">编程</a> <a href="/tags/%E5%86%A0%E8%AF%8D/" style="font-size: 1.1em; color: #999">冠词</a> <a href="/tags/%E6%96%BD%E5%AF%86%E7%89%B9%E6%BB%A4%E6%B3%A2/" style="font-size: 1.1em; color: #999">施密特滤波</a> <a href="/tags/QPushButton/" style="font-size: 1.2em; color: #999da3">QPushButton</a> <a href="/tags/Lua/" style="font-size: 1.1em; color: #999">Lua</a> <a href="/tags/%E5%B7%A5%E7%A8%8B/" style="font-size: 1.2em; color: #999da3">工程</a> <a href="/tags/%E7%94%9F%E6%88%90%E5%99%A8/" style="font-size: 1.1em; color: #999">生成器</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/06/">
+            <span class="card-archive-list-date">
+              六月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              五月 2025
+            </span>
+            <span class="card-archive-list-count">8</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              十一月 2024
+            </span>
+            <span class="card-archive-list-count">8</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/10/">
+            <span class="card-archive-list-date">
+              十月 2024
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/09/">
+            <span class="card-archive-list-date">
+              九月 2024
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/07/">
+            <span class="card-archive-list-date">
+              七月 2024
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/02/">
+            <span class="card-archive-list-date">
+              二月 2024
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">267</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2020-07-10T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">389.7k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-11-09T02:24:45.437Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://www.onlycalm.cn">OnlyCalm</a> 的博客</br> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024183071号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["纪念我过去 为人如此风趣","活得精彩 结尾切勿流眼泪","友情爱情两边都发现 亏欠","没求过你 你就当我骄傲","离时代远远 无人间烟火","从今天开始 相识当做别离","做喜欢的工作和享受游戏 一死了 怎细味","不要 不要假设我知道 一切 一切都是因为我而做"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["纪念我过去 为人如此风趣","活得精彩 结尾切勿流眼泪","友情爱情两边都发现 亏欠","没求过你 你就当我骄傲","离时代远远 无人间烟火","从今天开始 相识当做别离","做喜欢的工作和享受游戏 一死了 怎细味","不要 不要假设我知道 一切 一切都是因为我而做"])
+}
+typedJSFn.run(subtitleType)</script></div><script src="/js/sakura.js"></script><div class="aplayer no-destroy" data-id="7642168633" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人,张氏情歌,夕阳无限好,单车,心的距离,婚礼祝福,积木,我们,苦瓜" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>

@@ -1,0 +1,658 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第四章——网络基础知识 | OnlyCalm's Blog</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第四章——网络基础知识前言：&emsp;&emsp; 计算机第四章节主要知识点。 1 知识点介绍 OSI&#x2F;RM TCP&#x2F;IP IP地址与网络划分 DNS与DHCP 网络规划与设计 网络故障诊断  2 OSI七层模型 应用层：表示实现的具体应用功能； 表示层：表示数据的格式； 会话层：管理或者终止绘画的； 传输层；做端到端的连接。将上面层的数据分成报文段（数据段）； 网络层：将传">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章——网络基础知识">
+<meta property="og:url" content="http://www.onlycalm.cn/2022/01/30/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="OnlyCalm&#39;s Blog">
+<meta property="og:description" content="第四章——网络基础知识前言：&emsp;&emsp; 计算机第四章节主要知识点。 1 知识点介绍 OSI&#x2F;RM TCP&#x2F;IP IP地址与网络划分 DNS与DHCP 网络规划与设计 网络故障诊断  2 OSI七层模型 应用层：表示实现的具体应用功能； 表示层：表示数据的格式； 会话层：管理或者终止绘画的； 传输层；做端到端的连接。将上面层的数据分成报文段（数据段）； 网络层：将传">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg">
+<meta property="article:published_time" content="2022-01-30T03:39:00.000Z">
+<meta property="article:modified_time" content="2022-01-30T03:39:00.000Z">
+<meta property="article:author" content="OnlyCalm">
+<meta property="article:tag" content="嵌入式系统设计师">
+<meta property="article:tag" content="中级">
+<meta property="article:tag" content="软考">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "第四章——网络基础知识",
+  "url": "http://www.onlycalm.cn/2022/01/30/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/",
+  "image": "https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg",
+  "datePublished": "2022-01-30T03:39:00.000Z",
+  "dateModified": "2022-01-30T03:39:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "OnlyCalm",
+      "url": "http://www.onlycalm.cn/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://www.onlycalm.cn/2022/01/30/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: OnlyCalm","link":"链接: ","source":"来源: OnlyCalm's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第四章——网络基础知识',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #d9d9d9;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OnlyCalm's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">第四章——网络基础知识</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">第四章——网络基础知识</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-30T03:39:00.000Z" title="发表于 2022-01-30 11:39:00">2022-01-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-30T03:39:00.000Z" title="更新于 2022-01-30 11:39:00">2022-01-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%B4%E8%B6%A3/">兴趣</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/">国家软考</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/">中级嵌入式系统设计师</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="第四章——网络基础知识"><a href="#第四章——网络基础知识" class="headerlink" title="第四章——网络基础知识"></a><center>第四章——网络基础知识</center></h1><p><em>前言：</em><br>&emsp;&emsp; <em>计算机第四章节主要知识点。</em></p>
+<h2 id="1-知识点介绍"><a href="#1-知识点介绍" class="headerlink" title="1 知识点介绍"></a>1 知识点介绍</h2><ul>
+<li>OSI&#x2F;RM</li>
+<li>TCP&#x2F;IP</li>
+<li>IP地址与网络划分</li>
+<li>DNS与DHCP</li>
+<li>网络规划与设计</li>
+<li>网络故障诊断</li>
+</ul>
+<h2 id="2-OSI七层模型"><a href="#2-OSI七层模型" class="headerlink" title="2 OSI七层模型"></a>2 OSI七层模型</h2><ul>
+<li>应用层：表示实现的具体应用功能；</li>
+<li>表示层：表示数据的格式；</li>
+<li>会话层：管理或者终止绘画的；</li>
+<li>传输层；做端到端的连接。将上面层的数据分成报文段（数据段）；</li>
+<li>网络层：将传输层的报文段分成IP数据包，进行分组数据传输和路由选择；</li>
+<li>数据链路层：将网络层的IP数据包分成帧为单位进行传输；</li>
+<li>物理层：传输Bit数据流；</li>
+</ul>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/OSI7.png" alt="OSI7.png" title="OSI7"></p>
+<p>&emsp;&emsp;OSI理论是7层模型，但实际使用的TCP&#x2F;IP是4层模型。</p>
+<h3 id="2-1-OSI-RM七层模型"><a href="#2-1-OSI-RM七层模型" class="headerlink" title="2.1 OSI&#x2F;RM七层模型"></a>2.1 OSI&#x2F;RM七层模型</h3><p>&emsp;&emsp;数据在各层之间的传递过程。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/OSI_Transfer.png" alt="OSI_Transfer.png" title="OSI Transfer"></p>
+<h3 id="2-2-TCP-IP协议族"><a href="#2-2-TCP-IP协议族" class="headerlink" title="2.2 TCP&#x2F;IP协议族"></a>2.2 TCP&#x2F;IP协议族</h3><h4 id="2-2-1-TCP-IP分层"><a href="#2-2-1-TCP-IP分层" class="headerlink" title="2.2.1 TCP&#x2F;IP分层"></a>2.2.1 TCP&#x2F;IP分层</h4><p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/TCP_IP.png" alt="TCP_IP.png" title="TCP IP"></p>
+<ul>
+<li>应用层协议：<ul>
+<li>POP3: 端口号110，收邮件；</li>
+<li>SMTP: 端口号25，发邮件；</li>
+<li>FTP: 端口号20&#x2F;21，文件传输；</li>
+<li>HTTP: 端口号80，超文本传输协议；</li>
+<li>HTTPS: 端口号443，安全的超文本传输协议；</li>
+<li>Telnet: 端口号23，远程登录；</li>
+<li>DHCP: 端口号67，动态主机配置协议；</li>
+<li>TFTP: 端口号69，简单文件传输协议；</li>
+<li>SNMP: 端口号161，简单网络管理；</li>
+<li>DNS: 端口号53，域名解析；</li>
+</ul>
+</li>
+<li>网际层协议：<ul>
+<li>IP</li>
+<li>ICMP</li>
+<li>IGMP</li>
+<li>ARP</li>
+<li>RARP</li>
+</ul>
+</li>
+<li>网络接口层协议：<ul>
+<li>CSMA&#x2F;CD</li>
+<li>TokingRing</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/TCP_IP_Prot.png" alt="TCP_IP_Prot.png" title="TCP IP Protocol"></p>
+<p>&emsp;&emsp;UDP是不可靠的，TCP是可靠的，UDP的可靠性依靠上层协议提供。<br>&emsp;&emsp;常用协议按照用途分类。</p>
+<ul>
+<li>与网页访问相关：<ul>
+<li>HTTP</li>
+<li>HTTPS</li>
+</ul>
+</li>
+<li>与电子邮件相关：<ul>
+<li>SMTP</li>
+<li>POP3</li>
+<li>IMAP4</li>
+<li>MIME</li>
+<li>PGP</li>
+</ul>
+</li>
+<li>远程访问&#x2F;管理<ul>
+<li>TELNET</li>
+<li>RAS</li>
+</ul>
+</li>
+<li>域名、IP地址解析相关：<ul>
+<li>DNS</li>
+</ul>
+</li>
+<li>FTP访问：<ul>
+<li>FTP</li>
+</ul>
+</li>
+<li>轻量目录访问协议：<ul>
+<li>LDAP</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-2-电子邮件协议"><a href="#2-2-2-电子邮件协议" class="headerlink" title="2.2.2 电子邮件协议"></a>2.2.2 电子邮件协议</h4><p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/email.png" alt="email.png" title="email"></p>
+<p>&emsp;&emsp;电子邮件协议：SMTP、MIME、POP3、IMAP4。</p>
+<h4 id="2-2-3-WWW（万维网）"><a href="#2-2-3-WWW（万维网）" class="headerlink" title="2.2.3 WWW（万维网）"></a>2.2.3 WWW（万维网）</h4><ul>
+<li>URL 协议: &#x2F;&#x2F;主机地址[: 端口号]&#x2F;路径&#x2F;文件名</li>
+<li>浏览器 IE Netscape Firefox</li>
+<li>协议 http 80</li>
+<li>https 443 是以安全为目标的HTTP通道，简单讲是HTTP的安全版。</li>
+<li>http 404 连接指向的网页不存在，即原始网页的URL失效。</li>
+</ul>
+<h4 id="2-2-4-FTP"><a href="#2-2-4-FTP" class="headerlink" title="2.2.4 FTP"></a>2.2.4 FTP</h4><p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/FTP.png" alt="FTP.png" title="FTP"></p>
+<ul>
+<li>21端口 用于与客户机建立命令链路。</li>
+<li>20端口 具体的数据传输走该端口。</li>
+</ul>
+<h4 id="2-2-5-其他"><a href="#2-2-5-其他" class="headerlink" title="2.2.5 其他"></a>2.2.5 其他</h4><ul>
+<li>ARP(Address Resolation Protocol，地址解析协议)，将IP地址转Mac物理地址。</li>
+<li>ICMP(Internet Control Messages Protocol，网络控制报文协议)，比如 <code>ping ID地址</code> 用的就是改协议。</li>
+<li>IP(Internet Protocol，网际协议)，提供不可靠无连接的数据传输服务，即不保证传输成功，包错误时直接丢掉数据包并回发一个错误消息（ICMP报文），需重新传输。</li>
+<li>TCP(Transfer Control Protocol，传输控制协议)</li>
+<li>UDP(User Datagram Protocol，用户数据包协议)</li>
+</ul>
+<h4 id="2-2-6-协议端口"><a href="#2-2-6-协议端口" class="headerlink" title="2.2.6 协议端口"></a>2.2.6 协议端口</h4><ul>
+<li>POP3: 110端口，邮件收取；</li>
+<li>SMTP: 25端口，邮件发送；</li>
+<li>FTP: 20数据端口&#x2F;21控制端口，文件传输协议；</li>
+<li>HTTP: 80端口，超文本传输协议，网页传输；</li>
+<li>DHCP: 67端口，IP地址自动分配；</li>
+<li>SNMP: 161端口，简单网络管理协议；</li>
+<li>DNS: 53端口，域名解析协议，记录域名与IP的映射关系；</li>
+<li>TCP: 可靠的传输层协议；</li>
+<li>UDP: 不可靠的传输层协议，但开销小；</li>
+<li>ICMP: 因特网差错控制协议，PING命令来自该协议；</li>
+<li>IGMP: 网际组管理协议；</li>
+<li>ARP: 地址解析协议，IP地址转换为MAC地址；</li>
+<li>RARP: 反向地址解析协议，MAC地址转IP地址（淘汰）；</li>
+</ul>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/architecture.png" alt="architecture.png" title="architecture"></p>
+<h2 id="3-常见设备的部署位置与网络介质"><a href="#3-常见设备的部署位置与网络介质" class="headerlink" title="3 常见设备的部署位置与网络介质"></a>3 常见设备的部署位置与网络介质</h2><ul>
+<li>防火墙<ul>
+<li>防火墙一般放在安全边界区（如内网和外网之间，控制访问安全）</li>
+</ul>
+</li>
+<li>路由器 用于网络互联：<ul>
+<li>可作为互联网接入</li>
+<li>不同网段间互联</li>
+</ul>
+</li>
+<li>交换机：用于连接节点</li>
+<li>集线器：用于连接节点</li>
+</ul>
+<p>&emsp;&emsp;路由器和3层交换机在网络层，交换机在链路层，集线器在物理层。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/media.png" alt="media.png" title="media"></p>
+<h2 id="4-例题"><a href="#4-例题" class="headerlink" title="4 例题"></a>4 例题</h2><p>1.若一台服务器只开放了25和110两个端口，那么这台服务器可以提供（A）服务。</p>
+<p>A. E-mail<br>B. Web<br>C. DNS<br>D. FTP</p>
+<p>2.SNMP是一种异步请求&#x2F;响应协议，采用（D）协议进行封装。</p>
+<p>A. IP<br>B. ICMP<br>C. TCP<br>D. UDP</p>
+<p>3.相比于TCP，UDP的优势为（B）。</p>
+<p>A. 可靠传输<br>B. 开销较小<br>C. 拥塞控制<br>D. 流量控制</p>
+<p>4.某IP网络连接如图所示，在这种配置下IP全局广播分组不能够通过的路径是（B）。</p>
+<p>A. 计算机P和计算机Q之间的路径；<br>B. 计算机P和计算机S之间的路径；<br>C. 计算机Q和计算机R之间的路径；<br>D. 计算机S和计算机T之间的路径；</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/ex4.png" alt="ex4.png" title="ex4"></p>
+<h2 id="5-IP地址"><a href="#5-IP地址" class="headerlink" title="5 IP地址"></a>5 IP地址</h2><h3 id="5-1-IPv4"><a href="#5-1-IPv4" class="headerlink" title="5.1 IPv4"></a>5.1 IPv4</h3><p>&emsp;&emsp;IP组成。一台电脑可以装多个网卡因此可以拥有多个IP地址。IPv4地址有32位，采用点分十进制表示。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/IPv4.png" alt="IPv4" title="IPv4"></p>
+<p>&emsp;&emsp;IP地址分类。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/IPv4_Classify.png" alt="IPv4_Classify" title="IPv4 Classify"></p>
+<h3 id="5-2-IP地址掩码"><a href="#5-2-IP地址掩码" class="headerlink" title="5.2 IP地址掩码"></a>5.2 IP地址掩码</h3><p>&emsp;&emsp;网络位用1表示，主机位用0表示。<br>&emsp;&emsp;标准地址掩码。</p>
+<ul>
+<li>A类：255.0.0.0</li>
+<li>B类：255.255.0.0</li>
+<li>C类：255.255.255.0</li>
+</ul>
+<p>&emsp;&emsp;地址掩码表示方法</p>
+<ul>
+<li>点分十进制：255.255.255.0</li>
+<li>位计数：172.21.0.0&#x2F;24</li>
+</ul>
+<p>&emsp;&emsp;网络号由网络部分 + 全零的主机位来表示。</p>
+<h3 id="5-3-计算IP地址所属网段"><a href="#5-3-计算IP地址所属网段" class="headerlink" title="5.3 计算IP地址所属网段"></a>5.3 计算IP地址所属网段</h3><p>&emsp;&emsp;地址掩码和IP地址进行与运算。</p>
+<h3 id="5-4-变长子网掩码"><a href="#5-4-变长子网掩码" class="headerlink" title="5.4 变长子网掩码"></a>5.4 变长子网掩码</h3><p>&emsp;&emsp;如192.168.100.1&#x2F;25。方法是从主机位中拿出若干位作为子网标识。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/elongate.png" alt="elongate" title="elongate"></p>
+<ul>
+<li>IPv4地址包括3个部分：网络部分、子网部分和主机部分；</li>
+<li>子网是主网的一个子集；</li>
+<li>只要符合网络位 + 主机位 &#x3D; 32即可；</li>
+<li>IPv4地址的网络号，由分配的子网掩码来决定；</li>
+</ul>
+<h3 id="5-5-子网个数"><a href="#5-5-子网个数" class="headerlink" title="5.5 子网个数"></a>5.5 子网个数</h3><p>&emsp;&emsp;计算公式为： $2^n$ ，其中n为子网空间的位数。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/Subnet_Amt.png" alt="Subnet_Amt" title="Subnet Amt"></p>
+<h3 id="5-6-子网中可用IP地址数"><a href="#5-6-子网中可用IP地址数" class="headerlink" title="5.6 子网中可用IP地址数"></a>5.6 子网中可用IP地址数</h3><p>&emsp;&emsp;公式为 $2^n - 2$ ，其中n表示主机空间，-2表示减去全0的子网号和全1的广播地址。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/IP_Amt.png" alt="IP_Amt" title="IP Amt"></p>
+<h3 id="5-7-特殊含义的IP地址"><a href="#5-7-特殊含义的IP地址" class="headerlink" title="5.7 特殊含义的IP地址"></a>5.7 特殊含义的IP地址</h3><table>
+<thead>
+<tr>
+<th align="center">IP</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">127网段</td>
+<td align="center">回播地址（ping 127.0.0.1，不会发到网络上，在本机中）能检测TCP&#x2F;IP协议正常及网卡正常</td>
+</tr>
+<tr>
+<td align="center">全0地址</td>
+<td align="center">为获取IP地址时，使用的地址（用于源地址）</td>
+</tr>
+<tr>
+<td align="center">全1地址</td>
+<td align="center">本地子网的广播（用于目标地址）</td>
+</tr>
+<tr>
+<td align="center">主机号全1地址</td>
+<td align="center">特定子网的广播（用于目标地址）</td>
+</tr>
+<tr>
+<td align="center">10.0.0.0&#x2F;8</td>
+<td align="center">10.0.0.1至10.255.255.254</td>
+</tr>
+<tr>
+<td align="center">172.16.0.0&#x2F;12</td>
+<td align="center">172.16.0.1至172.31.255.254</td>
+</tr>
+<tr>
+<td align="center">192.168.0.0&#x2F;16</td>
+<td align="center">192.168.0.1至192.168.255.254</td>
+</tr>
+<tr>
+<td align="center">169.254.0.0</td>
+<td align="center">保留地址，用于DHCP失效（Win）</td>
+</tr>
+</tbody></table>
+<h3 id="5-8-IPv6"><a href="#5-8-IPv6" class="headerlink" title="5.8 IPv6"></a>5.8 IPv6</h3><p>&emsp;&emsp;IPv6为128位，用16进制表示，冒分十六进制表示法，如：12AB::CD30:0:0:0:0&#x2F;60，或者零压缩法，连续的0用冒号表示，0压缩法只能使用一次。总长度分为8段，每段2个字节。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/IPv6.png" alt="IPv6" title="IPv6"></p>
+<p>&emsp;&emsp;IPv4与IPv6网络通信时相关技术。</p>
+<ul>
+<li>双协议栈</li>
+<li>隧道技术</li>
+<li>翻译技术</li>
+</ul>
+<h4 id="5-8-1-例题"><a href="#5-8-1-例题" class="headerlink" title="5.8.1 例题"></a>5.8.1 例题</h4><p>&emsp;&emsp;IP地址块155.32.80.192&#x2F;26包含了（C）个主机地址，以下IP地址中，不属于这个网络的地址是（D）。</p>
+<p>A. 15<br>B. 32<br>C. 62<br>D. 64</p>
+<p>A. 155.32.80.202<br>B. 155.32.80.195<br>C. 155.32.80.253<br>D. 155.32.80.191</p>
+<h2 id="6-DNS与DHCP"><a href="#6-DNS与DHCP" class="headerlink" title="6 DNS与DHCP"></a>6 DNS与DHCP</h2><h3 id="6-1-域名空间"><a href="#6-1-域名空间" class="headerlink" title="6.1 域名空间"></a>6.1 域名空间</h3><table>
+<thead>
+<tr>
+<th align="center">域名</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">com</td>
+<td align="center">表示商业机构</td>
+</tr>
+<tr>
+<td align="center">net</td>
+<td align="center">表示网络服务机构</td>
+</tr>
+<tr>
+<td align="center">org</td>
+<td align="center">表示非盈利性组织</td>
+</tr>
+<tr>
+<td align="center">gov</td>
+<td align="center">表示政府机构</td>
+</tr>
+<tr>
+<td align="center">edu</td>
+<td align="center">表示教育机构</td>
+</tr>
+<tr>
+<td align="center">mil</td>
+<td align="center">表示军事机构</td>
+</tr>
+<tr>
+<td align="center">au</td>
+<td align="center">澳大利亚</td>
+</tr>
+<tr>
+<td align="center">cn</td>
+<td align="center">中国</td>
+</tr>
+<tr>
+<td align="center">tw</td>
+<td align="center">台湾地区</td>
+</tr>
+<tr>
+<td align="center">hk</td>
+<td align="center">香港地区</td>
+</tr>
+</tbody></table>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/Domain.png" alt="Domain" title="Domain"></p>
+<h3 id="6-2-DHCP协议"><a href="#6-2-DHCP协议" class="headerlink" title="6.2 DHCP协议"></a>6.2 DHCP协议</h3><ul>
+<li>客户机&#x2F;服务器模型</li>
+<li>租约默认为8天</li>
+<li>当租约超过87.5%时，如果仍然没有和当初提供IP的DHCP服务器联系上，则开始联系其他的DHCP服务器。</li>
+<li>固定分配、动态分配和自动分配。</li>
+<li>169.254.X.X和0.0.0.0</li>
+</ul>
+<h3 id="6-3-DNS协议"><a href="#6-3-DNS协议" class="headerlink" title="6.3 DNS协议"></a>6.3 DNS协议</h3><p>&emsp;&emsp;对域名和IP地址的映射关系进行解析。</p>
+<ul>
+<li>递归查询：服务器必须回答目标IP与域名的映射关系。</li>
+<li>迭代查询：服务器收到一次迭代查询回复一次结果，这个结果不一定是目标IP与域名的映射关系，也可以是其他DNS服务器的地址。</li>
+</ul>
+<p>&emsp;&emsp;主机向本地域名服务器的查询采用递归查询。本地域名服务器向其他域名服务器的查询通常采用迭代查询。根域名服务器负担重，效率低，故较少采用。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/DNS.png" alt="DNS" title="DNS"></p>
+<h4 id="6-3-1-例题"><a href="#6-3-1-例题" class="headerlink" title="6.3.1 例题"></a>6.3.1 例题</h4><p>&emsp;&emsp;主机host1对host2进行域名查询的过程如下图所示，下列说法中正确的是（A）。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/ex5.png" alt="ex5" title="ex5"></p>
+<p>A. 根域名服务器采用迭代查询，中介域名服务器采用递归查询。<br>B. 根域名服务器采用递归查询，中介域名服务器采用迭代查询。<br>C. 根域名服务器和中介域名服务器均采用迭代查询。<br>D. 根域名服务器和中介域名服务器均采用递归查询。</p>
+<h2 id="7-网络规划与设计"><a href="#7-网络规划与设计" class="headerlink" title="7 网络规划与设计"></a>7 网络规划与设计</h2><h3 id="7-1-网络分层设计"><a href="#7-1-网络分层设计" class="headerlink" title="7.1 网络分层设计"></a>7.1 网络分层设计</h3><ul>
+<li>接入层：用户接入、计费管理、MAC地址认证、收集用户信息。</li>
+<li>汇聚层：网络访问策略控制、数据包处理、过滤、寻址。需要更高的性能，更少的接口和更高的交换速率。</li>
+<li>核心层：高速数据交换，常用冗余机制。使用双星（树）结构。</li>
+</ul>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/network.png" alt="network.png" title="network"></p>
+<h3 id="7-2-例题"><a href="#7-2-例题" class="headerlink" title="7.2 例题"></a>7.2 例题</h3><p>&emsp;&emsp;主域名服务器在接收到域名请求后，首先查询的是（C）。</p>
+<p>A. 本地hosts文件<br>B. 转发域名服务器<br>C. 本地缓存<br>D. 授权域名服务器</p>
+<p>&emsp;&emsp;查询过程如下。</p>
+<ul>
+<li>客户端（浏览器）：先hosts -&gt; 在本地缓存 -&gt; 服务器。</li>
+<li>服务器：先缓存 -&gt; hosts -&gt;</li>
+</ul>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8 总结"></a>8 总结</h2><p>&emsp;&emsp;本章着重考查网络基础知识，考查形式主要是在上午的选择题当中。主要是需要掌握tcp&#x2F;ip协议族的相关概念，以及IPv4地址的计算。复习时注意对相关概念的联系并区分记忆，固定题型多做练习熟能生巧。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn">OnlyCalm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn/2022/01/30/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">http://www.onlycalm.cn/2022/01/30/兴趣/国家软考/中级嵌入式系统设计师/第四章——网络基础知识/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://www.onlycalm.cn" target="_blank">OnlyCalm's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/">嵌入式系统设计师</a><a class="post-meta__tags" href="/tags/%E4%B8%AD%E7%BA%A7/">中级</a><a class="post-meta__tags" href="/tags/%E8%BD%AF%E8%80%83/">软考</a></div><div class="post-share"><div class="social-share" data-image="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2022/01/08/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/" title="第三章——操作系统知识"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_19.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">第三章——操作系统知识</div></div><div class="info-2"><div class="info-item-1">第三章——操作系统知识前言：&emsp;&emsp; 计算机第三章节主要知识点。 1 知识点介绍 操作系统的作用； 进程（任务）管理； 存储管理； 文件管理； 设备管理；  2 操作系统的作用&emsp;&emsp;通过资源管理（软硬件资源管理），提高计算机系统的效率，改善人机界面，向用户提供友好的工作环境。  3 进程管理3.1 进程的概念&emsp;&emsp;进程是程序在一个数据集合上运行的过程，它是系统进行资源分配和调度的一个独立单位。它由程序块、进程控制块（PCB）和数据块三部分组成。 3.2 进程和程序的区别 进程是程序的一次执行过程，没有程序就没有进程； 程序是完成某一特定功能的一系列程序语句的集合，只要不被破坏，他就永远存在； 程序是一个静态的概念，进程是一个动态的概念，它由创建而产生，完成任务后因撤销而消亡；进程是系统进行资源分配和调度的独立单位，而程序不是。  3.3...</div></div></div></a><a class="pagination-related" href="/2022/01/30/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%BA%94%E7%AB%A0%E2%80%94%E2%80%94%E5%AE%89%E5%85%A8%E6%80%A7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="第五章——安全性基础知识"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_17.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">第五章——安全性基础知识</div></div><div class="info-2"><div class="info-item-1">第五章——安全性基础知识前言：&emsp;&emsp; 计算机第五章节主要知识点。 1 知识点介绍 计算机系统安全概述； 信息安全基础； 网络安全协议；  2 网络攻击 被动攻击：指攻击者从网络上窃听他人的通信内容。通常把这类攻击称为接活。 流量分析：是通过持续检测现有网络中的流量变化或者变化趋势，从而得到相应信息的一种被动攻击方式。   主动攻击：是指通过一系列的方法，主动地获取向被攻击对象实施破坏的一种攻击方式。 篡改：攻击者故意篡改网络上传送的报文。也包括彻底中断传送的报文。 恶意程序：种类繁多，威胁较大的有：计算机病毒、计算机蠕虫、特洛伊木马、逻辑炸弹。 拒绝服务：指攻击者向因特网上的某个服务器不停地发送大量分组，使因特网或服务器无法提供正常服务。如：Dos，DDos。     2.1 例题&emsp;&emsp;下列行为中，（）属于被动攻击行为。 A. 伪造B. 窃听C. DDOS攻击D. 篡改信息 3...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/11/27/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" title="第一章——计算机系统基础"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-27</div><div class="info-item-2">第一章——计算机系统基础</div></div><div class="info-2"><div class="info-item-1">第一章——计算机系统基础前言：&emsp;&emsp; 计算机第一章节主要知识点。 1 知识点介绍 数值转换； 数的表示； 计算机的组成； 流水线； 多级存储结构； I&#x2F;O控制方式； 可靠性、校验码；  2 数值转换&emsp;&emsp;进位计数制系统基本概念：数制、基数、数码、数位、位权。    特点&#x2F;数制 十进制 二进制 八进制 十六进制    基本数码 0-9 0, 1 0-7 0-9, A-F   基数 10 2 8 16   位权 $10^n$ $2^n$ $8^n$ $16^n$   2.1 BCD码&emsp;&emsp;是一种二进制的数字编码形式，用4位二进制数来表示1位十进制数。 2.2 8421码&emsp;&emsp;8421码是BCD码的一种，它表达的意思是每一个二进制位上的数据对应一个固定的值，只需要把对应的1位置的数据值相加，即可得到该二进制对应的十进制值。 $$0b1010100 &#x3D; 64 + 16 + 4 &#x3D; 84$$ $$100 &#x3D; 0b1100100$$ 2.3...</div></div></div></a><a class="pagination-related" href="/2022/01/31/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%83%E7%AB%A0%E2%80%94%E2%80%94%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E4%B8%8E%E8%BF%90%E7%BB%B4/" title="第七章——嵌入式系统开发与运维"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_7.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-31</div><div class="info-item-2">第七章——嵌入式系统开发与运维</div></div><div class="info-2"><div class="info-item-1">第七章——嵌入式系统开发与运维前言：&emsp;&emsp; 计算机第七章节主要知识点。 1 知识点介绍 系统开发过程及项目管理； 系统分析基础知识； 系统设计知识； 下午题专题训练  2 系统开发过程及项目管理 开发模型 项目管理 软件过程改进  2.1 开发模型 瀑布模型  演化模型  增量模型  螺旋模型  快速原型模型  喷泉模型  V模型  迭代模型&#x2F;迭代开发方法  构建组装模型&#x2F;基于构件的开发方法  统一过程&#x2F;统一开发方法  敏捷开发方法  模型驱动的开发方法  软硬件协同开发的方法   2.2 瀑布模型 2.3 原型模型 2.4 螺旋模型 2.5 增量模型 2.6 V模型、喷泉模型、快速应用开发模型 2.7 构建组装模型 2.8 敏捷方法&emsp;&emsp; 敏捷宣言...</div></div></div></a><a class="pagination-related" href="/2022/01/08/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/" title="第三章——操作系统知识"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_19.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-08</div><div class="info-item-2">第三章——操作系统知识</div></div><div class="info-2"><div class="info-item-1">第三章——操作系统知识前言：&emsp;&emsp; 计算机第三章节主要知识点。 1 知识点介绍 操作系统的作用； 进程（任务）管理； 存储管理； 文件管理； 设备管理；  2 操作系统的作用&emsp;&emsp;通过资源管理（软硬件资源管理），提高计算机系统的效率，改善人机界面，向用户提供友好的工作环境。  3 进程管理3.1 进程的概念&emsp;&emsp;进程是程序在一个数据集合上运行的过程，它是系统进行资源分配和调度的一个独立单位。它由程序块、进程控制块（PCB）和数据块三部分组成。 3.2 进程和程序的区别 进程是程序的一次执行过程，没有程序就没有进程； 程序是完成某一特定功能的一系列程序语句的集合，只要不被破坏，他就永远存在； 程序是一个静态的概念，进程是一个动态的概念，它由创建而产生，完成任务后因撤销而消亡；进程是系统进行资源分配和调度的独立单位，而程序不是。  3.3...</div></div></div></a><a class="pagination-related" href="/2022/02/01/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B9%9D%E7%AB%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" title="第九章——数据结构与算法"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-01</div><div class="info-item-2">第九章——数据结构与算法</div></div><div class="info-2"><div class="info-item-1">第九章——数据结构与算法前言：&emsp;&emsp; 计算机第九章节主要知识点。 1 知识点介绍 数据结构与算法概念 线性表 数组与矩阵 树与二叉树 图 查找  2 数据结构定义 数据结构 数据逻辑结构：指数据元素之间的管理。 线性结构：一对一关系 非线性结构：一对多，多对多关系   数据物理结构：数据在物理设备上具体如何存储。    3 算法概念&emsp;&emsp;算法的5个重要特征  又穷性：执行有穷步之后结束，且每一步都可在有穷时间内完成。 确定性：算法中每一条指令都必须由确切的含义，不能含糊不清。 输入（&gt;&#x3D; 0） 输出（&gt;&#x3D; 1） 有效性（可行性）：算法的每个步骤都能有效执行并能在执行有限此后得到确定的结果，例如a &#x3D; 0，b &#x2F; a就无效。  4 伪代码&emsp;&emsp;伪代码是一种算法描述语言，介于自然语言与编程语言之间，不用拘泥于具体的实现。  5 线性表5.1...</div></div></div></a><a class="pagination-related" href="/2022/01/02/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E2%80%94%E2%80%94%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6/" title="第二章——嵌入式系统软件"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_6.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="info-item-2">第二章——嵌入式系统软件</div></div><div class="info-2"><div class="info-item-1">第二章——嵌入式系统软件前言：&emsp;&emsp; 计算机第二章节主要知识点。 1 知识点介绍 嵌入式软件基础； 嵌入式操作系统概述；  2 嵌入式软件基础 嵌入式软件概述； 嵌入式软件分类； 嵌入式软件的体系结构； 设备驱动层； 嵌入式中间件；  2.1 嵌入式软件的特点 规模较小； 开发难度大； 硬件资源有限； 嵌入式软件一般涉及到底层软件的开发，需要软硬件基础； 开发环境和运行环境不同；   实时性和可靠性要求高。如火箭飞行控制、核电站； 要求固化存储；  2.2...</div></div></div></a><a class="pagination-related" href="/2022/01/30/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%BA%94%E7%AB%A0%E2%80%94%E2%80%94%E5%AE%89%E5%85%A8%E6%80%A7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="第五章——安全性基础知识"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_17.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-30</div><div class="info-item-2">第五章——安全性基础知识</div></div><div class="info-2"><div class="info-item-1">第五章——安全性基础知识前言：&emsp;&emsp; 计算机第五章节主要知识点。 1 知识点介绍 计算机系统安全概述； 信息安全基础； 网络安全协议；  2 网络攻击 被动攻击：指攻击者从网络上窃听他人的通信内容。通常把这类攻击称为接活。 流量分析：是通过持续检测现有网络中的流量变化或者变化趋势，从而得到相应信息的一种被动攻击方式。   主动攻击：是指通过一系列的方法，主动地获取向被攻击对象实施破坏的一种攻击方式。 篡改：攻击者故意篡改网络上传送的报文。也包括彻底中断传送的报文。 恶意程序：种类繁多，威胁较大的有：计算机病毒、计算机蠕虫、特洛伊木马、逻辑炸弹。 拒绝服务：指攻击者向因特网上的某个服务器不停地发送大量分组，使因特网或服务器无法提供正常服务。如：Dos，DDos。     2.1 例题&emsp;&emsp;下列行为中，（）属于被动攻击行为。 A. 伪造B. 窃听C. DDOS攻击D. 篡改信息 3...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">OnlyCalm</div><div class="author-info-description">自娱自乐，做大娱乐家。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">第四章——网络基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%9F%A5%E8%AF%86%E7%82%B9%E4%BB%8B%E7%BB%8D"><span class="toc-text">1 知识点介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-text">2 OSI七层模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-OSI-RM%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-text">2.1 OSI&#x2F;RM七层模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-TCP-IP%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="toc-text">2.2 TCP&#x2F;IP协议族</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-TCP-IP%E5%88%86%E5%B1%82"><span class="toc-text">2.2.1 TCP&#x2F;IP分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%8D%8F%E8%AE%AE"><span class="toc-text">2.2.2 电子邮件协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-WWW%EF%BC%88%E4%B8%87%E7%BB%B4%E7%BD%91%EF%BC%89"><span class="toc-text">2.2.3 WWW（万维网）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-4-FTP"><span class="toc-text">2.2.4 FTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-5-%E5%85%B6%E4%BB%96"><span class="toc-text">2.2.5 其他</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-6-%E5%8D%8F%E8%AE%AE%E7%AB%AF%E5%8F%A3"><span class="toc-text">2.2.6 协议端口</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B8%B8%E8%A7%81%E8%AE%BE%E5%A4%87%E7%9A%84%E9%83%A8%E7%BD%B2%E4%BD%8D%E7%BD%AE%E4%B8%8E%E7%BD%91%E7%BB%9C%E4%BB%8B%E8%B4%A8"><span class="toc-text">3 常见设备的部署位置与网络介质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BE%8B%E9%A2%98"><span class="toc-text">4 例题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-IP%E5%9C%B0%E5%9D%80"><span class="toc-text">5 IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-IPv4"><span class="toc-text">5.1 IPv4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-IP%E5%9C%B0%E5%9D%80%E6%8E%A9%E7%A0%81"><span class="toc-text">5.2 IP地址掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E8%AE%A1%E7%AE%97IP%E5%9C%B0%E5%9D%80%E6%89%80%E5%B1%9E%E7%BD%91%E6%AE%B5"><span class="toc-text">5.3 计算IP地址所属网段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E5%8F%98%E9%95%BF%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="toc-text">5.4 变长子网掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E5%AD%90%E7%BD%91%E4%B8%AA%E6%95%B0"><span class="toc-text">5.5 子网个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-%E5%AD%90%E7%BD%91%E4%B8%AD%E5%8F%AF%E7%94%A8IP%E5%9C%B0%E5%9D%80%E6%95%B0"><span class="toc-text">5.6 子网中可用IP地址数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-%E7%89%B9%E6%AE%8A%E5%90%AB%E4%B9%89%E7%9A%84IP%E5%9C%B0%E5%9D%80"><span class="toc-text">5.7 特殊含义的IP地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-8-IPv6"><span class="toc-text">5.8 IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-8-1-%E4%BE%8B%E9%A2%98"><span class="toc-text">5.8.1 例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-DNS%E4%B8%8EDHCP"><span class="toc-text">6 DNS与DHCP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%9F%9F%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-text">6.1 域名空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-DHCP%E5%8D%8F%E8%AE%AE"><span class="toc-text">6.2 DHCP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-DNS%E5%8D%8F%E8%AE%AE"><span class="toc-text">6.3 DNS协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-1-%E4%BE%8B%E9%A2%98"><span class="toc-text">6.3.1 例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E7%BD%91%E7%BB%9C%E8%A7%84%E5%88%92%E4%B8%8E%E8%AE%BE%E8%AE%A1"><span class="toc-text">7 网络规划与设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1"><span class="toc-text">7.1 网络分层设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E4%BE%8B%E9%A2%98"><span class="toc-text">7.2 例题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E6%80%BB%E7%BB%93"><span class="toc-text">8 总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（三）——搭建linux工程"/></a><div class="content"><a class="title" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程">FreeRTOS基础篇（三）——搭建linux工程</a><time datetime="2025-08-17T11:26:00.000Z" title="发表于 2025-08-17 19:26:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（一）——介绍"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍">FreeRTOS基础篇（一）——介绍</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（二）——QEMU"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU">FreeRTOS基础篇（二）——QEMU</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Actions配置CI和CD"/></a><div class="content"><a class="title" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD">Github Actions配置CI和CD</a><time datetime="2025-05-31T16:01:00.000Z" title="发表于 2025-06-01 00:01:00">2025-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础篇（五）——vscode使用docker插件"/></a><div class="content"><a class="title" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件">Docker基础篇（五）——vscode使用docker插件</a><time datetime="2025-05-04T16:18:00.000Z" title="发表于 2025-05-05 00:18:00">2025-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://www.onlycalm.cn">OnlyCalm</a> 的博客</br> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024183071号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+      appKey: 'f2158LsoEVzRzMS8EG7rvFSs',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: '0b3f5b76c03e1d9ecca0',
+      clientSecret: '94ba0623c1599038f16bc6ecbdf0c9015c735fe5',
+      repo: 'blogtalk',
+      owner: 'onlycalm',
+      admin: ['onlycalm'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || 'a9e0ae755af91c29bb25f440c15b6172'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Valine' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/sakura.js"></script><div class="aplayer no-destroy" data-id="7642168633" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人,张氏情歌,夕阳无限好,单车,心的距离,婚礼祝福,积木,我们,苦瓜" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SVN软件开发日志规范 | OnlyCalm's Blog</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="SVN SVN软件开发日志规范前言：&emsp;&emsp;写代码的好习惯除了言简意赅的注释外，还有完善且必要的日志。注释主要是对代码内的模块或功能函数、算法、逻辑框架等进行必要简明的说明，它关注的是”这个“代码里做了什么。而日志需要说明的是这版代码和上一版本改了什么（重点关注代码的升级迭代、用途、风险），和其他代码有啥关系（比如关注是否某些功能模块借鉴或移植于其他项目）。所以日志主要关注的是“这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVN软件开发日志规范">
+<meta property="og:url" content="http://www.onlycalm.cn/2020/03/14/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/SVN%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="OnlyCalm&#39;s Blog">
+<meta property="og:description" content="SVN SVN软件开发日志规范前言：&emsp;&emsp;写代码的好习惯除了言简意赅的注释外，还有完善且必要的日志。注释主要是对代码内的模块或功能函数、算法、逻辑框架等进行必要简明的说明，它关注的是”这个“代码里做了什么。而日志需要说明的是这版代码和上一版本改了什么（重点关注代码的升级迭代、用途、风险），和其他代码有啥关系（比如关注是否某些功能模块借鉴或移植于其他项目）。所以日志主要关注的是“这">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg">
+<meta property="article:published_time" content="2020-03-14T04:51:49.000Z">
+<meta property="article:modified_time" content="2020-08-09T07:10:00.000Z">
+<meta property="article:author" content="OnlyCalm">
+<meta property="article:tag" content="c">
+<meta property="article:tag" content="规范">
+<meta property="article:tag" content="SVN">
+<meta property="article:tag" content="日志">
+<meta property="article:tag" content="命名">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SVN软件开发日志规范",
+  "url": "http://www.onlycalm.cn/2020/03/14/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/SVN%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/",
+  "image": "https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg",
+  "datePublished": "2020-03-14T04:51:49.000Z",
+  "dateModified": "2020-08-09T07:10:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "OnlyCalm",
+      "url": "http://www.onlycalm.cn/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://www.onlycalm.cn/2020/03/14/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/SVN%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: OnlyCalm","link":"链接: ","source":"来源: OnlyCalm's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SVN软件开发日志规范',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #d9d9d9;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OnlyCalm's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">SVN软件开发日志规范</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">SVN软件开发日志规范</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-03-14T04:51:49.000Z" title="发表于 2020-03-14 12:51:49">2020-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-08-09T07:10:00.000Z" title="更新于 2020-08-09 15:10:00">2020-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/">规范</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="SVN-SVN软件开发日志规范"><a href="#SVN-SVN软件开发日志规范" class="headerlink" title="SVN SVN软件开发日志规范"></a><center>SVN SVN软件开发日志规范</center></h2><p><em>前言：</em><br>&emsp;&emsp;<em>写代码的好习惯除了言简意赅的注释外，还有完善且必要的日志。注释主要是对代码内的模块或功能函数、算法、逻辑框架等进行必要简明的说明，它关注的是”这个“代码里做了什么。而日志需要说明的是这版代码和上一版本改了什么（重点关注代码的升级迭代、用途、风险），和其他代码有啥关系（比如关注是否某些功能模块借鉴或移植于其他项目）。所以日志主要关注的是“这些”代码之间的关系（改动、移植），以及怎么用它，有何风险。所以不要觉得代码里写了足够的注释就不需要写Log了，经验丰富的软件开发们会形成自己完整的一套规范风格。</em></p>
+<h3 id="1-如何写代码日志？"><a href="#1-如何写代码日志？" class="headerlink" title="1 如何写代码日志？"></a>1 如何写代码日志？</h3><p>&emsp;&emsp;这是我们要回答的第一个问题。通过上面的简介我们大致知道代码Log需要记录哪些信息了，但是这还不够。做软件一个很重要的思维方式就是把问题分类或分块进行细化。一版代码按照开发的进程分，可以分为首次开发和变更开发。按照软件发布的用途分，可以分为临时程序（用于新方案实验、辅助硬件测试、给客户送样等）和受控程序（指正式出货的程序）。按照发布次数可以分为初版发布和变更发布（程序升级）。另外还可以根据自己特色进行分类，比如按所用芯片型号、平台、开发语言、内部开发或内外合作。你的日志里要能清晰分辨出来现在在做的是属于哪一类程序。</p>
+<h3 id="2-先弄清楚现在要写的是什么程序"><a href="#2-先弄清楚现在要写的是什么程序" class="headerlink" title="2 先弄清楚现在要写的是什么程序"></a>2 先弄清楚现在要写的是什么程序</h3><p>&emsp;&emsp;当项目立项时,我们第一步当然是仔细阅读相关文档（可能是设计开发要求、方案策略设计说明、设计变更通知单、产品立项报告等等，不同的公司会有较大的差异，当然有些公司没有任何文档，全靠嘴（我这经历过什么。。。））。这些文档里除了告诉我们需要做出什么样功能的程序外，我们还能知道这是一个新项目还是老项目升级，这是将来要正式出货的程序还是只是实验程序。如果是老项目程序升级，那它就一定存在历史版本，且应该清楚的知道改动了什么。如果是正式出货的程序，那它一定有适用范围，比如这版程序用于哪些型号，哪些芯片或平台，甚至应该有对应的硬件版本号（当然，当硬件电路做出改动时软件需要评估是否能兼容，这种问题比较多发生在嵌入式行业，互联网行业就是所用的架构和平台版本了）。如果是临时程序，一定要把它区别于正式程序，写明程序的意图和提供给了谁，特别是做了某些实验验证后会得出一些进展结果，能说明的尽量说明。<br>&emsp;&emsp;开发一版程序往往不可能SVN只上传一次就成功，开发过程中，每天下班前上传新代码并写上Log是一个好习惯，这种情况需要简明的写上代码改动点和遗留问题，方便下一次开发能快速衔接。</p>
+<h3 id="3-未发布软件Log模板"><a href="#3-未发布软件Log模板" class="headerlink" title="3 未发布软件Log模板"></a>3 未发布软件Log模板</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------代码开发----------------------------------------------</span><br><span class="line">工程名：（写这个并不重复，因为工程名后期可能会改（虽然几乎不会），每个日志都写方便追溯。）</span><br><span class="line">软件版本：（如：<span class="number">200305</span> V1.<span class="number">0</span>）</span><br><span class="line">带上版本号后发布，不允许对已发布出去的备份程序做任何修改。）</span><br><span class="line">上传修改：（首次上传/修改上传。）</span><br><span class="line">版本迭代：（初版/在某某版本上变更升级。）</span><br><span class="line">上传人：（还是建议给自己取个英文名吧。）</span><br><span class="line">上传时间：（比如用六位日期数字<span class="number">200303</span>，别想了，下个世纪你的程序早被淘汰了。）</span><br><span class="line">上传原因：（如果是首次上传就写明开发目的，如：某某项目生产出货、用于某实验、给某客户送样等，如果是开发过程中的修改上传就写开发上传。）</span><br><span class="line">修改点：（这个很重要，要做到描述简明但不漏点，就是说改动了哪几个大方向要一个不漏，但是这些方向细节改了什么这里只用简明概括，想了解细节的时候对比代码就行了，当然代码内注释要写好。）</span><br><span class="line">遗留问题：（如果是在开发过程中的修改上传，写明还未进行和还未完成的功能，以便下次继续开发。如果是已经发布的程序，写明软件的风险点，方便未来软件升级时优化或排查Bug时更快定位问题。如果暂未发现风险点则写未知。）</span><br><span class="line">适用范围：（在这里写明用于什么芯片或平台。用了什么开发工具（有些大公司比较统一，而且万年不升级工具，一般小公司比较乱，不同的人用不同版本的IDE，甚至不同的开发语言。适用于哪些项目，写上项目名。总之限制软件通用性的条件可以写在这里。）</span><br><span class="line">* 使用芯片：</span><br><span class="line">* 硬件版本：</span><br><span class="line">* 适用项目：</span><br><span class="line">* 适用协议：</span><br><span class="line">工具平台：（在这里写上所用开发工具或平台的版本。）</span><br><span class="line">* 底层库版本：</span><br><span class="line">* 编译器：</span><br><span class="line">* 离线编程器上位机：</span><br><span class="line">其他描述：（需要提示或强调的东西，比如和某第三方公司合作开发，分别负责什么模块之类的。）</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-软件发布时应该写什么Log"><a href="#4-软件发布时应该写什么Log" class="headerlink" title="4 软件发布时应该写什么Log"></a>4 软件发布时应该写什么Log</h3><p>&emsp;&emsp;像前面的开发日志主要是写给软件开发人员看的，而发布出去的程序供给外部门，他们不需要知道太多软件修改的细节，主要需描述清楚3点：1、这版软件实现了哪些功能。2、适用范围。3、风险点有哪些。发布日志还有一个重要的信息，就是版本的升级迭代关系。这版软件是用于替换哪版旧软件，还是初版软件，这一点也可以归类到适用范围里。一些大公司有完善的流程管理平台（比如JIRA等），相关的信息详细记录在平台上。对于一些未搭建平台的小公司建议在工程里创建一个文档，随着开发过程保持文档更新。这份文档在最终出货时可以做成软件适用说明文档给出去。</p>
+<h3 id="5-已发布软件Log模板"><a href="#5-已发布软件Log模板" class="headerlink" title="5 已发布软件Log模板"></a>5 已发布软件Log模板</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------软件发布----------------------------------------------</span><br><span class="line">发布软件名：（要发布的是软件名称，名称里要带上软件版本号。）</span><br><span class="line">软件版本：（如：<span class="number">200305</span> V1.<span class="number">0</span>）</span><br><span class="line">项目当前状态：（完成/进行/暂停/废止）</span><br><span class="line">发布目的：（用于某项目产品生产出货/用于某项实验/）</span><br><span class="line">版本特征：（正式出货的为受控版，对其有严格的管控，其他为临时版，比如用于测试或验证，管控可能不严格。）</span><br><span class="line">版本迭代：（初版/在某某版上修改）</span><br><span class="line">发布人：</span><br><span class="line">发布时间：</span><br><span class="line">功能描述：（列举出该版软件已经实现的功能，重点描述设计开发要求上提到的功能的实现情况。只写实现了没有，不要在这里啰嗦描述为什么没有实现原因等。）</span><br><span class="line">变更原因：（如果是旧版基础上变更则写明变更原因。若为初版则写初版即可。）</span><br><span class="line">变更点：（变更程序简明写变更点（这里不要写详细的软件修改点，从前后两版的功能角度写解决了什么Bug或做了什么优化。若为初版则写初版即可。）</span><br><span class="line">适用范围：（在这里写明用于什么芯片或平台。用了什么开发工具（有些大公司比较统一，而且万年不升级工具，一般小公司比较乱，不同的人用不同版本的IDE，甚至不同的开发语言。适用于哪些项目，写上项目名。总之限制软件通用性的条件可以写在这里。）</span><br><span class="line">* 使用芯片：</span><br><span class="line">* 硬件版本：</span><br><span class="line">* 适用项目：</span><br><span class="line">* 适用协议：</span><br><span class="line">测试情况：（通过测试/未通过测试）</span><br><span class="line">遗留问题：（写明风险点，如果暂未发现风险点则写未知。）</span><br><span class="line">工具平台：（在这里写上所用开发工具或平台的版本。）</span><br><span class="line">* 底层库版本：</span><br><span class="line">* 编译器：</span><br><span class="line">* 离线编程器上位机：</span><br><span class="line">其他描述：（需要提示或强调的东西，比如和某第三方公司合作开发，分别负责什么模块之类的。）</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-如何写文档日志？"><a href="#6-如何写文档日志？" class="headerlink" title="6 如何写文档日志？"></a>6 如何写文档日志？</h3><p>&emsp;&emsp;上面已经讨论过如何给代码写上日志，在开发过程中一个软件开发人员会接收和产出很多文档，这些文档都需要和项目相关联并并在SVN等平台做好记录并上传，也会设计到Log的编写。一般来说文档的Log相对显得不那么重要，只需在日志里说明上传的文档里包含了哪些信息，属于哪个项目，文档修改时简略说明文档的修改点。当然比较重要的信息比如调试测试报告测出Bug或发现风险时，也请在Log里简明描述下。有些公司会按照文档的类别进行分类Log，比如调试测试报告的Log规范和软件其他文档Log规范不同，这里我只介绍通用简单的模板。</p>
+<h3 id="7-文档Log模板"><a href="#7-文档Log模板" class="headerlink" title="7 文档Log模板"></a>7 文档Log模板</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------文档上传----------------------------------------------</span><br><span class="line">上传修改：（首次上传/修改上传。）</span><br><span class="line">上传人：</span><br><span class="line">上传时间：</span><br><span class="line">上传原因：（比如：某某项目某版软件设计开发要求。某某项目某版软件调试报告。流程规范化软件则写软件规范化实施说明管理文档。等等。）</span><br><span class="line">修改点：（简明写文档做了哪些改动，如果第一次上传就写首次上传。）</span><br><span class="line">其他描述：（需要提示或强调的东西，比如调试测试报告里发现的Bug或风险点。）</span><br></pre></td></tr></table></figure>
+
+<p><em>&emsp;&emsp;实际这个规范不仅可用于SVN规范也能套用到其他平台和部门。</em></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn">OnlyCalm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn/2020/03/14/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/SVN%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/">http://www.onlycalm.cn/2020/03/14/编程/规范/SVN软件开发日志规范/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://www.onlycalm.cn" target="_blank">OnlyCalm's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/c/">c</a><a class="post-meta__tags" href="/tags/%E8%A7%84%E8%8C%83/">规范</a><a class="post-meta__tags" href="/tags/SVN/">SVN</a><a class="post-meta__tags" href="/tags/%E6%97%A5%E5%BF%97/">日志</a><a class="post-meta__tags" href="/tags/%E5%91%BD%E5%90%8D/">命名</a></div><div class="post-share"><div class="social-share" data-image="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/03/10/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/c%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E5%86%85%E5%B8%83%E5%B1%80%E8%A7%84%E8%8C%83/" title="c代码文件内布局规范"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">c代码文件内布局规范</div></div><div class="info-2"><div class="info-item-1">c代码文件内布局规范&emsp;&emsp;从上到下按如下布局代码： 1 *.h文件内代码布局规范 文件头注释。 文件条件编译宏。 头文件包含。 普通宏定义 结构体定义。 联合定义。 枚举定义。 宏定义。 全局变量声明。 全局函数声明。 宏函数定义。  2 *.c文件内代码布局规范 文件头注释。 头文件包含。 变量定义（按类型分类，从占字节少到字节多，然后是结构体、联合、枚举变量）。 函数定义。  </div></div></div></a><a class="pagination-related" href="/2020/03/17/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%BB%E5%8A%A8%E7%AC%94%E7%9A%84%E6%9B%B2%E7%BA%BF%E6%A0%A1%E5%87%86%E6%96%B9%E6%B3%95/" title="主动笔的曲线校准方法"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">主动笔的曲线校准方法</div></div><div class="info-2"><div class="info-item-1">主动笔的曲线校准方法前言：&emsp;&emsp;为了保证主动笔的书写体验，减小每一支笔之间的压力感知差异，在主动笔出货前一般会有一个校准过程。校准是指主动笔的压力曲线校准，这条压力曲线横轴是笔尖的克重压力，纵轴是输出到显示屏的压力等级。校准的目的就是保证随便拿一直笔，相同的力去书写使其粗细变化都是基本一致的。 1 主动笔的压力曲线1.1 什么样的压力曲线适合主动笔呢？很容易想到随着克重压力的增加，输出的压力等级也应该增加，也即压力和压力等级是正相关关系。那么更具体的曲线趋势应该是哪种呢？我们讨论如下三种：  指数函数关系； 一次函数关系（属于幂函数）； 对数函数关系；  1.2...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/03/10/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/c%E4%BB%A3%E7%A0%81%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" title="c代码命名规范"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-10</div><div class="info-item-2">c代码命名规范</div></div><div class="info-2"><div class="info-item-1">c代码命名规范前言：&emsp;&emsp;为了兼容不同供应商的芯片驱动库，最好的办法是使用自定义的数据类型等，这样有利于代码的重用性和移植性。 1 变量命名1.1 命名前缀12345678910111213//类型宏定义，为了屏蔽不同芯片库文件的变量类型名称不一致，增强可移植性typedef _Bool Bool;                                        //!&lt; 布尔类型变量，变量命名时前缀加btypedef uint8_t Byte;                                      //!&lt; 1个字节无符号整型，变量命名时前缀加bytypedef uint16_t Word;                                     //!&lt; 2个字节无符号整型，变量命名时前缀加wtypedef uint32_t DWord;                                    //!&lt;...</div></div></div></a><a class="pagination-related" href="/2021/03/27/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%BC%96%E7%A8%8B%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" title="c进阶篇（二）——编程命名规范"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-27</div><div class="info-item-2">c进阶篇（二）——编程命名规范</div></div><div class="info-2"><div class="info-item-1">c进阶篇（二）——编程命名规范前言：&emsp;&emsp;目前嵌入式常用的编程命名规范有驼峰命名法、匈牙利命名法、下划线命名法等。几种命名规范各有特色，但原则是开发人员之间保持统一的一套规范，如果是在现有的代码上开发，那么最好继续保持代码当前使用的编程规范，而不是盲目坚持自己的习惯。换句话说建议对几种常用命名规范都有所熟悉。有些公司是针对不同的“对象”使用不同的命名规范，比如变量名、方法名、类名等，结合多种命名规范各自的优势。写代码也有很多年了，有必要对编程命名规范进行一次整理总结。 1...</div></div></div></a><a class="pagination-related" href="/2019/08/12/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E6%A8%A1%E6%8B%9FPWM%E6%B3%A2%E7%9A%84%E8%87%AA%E9%80%82%E5%BA%94%E5%8F%96%E9%98%88%E5%80%BC%E7%AE%97%E6%B3%95/" title="模拟PWM波的自适应取阈值算法"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-08-12</div><div class="info-item-2">模拟PWM波的自适应取阈值算法</div></div><div class="info-2"><div class="info-item-1">模拟PWM波的自适应取阈值算法前言：&emsp;&emsp;单片机开发中，我们常常接触到的波形就是PWM波，一般都是0~3.3V的数字PWM波，很少涉及模拟PWM波。两者有什么不同呢？模拟PWM波不只有高低电平，还有中间的一些变化过程，且波形可能也不是规整的矩形波，再者它的电压可能超过3.3v导致无法直接用单片机IO口识别，PWM无法直接捕获到上升下降沿。&emsp;&emsp;如果你预算充足，开发的设备也不是非常的小型话，可以容纳额外的电路，那么你可以考虑从硬件上增加一些运放电路或整形电路，尽可能将模拟PWM变为数字PWM，如果不行就得考虑串联电阻来分压，然后代码中通过AD采样到数据后进行算法处理。 1 自适应算法1.1 自适应取阈值算法思路： 这里的MAX，MIN，LOW电压值都是不确定的，受传输距离和干扰影响。 1.2...</div></div></div></a><a class="pagination-related" href="/2020/03/10/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/c%E4%BB%A3%E7%A0%81Doxygen%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83/" title="c代码Doxygen注释规范"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_6.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-10</div><div class="info-item-2">c代码Doxygen注释规范</div></div><div class="info-2"><div class="info-item-1">c代码Doxygen注释规范前言：&emsp;&emsp;良好得注释风格利于后期维护和团队协作开发，使得代码逻辑清晰，意图明了。Doxygen是一种能自动提取代码内注释生成版主文档的开源软件，它是跨平台的。非开源项目也许并不需要有这样一份帮助文档，但Doxygen的注释规范也不失为一种好的风格，可以推广遵守。 1 Doxygen注释规范模板1.1 文件注释模板123456789/** * @file 文件名（*.h/*.c） * @brief 该模块功能的简介。 * @details 使用该模块有哪些细节注意等。 * @author 创建该文件的人名。 * @data 该文件的创建日期（2020-03-10）。 * @version 文件或模块版本号（V1.0.0）。 * @copyright 版权所属公司。 */  &emsp;&emsp;若某项无相关的说明，中文写 无 ，英文写 None ，此时末尾不加标点，若有相关的说明，则建议正常使用标点符号，包括句末标点。 1.2 函数注释模板1.2.1 完整格式1234567891011121314151617181920/** *...</div></div></div></a><a class="pagination-related" href="/2020/03/10/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/c%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E5%86%85%E5%B8%83%E5%B1%80%E8%A7%84%E8%8C%83/" title="c代码文件内布局规范"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-10</div><div class="info-item-2">c代码文件内布局规范</div></div><div class="info-2"><div class="info-item-1">c代码文件内布局规范&emsp;&emsp;从上到下按如下布局代码： 1 *.h文件内代码布局规范 文件头注释。 文件条件编译宏。 头文件包含。 普通宏定义 结构体定义。 联合定义。 枚举定义。 宏定义。 全局变量声明。 全局函数声明。 宏函数定义。  2 *.c文件内代码布局规范 文件头注释。 头文件包含。 变量定义（按类型分类，从占字节少到字节多，然后是结构体、联合、枚举变量）。 函数定义。  </div></div></div></a><a class="pagination-related" href="/2024/09/08/%E7%BC%96%E7%A8%8B/c/%E9%AB%98%E7%BA%A7%E7%AF%87/c%E9%AB%98%E7%BA%A7%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E9%9A%BE%E5%8F%91%E7%8E%B0%E7%9A%84%E5%91%BD%E5%90%8D%E9%87%8D%E5%A4%8D/" title="c高级篇（一）——难发现的命名重复"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_19.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-08</div><div class="info-item-2">c高级篇（一）——难发现的命名重复</div></div><div class="info-2"><div class="info-item-1">c高级篇（一）——难发现的命名重复前言：&emsp;&emsp; 这是我开始编写的第一个高级篇博文，分类的大体的原则是，基础篇写必须掌握的基础知识，进阶篇写需要一定理解深度才能真正掌握的知识，而高级篇写一些偏经验性的，书本上可能学不到的知识。 1 宏和枚举名重复&emsp;&emsp;为什么需要命名空间？在c中并不支持命名命名空间，在大型项目中会遇到烦人的命名重复的问题，比如宏名、枚举名、全局变量名、函数名。大型工程中，不同的模块会分配给不同的人或团队开发，各自模块测试通过，最终合到一起时可能会发现命名有较多重复，没发现的就将成为Bug。比如下面这c段代码。 123456789101112131415#include &lt;stdio.h&gt;typedef enum&#123;    NAME = 0&#125; tenuTest;#define NAME 5int main(void)&#123;    printf(&quot;NAME is %d\n&quot;, NAME);    return 0;&#125;  &emsp;&emsp;这段代码枚举和宏都定义了...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">OnlyCalm</div><div class="author-info-description">自娱自乐，做大娱乐家。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVN-SVN%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83"><span class="toc-text">SVN SVN软件开发日志规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%A6%82%E4%BD%95%E5%86%99%E4%BB%A3%E7%A0%81%E6%97%A5%E5%BF%97%EF%BC%9F"><span class="toc-text">1 如何写代码日志？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%88%E5%BC%84%E6%B8%85%E6%A5%9A%E7%8E%B0%E5%9C%A8%E8%A6%81%E5%86%99%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%E7%A8%8B%E5%BA%8F"><span class="toc-text">2 先弄清楚现在要写的是什么程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9C%AA%E5%8F%91%E5%B8%83%E8%BD%AF%E4%BB%B6Log%E6%A8%A1%E6%9D%BF"><span class="toc-text">3 未发布软件Log模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BD%AF%E4%BB%B6%E5%8F%91%E5%B8%83%E6%97%B6%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88Log"><span class="toc-text">4 软件发布时应该写什么Log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B7%B2%E5%8F%91%E5%B8%83%E8%BD%AF%E4%BB%B6Log%E6%A8%A1%E6%9D%BF"><span class="toc-text">5 已发布软件Log模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%A6%82%E4%BD%95%E5%86%99%E6%96%87%E6%A1%A3%E6%97%A5%E5%BF%97%EF%BC%9F"><span class="toc-text">6 如何写文档日志？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%96%87%E6%A1%A3Log%E6%A8%A1%E6%9D%BF"><span class="toc-text">7 文档Log模板</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（三）——搭建linux工程"/></a><div class="content"><a class="title" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程">FreeRTOS基础篇（三）——搭建linux工程</a><time datetime="2025-08-17T11:26:00.000Z" title="发表于 2025-08-17 19:26:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（一）——介绍"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍">FreeRTOS基础篇（一）——介绍</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（二）——QEMU"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU">FreeRTOS基础篇（二）——QEMU</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Actions配置CI和CD"/></a><div class="content"><a class="title" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD">Github Actions配置CI和CD</a><time datetime="2025-05-31T16:01:00.000Z" title="发表于 2025-06-01 00:01:00">2025-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础篇（五）——vscode使用docker插件"/></a><div class="content"><a class="title" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件">Docker基础篇（五）——vscode使用docker插件</a><time datetime="2025-05-04T16:18:00.000Z" title="发表于 2025-05-05 00:18:00">2025-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://www.onlycalm.cn">OnlyCalm</a> 的博客</br> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024183071号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+      appKey: 'f2158LsoEVzRzMS8EG7rvFSs',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: '0b3f5b76c03e1d9ecca0',
+      clientSecret: '94ba0623c1599038f16bc6ecbdf0c9015c735fe5',
+      repo: 'blogtalk',
+      owner: 'onlycalm',
+      admin: ['onlycalm'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '9be489a08c6ff8ea38e5fdbbdde87b82'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Valine' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/sakura.js"></script><div class="aplayer no-destroy" data-id="7642168633" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人,张氏情歌,夕阳无限好,单车,心的距离,婚礼祝福,积木,我们,苦瓜" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>

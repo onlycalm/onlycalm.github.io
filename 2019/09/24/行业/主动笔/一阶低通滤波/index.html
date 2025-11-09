@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>一阶低通滤波 | OnlyCalm's Blog</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一阶低通滤波前言：&emsp;&emsp;在使用单片机开发中，常常会用到的外设包括ADC采样。而采样必然会伴随这随机干扰引起的毛刺噪声，对于需要捕捉采样值突变的系统来说尤其需要减小毛刺突变的影响。从硬件电路和软件算法上都能一定程度的减少噪声达到滤波的目的，本文主要讲解软件使用低通滤波算法来滤波ADC采样值的方法。 1 一阶低通滤波（又叫惯性滤波）算法1.1 算法原理&emsp;&emsp;滤波算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一阶低通滤波">
+<meta property="og:url" content="http://www.onlycalm.cn/2019/09/24/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2/index.html">
+<meta property="og:site_name" content="OnlyCalm&#39;s Blog">
+<meta property="og:description" content="一阶低通滤波前言：&emsp;&emsp;在使用单片机开发中，常常会用到的外设包括ADC采样。而采样必然会伴随这随机干扰引起的毛刺噪声，对于需要捕捉采样值突变的系统来说尤其需要减小毛刺突变的影响。从硬件电路和软件算法上都能一定程度的减少噪声达到滤波的目的，本文主要讲解软件使用低通滤波算法来滤波ADC采样值的方法。 1 一阶低通滤波（又叫惯性滤波）算法1.1 算法原理&emsp;&emsp;滤波算法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_8.jpg">
+<meta property="article:published_time" content="2019-09-24T08:19:20.000Z">
+<meta property="article:modified_time" content="2020-08-09T07:10:00.000Z">
+<meta property="article:author" content="OnlyCalm">
+<meta property="article:tag" content="ADC">
+<meta property="article:tag" content="采样">
+<meta property="article:tag" content="低通">
+<meta property="article:tag" content="一阶">
+<meta property="article:tag" content="滤波">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_8.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "一阶低通滤波",
+  "url": "http://www.onlycalm.cn/2019/09/24/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2/",
+  "image": "https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_8.jpg",
+  "datePublished": "2019-09-24T08:19:20.000Z",
+  "dateModified": "2020-08-09T07:10:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "OnlyCalm",
+      "url": "http://www.onlycalm.cn/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://www.onlycalm.cn/2019/09/24/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: OnlyCalm","link":"链接: ","source":"来源: OnlyCalm's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '一阶低通滤波',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #d9d9d9;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_8.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OnlyCalm's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">一阶低通滤波</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">一阶低通滤波</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-09-24T08:19:20.000Z" title="发表于 2019-09-24 16:19:20">2019-09-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-08-09T07:10:00.000Z" title="更新于 2020-08-09 15:10:00">2020-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%A1%8C%E4%B8%9A/">行业</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/">主动笔</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="一阶低通滤波"><a href="#一阶低通滤波" class="headerlink" title="一阶低通滤波"></a><center>一阶低通滤波</center></h1><p><em>前言：</em><br>&emsp;&emsp;<em>在使用单片机开发中，常常会用到的外设包括ADC采样。而采样必然会伴随这随机干扰引起的毛刺噪声，对于需要捕捉采样值突变的系统来说尤其需要减小毛刺突变的影响。从硬件电路和软件算法上都能一定程度的减少噪声达到滤波的目的，本文主要讲解软件使用低通滤波算法来滤波ADC采样值的方法。</em></p>
+<h2 id="1-一阶低通滤波（又叫惯性滤波）算法"><a href="#1-一阶低通滤波（又叫惯性滤波）算法" class="headerlink" title="1 一阶低通滤波（又叫惯性滤波）算法"></a>1 一阶低通滤波（又叫惯性滤波）算法</h2><h3 id="1-1-算法原理"><a href="#1-1-算法原理" class="headerlink" title="1.1 算法原理"></a>1.1 算法原理</h3><p>&emsp;&emsp;滤波算法公式：<br>    Y(n) &#x3D; a * X(n) + (1 - a) * Y(n - 1)</p>
+<p>Y(n)：本次滤波结果。<br>a：滤波系数。取值范围为0~1, 值越小越稳定，越大越灵敏。<br>X(n)：本次采样值。<br>Y(n - 1)：上次滤波结果。</p>
+<h3 id="1-2-C代码实现"><a href="#1-2-C代码实现" class="headerlink" title="1.2 C代码实现"></a>1.2 C代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一阶低通滤波</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FO_LOW_PASS_FILTER_SENSITIVE_a                   0.8f                        <span class="comment">//一阶低通滤波系数取值范围为(0,1)。值越小越稳定，越大越灵敏，二者难兼顾。</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FO_LOW_PASS_FILTER_STEADY_a                      0.15f</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//输入Adc采样值，输出低通滤波值</span></span><br><span class="line"><span class="comment">//优点：调节精细，稳定度和灵敏度偏向分明。缺点：带有浮点运算</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">FOLowPassFilter</span><span class="params">(AdcSample, a)</span></span><br><span class="line">&#123;</span><br><span class="line">    g_u16FOLowPassFilterResult = (<span class="type">uint16_t</span>)(a * AdcSample + (<span class="number">1</span> - a) * g_u16FOLowPassFilterResultL);</span><br><span class="line">    g_u16FOLowPassFilterResultL = g_u16FOLowPassFilterResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-一阶低通滤波算法特点"><a href="#1-3-一阶低通滤波算法特点" class="headerlink" title="1.3 一阶低通滤波算法特点"></a>1.3 一阶低通滤波算法特点</h3><p>&emsp;&emsp;使用一阶低通滤波算法的优点：</p>
+<ul>
+<li>相比于硬件滤波，软件滤波节省成本，可靠性高，滤波范围可以由软件任意修改（硬件需要考虑阻抗匹配问题）。</li>
+<li>一阶低通滤波运算量小，需要调节的参数少，易于软件实现和单片机快速处理，是实时性强的滤波。</li>
+</ul>
+<p>&emsp;&emsp;使用一阶低通滤波算法的缺点：</p>
+<ul>
+<li>滤波系数越小，滤波结果越稳定，滤波系数越大结果越灵敏。稳定性和灵敏性二者难兼顾。</li>
+</ul>
+<h2 id="2-算法改进"><a href="#2-算法改进" class="headerlink" title="2 算法改进"></a>2 算法改进</h2><h3 id="2-1-系数a取较小值时（偏稳定）"><a href="#2-1-系数a取较小值时（偏稳定）" class="headerlink" title="2.1 系数a取较小值时（偏稳定）"></a>2.1 系数a取较小值时（偏稳定）</h3><p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2/a0.15%E7%BB%86%E8%8A%82%E5%9B%BE.png" alt="a0.15细节图.png" title="小a稳定"></p>
+<p>&emsp;&emsp;图中蓝色表示原始ADC采样值，橙色为滤波后的值，其他图片也这样。当电压不变化时采集到的ADC采样值实际存在很多毛刺噪声，选取较小的a值则能有效减小毛刺的幅度，使信号趋于稳定，防止误判。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2/a0.1.png" alt="a0.1.png" title="灵敏性差"></p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2/a0.15.png" alt="a0.15.png" title="灵敏性差"></p>
+<p>&emsp;&emsp;选取较小a值时，稳定段过滤很多毛刺噪声，但灵敏性（跟随性）较差，信号幅度变化明显时滤波结果明显滞后，且无法达到波峰波谷值。</p>
+<h3 id="2-2-系数a取较大时（偏灵敏）"><a href="#2-2-系数a取较大时（偏灵敏）" class="headerlink" title="2.2 系数a取较大时（偏灵敏）"></a>2.2 系数a取较大时（偏灵敏）</h3><p>&emsp;&emsp;特点与a较小时相反，滤波结果有较好的跟随性，但消除毛刺噪声能力差。</p>
+<h3 id="2-3-使用动态系数"><a href="#2-3-使用动态系数" class="headerlink" title="2.3 使用动态系数"></a>2.3 使用动态系数</h3><p>&emsp;&emsp;既然一阶低通滤波无法同时兼容滤波的稳定性和灵敏性， 那么我们可以根据实际情况，在采样值较低且变换幅度较小时使用小系数偏稳定性，当检测到采样值大于一定范围且增幅明显时立刻且大系数偏灵敏性。</p>
+<p>&emsp;&emsp;代码示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Filter</span><span class="params">(AdcSample)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(g_u16AdcSampleVal &gt; g_u16AdcInitBaseVal)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>((DifferenceAbs(g_u16AdcSampleVal, g_u16AdcSampleValL) &lt;= ADC_SAMPLE_LARGE_JUMP)   <span class="comment">//采样值无大幅度跳变</span></span><br><span class="line">           &amp;&amp; (DifferenceAbs(g_u16AdcSampleVal, g_u16AdcSampleValLL) &lt;= ADC_SAMPLE_LARGE_JUMP))</span><br><span class="line">        &#123;</span><br><span class="line">            FOLowPassFilter(AdcSample, FO_LOW_PASS_FILTER_STEADY_a);      <span class="comment">//一阶低通滤波,偏稳定</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            FOLowPassFilter(AdcSample, FO_LOW_PASS_FILTER_SENSITIVE_a);   <span class="comment">//一阶低通滤波,偏灵敏</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        FOLowPassFilter(AdcSample, FO_LOW_PASS_FILTER_STEADY_a);          <span class="comment">//一阶低通滤波,偏稳定</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果展示：</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2/%E5%8A%A8%E6%80%81%E7%B3%BB%E6%95%B0%E5%85%BC%E9%A1%BE%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%92%8C%E7%81%B5%E6%95%8F%E5%BA%A6.png" alt="动态系数兼顾稳定性和灵敏度.png" title="动态系数"></p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2/a0.3.png" alt="a0.3.png" title="兼顾稳定和灵敏"></p>
+<h3 id="2-4-算法改进"><a href="#2-4-算法改进" class="headerlink" title="2.4 算法改进"></a>2.4 算法改进</h3><p>&emsp;&emsp;以下算法时一阶低通滤波的变形，可以避免单片机做浮点运算，如果你的单片机浮点运算的性能较差可以使用该变形公式。这个公式不是我发明的，是由一个大佬传授给我的，我将其拿出来分享。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一阶低通滤波变形</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FO_LOW_PASS_FILTER_EXTERN_SENSITIVE_a            1u                          <span class="comment">//值越大越稳定，越小越灵敏，二者难兼顾。</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FO_LOW_PASS_FILTER_EXTERN_STEADY_a               7u</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//一阶低通滤波变形，此方法为网上借鉴</span></span><br><span class="line"><span class="comment">//优点：无浮点运算。缺点：调节粗糙。</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">FOLowPassFilterExtern</span><span class="params">(AdcSample, a)</span></span><br><span class="line">&#123;</span><br><span class="line">    g_u16FOLowPassFilterResult = AdcSample + g_u16FOLowPassFilterResultL * a;</span><br><span class="line">    g_u16FOLowPassFilterResult = g_u16FOLowPassFilterResult / (a + <span class="number">1</span>);</span><br><span class="line">    g_u16FOLowPassFilterResultL = g_u16FOLowPassFilterResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn">OnlyCalm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn/2019/09/24/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2/">http://www.onlycalm.cn/2019/09/24/行业/主动笔/一阶低通滤波/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://www.onlycalm.cn" target="_blank">OnlyCalm's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ADC/">ADC</a><a class="post-meta__tags" href="/tags/%E9%87%87%E6%A0%B7/">采样</a><a class="post-meta__tags" href="/tags/%E4%BD%8E%E9%80%9A/">低通</a><a class="post-meta__tags" href="/tags/%E4%B8%80%E9%98%B6/">一阶</a><a class="post-meta__tags" href="/tags/%E6%BB%A4%E6%B3%A2/">滤波</a></div><div class="post-share"><div class="social-share" data-image="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2019/08/19/%E7%BC%96%E7%A8%8B/Lua/%E5%9F%BA%E7%A1%80%E7%AF%87/Lua%E7%9A%84%E5%87%BD%E6%95%B0/" title="Lua的函数"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Lua的函数</div></div><div class="info-2"><div class="info-item-1">Lua的函数前言：&emsp;&emsp;最近在学些Lua的函数，之前学的太快导致有些概念性的东西记不住，这次把这些东西梳理下串起来。 1...</div></div></div></a><a class="pagination-related" href="/2020/03/10/%E7%BC%96%E7%A8%8B/%E8%A7%84%E8%8C%83/c%E4%BB%A3%E7%A0%81Doxygen%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83/" title="c代码Doxygen注释规范"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">c代码Doxygen注释规范</div></div><div class="info-2"><div class="info-item-1">c代码Doxygen注释规范前言：&emsp;&emsp;良好得注释风格利于后期维护和团队协作开发，使得代码逻辑清晰，意图明了。Doxygen是一种能自动提取代码内注释生成版主文档的开源软件，它是跨平台的。非开源项目也许并不需要有这样一份帮助文档，但Doxygen的注释规范也不失为一种好的风格，可以推广遵守。 1 Doxygen注释规范模板1.1 文件注释模板123456789/** * @file 文件名（*.h/*.c） * @brief 该模块功能的简介。 * @details 使用该模块有哪些细节注意等。 * @author 创建该文件的人名。 * @data 该文件的创建日期（2020-03-10）。 * @version 文件或模块版本号（V1.0.0）。 * @copyright 版权所属公司。 */  &emsp;&emsp;若某项无相关的说明，中文写 无 ，英文写 None ，此时末尾不加标点，若有相关的说明，则建议正常使用标点符号，包括句末标点。 1.2 函数注释模板1.2.1 完整格式1234567891011121314151617181920/** *...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/08/07/%E8%A1%8C%E4%B8%9A/%E4%B8%BB%E5%8A%A8%E7%AC%94/%E5%85%BC%E9%A1%BE%E5%8A%A8%E9%9D%99%E7%89%B9%E6%80%A7%E7%9A%84ADC%E9%87%87%E6%A0%B7%E6%BB%A4%E6%B3%A2/" title="兼顾动静特性的ADC采样滤波"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_11.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-07</div><div class="info-item-2">兼顾动静特性的ADC采样滤波</div></div><div class="info-2"><div class="info-item-1">兼顾动静特性的ADC采样滤波前言:&emsp;&emsp;嵌入式开发中ADC是十分常用的外设，常见运用比如电量检测、温度检测、压力检测等。ADC采样易收到较多干扰导致采样不准，比如ADC时钟不准、参考电压不准、被测电压存在漂移等，这时候可通过软件算法滤波，降低噪声干扰。 1...</div></div></div></a><a class="pagination-related" href="/2021/09/14/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%85%BC%E9%A1%BE%E5%8A%A8%E9%9D%99%E7%89%B9%E6%80%A7%E7%9A%84ADC%E9%87%87%E6%A0%B7%E6%BB%A4%E6%B3%A2/" title="兼顾动静特性的ADC采样滤波"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_19.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-14</div><div class="info-item-2">兼顾动静特性的ADC采样滤波</div></div><div class="info-2"><div class="info-item-1">兼顾动静特性的ADC采样滤波前言:&emsp;&emsp;嵌入式开发中ADC是十分常用的外设，常见运用比如电量检测、温度检测、压力检测等。ADC采样易收到较多干扰导致采样不准，比如ADC时钟不准、参考电压不准、被测电压存在漂移等，这时候可通过软件算法滤波，降低噪声干扰。 1...</div></div></div></a><a class="pagination-related" href="/2021/03/13/%E8%A1%8C%E4%B8%9A/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E5%8D%95%E7%89%87%E6%9C%BAADC%E9%87%87%E6%A0%B7/" title="单片机ADC采样"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_18.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-13</div><div class="info-item-2">单片机ADC采样</div></div><div class="info-2"><div class="info-item-1">单片机ADC采样前言：&emsp;&emsp;ADC是单片机中将模拟量转换为数字量的器件，我们称之为魔术转换器，简称ADC。模拟量是指变量在一定时间范围连续变化的量，数字量在时间上是不连续的，离散的。 1 ADC采样原理&emsp;&emsp;将模拟量转换为数字量的过程一般可分为：采样、保持、量化、编码四个步骤。在实际的转换过程中，这些过程有时是合并进行，比如取样和保持，量化和编码可同时进行。  1.1 采样&emsp;&emsp;将时间连续变化的模拟量转换为时间离散的模拟量。通过控制采样电路开关，使得连续的模拟采样信号被周期性的导通一段时间。这个周期即为ADC的采样周期。 1.2 保持&emsp;&emsp;由于被测模拟信号可能一直处于变化状态，因此为了保证采样的精准性，在量化编码期间应保持被测信号不变，这就是保持的作用。比如对电压的ADC转换，采样电路开关导通后，模拟信号输入进保持电路的电容，开始充电，之后采样断开后电容中的电量被保持，等待量化操作和下一个采样脉冲到来。 1.3...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">OnlyCalm</div><div class="author-info-description">自娱自乐，做大娱乐家。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2"><span class="toc-text">一阶低通滤波</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%EF%BC%88%E5%8F%88%E5%8F%AB%E6%83%AF%E6%80%A7%E6%BB%A4%E6%B3%A2%EF%BC%89%E7%AE%97%E6%B3%95"><span class="toc-text">1 一阶低通滤波（又叫惯性滤波）算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="toc-text">1.1 算法原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-C%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">1.2 C代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%B8%80%E9%98%B6%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E7%AE%97%E6%B3%95%E7%89%B9%E7%82%B9"><span class="toc-text">1.3 一阶低通滤波算法特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B"><span class="toc-text">2 算法改进</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%B3%BB%E6%95%B0a%E5%8F%96%E8%BE%83%E5%B0%8F%E5%80%BC%E6%97%B6%EF%BC%88%E5%81%8F%E7%A8%B3%E5%AE%9A%EF%BC%89"><span class="toc-text">2.1 系数a取较小值时（偏稳定）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E7%B3%BB%E6%95%B0a%E5%8F%96%E8%BE%83%E5%A4%A7%E6%97%B6%EF%BC%88%E5%81%8F%E7%81%B5%E6%95%8F%EF%BC%89"><span class="toc-text">2.2 系数a取较大时（偏灵敏）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E7%B3%BB%E6%95%B0"><span class="toc-text">2.3 使用动态系数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B"><span class="toc-text">2.4 算法改进</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（三）——搭建linux工程"/></a><div class="content"><a class="title" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程">FreeRTOS基础篇（三）——搭建linux工程</a><time datetime="2025-08-17T11:26:00.000Z" title="发表于 2025-08-17 19:26:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（一）——介绍"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍">FreeRTOS基础篇（一）——介绍</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（二）——QEMU"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU">FreeRTOS基础篇（二）——QEMU</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Actions配置CI和CD"/></a><div class="content"><a class="title" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD">Github Actions配置CI和CD</a><time datetime="2025-05-31T16:01:00.000Z" title="发表于 2025-06-01 00:01:00">2025-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础篇（五）——vscode使用docker插件"/></a><div class="content"><a class="title" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件">Docker基础篇（五）——vscode使用docker插件</a><time datetime="2025-05-04T16:18:00.000Z" title="发表于 2025-05-05 00:18:00">2025-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://www.onlycalm.cn">OnlyCalm</a> 的博客</br> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024183071号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+      appKey: 'f2158LsoEVzRzMS8EG7rvFSs',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: '0b3f5b76c03e1d9ecca0',
+      clientSecret: '94ba0623c1599038f16bc6ecbdf0c9015c735fe5',
+      repo: 'blogtalk',
+      owner: 'onlycalm',
+      admin: ['onlycalm'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '511e66631f0b86b531e6226a91b562c2'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Valine' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/sakura.js"></script><div class="aplayer no-destroy" data-id="7642168633" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人,张氏情歌,夕阳无限好,单车,心的距离,婚礼祝福,积木,我们,苦瓜" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>

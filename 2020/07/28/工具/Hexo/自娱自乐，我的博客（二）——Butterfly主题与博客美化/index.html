@@ -1,0 +1,599 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>自娱自乐，我的博客（二）——Butterfly主题与博客美化 | OnlyCalm's Blog</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="自娱自乐，我的博客（二）——Butterfly主题与博客美化前言：阅读这篇文章我能学到什么？&emsp;&emsp;上一篇讲了如何搭建个人博客，我们期望博客更美观和个性化，因此之后的几篇文章都会讲解如何去美化我们的博客。即便是程序员懂网页前端的只是一小部分，另外也是使我们更简单容易的维护博客，通常我们都会选择一个喜欢的主体并在此基础上进行个性化设置。我推荐Butterfly作为博客主题，非常美观且">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自娱自乐，我的博客（二）——Butterfly主题与博客美化">
+<meta property="og:url" content="http://www.onlycalm.cn/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/index.html">
+<meta property="og:site_name" content="OnlyCalm&#39;s Blog">
+<meta property="og:description" content="自娱自乐，我的博客（二）——Butterfly主题与博客美化前言：阅读这篇文章我能学到什么？&emsp;&emsp;上一篇讲了如何搭建个人博客，我们期望博客更美观和个性化，因此之后的几篇文章都会讲解如何去美化我们的博客。即便是程序员懂网页前端的只是一小部分，另外也是使我们更简单容易的维护博客，通常我们都会选择一个喜欢的主体并在此基础上进行个性化设置。我推荐Butterfly作为博客主题，非常美观且">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg">
+<meta property="article:published_time" content="2020-07-28T10:15:12.000Z">
+<meta property="article:modified_time" content="2020-09-13T08:47:00.000Z">
+<meta property="article:author" content="OnlyCalm">
+<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="ButterFly">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="美化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "自娱自乐，我的博客（二）——Butterfly主题与博客美化",
+  "url": "http://www.onlycalm.cn/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/",
+  "image": "https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg",
+  "datePublished": "2020-07-28T10:15:12.000Z",
+  "dateModified": "2020-09-13T08:47:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "OnlyCalm",
+      "url": "http://www.onlycalm.cn/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://www.onlycalm.cn/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: OnlyCalm","link":"链接: ","source":"来源: OnlyCalm's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '自娱自乐，我的博客（二）——Butterfly主题与博客美化',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #d9d9d9;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OnlyCalm's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">自娱自乐，我的博客（二）——Butterfly主题与博客美化</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">自娱自乐，我的博客（二）——Butterfly主题与博客美化</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-28T10:15:12.000Z" title="发表于 2020-07-28 18:15:12">2020-07-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-09-13T08:47:00.000Z" title="更新于 2020-09-13 16:47:00">2020-09-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/Hexo/">Hexo</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">4.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="自娱自乐，我的博客（二）——Butterfly主题与博客美化"><a href="#自娱自乐，我的博客（二）——Butterfly主题与博客美化" class="headerlink" title="自娱自乐，我的博客（二）——Butterfly主题与博客美化"></a><center>自娱自乐，我的博客（二）——Butterfly主题与博客美化</center></h1><p><em>前言：</em><br><em>阅读这篇文章我能学到什么？</em><br>&emsp;&emsp;<em>上一篇讲了如何搭建个人博客，我们期望博客更美观和个性化，因此之后的几篇文章都会讲解如何去美化我们的博客。即便是程序员懂网页前端的只是一小部分，另外也是使我们更简单容易的维护博客，通常我们都会选择一个喜欢的主体并在此基础上进行个性化设置。我推荐Butterfly作为博客主题，非常美观且配置丰富。</em></p>
+<h2 id="1-更换博客主题"><a href="#1-更换博客主题" class="headerlink" title="1 更换博客主题"></a>1 更换博客主题</h2><p>&emsp;&emsp;Butterfly主题你可以在<a target="_blank" rel="noopener" href="https://hexo.io/themes" title="转到Hexo官网的主题页">Hexo官网的主题页</a>搜索找到它，或者直接访问<a target="_blank" rel="noopener" href="https://demo.jerryc.me/" title="转到Butterfly 主题的首页">Butterfly 主题的首页</a>，你可以先一览它的“美貌”，并且里面有关于该主题的使用教程。</p>
+<h3 id="1-1-安装Butterfly"><a href="#1-1-安装Butterfly" class="headerlink" title="1.1 安装Butterfly"></a>1.1 安装Butterfly</h3><p>&emsp;&emsp;在你的hexo工作的根目录里执行cmd指令下载安装Butterfly主题。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b master https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-配置Butterfly"><a href="#1-2-配置Butterfly" class="headerlink" title="1.2 配置Butterfly"></a>1.2 配置Butterfly</h3><p>&emsp;&emsp;此时在themes目录下就会多一个butterfly目录，里面放的就是该主题的相关文件。但要使其生效还需要修改hexo根目录下的配置文件__config.yml中的 <code>theme</code> 关键字的值，其默认使用的是landscape主题（如果以后用不到就删除吧）。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">butterfly</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;需要注意的是hexo对语法格式要求很严格，请不要省略冒号后面的空格。<br>&emsp;&emsp;主题下载好后请将主题下的配置文件即themes&#x2F;butterfly&#x2F;__config.yml复制到source&#x2F;_data目录下，并重命名为butterfly.yml，如果_data目录不存在就手动新建一个。之后对Butterfly主题的配置都在butterfly.yml文件中进行，因为该文件的修改会默认覆盖主题目录下的__config.yml文件里的修改，这样做是方便以后更新主题。</p>
+<h3 id="1-2-安装pug和stylus的渲染器"><a href="#1-2-安装pug和stylus的渲染器" class="headerlink" title="1.2 安装pug和stylus的渲染器"></a>1.2 安装pug和stylus的渲染器</h3><p>&emsp;&emsp;由于该主题使用了这些渲染器所以要想正常显示必须安装它们。在hexo工作目录下执行cmd指令。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-pug hexo-renderer-stylus --save</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;现在准备就绪，让我们来看看效果。在hexo工作目录执行指令进行清空。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;然后执行指令重新生成站点文件。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;随后执行指令在本地预览。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在浏览器中输入网址 <strong><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a></strong> 进行本地访问。后续配置文件的修改都需要重新生成后才能看到效果，不再重复描述这个过程。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Butterfly.gif" alt="Butterfly.gif" title="Butterfly"></p>
+<h2 id="2-设置站点资料"><a href="#2-设置站点资料" class="headerlink" title="2 设置站点资料"></a>2 设置站点资料</h2><p>&emsp;&emsp;在hexo工作目录的配置文件中__config.yml输入属于自己的配置信息。</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">title</td>
+<td align="center">网站标题</td>
+</tr>
+<tr>
+<td align="center">subtitle</td>
+<td align="center">网站副标题</td>
+</tr>
+<tr>
+<td align="center">description</td>
+<td align="center">网站描述</td>
+</tr>
+<tr>
+<td align="center">keywords</td>
+<td align="center">网站关键词，搜索引擎会搜索这些关键词</td>
+</tr>
+<tr>
+<td align="center">author</td>
+<td align="center">博主名字</td>
+</tr>
+<tr>
+<td align="center">language</td>
+<td align="center">网站语言，默认’’或 en 为英语，中文为 zh-CN</td>
+</tr>
+<tr>
+<td align="center">timezone</td>
+<td align="center">网站使用时区，默认使用访问电脑所在时区也可以指定比如使用上海时区Asia&#x2F;Shanghai。建议使用默认就行了</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;我的设置如下。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">OnlyCalm&#x27;s</span> <span class="string">Blog</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;onlycalm&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;自娱自乐，做大娱乐家&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">OnlyCalm,</span> <span class="string">Calm,</span> <span class="string">Blog</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">OnlyCalm</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-修改导航菜单"><a href="#2-修改导航菜单" class="headerlink" title="2 修改导航菜单"></a>2 修改导航菜单</h2><p>&emsp;&emsp;导航菜单每一个按钮由图标和描述文字组成，我们可以修改图标和文字。<br>&emsp;&emsp;Butterfly支持font-awesome图标，在配置文件source&#x2F;_data&#x2F;butterfly.yml进行配置文本和图标。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="string">主页:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-fort-awesome</span></span><br><span class="line">  <span class="string">文章</span> <span class="string">||</span> <span class="attr">fas fa-book-open:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">分类</span> <span class="string">||</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fas</span> <span class="string">fa-box-open</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">标签</span> <span class="string">||</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fas</span> <span class="string">fa-bookmark</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">时间轴</span> <span class="string">||</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fas</span> <span class="string">fa-hourglass-half</span></span><br><span class="line">  <span class="string">娱乐</span> <span class="string">||</span> <span class="attr">fas fa-icons:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">音乐</span> <span class="string">||</span> <span class="string">/music/</span> <span class="string">||</span> <span class="string">fas</span> <span class="string">fa-headphones</span></span><br><span class="line">  <span class="string">友链:</span> <span class="string">/link/</span> <span class="string">||</span> <span class="string">fas</span> <span class="string">fa-user-friends</span></span><br><span class="line">  <span class="string">打赏:</span> <span class="string">/reward/</span> <span class="string">||</span> <span class="string">fas</span> <span class="string">fa-gift</span></span><br><span class="line">  <span class="string">关于:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-canadian-maple-leaf</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;修改之后的效果如下。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/New%20navigation%20menu.gif" alt="New navigation menu.gif" title="New navigation menu"></p>
+<p>&emsp;&emsp;图标可以在<a target="_blank" rel="noopener" href="https://fontawesome.com/" title="Font Awesome">Font Awesome</a>网站上搜索，有很多免费的图标，不过更多是收费的图标(带pro的，目前收费是一年99)。从上到下的书写顺序对应页面从左到右的显示顺序。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Font%20awesome%20github.png" alt="Font awesome github.png" title="Font awesome github"></p>
+<p>&emsp;&emsp;使用方法网站会给出，我们只要照葫芦画瓢填写就行了。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Use%20icon.png" alt="Use icon.png" title="Use icon"></p>
+<h2 id="3-修改社交图标和头像"><a href="#3-修改社交图标和头像" class="headerlink" title="3 修改社交图标和头像"></a>3 修改社交图标和头像</h2><h3 id="3-1-修改设计图标"><a href="#3-1-修改设计图标" class="headerlink" title="3.1 修改设计图标"></a>3.1 修改设计图标</h3><p>&emsp;&emsp;社交图标的语法格式为 <code>图标名 : url || 描述</code>，根据需要进行配置。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">fab fa-github:</span> <span class="string">https://github.com/onlycalm</span> <span class="string">||</span> <span class="string">GitHub</span></span><br><span class="line">  <span class="attr">fab fa-cuttlefish:</span> <span class="string">https://blog.csdn.net/qq_42475711</span> <span class="string">||</span> <span class="string">CSDN</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-修改头像"><a href="#3-2-修改头像" class="headerlink" title="3.2 修改头像"></a>3.2 修改头像</h3><p>&emsp;&emsp;继续修改butterfly.yml配置文件中关于头像的配置，在avatar的img参数后给出作为头像的图片地址。找好你需要作为头像的图片，将其拷贝到博客根目录下的source&#x2F;images文件夹中，如果不存在就新建一个。不建议放在主题目录下的sourse&#x2F;img文件夹内，这只作用于某个主题，并且未来更新升级也麻烦，也容易丢失图片。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="attr">img:</span> <span class="string">/images/avatar.png</span></span><br><span class="line">  <span class="attr">effect:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;如果将 <code>effect</code> 配置为 <code>true</code> 则头像会一直旋转。<br>&emsp;&emsp;修改社交图标和头像后的效果为见下图。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Social%20avatar.gif" alt="Social avatar.gif" title="Social avatar"></p>
+<h3 id="3-3-修改网站图标"><a href="#3-3-修改网站图标" class="headerlink" title="3.3 修改网站图标"></a>3.3 修改网站图标</h3><p>&emsp;&emsp;主题默认使用的网站图标是Hexo的图标，如果想要更加个性化可以将图标文件拷贝到博客根目录下source&#x2F;images下。<br>&emsp;&emsp;修改 butterfly.yml 配置文件，找到 favicon 关键字设置图标路径。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span> <span class="string">/images/favicon.png</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Favicon.png" alt="Favicon.png" title="Favicon"></p>
+<h2 id="4-修改Footer和主题颜色"><a href="#4-修改Footer和主题颜色" class="headerlink" title="4 修改Footer和主题颜色"></a>4 修改Footer和主题颜色</h2><h3 id="4-1-修改Footer设置"><a href="#4-1-修改Footer设置" class="headerlink" title="4.1 修改Footer设置"></a>4.1 修改Footer设置</h3><p>&emsp;&emsp;Footer是对博客页脚的设置，你可以设置博客建站的年份，以及加入一段文本描述。默认会开启一个Hexo和Butterfly的版权声明，如果你不喜欢也可以将其关闭。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">since:</span> <span class="number">2020</span></span><br><span class="line"></span><br><span class="line"><span class="attr">footer_custom_text:</span> <span class="string">生生灯火，明暗无辄&lt;/br&gt;欢迎访问</span> <span class="string">&lt;a</span> <span class="string">href=&quot;https://onlycalm.github.io&quot;&gt;OnlyCalm&lt;/a&gt;!</span> <span class="string">的博客</span></span><br><span class="line"></span><br><span class="line"><span class="attr">footer_copyright:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;<code>since</code> 参数用于配置博客建站年份，<code>footer_custom_texto</code> 是显示在页脚的描述文本，支持html语法。<code>footer_copyright</code> 配置为false可以将版权声明关闭。</p>
+<h3 id="4-2-修改主题"><a href="#4-2-修改主题" class="headerlink" title="4.2 修改主题"></a>4.2 修改主题</h3><h4 id="4-2-1-修改UI颜色"><a href="#4-2-1-修改UI颜色" class="headerlink" title="4.2.1 修改UI颜色"></a>4.2.1 修改UI颜色</h4><p>&emsp;&emsp;在主题配置文件butterfly.yml中找到主题色调的修改项theme_color 。</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">main</td>
+<td align="center">主题主色调颜色。能修改大部分颜色</td>
+</tr>
+<tr>
+<td align="center">paginator</td>
+<td align="center">分页器颜色</td>
+</tr>
+<tr>
+<td align="center">button_hover</td>
+<td align="center">按钮悬浮状态颜色。比如页面右下键有回到顶部和设置按钮，将鼠标移动上去使其获得焦点时的颜色</td>
+</tr>
+<tr>
+<td align="center">text_selection</td>
+<td align="center">文本内容被选中时的背景色</td>
+</tr>
+<tr>
+<td align="center">link_color</td>
+<td align="center">链接颜色</td>
+</tr>
+<tr>
+<td align="center">meta_color</td>
+<td align="center">meta 标签颜色</td>
+</tr>
+<tr>
+<td align="center">hr_color</td>
+<td align="center">hr 标签颜色</td>
+</tr>
+<tr>
+<td align="center">code_foreground</td>
+<td align="center">代码前景色</td>
+</tr>
+<tr>
+<td align="center">code_background</td>
+<td align="center">代码背景色</td>
+</tr>
+<tr>
+<td align="center">toc_color</td>
+<td align="center">文章 toc 颜色</td>
+</tr>
+<tr>
+<td align="center">blockquote_padding_color</td>
+<td align="center">块引用填充色</td>
+</tr>
+<tr>
+<td align="center">blockquote_background_color</td>
+<td align="center">块引用背景色</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;根据个人喜好配置，下面是我的配置供参考。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme_color:</span></span><br><span class="line">   <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">   <span class="attr">main:</span> <span class="string">&quot;#8DB6CD&quot;</span></span><br><span class="line">   <span class="attr">paginator:</span> <span class="string">&quot;#C6E2FF&quot;</span></span><br><span class="line">   <span class="attr">button_hover:</span> <span class="string">&quot;#EE8262&quot;</span></span><br><span class="line">   <span class="attr">text_selection:</span> <span class="string">&quot;#6fa8dc&quot;</span></span><br><span class="line">   <span class="attr">link_color:</span> <span class="string">&quot;#99a9bf&quot;</span></span><br><span class="line">   <span class="attr">meta_color:</span> <span class="string">&quot;#858585&quot;</span></span><br><span class="line">   <span class="attr">hr_color:</span> <span class="string">&quot;#A4D8FA&quot;</span></span><br><span class="line">   <span class="attr">code_foreground:</span> <span class="string">&quot;#F47466&quot;</span></span><br><span class="line">   <span class="attr">code_background:</span> <span class="string">&quot;rgba(27, 31, 35, .05)&quot;</span></span><br><span class="line">   <span class="attr">toc_color:</span> <span class="string">&quot;#CD6889&quot;</span></span><br><span class="line">   <span class="attr">blockquote_padding_color:</span> <span class="string">&quot;#49b1f5&quot;</span></span><br><span class="line">   <span class="attr">blockquote_background_color:</span> <span class="string">&quot;#49b1f5&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-2-修改网站背景"><a href="#4-2-2-修改网站背景" class="headerlink" title="4.2.2 修改网站背景"></a>4.2.2 修改网站背景</h4><p>&emsp;&emsp;在主题配置文件butterfly.yml中找到关键字 <code>background</code>，该关键字之后可以直接设置颜色值也可以给出图片的url显示图片。白色有时候太亮太刺眼了，所以我将其配置为浅灰色。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">background:</span> <span class="string">&quot;#d9d9d9&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-2-修改Footer颜色"><a href="#4-2-2-修改Footer颜色" class="headerlink" title="4.2.2 修改Footer颜色"></a>4.2.2 修改Footer颜色</h4><p>&emsp;&emsp;Footer可以是top_img图片的一部分（图片的底部），也可以和主题色保持一致。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">footer_bg:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;我将其配置为 <code>true</code> 则显示top_img的下面一部分。<br>&emsp;&emsp;下面是效果展示。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Color.gif" alt="Color.gif" title="Color"></p>
+<h2 id="5-侧边栏设置"><a href="#5-侧边栏设置" class="headerlink" title="5 侧边栏设置"></a>5 侧边栏设置</h2><p>&emsp;&emsp;很多博客平台都提供侧边栏罗列出“博客专栏”、“写作时间线”、“近期文章”等，同样的Butterfly也提供这样的功能，具体需要显示那些板块可由我们自己配置。下图是默认配置，已经符合我的习惯所以我就不需要修改它了，大家根据自己需要相应修改。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">aside:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">mobile:</span> <span class="literal">true</span> <span class="comment"># display on mobile</span></span><br><span class="line">  <span class="attr">position:</span> <span class="string">right</span> <span class="comment"># left or right</span></span><br><span class="line">  <span class="attr">card_author:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">description:</span></span><br><span class="line">  <span class="attr">card_announcement:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">content:</span> <span class="string">This</span> <span class="string">is</span> <span class="string">my</span> <span class="string">Blog</span></span><br><span class="line">  <span class="attr">card_recent_post:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">limit:</span> <span class="number">5</span> <span class="comment"># if set 0 will show all</span></span><br><span class="line">  <span class="attr">card_categories:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">limit:</span> <span class="number">8</span> <span class="comment"># if set 0 will show all</span></span><br><span class="line">    <span class="attr">expand:</span> <span class="string">none</span> <span class="comment"># none/true/false</span></span><br><span class="line">  <span class="attr">card_tags:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">limit:</span> <span class="number">40</span> <span class="comment"># if set 0 will show all</span></span><br><span class="line">    <span class="attr">color:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">card_archives:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">monthly</span> <span class="comment"># yearly or monthly</span></span><br><span class="line">    <span class="attr">format:</span> <span class="string">MMMM</span> <span class="string">YYYY</span> <span class="comment"># eg: YYYY年MM月</span></span><br><span class="line">    <span class="attr">order:</span> <span class="number">-1</span> <span class="comment"># Sort of order. 1, asc for ascending; -1, desc for descending</span></span><br><span class="line">    <span class="attr">limit:</span> <span class="number">8</span> <span class="comment"># if set 0 will show all</span></span><br><span class="line">  <span class="attr">card_webinfo:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-背景特效"><a href="#6-背景特效" class="headerlink" title="6 背景特效"></a>6 背景特效</h2><h3 id="6-1-彩带背景特效"><a href="#6-1-彩带背景特效" class="headerlink" title="6.1 彩带背景特效"></a>6.1 彩带背景特效</h3><h4 id="6-1-1-静态彩带背景"><a href="#6-1-1-静态彩带背景" class="headerlink" title="6.1.1 静态彩带背景"></a>6.1.1 静态彩带背景</h4><p>&emsp;&emsp;在主题配置文件butterfly.yml中找到 <code>canvas_ribbon</code> 参数，使能该项功能。你可以配置彩带的大小、透明度、风格以及单机鼠标左键时是否更换彩带，是否在手机端显示彩带。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">canvas_ribbon:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">size:</span> <span class="number">150</span></span><br><span class="line">  <span class="attr">alpha:</span> <span class="number">0.6</span></span><br><span class="line">  <span class="attr">zIndex:</span> <span class="number">-1</span></span><br><span class="line">  <span class="attr">click_to_change:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">mobile:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-1-2-动态彩带背景"><a href="#6-1-2-动态彩带背景" class="headerlink" title="6.1.2 动态彩带背景"></a>6.1.2 动态彩带背景</h4><p>&emsp;&emsp;在主题配置文件butterfly.yml中找到 <code>canvas_ribbon_piao</code> 参数，使能该项功能。你可以配置是否在手机端显示动态彩带。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">canvas_ribbon_piao:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">mobile:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-Canvas-nest特效"><a href="#6-2-Canvas-nest特效" class="headerlink" title="6.2 Canvas_nest特效"></a>6.2 Canvas_nest特效</h3><p>&emsp;&emsp;该特效会在屏幕上较为均匀的生成一些离散点运动，相邻的点较近时连成线，也能和鼠标进行互动。在主题配置文件中找到 <code>canvas_nest</code> 参数，使能该项功能。我们可以配置颜色、透明度、样式、点数量以及是否在手机端显示。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">canvas_nest:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">&#x27;0, 205, 102&#x27;</span> <span class="comment">#color of lines, default: &#x27;0,0,0&#x27;; RGB values: (R,G,B).(<span class="doctag">note:</span> use &#x27;,&#x27; to separate.)</span></span><br><span class="line">  <span class="attr">opacity:</span> <span class="number">0.7</span> <span class="comment"># the opacity of line (0~1), default: 0.5.</span></span><br><span class="line">  <span class="attr">zIndex:</span> <span class="number">-1</span> <span class="comment"># z-index property of the background, default: -1.</span></span><br><span class="line">  <span class="attr">count:</span> <span class="number">200</span> <span class="comment"># the number of lines, default: 99.</span></span><br><span class="line">  <span class="attr">mobile:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Canvas.gif" alt="Canvas.gif" title="Canvas"></p>
+<h2 id="7-鼠标点击特效"><a href="#7-鼠标点击特效" class="headerlink" title="7 鼠标点击特效"></a>7 鼠标点击特效</h2><h3 id="7-1-鼠标点击烟花特效"><a href="#7-1-鼠标点击烟花特效" class="headerlink" title="7.1 鼠标点击烟花特效"></a>7.1 鼠标点击烟花特效</h3><p>&emsp;&emsp;在主题配置文件butterfly.yml中找到 <code>fireworks</code> 参数，如果需要使能功能即可。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fireworks:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">zIndex:</span> <span class="number">9999</span> <span class="comment"># -1 or 9999</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-鼠标点击烟花特效"><a href="#7-2-鼠标点击烟花特效" class="headerlink" title="7.2 鼠标点击烟花特效"></a>7.2 鼠标点击烟花特效</h3><p>&emsp;&emsp;在主题配置文件butterfly.yml中找到 <code>click_heart</code> 参数，如果需要使能功能即可。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">click_heart:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-3-鼠标点击浮现字符特效"><a href="#7-3-鼠标点击浮现字符特效" class="headerlink" title="7.3 鼠标点击浮现字符特效"></a>7.3 鼠标点击浮现字符特效</h3><p>&emsp;&emsp;在主题配置文件butterfly.yml中找到 <code>ClickShowText</code> 参数，使能功能。<code>text</code> 参数下可以添加文本，鼠标点击时会从上到下轮循显示，<code>fontSize</code> 文本为大小。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ClickShowText:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">text:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">于心有愧</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">信心花舍</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">时光隧道</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">四季</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">不求人</span></span><br><span class="line">  <span class="attr">fontSize:</span> <span class="string">15px</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Click.gif" alt="Click.gif" title="Click"></p>
+<h2 id="8-副标题字体"><a href="#8-副标题字体" class="headerlink" title="8 副标题字体"></a>8 副标题字体</h2><p>&emsp;&emsp;在Butterfly主题的主页上，网站标题下有个副标题栏，以动画的形式显示一串文本的键入又删除，而且内容可变，如果你想修改这个文本内容可以在主题配置文件butterfly.yml下找到 <code>subtitle</code> 关键字配置。你可以使能该项功能，配置是否以打字动画效果展示，是否循环显示字符串以及字符串内容。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># the subtitle on homepage (主頁subtitle)</span></span><br><span class="line"><span class="attr">subtitle:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Typewriter Effect (打字效果)</span></span><br><span class="line">  <span class="attr">effect:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># loop (循環打字)</span></span><br><span class="line">  <span class="attr">loop:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># source調用第三方服務</span></span><br><span class="line">  <span class="comment"># source: false 關閉調用</span></span><br><span class="line">  <span class="comment"># source: 1  調用搏天api的隨機語錄（簡體） https://api.btstu.cn/</span></span><br><span class="line">  <span class="comment"># source: 2  調用一言網的一句話（簡體） https://hitokoto.cn/</span></span><br><span class="line">  <span class="comment"># source: 3  調用一句網（簡體） http://yijuzhan.com/</span></span><br><span class="line">  <span class="comment"># source: 4  調用今日詩詞（簡體） https://www.jinrishici.com/</span></span><br><span class="line">  <span class="comment"># subtitle 會先顯示 source , 再顯示 sub 的內容</span></span><br><span class="line">  <span class="attr">source:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># 如果有英文逗號&#x27; , &#x27;,請使用轉義字元 &amp;#44;</span></span><br><span class="line">  <span class="comment"># 如果有英文雙引號&#x27; &quot; &#x27;,請使用轉義字元 &amp;quot;</span></span><br><span class="line">  <span class="comment"># 開頭不允許轉義字元，如需要，請把整個句子用雙引號包住</span></span><br><span class="line">  <span class="comment"># 如果關閉打字效果，subtitle只會顯示sub的第一行文字</span></span><br><span class="line">  <span class="attr">sub:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">纪念我过去</span> <span class="string">为人如此风趣</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">活得精彩</span> <span class="string">结尾切勿流眼泪</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">友情爱情两边都发现</span> <span class="string">亏欠</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">没求过你</span> <span class="string">你就当我骄傲</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">离时代远远</span> <span class="string">无人间烟火</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">从今天开始</span> <span class="string">相识当做别离</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">做喜欢的工作和享受游戏</span> <span class="string">一死了</span> <span class="string">怎细味</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Roll%20string.gif" alt="Roll string.gif" title="Roll string"></p>
+<h2 id="9-更换页首图片"><a href="#9-更换页首图片" class="headerlink" title="9 更换页首图片"></a>9 更换页首图片</h2><p>&emsp;&emsp;Butterfly主题可以修改主页的图片，page页首图片也可以被修改。</p>
+<h3 id="9-1-更换主页图片"><a href="#9-1-更换主页图片" class="headerlink" title="9.1 更换主页图片"></a>9.1 更换主页图片</h3><p>&emsp;&emsp;将你要使用的图片拷贝到sourse&#x2F;images文件夹内。在博客根目录的sourse&#x2F;_data文件夹下butterfly.yml配置文件中进行配置，指定主页所用的图片路径。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># the banner image of home page</span></span><br><span class="line"><span class="attr">index_img:</span> <span class="string">/images/index_img.jpg</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="9-2-设置顶部图default-top-img和top-img"><a href="#9-2-设置顶部图default-top-img和top-img" class="headerlink" title="9.2 设置顶部图default_top_img和top_img"></a>9.2 设置顶部图default_top_img和top_img</h3><p>&emsp;&emsp;top_img是在md文件的front-matter中配置的，它可以为每个md生成的页面指定页首的图片，未设置top_img的md文件会使用default_top_img指定的图片作为页首图。<br>&emsp;&emsp;将你要使用的图片拷贝到sourse&#x2F;images文件夹内。在博客根目录的sourse&#x2F;_data文件夹下butterfly.yml配置文件中进行配置，指定default_top_img所用的图片路径。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if the banner of page not setting,it will show the top_img</span></span><br><span class="line"><span class="attr">default_top_img:</span> <span class="string">/images/default_top_img.png</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;我们尝试给music页面通过top_img指定一个页首图片。将图片拷贝至sourse&#x2F;images，打开music对应的index.md文件进行配置top_img参数。当然其他页面也可以指定顶部图。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: music</span><br><span class="line">date: 2020-07-17 22:12:10</span><br><span class="line">type: music</span><br><span class="line">aplayer: true</span><br><span class="line"><span class="section">top<span class="emphasis">_img: /images/music_</span>top<span class="emphasis">_img.jpg</span></span></span><br><span class="line"><span class="emphasis"><span class="section">---</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Top%20img.png" alt="Top img.png" title="Top img"></p>
+<h3 id="9-3-设置封面图default-cover"><a href="#9-3-设置封面图default-cover" class="headerlink" title="9.3 设置封面图default_cover"></a>9.3 设置封面图default_cover</h3><p>&emsp;&emsp;上面我们提到了顶部图，如果文章设置了封面图，则文章封面和顶部都将显示为指定的封面图。在配置文件中可指定多个封面图，会随机显示一个。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">default_cover:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_1.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_2.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_3.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_4.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_5.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_6.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_7.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_8.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_9.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_10.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_11.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_12.jpg</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/default_top_img_13.jpg</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;我们也可以在front-matter中指定文章的封面图，同时也相当于指定了顶部图了。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: music</span><br><span class="line">date: 2020-07-17 22:12:10</span><br><span class="line">type: music</span><br><span class="line">aplayer: true</span><br><span class="line"><span class="section">cover: /images/index<span class="emphasis">_img.jpg</span></span></span><br><span class="line"><span class="emphasis"><span class="section">---</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="10-页面透明化"><a href="#10-页面透明化" class="headerlink" title="10 页面透明化"></a>10 页面透明化</h2><p>&emsp;&emsp;我们在Hexo根目录下source&#x2F;css目录下新建文件butterfly.css，如果没有css文件夹则自己新建。<br>&emsp;&emsp;打开butterfly.yml配置文件，配置刚才添加的css文件路径。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/butterfly.css&quot;&gt;</span></span><br><span class="line">  <span class="attr">bottom:</span></span><br><span class="line">    <span class="comment"># - &lt;script src=&quot;xxxx&quot;&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;可以配置博文的背景、首页卡背景、页面页背景、页脚背景等的透明度，透明度和颜色可直接由rgba函数设置。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*页脚背景设置白色透明*/</span></span><br><span class="line"><span class="selector-id">#footer</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,.<span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*文章背景*/</span></span><br><span class="line"><span class="selector-class">.layout_post</span>&gt;<span class="selector-id">#post</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,.<span class="number">7</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*其他背景*/</span></span><br><span class="line"><span class="selector-id">#aside_content</span> <span class="selector-class">.card-widget</span>, <span class="selector-id">#recent-posts</span>&gt;<span class="selector-class">.recent-post-item</span>, <span class="selector-class">.layout_page</span>&gt;<span class="selector-tag">div</span><span class="selector-pseudo">:first-child</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.recent-posts</span>), <span class="selector-class">.layout_post</span>&gt;<span class="selector-id">#page</span>, <span class="selector-class">.layout_post</span>&gt;<span class="selector-id">#post</span>, <span class="selector-class">.read-mode</span> <span class="selector-class">.layout_post</span>&gt;<span class="selector-id">#post</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,.<span class="number">7</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;将这些代码添加到刚才新建的butterfly.css文件中即可。<br>&emsp;&emsp;还需要注意的是，如果你的footer配置了显示top_img图片将不能被透明，需要配置为false。请在博客根目录的配置文件_config.yml中确保如下配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Show the footer background image (same as top_img)</span></span><br><span class="line"><span class="attr">footer_bg:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Transparent.png" alt="Transparent.png" title="Transparent"></p>
+<h2 id="11-动态渐变"><a href="#11-动态渐变" class="headerlink" title="11 动态渐变"></a>11 动态渐变</h2><h3 id="11-1-页面背景动态渐变"><a href="#11-1-页面背景动态渐变" class="headerlink" title="11.1 页面背景动态渐变"></a>11.1 页面背景动态渐变</h3><p>&emsp;&emsp;在butterfly.css文件里添加如下代码，即可实现背景动态渐变色。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> gradientBG &#123;</span><br><span class="line">    <span class="number">0%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">0%</span> <span class="number">50%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">50%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">100%</span> <span class="number">50%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">0%</span> <span class="number">50%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#web_bg</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(-<span class="number">45deg</span>, <span class="number">#ead1dc</span>, <span class="number">#cfe2f3</span>, <span class="number">#fff2cc</span>, <span class="number">#d9d2e9</span>);</span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">400%</span> <span class="number">400%</span>;</span><br><span class="line">    <span class="attribute">animation</span>: gradientBG <span class="number">15s</span> ease infinite;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据自己喜好可修改linear-gradient函数中的四个颜色参数。</p>
+<h3 id="11-2-footer背景动态渐变"><a href="#11-2-footer背景动态渐变" class="headerlink" title="11.2 footer背景动态渐变"></a>11.2 footer背景动态渐变</h3><p>&emsp;&emsp;类似的，页脚的背景也可以实现动态渐变，在butterfly.css中添加如下代码。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> gradientBG &#123;</span><br><span class="line">    <span class="number">0%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">0%</span> <span class="number">50%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">50%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">100%</span> <span class="number">50%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>: <span class="number">0%</span> <span class="number">50%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#footer</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(-<span class="number">45deg</span>, <span class="number">#ead1dc</span>, <span class="number">#cfe2f3</span>, <span class="number">#fff2cc</span>, <span class="number">#d9d2e9</span>);</span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">400%</span> <span class="number">500%</span>;</span><br><span class="line">    <span class="attribute">animation</span>: gradientBG <span class="number">15s</span> ease infinite;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;如果你想实现背景和footer同步的渐变效果，建议将背景配置动态渐变，footer配置透明。下面是我配置的效果展示。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Transparent%20gradient.gif" alt="Transparent gradient.gif" title="Transparent gradient"></p>
+<p>&emsp;&emsp;为了使得页脚的字体在背景动态渐变的时候依旧能显示清晰，我还修改了页脚字体的颜色。同样的，在butterfly.css文件中添加如下代码修改页脚字体颜色。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*页脚 字体默认设为黑色*/</span></span><br><span class="line"><span class="selector-id">#footer-wrap</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*页脚 a 标签字体默认设为蓝色*/</span></span><br><span class="line"><span class="selector-id">#footer-wrap</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-修改鼠标样式"><a href="#12-修改鼠标样式" class="headerlink" title="12 修改鼠标样式"></a>12 修改鼠标样式</h2><p>&emsp;&emsp;需要将鼠标样式的icon图片放到themes&#x2F;butterfly&#x2F;source&#x2F;img目录下。<br>&emsp;&emsp;在themes&#x2F;butterfly&#x2F;source&#x2F;css&#x2F;butterfly.css文件里添加如下代码，即可实现修改鼠标样式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>,</span><br><span class="line">title&#123;</span><br><span class="line">    <span class="attribute">cursor</span>: <span class="built_in">url</span>(<span class="string">/img/Normal.cur</span>),</span><br><span class="line">        default;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span>,</span><br><span class="line"><span class="selector-tag">img</span>,</span><br><span class="line"><span class="selector-tag">button</span>,</span><br><span class="line"><span class="selector-tag">address</span>&#123;</span><br><span class="line">    <span class="attribute">cursor</span>: <span class="built_in">url</span>(<span class="string">/img/Link.cur</span>),</span><br><span class="line">        default;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Cursor.gif" alt="Cursor.gif" title="Cursor"></p>
+<p>&emsp;&emsp;这么改好像有个Bug，如果配置了鼠标点击时浮现文字，那么鼠标样式在点击时会短暂出现默认样式。</p>
+<h2 id="13-打字特效"><a href="#13-打字特效" class="headerlink" title="13 打字特效"></a>13 打字特效</h2><p>&emsp;&emsp;Butterfly已经整合了打字特效插件<a target="_blank" rel="noopener" href="https://github.com/disjukr/activate-power-mode" title="转到 activate-power-mode">activate-power-mode</a>，我们只需要在配置文件butterfly.yml中开启这个功能即可。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Typewriter Effect (打字效果)</span></span><br><span class="line"><span class="comment"># https://github.com/disjukr/activate-power-mode</span></span><br><span class="line"><span class="attr">activate_power_mode:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">colorful:</span> <span class="literal">true</span> <span class="comment"># open particle animation (冒光特效)</span></span><br><span class="line">  <span class="attr">shake:</span> <span class="literal">true</span> <span class="comment">#  open shake (抖動特效)</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Typing%20effect.gif" alt="Typing effect.gif" title="Typing effect"></p>
+<h2 id="14-友链"><a href="#14-友链" class="headerlink" title="14 友链"></a>14 友链</h2><p>&emsp;&emsp;在博客中可以给浏览者推荐其他优秀的博客或者网站，Butterfly能创建出漂亮的友链页面。<br>&emsp;&emsp;首先需要为友链创建一个page页，在hexo根目录下执行指令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page link</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;然后在source&#x2F;link&#x2F;index.md文件头添加如下内容。</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 友链</span><br><span class="line">date: 2020-08-02 13:11:11</span><br><span class="line"><span class="section">type: link</span></span><br><span class="line"><span class="section">----</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;之后在source&#x2F;_data目录下创建文件link.yml在其中添加如下内容即可。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">class_name:</span> <span class="string">友情链接</span></span><br><span class="line">  <span class="attr">class_desc:</span> <span class="string">人来人往</span></span><br><span class="line">  <span class="attr">link_list:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">onlycalm</span></span><br><span class="line">      <span class="attr">link:</span> <span class="string">https://onlycalm.github.io</span></span><br><span class="line">      <span class="attr">avatar:</span> <span class="string">/images/avatar.png</span></span><br><span class="line">      <span class="attr">descr:</span> <span class="string">自娱自乐，做大娱乐家</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">class_name:</span> <span class="string">网站</span></span><br><span class="line">  <span class="attr">class_desc:</span> <span class="string">推荐访问</span></span><br><span class="line">  <span class="attr">link_list:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">CSDN</span></span><br><span class="line">      <span class="attr">link:</span> <span class="string">https://www.csdn.net</span></span><br><span class="line">      <span class="attr">avatar:</span> <span class="string">https://csdnimg.cn/public/favicon.ico</span></span><br><span class="line">      <span class="attr">descr:</span> <span class="string">国内最大的程序员博客平台</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">GitHub</span></span><br><span class="line">      <span class="attr">link:</span> <span class="string">https://github.com</span></span><br><span class="line">      <span class="attr">avatar:</span> <span class="string">https://github.com/fluidicon.png</span></span><br><span class="line">      <span class="attr">descr:</span> <span class="string">全球最大的代码托管平台</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Link.png" alt="Link.png" title="Link"></p>
+<h2 id="15-添加樱花飘落效果"><a href="#15-添加樱花飘落效果" class="headerlink" title="15 添加樱花飘落效果"></a>15 添加樱花飘落效果</h2><p>&emsp;&emsp;Buterfly添加动态飘落效果非常方便，我们只需要下载相应的js文件，然后修改butterfly.yml配置即可，不需要修改源码文件。<br>&emsp;&emsp;将文件 <a target="_blank" rel="noopener" href="http://onlycalm.cn/js/sakura.js" title="下载sakura.js">sakura.js</a> 下载到本地（点击然后右键另存为），在Hexo根目录下找到source&#x2F;js目录，如果js目录不存在则自己新建，将sakura.js放到js目录下。<br>&emsp;&emsp;在配置文件butterfly.yml中进行如下配置。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="comment"># - &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/butterfly.css&quot;&gt;</span></span><br><span class="line">  <span class="attr">bottom:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;script</span> <span class="string">src=&quot;/js/sakura.js&quot;&gt;&lt;/script&gt;</span>                   <span class="comment">#加载sakura.js</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;重新部署网站后可看到如下效果。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/Sakura.png" alt="Sakura.png" title="添加樱花飘落效果"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn">OnlyCalm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/">http://www.onlycalm.cn/2020/07/28/工具/Hexo/自娱自乐，我的博客（二）——Butterfly主题与博客美化/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://www.onlycalm.cn" target="_blank">OnlyCalm's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Blog/">Blog</a><a class="post-meta__tags" href="/tags/ButterFly/">ButterFly</a><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/%E7%BE%8E%E5%8C%96/">美化</a></div><div class="post-share"><div class="social-share" data-image="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E5%8A%9F%E8%83%BD%E6%89%A9%E5%B1%95/" title="自娱自乐，我的博客（三）——Butterfly主题与博客功能扩展"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_18.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">自娱自乐，我的博客（三）——Butterfly主题与博客功能扩展</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（三）——Butterfly主题与博客功能扩展前言：阅读这篇文章我能学到什么？&emsp;&emsp;Hexo还支持给博客安装各种免费的第三方插件，这篇文章主要介绍一些优秀的插件安装和使用，使得我们的个人博客更加的功能完善好用。 1 安装本地搜索插件&emsp;&emsp;先在我们个人博客的根目录执行指令安装本地搜索插件wzpan&#x2F;hexo-generator-search。 1npm install hexo-generator-search --save  &emsp;&emsp;在博客根目录的配置文件中添加下面这段配置 1234search:  path: search.xml  field: all  content: true  &emsp;&emsp;关于这几个参数的具体作用请查阅GitHub上该项目的说明。接着还需要开启主题的站内搜索功能。在博客主题的配置文件butterfly.yml中查找关键字 local_search 进行如下配置。 12345local_search:  enable: true  labels:   ...</div></div></div></a><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/" title="自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_9.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding前言：&emsp;&emsp;之前是将博客部署到Github Pages上，虽然国内访问很慢但是也就凑合用了，但是最近Github Pages被墙了导致无法访问，已经持续半个多月了，于是决定将博客源文件依旧存在Github，但是静态网页上传到Gitee和Coding上。Gitee和Coding也是可免费部署静态网页的平台，而且在国内访问速度会不错，Gitee缺点是每次修改博客后都需要手动更新才会生效，而Coding像Github那样可以自动更新，Coding也支持设置为手动部署。另外Gitee目前需要花钱购买Gitee Pages Pro服务才支持自定义域名，而Coding和Github一样是可免费绑定自己的域名的。 1 将静态网页部署到Gitee上1.1 在Gitee上创建仓库&emsp;&emsp;这篇文章假定你已经知道如何使用hexo，并且能成功在本地生成和预览静态网页了，如果不清楚可以先去阅读我的另一篇博客《自娱自乐，我的博客(一)——hexo + github...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Hexo%20+%20github%20pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BABlog/" title="自娱自乐，我的博客（一）——Hexo + github pages搭建个人Blog"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_14.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-28</div><div class="info-item-2">自娱自乐，我的博客（一）——Hexo + github pages搭建个人Blog</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（一）——Hexo + github pages搭建个人Blog前言：阅读这篇文章我能学到什么？&emsp;&emsp;这篇文章介绍通过hexo在github pages上搭建个人博客的方法。hexo是免费的博客框架（如果钱多可以去捐赠），它使得搭建个人博客更简便且满足个性化。最初是由Tommy Chen于2012年开始创建维护，截止目前（2020-07-04）该项目在Github上已经拥有超过31k STARS。GitHub Pages可以访问GitHub上的仓库并以静态网页的形式呈现出来，也就是说GitHub Pages使得你可以直接从GitHub仓库创建网站，不需要你再单独去租用虚拟主机或域名。所以，Hexo作为博客框架，GitHub作为仓库，GitHub Pages将仓库呈现为静态网站，也就顺理成章的能够搭建个人的免费博客了。 1 初识Hexo&emsp;&emsp;一种免费、简洁、快速、易用、的博客框架。它支持解析渲染Markdown格式文件为静态网页。个性化较高，可替换主题或直接修改源码实现网页自定制。&emsp;&emsp;Hexo...</div></div></div></a><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E5%8A%9F%E8%83%BD%E6%89%A9%E5%B1%95/" title="自娱自乐，我的博客（三）——Butterfly主题与博客功能扩展"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_18.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-28</div><div class="info-item-2">自娱自乐，我的博客（三）——Butterfly主题与博客功能扩展</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（三）——Butterfly主题与博客功能扩展前言：阅读这篇文章我能学到什么？&emsp;&emsp;Hexo还支持给博客安装各种免费的第三方插件，这篇文章主要介绍一些优秀的插件安装和使用，使得我们的个人博客更加的功能完善好用。 1 安装本地搜索插件&emsp;&emsp;先在我们个人博客的根目录执行指令安装本地搜索插件wzpan&#x2F;hexo-generator-search。 1npm install hexo-generator-search --save  &emsp;&emsp;在博客根目录的配置文件中添加下面这段配置 1234search:  path: search.xml  field: all  content: true  &emsp;&emsp;关于这几个参数的具体作用请查阅GitHub上该项目的说明。接着还需要开启主题的站内搜索功能。在博客主题的配置文件butterfly.yml中查找关键字 local_search 进行如下配置。 12345local_search:  enable: true  labels:   ...</div></div></div></a><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94Hexo%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%E5%88%B0Gitee%E5%92%8CCoding/" title="自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_9.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-28</div><div class="info-item-2">自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（五）——Hexo静态网页部署到Gitee和Coding前言：&emsp;&emsp;之前是将博客部署到Github Pages上，虽然国内访问很慢但是也就凑合用了，但是最近Github Pages被墙了导致无法访问，已经持续半个多月了，于是决定将博客源文件依旧存在Github，但是静态网页上传到Gitee和Coding上。Gitee和Coding也是可免费部署静态网页的平台，而且在国内访问速度会不错，Gitee缺点是每次修改博客后都需要手动更新才会生效，而Coding像Github那样可以自动更新，Coding也支持设置为手动部署。另外Gitee目前需要花钱购买Gitee Pages Pro服务才支持自定义域名，而Coding和Github一样是可免费绑定自己的域名的。 1 将静态网页部署到Gitee上1.1 在Gitee上创建仓库&emsp;&emsp;这篇文章假定你已经知道如何使用hexo，并且能成功在本地生成和预览静态网页了，如果不清楚可以先去阅读我的另一篇博客《自娱自乐，我的博客(一)——hexo + github...</div></div></div></a><a class="pagination-related" href="/2020/07/28/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94Hexo%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86/" title="自娱自乐，我的博客（四）——Hexo文章管理"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-28</div><div class="info-item-2">自娱自乐，我的博客（四）——Hexo文章管理</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（四）——Hexo文章管理前言：阅读这篇文章我能学到什么？&emsp;&emsp;通过Hexo搭建一个博客网站并不算难，网站搭建好后如何规范的管理我们的文章，如何维护它们也是一个问题。 1 资源文件和文章的存储位置&emsp;&emsp;为了对文章进行分类管理，我们可以在Hexo根目录的source&#x2F;_posts文件夹下手动创建文件夹将md文件放在文件夹里，但是对应的资源文件比如图片全部放在source&#x2F;images文件夹下显得过于杂乱，最好是对应上md文件。为了实现分类管理需要修改_config.yml文件的配置。 1post_asset_folder: true  &emsp;&emsp;配置之后可以在Hexo根目录通过执行指令 1hexo new post...</div></div></div></a><a class="pagination-related" href="/2024/02/06/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%85%BE%E8%AE%AF%E4%BA%91SSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7/" title="自娱自乐，我的博客（十七）——腾讯云SSL证书申请"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-06</div><div class="info-item-2">自娱自乐，我的博客（十七）——腾讯云SSL证书申请</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（十七）——腾讯云SSL证书申请前言：&emsp;&emsp; 在腾讯云上可以免费申请SSL证书，本篇文章介绍如何申请并配置SSL证书。 1 介绍&emsp;&emsp;SSL证书（Secure Sockets Layer，现在通常指TLS证书，即Transport Layer Security）的主要作用是为网站提供安全的数据传输服务。主要包含以下几个用途。  数据加密。 身份识别。 防止中间人攻击。 HTTPS标识。 建立信任。  &emsp;&emsp;在腾讯云使用个人域名，必须要要绑定证书。通常证书有效期是一年，到期后需要重新申请新的证书并绑定。 2 证书申请&emsp;&emsp;登录腾讯云 SSL证书申请 界面。提交证书申请，填写要绑定的个人域名。  &emsp;&emsp;要成功绑定域名，还需要添加一条域名解析记录，我是在阿里云购买的域名，因此我在阿里云的域名配置中添加以下记录。  &emsp;&emsp;后在腾讯云点击 验证域名 观察验证是否通过。  &emsp;&emsp;证书申请成功后会显示 已签发 。  3 绑定域名3.1...</div></div></div></a><a class="pagination-related" href="/2024/02/06/%E5%B7%A5%E5%85%B7/Hexo/%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%8D%9A%E5%AE%A2%E6%89%98%E7%AE%A1%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91/" title="自娱自乐，我的博客（十六）——博客托管到腾讯云"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-06</div><div class="info-item-2">自娱自乐，我的博客（十六）——博客托管到腾讯云</div></div><div class="info-2"><div class="info-item-1">自娱自乐，我的博客（十六）——博客托管到腾讯云前言：&emsp;&emsp; 早些搞博客的时候比较穷，白嫖博客托管，用过github，由于网速太慢切到gitee，又由于不支持私有域名换到Coding，后Coding开始收费又换到Vercel，这个网站有段时间被墙了后再次换回Coding体验几个月免费，现在免费期也到了。腾讯将静态网站托管功能从Coding移到腾讯云了，免费固然好但经常被迫搬家，要花时间折腾，现在人到中年钱有一点，更缺的是时间，因此在腾讯云正式成为付费用户。 1 腾讯云静态网站托管1.1 开通静态网站托管服务&emsp;&emsp;在 腾讯云官网 搜索 网站托管 ，点击 静态网站托管 。注意，静态网站托管是包月的，不是按流量收费。  &emsp;&emsp;首次使用需要点击 免费开通云开发 将服务打开。  &emsp;&emsp;点击 同意授权...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">OnlyCalm</div><div class="author-info-description">自娱自乐，做大娱乐家。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%A8%B1%E8%87%AA%E4%B9%90%EF%BC%8C%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Butterfly%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96"><span class="toc-text">自娱自乐，我的博客（二）——Butterfly主题与博客美化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9B%B4%E6%8D%A2%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98"><span class="toc-text">1 更换博客主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85Butterfly"><span class="toc-text">1.1 安装Butterfly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%85%8D%E7%BD%AEButterfly"><span class="toc-text">1.2 配置Butterfly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%AE%89%E8%A3%85pug%E5%92%8Cstylus%E7%9A%84%E6%B8%B2%E6%9F%93%E5%99%A8"><span class="toc-text">1.2 安装pug和stylus的渲染器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AE%E7%AB%99%E7%82%B9%E8%B5%84%E6%96%99"><span class="toc-text">2 设置站点资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95"><span class="toc-text">2 修改导航菜单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E7%A4%BE%E4%BA%A4%E5%9B%BE%E6%A0%87%E5%92%8C%E5%A4%B4%E5%83%8F"><span class="toc-text">3 修改社交图标和头像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BF%AE%E6%94%B9%E8%AE%BE%E8%AE%A1%E5%9B%BE%E6%A0%87"><span class="toc-text">3.1 修改设计图标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BF%AE%E6%94%B9%E5%A4%B4%E5%83%8F"><span class="toc-text">3.2 修改头像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E4%BF%AE%E6%94%B9%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87"><span class="toc-text">3.3 修改网站图标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BF%AE%E6%94%B9Footer%E5%92%8C%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2"><span class="toc-text">4 修改Footer和主题颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E4%BF%AE%E6%94%B9Footer%E8%AE%BE%E7%BD%AE"><span class="toc-text">4.1 修改Footer设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98"><span class="toc-text">4.2 修改主题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-%E4%BF%AE%E6%94%B9UI%E9%A2%9C%E8%89%B2"><span class="toc-text">4.2.1 修改UI颜色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-%E4%BF%AE%E6%94%B9%E7%BD%91%E7%AB%99%E8%83%8C%E6%99%AF"><span class="toc-text">4.2.2 修改网站背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-%E4%BF%AE%E6%94%B9Footer%E9%A2%9C%E8%89%B2"><span class="toc-text">4.2.2 修改Footer颜色</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%AE%BE%E7%BD%AE"><span class="toc-text">5 侧边栏设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E8%83%8C%E6%99%AF%E7%89%B9%E6%95%88"><span class="toc-text">6 背景特效</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%BD%A9%E5%B8%A6%E8%83%8C%E6%99%AF%E7%89%B9%E6%95%88"><span class="toc-text">6.1 彩带背景特效</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-1-%E9%9D%99%E6%80%81%E5%BD%A9%E5%B8%A6%E8%83%8C%E6%99%AF"><span class="toc-text">6.1.1 静态彩带背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-2-%E5%8A%A8%E6%80%81%E5%BD%A9%E5%B8%A6%E8%83%8C%E6%99%AF"><span class="toc-text">6.1.2 动态彩带背景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Canvas-nest%E7%89%B9%E6%95%88"><span class="toc-text">6.2 Canvas_nest特效</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E7%89%B9%E6%95%88"><span class="toc-text">7 鼠标点击特效</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E7%83%9F%E8%8A%B1%E7%89%B9%E6%95%88"><span class="toc-text">7.1 鼠标点击烟花特效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E7%83%9F%E8%8A%B1%E7%89%B9%E6%95%88"><span class="toc-text">7.2 鼠标点击烟花特效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E6%B5%AE%E7%8E%B0%E5%AD%97%E7%AC%A6%E7%89%B9%E6%95%88"><span class="toc-text">7.3 鼠标点击浮现字符特效</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%89%AF%E6%A0%87%E9%A2%98%E5%AD%97%E4%BD%93"><span class="toc-text">8 副标题字体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%9B%B4%E6%8D%A2%E9%A1%B5%E9%A6%96%E5%9B%BE%E7%89%87"><span class="toc-text">9 更换页首图片</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A1%B5%E5%9B%BE%E7%89%87"><span class="toc-text">9.1 更换主页图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-%E8%AE%BE%E7%BD%AE%E9%A1%B6%E9%83%A8%E5%9B%BEdefault-top-img%E5%92%8Ctop-img"><span class="toc-text">9.2 设置顶部图default_top_img和top_img</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-%E8%AE%BE%E7%BD%AE%E5%B0%81%E9%9D%A2%E5%9B%BEdefault-cover"><span class="toc-text">9.3 设置封面图default_cover</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E9%A1%B5%E9%9D%A2%E9%80%8F%E6%98%8E%E5%8C%96"><span class="toc-text">10 页面透明化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%8A%A8%E6%80%81%E6%B8%90%E5%8F%98"><span class="toc-text">11 动态渐变</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-%E9%A1%B5%E9%9D%A2%E8%83%8C%E6%99%AF%E5%8A%A8%E6%80%81%E6%B8%90%E5%8F%98"><span class="toc-text">11.1 页面背景动态渐变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-footer%E8%83%8C%E6%99%AF%E5%8A%A8%E6%80%81%E6%B8%90%E5%8F%98"><span class="toc-text">11.2 footer背景动态渐变</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E4%BF%AE%E6%94%B9%E9%BC%A0%E6%A0%87%E6%A0%B7%E5%BC%8F"><span class="toc-text">12 修改鼠标样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E6%89%93%E5%AD%97%E7%89%B9%E6%95%88"><span class="toc-text">13 打字特效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E5%8F%8B%E9%93%BE"><span class="toc-text">14 友链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-%E6%B7%BB%E5%8A%A0%E6%A8%B1%E8%8A%B1%E9%A3%98%E8%90%BD%E6%95%88%E6%9E%9C"><span class="toc-text">15 添加樱花飘落效果</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（三）——搭建linux工程"/></a><div class="content"><a class="title" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程">FreeRTOS基础篇（三）——搭建linux工程</a><time datetime="2025-08-17T11:26:00.000Z" title="发表于 2025-08-17 19:26:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（一）——介绍"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍">FreeRTOS基础篇（一）——介绍</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（二）——QEMU"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU">FreeRTOS基础篇（二）——QEMU</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Actions配置CI和CD"/></a><div class="content"><a class="title" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD">Github Actions配置CI和CD</a><time datetime="2025-05-31T16:01:00.000Z" title="发表于 2025-06-01 00:01:00">2025-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础篇（五）——vscode使用docker插件"/></a><div class="content"><a class="title" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件">Docker基础篇（五）——vscode使用docker插件</a><time datetime="2025-05-04T16:18:00.000Z" title="发表于 2025-05-05 00:18:00">2025-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://www.onlycalm.cn">OnlyCalm</a> 的博客</br> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024183071号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+      appKey: 'f2158LsoEVzRzMS8EG7rvFSs',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: '0b3f5b76c03e1d9ecca0',
+      clientSecret: '94ba0623c1599038f16bc6ecbdf0c9015c735fe5',
+      repo: 'blogtalk',
+      owner: 'onlycalm',
+      admin: ['onlycalm'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || 'aca3c7ac3699ab8cbb4e80419b898fd5'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Valine' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/sakura.js"></script><div class="aplayer no-destroy" data-id="7642168633" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人,张氏情歌,夕阳无限好,单车,心的距离,婚礼祝福,积木,我们,苦瓜" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>

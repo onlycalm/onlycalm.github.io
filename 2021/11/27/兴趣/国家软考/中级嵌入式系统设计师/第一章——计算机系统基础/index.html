@@ -1,0 +1,892 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第一章——计算机系统基础 | OnlyCalm's Blog</title><meta name="author" content="OnlyCalm"><meta name="copyright" content="OnlyCalm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第一章——计算机系统基础前言：&emsp;&emsp; 计算机第一章节主要知识点。 1 知识点介绍 数值转换； 数的表示； 计算机的组成； 流水线； 多级存储结构； I&#x2F;O控制方式； 可靠性、校验码；  2 数值转换&emsp;&emsp;进位计数制系统基本概念：数制、基数、数码、数位、位权。    特点&#x2F;数制 十进制 二进制 八进制 十六进制    基本数码 0-9 0, 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一章——计算机系统基础">
+<meta property="og:url" content="http://www.onlycalm.cn/2021/11/27/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="OnlyCalm&#39;s Blog">
+<meta property="og:description" content="第一章——计算机系统基础前言：&emsp;&emsp; 计算机第一章节主要知识点。 1 知识点介绍 数值转换； 数的表示； 计算机的组成； 流水线； 多级存储结构； I&#x2F;O控制方式； 可靠性、校验码；  2 数值转换&emsp;&emsp;进位计数制系统基本概念：数制、基数、数码、数位、位权。    特点&#x2F;数制 十进制 二进制 八进制 十六进制    基本数码 0-9 0, 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg">
+<meta property="article:published_time" content="2021-11-27T04:56:00.000Z">
+<meta property="article:modified_time" content="2021-11-27T04:56:00.000Z">
+<meta property="article:author" content="OnlyCalm">
+<meta property="article:tag" content="嵌入式系统设计师">
+<meta property="article:tag" content="中级">
+<meta property="article:tag" content="软考">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "第一章——计算机系统基础",
+  "url": "http://www.onlycalm.cn/2021/11/27/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/",
+  "image": "https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg",
+  "datePublished": "2021-11-27T04:56:00.000Z",
+  "dateModified": "2021-11-27T04:56:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "OnlyCalm",
+      "url": "http://www.onlycalm.cn/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/favicon_16x16.ico"><link rel="canonical" href="http://www.onlycalm.cn/2021/11/27/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa84fe0b630e04119afd5cc009c11181";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: OnlyCalm","link":"链接: ","source":"来源: OnlyCalm's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第一章——计算机系统基础',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/butterfly.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #d9d9d9;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OnlyCalm's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">第一章——计算机系统基础</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fab fa-fort-awesome"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book-open"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-box-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-bookmark"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-hourglass-half"></i><span> 时间轴</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-icons"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-user-friends"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-gift"></i><span> 打赏</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fab fa-canadian-maple-leaf"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">第一章——计算机系统基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-27T04:56:00.000Z" title="发表于 2021-11-27 12:56:00">2021-11-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-27T04:56:00.000Z" title="更新于 2021-11-27 12:56:00">2021-11-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%B4%E8%B6%A3/">兴趣</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/">国家软考</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/">中级嵌入式系统设计师</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">5.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="第一章——计算机系统基础"><a href="#第一章——计算机系统基础" class="headerlink" title="第一章——计算机系统基础"></a><center>第一章——计算机系统基础</center></h1><p><em>前言：</em><br>&emsp;&emsp; <em>计算机第一章节主要知识点。</em></p>
+<h2 id="1-知识点介绍"><a href="#1-知识点介绍" class="headerlink" title="1 知识点介绍"></a>1 知识点介绍</h2><ul>
+<li>数值转换；</li>
+<li>数的表示；</li>
+<li>计算机的组成；</li>
+<li>流水线；</li>
+<li>多级存储结构；</li>
+<li>I&#x2F;O控制方式；</li>
+<li>可靠性、校验码；</li>
+</ul>
+<h2 id="2-数值转换"><a href="#2-数值转换" class="headerlink" title="2 数值转换"></a>2 数值转换</h2><p>&emsp;&emsp;进位计数制系统基本概念：数制、基数、数码、数位、位权。</p>
+<table>
+<thead>
+<tr>
+<th align="center">特点&#x2F;数制</th>
+<th align="center">十进制</th>
+<th align="center">二进制</th>
+<th align="center">八进制</th>
+<th align="center">十六进制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">基本数码</td>
+<td align="center">0-9</td>
+<td align="center">0, 1</td>
+<td align="center">0-7</td>
+<td align="center">0-9, A-F</td>
+</tr>
+<tr>
+<td align="center">基数</td>
+<td align="center">10</td>
+<td align="center">2</td>
+<td align="center">8</td>
+<td align="center">16</td>
+</tr>
+<tr>
+<td align="center">位权</td>
+<td align="center">$10^n$</td>
+<td align="center">$2^n$</td>
+<td align="center">$8^n$</td>
+<td align="center">$16^n$</td>
+</tr>
+</tbody></table>
+<h3 id="2-1-BCD码"><a href="#2-1-BCD码" class="headerlink" title="2.1 BCD码"></a>2.1 BCD码</h3><p>&emsp;&emsp;是一种二进制的数字编码形式，用4位二进制数来表示1位十进制数。</p>
+<h3 id="2-2-8421码"><a href="#2-2-8421码" class="headerlink" title="2.2 8421码"></a>2.2 8421码</h3><p>&emsp;&emsp;8421码是BCD码的一种，它表达的意思是每一个二进制位上的数据对应一个固定的值，只需要把对应的1位置的数据值相加，即可得到该二进制对应的十进制值。</p>
+<p>$$<br>0b1010100 &#x3D; 64 + 16 + 4 &#x3D; 84<br>$$</p>
+<p>$$<br>100 &#x3D; 0b1100100<br>$$</p>
+<h3 id="2-3-N进制转十进制"><a href="#2-3-N进制转十进制" class="headerlink" title="2.3 N进制转十进制"></a>2.3 N进制转十进制</h3><p>&emsp;&emsp;使用按权展开法，将N进制的每一位数用 $N^k$ 形式表示，N为底数&#x2F;基数，k为指数。</p>
+<ul>
+<li>二进制转十进制</li>
+</ul>
+<p>$$<br>0b10100.01 &#x3D; 1 \times 2^4 + 1 \times 2^2 + 1 \times 2^{-2}<br>$$</p>
+<ul>
+<li>八进制转十进制</li>
+</ul>
+<p>$$<br>604.01 &#x3D; 6 \times 8^2 + 4 \times 8^0 + 1 \times 8^{-2}<br>$$</p>
+<h3 id="2-4-十进制转N进制"><a href="#2-4-十进制转N进制" class="headerlink" title="2.4 十进制转N进制"></a>2.4 十进制转N进制</h3><p>&emsp;&emsp;使用短除法。以下是示范从十进制转二进制。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">          余</span><br><span class="line">2 |_94_ ---0</span><br><span class="line">2 |_47_ ---1</span><br><span class="line">2 |_23_ ---1</span><br><span class="line">2 |_11_ ---1</span><br><span class="line">2 |__5_ ---1</span><br><span class="line">2 |__2_ ---0</span><br><span class="line">     1  ---1</span><br></pre></td></tr></table></figure>
+
+<p>从下往上写余数，因此 94 &#x3D; 0b1011110</p>
+<h3 id="2-5-二进制和八进制互转"><a href="#2-5-二进制和八进制互转" class="headerlink" title="2.5 二进制和八进制互转"></a>2.5 二进制和八进制互转</h3><p>&emsp;&emsp;每3位二进制表示一个八进制数。</p>
+<p>二进制：010 001 110<br>八进制： 2   1   6</p>
+<h3 id="2-6-二进制和十六进制互转"><a href="#2-6-二进制和十六进制互转" class="headerlink" title="2.6 二进制和十六进制互转"></a>2.6 二进制和十六进制互转</h3><p>&emsp;&emsp;每4位二进制表示一个十六进制。</p>
+<p>二进制：  1000 1110<br>十六进制：  8    E</p>
+<h3 id="2-7-数据的存储单位"><a href="#2-7-数据的存储单位" class="headerlink" title="2.7 数据的存储单位"></a>2.7 数据的存储单位</h3><p>&emsp;&emsp;在计算机中，数据的最小存储单位为bit（位，简写为b），1bit为一个二进制数。字节Byte（简写为B）有8个bit。为8个二进制数。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1Byte = 8bit</span><br><span class="line">1kB = 1024B</span><br><span class="line">1MB = 1024kB</span><br><span class="line">1GB = 1024MB</span><br><span class="line">1TB = 1024GB</span><br></pre></td></tr></table></figure>
+
+<p>$1024 &#x3D; 2^{10}$</p>
+<h3 id="2-8-二进制算术运算"><a href="#2-8-二进制算术运算" class="headerlink" title="2.8 二进制算术运算"></a>2.8 二进制算术运算</h3><p>&emsp;&emsp;算术运算：加减乘除，逻辑运算：与或非异或同或。</p>
+<h4 id="2-8-1-例题"><a href="#2-8-1-例题" class="headerlink" title="2.8.1 例题"></a>2.8.1 例题</h4><ol>
+<li>内存按字节编址从A5000H到DCFFFH的区域其存储容量为（D）。</li>
+</ol>
+<p>A. 123kB<br>B. 180kB<br>C. 223kB<br>D. 224kB</p>
+<ol start="2">
+<li>内存按字节编址，地址从90000H到CFFFFH，若用存储容量为16k × 8bit的存储器西片构成该内存，至少需要（D）片。</li>
+</ol>
+<p>A. 2<br>B. 4<br>C. 8<br>D. 16</p>
+<ol start="3">
+<li>内存按字节编址，从A1000H到B13FFH的区域的存储容量为（C）kB。</li>
+</ol>
+<p>A. 32<br>B. 34<br>C. 65<br>D. 67</p>
+<ol start="4">
+<li>地址编号从80000H到BFFFFH且按字节编址的内存容量为（B）kB，若用16k × 4bit的存储芯片构成该内存，共需（C）。</li>
+</ol>
+<p>A. 128<br>B. 256<br>C. 512<br>D. 1024</p>
+<p>A. 8<br>B. 16<br>C. 32<br>D. 64</p>
+<ol start="5">
+<li>移位指令中的（A）指令的操作结果相当于对操作数进行乘2操作。</li>
+</ol>
+<p>A. 算术左移<br>B. 逻辑右移<br>C. 算术右移<br>D. 带进位循环左移</p>
+<h2 id="3-数的表示"><a href="#3-数的表示" class="headerlink" title="3 数的表示"></a>3 数的表示</h2><p>&emsp;&emsp;数在计算机中都是以二进制存储的，数在计算机中的表示就是 <strong>机器数</strong> 。<br>&emsp;&emsp;机器数的真值：符号位 + 相应进制的数值。比如正1的二进制真值为+0001，十进制真值为+1。</p>
+<h3 id="3-1-码制"><a href="#3-1-码制" class="headerlink" title="3.1 码制"></a>3.1 码制</h3><p>&emsp;&emsp;码制包含原码、反码、补码、移码。</p>
+<table>
+<thead>
+<tr>
+<th align="center">码制</th>
+<th align="center">数值+1</th>
+<th align="center">数值-1</th>
+<th align="center">1+(-1)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">原码</td>
+<td align="center">0000 0001</td>
+<td align="center">1000 0001</td>
+<td align="center">1000 0010</td>
+</tr>
+<tr>
+<td align="center">反码</td>
+<td align="center">0000 0001</td>
+<td align="center">1111 1110</td>
+<td align="center">1111 1111</td>
+</tr>
+<tr>
+<td align="center">补码</td>
+<td align="center">0000 0001</td>
+<td align="center">1111 1111</td>
+<td align="center">0000 0000</td>
+</tr>
+<tr>
+<td align="center">移码</td>
+<td align="center">1000 0001</td>
+<td align="center">0111 1111</td>
+<td align="center">1000 0000</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;计算机中常用补码进行加减法运算，而移码常用于浮点数的阶码。</p>
+<table>
+<thead>
+<tr>
+<th align="center">码制</th>
+<th align="center">整数数值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">原码</td>
+<td align="center">$-(2^{n - 1} - 1)$ ~ $2^{n - 1} - 1$</td>
+</tr>
+<tr>
+<td align="center">反码</td>
+<td align="center">$-(2^{n - 1} - 1)$ ~ $2^{n - 1} - 1$</td>
+</tr>
+<tr>
+<td align="center">补码</td>
+<td align="center">$-2^{n - 1}$ ~ $2^{n - 1} - 1$</td>
+</tr>
+<tr>
+<td align="center">移码</td>
+<td align="center">$-2^{n - 1}$ ~ $2^{n - 1} - 1$</td>
+</tr>
+</tbody></table>
+<h3 id="3-2-定点数和浮点数"><a href="#3-2-定点数和浮点数" class="headerlink" title="3.2 定点数和浮点数"></a>3.2 定点数和浮点数</h3><h4 id="3-2-1-定点数（定点表示法）"><a href="#3-2-1-定点数（定点表示法）" class="headerlink" title="3.2.1 定点数（定点表示法）"></a>3.2.1 定点数（定点表示法）</h4><p>&emsp;&emsp;小数点的位置固定不变的数，小数点不需要占用一位二进位。包括 <strong>定点整数</strong> 和 <strong>定点小数</strong> 。<br>&emsp;&emsp;定点小数小数点隐含在二进制符号位和数值位中间。</p>
+<p>$$<br>x_0 x_1 x_2 x_3 … x_n(.)<br>$$</p>
+<p>&emsp;&emsp; $x_0$ 为符号位。</p>
+<h3 id="3-2-2-浮点数（浮点表示法）"><a href="#3-2-2-浮点数（浮点表示法）" class="headerlink" title="3.2.2 浮点数（浮点表示法）"></a>3.2.2 浮点数（浮点表示法）</h3><p>&emsp;&emsp;就是科学计数法。<br>&emsp;&emsp; $N &#x3D; R^e \times M$ R是基数，由于计算机用二进制存储数据，因此R固定为2，指数e为阶码，M为尾数。浮点数的表示有点类似科学计数法，如： $0.985 \times 10^2$ 。浮点数在计算机中存储格式如下。</p>
+<p>$$<br>N &#x3D; M \times R^e<br>$$</p>
+<p>&emsp;&emsp;如。</p>
+<p>$$<br>0.985 \times 10^2<br>$$</p>
+<ul>
+<li>M: 为尾数；</li>
+<li>e: 为指数（阶码），带符号；</li>
+<li>R: 为基数（阶码的底）；</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对阶 -&gt; 尾数计算 -&gt; 结果格式化</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">阶符</th>
+<th align="center">阶码</th>
+<th align="center">数符</th>
+<th align="center">尾数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">阶码的符号</td>
+<td align="center">决定数值表示的范围</td>
+<td align="center">N的符号</td>
+<td align="center">决定数值表示的精度</td>
+</tr>
+</tbody></table>
+<ul>
+<li>阶符：阶码e的符号；</li>
+<li>阶码：用移码表示，表示数值的范围；</li>
+<li>数符：N的符号。</li>
+<li>尾数：决定数值表示的精度，位数越多精度越高；</li>
+</ul>
+<p>&emsp;&emsp;尾数的小数点左移n位阶码加n，右移n位阶码减n。<br>&emsp;&emsp;浮点数的计算需要进过3个过程：<strong>对阶 -&gt; 尾数计算 -&gt; 结果格式化</strong> 。<br>&emsp;&emsp;浮点数相加，第一步先使阶码相等即 <strong>对阶</strong> ，然后将尾数相加，最后格式化为科学计数法（小数点后十分位为非0）。</p>
+<ul>
+<li>对阶：使阶码相等；</li>
+<li>尾数计算：对尾数进行算术计算；</li>
+<li>结果格式化：整数部分为0，小数点后第一位为非0；</li>
+</ul>
+<h4 id="3-2-2-1-例题"><a href="#3-2-2-1-例题" class="headerlink" title="3.2.2.1 例题"></a>3.2.2.1 例题</h4><ol>
+<li>机器字长为n位的二进制数可以用补码来表示（A）个不同的有符号定点小数。</li>
+</ol>
+<p>A. $2^n$<br>B. $2^{n - 1}$<br>C. $2^n - 1$<br>D. $2^{n - 1} + 1$</p>
+<ol start="2">
+<li>如果“2X”的补码是“90H”，那么X的真值是（B）。</li>
+</ol>
+<p>A. 72<br>B. -56<br>C. 56<br>D. 111</p>
+<ol start="3">
+<li>某机器字长为n，最高位是符号位，其定点整数的最大值为（B）。</li>
+</ol>
+<p>A. $2^n - 1$<br>B. $2^{n - 1} - 1$<br>C. $2^n$<br>D. $2^{n - 1}$</p>
+<h2 id="4-计算机的组成"><a href="#4-计算机的组成" class="headerlink" title="4 计算机的组成"></a>4 计算机的组成</h2><p>&emsp;&emsp;计算机（硬件）组成（冯诺依曼）：输入设备、输出设备、存储器、运算器、控制器。控制器就像大脑，发出指令控制计算机各个部分协调工作。（计算机系统包括软件和硬件两大部分。）</p>
+<ul>
+<li>输入设备</li>
+</ul>
+<p>&emsp;&emsp;功能：把相关的程序和数据输入到存储器中进行保存。如：键盘、鼠标等。</p>
+<ul>
+<li>输出设备</li>
+</ul>
+<p>&emsp;&emsp;功能：输出存储器中的相关数据数据。如：打印机、显示器等。</p>
+<ul>
+<li>运算器</li>
+</ul>
+<p>&emsp;&emsp;功能：进行逻辑和算术运算。如：加减乘除、与或非等。</p>
+<ul>
+<li>控制器</li>
+</ul>
+<p>&emsp;&emsp;功能：控制协调其他设备工作，发送相关的控制命令，去命令相关的设备执行操作。</p>
+<ul>
+<li>存储器</li>
+</ul>
+<p>&emsp;&emsp;功能：存储数据。如：硬盘、内存等。包括主存储器（内容（ROM和RAM））和辅助存储器（硬盘）。</p>
+<blockquote>
+<ul>
+<li>运算器 + 控制器就是中央控制单元CPU；</li>
+<li>存储器包括辅助存储器（比如硬盘）、主存储器（内存（RAM、ROM））；</li>
+<li>输入设备 + 输出设备 + 辅助存储器就是外部设备；</li>
+<li>主存储器 + CPU就是主机；</li>
+</ul>
+</blockquote>
+<p>&emsp;&emsp;工作流程简述：控制器发送控制命令给输入设备，输入设备将数据传入存储器中，在控制器指令的作用下，把程序的指令一条条送到控制器中，控制器对指令进行译码，根据指令的操作要求向存储器和运算器发送指令，向运算器发运算命令，想存储器发取数命令，经过运算器的运算将结果保存到存储器中，又在控制器的命令下将结果输出到输出设备中。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/PC_top.png" alt="PC_top.png" title="PC_top"></p>
+<h3 id="4-1-重要寄存器"><a href="#4-1-重要寄存器" class="headerlink" title="4.1 重要寄存器"></a>4.1 重要寄存器</h3><h4 id="4-1-1-运算器"><a href="#4-1-1-运算器" class="headerlink" title="4.1.1 运算器"></a>4.1.1 运算器</h4><ul>
+<li>算术逻辑单元ALU：数据的算术运算和逻辑运算；</li>
+<li>累加寄存器AC：通用寄存器，为ALU提供了一个工作区，用于暂存数据；</li>
+<li>数据缓冲寄存器DR：写内存时，暂存指令或数据；</li>
+<li>状态条件寄存器PSW：存状态标志与控制标志（争议：也有将其归类为控制器的）；</li>
+</ul>
+<h4 id="4-1-2-控制器"><a href="#4-1-2-控制器" class="headerlink" title="4.1.2 控制器"></a>4.1.2 控制器</h4><ul>
+<li>程序计算器PC：存储下一条要执行指令的地址；</li>
+<li>指令寄存器IR：存储即将执行的指令；</li>
+<li>指令译码器ID：对指令中的操作码字段进行分析解释；</li>
+<li>时序部件：提供时序控制信号；</li>
+</ul>
+<p>&emsp;&emsp;计算机执行的过程：<strong>PC - &gt; AR -&gt; ROM -&gt; DR -&gt; IR -&gt; ID</strong> 。</p>
+<h4 id="4-1-2-1-例题"><a href="#4-1-2-1-例题" class="headerlink" title="4.1.2.1 例题"></a>4.1.2.1 例题</h4><ol>
+<li>在CPU中，常用来为ALU执行算术逻辑运算提供数据并暂存运算结果的寄存器是（D）。</li>
+</ol>
+<p>A. 程序计数器<br>B. 状态寄存器<br>C. 通用寄存器<br>D. 累加寄存器</p>
+<ol start="2">
+<li>计算机指令一般包括操作码和地址码两部分，为分析执行一条指令，则其（C）。</li>
+</ol>
+<p>A. 操作码应存入指令寄存器（IR），地址码应存入程序计数器（PC）。<br>B. 操作码应存入程序计数器（PC），地址码应存入指令寄存器（IR）。<br>C. 操作码和地址码都应存入指令寄存器（IR）。<br>D. 操作码和地址码都应存入程序计数器（PC）。</p>
+<h3 id="4-2-基本概念"><a href="#4-2-基本概念" class="headerlink" title="4.2 基本概念"></a>4.2 基本概念</h3><ul>
+<li>CPU的性能指标：主频、字长、CPU缓存、核心数量；<ul>
+<li>主频：CPU内核的时钟频率，即CPU运算时的工作频率，单位是Hz；</li>
+<li>字长：单位时间内能同时处理的二进制位数；</li>
+<li>CPU缓存：一般CPU缓存的运行速度和CPU速度相当，缓存越大命中率越高，但成本高；</li>
+<li>核心数量：多个CPU并行处理；</li>
+</ul>
+</li>
+<li>总线的分类：数据总线、地址总线、控制总线；</li>
+<li>总线的性能指标：带宽、位宽、工作频率；</li>
+<li>BIOS&#x2F;CMOS；<ul>
+<li>BIOS：基本输入输出的程序，存储在ROM中是一段程序。BIOS通过硬盘引导程序MBR加载操作系统的内核到内存中；</li>
+<li>CMOS：是一块RAM芯片，设置参数保存在该芯片中，该芯片有一块单独的电池供电；</li>
+</ul>
+</li>
+<li>系统性能评测方法：时钟频率、指令执行、等效指令速度法、数据处理速率（PDR）、核心程序法、基准测试程序；<ul>
+<li>时钟频率：时钟频率越高性能越好；</li>
+<li>指令执行：单位时间内执行的指令越多性能越好，单位是kIPS（每秒多少指令）、MIPS。有精简指令集、复杂指令集；</li>
+<li>等效指令：把不同种类的指令按比例来分，计算出需要多少时间；</li>
+<li>核心程序法：编写程序测试运行时间；</li>
+<li>基准测试程序：针对不同领域编写专门的测试程序；</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-总线系统"><a href="#4-3-总线系统" class="headerlink" title="4.3 总线系统"></a>4.3 总线系统</h3><p>&emsp;&emsp;一条总线同一时刻仅允许一个设备发送，但允许多个设备接收。分为系统总线和外部总线。</p>
+<h4 id="4-3-1-总线的分类"><a href="#4-3-1-总线的分类" class="headerlink" title="4.3.1 总线的分类"></a>4.3.1 总线的分类</h4><ul>
+<li>数据总线（Data Bus）：在CPU与RAM之间来回传送需要处理或是需要储存的数据。为双向传输总线（CPU读写）；</li>
+<li>地址总线（Address Bus）：用来指定在RAM（Random Access Memory）之中存储的数据的地址。单向传输（CPU到外部设备）；</li>
+<li>控制总线（Control Bus）：将微处理器控制单元（Control Unit）的信号，传送到周边设备，一般常见的为USB Bus和1394 Bus。双向传输（CPU与外部设备）；</li>
+</ul>
+<h4 id="4-3-2-总线的性能指标"><a href="#4-3-2-总线的性能指标" class="headerlink" title="4.3.2 总线的性能指标"></a>4.3.2 总线的性能指标</h4><p>&emsp;&emsp;带宽、位宽、工作频率。</p>
+<ul>
+<li>带宽：总线在单位时间能传输的数据总量，单位是字节每秒（B&#x2F;s）；</li>
+<li>位宽（宽度）：数据的宽度，如：32位、64位，单位是位（bit）；</li>
+<li>工作频率：总线的工作频率，单位时间内能传输多少次，单位是Hz（1&#x2F;s）；</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">带宽 = 位宽 * 工作频率</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-3-例题"><a href="#4-3-3-例题" class="headerlink" title="4.3.3 例题"></a>4.3.3 例题</h4><ol>
+<li>处理机主要由处理器、存储器和总线组成，总线包括（A）。</li>
+</ol>
+<p>A. 数据总线、地址总线、控制总线；<br>B. 并行总线、串行总线、外部总线；<br>C. 单工总线、双工总线、外部总线；<br>D. 逻辑总线、物理总线、内部总线；</p>
+<ol start="2">
+<li>总线宽度为32bit，时钟频率为200MHz，若总线每5个时钟周期传送一个32bit的字，则该总线的带宽为（C）MB&#x2F;s。</li>
+</ol>
+<p>A. 40<br>B. 80<br>C. 160<br>D. 200</p>
+<h3 id="4-4-指令"><a href="#4-4-指令" class="headerlink" title="4.4 指令"></a>4.4 指令</h3><h4 id="4-4-1-基本概念"><a href="#4-4-1-基本概念" class="headerlink" title="4.4.1 基本概念"></a>4.4.1 基本概念</h4><p>&emsp;&emsp;一条指令就是机器语言的一个语句，是一组有意义的二进制代码。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">操作码字段OP</td>
+<td align="center">地址码字段A</td>
+</tr>
+<tr>
+<td align="center">指出了计算机要执行什么性质的操作（如：加减乘除与或非等）</td>
+<td align="center">包含各操作数的地址及操作结果的存放地址等</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;例如。</p>
+<table>
+<thead>
+<tr>
+<th align="center">指令</th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">4字节指令</td>
+<td align="center">OP</td>
+<td align="center">$A_1$</td>
+<td align="center">$A_2$</td>
+<td align="center">$A_3$</td>
+<td align="center">$A_4$</td>
+<td align="center">表示 $A_1$ OP操作 $A_2$，结果存入 $A_3$，将 $A_4$ 指向下一条即将执行的地址。</td>
+</tr>
+<tr>
+<td align="center">3字节指令</td>
+<td align="center">OP</td>
+<td align="center">$A_1$</td>
+<td align="center">$A_2$</td>
+<td align="center">$A_3$</td>
+<td align="center"></td>
+<td align="center">省略 $A_4$ 使用PC代替 $A_4$ ，依次执行即PC加1。</td>
+</tr>
+<tr>
+<td align="center">2字节指令</td>
+<td align="center">OP</td>
+<td align="center">$A_1$</td>
+<td align="center">$A_2$</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">省略 $A_3$ ，将结果放在累加器ACC中。</td>
+</tr>
+<tr>
+<td align="center">1字节指令</td>
+<td align="center">OP</td>
+<td align="center">$A_1$</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">$A_2$ 操作数在ACC中。</td>
+</tr>
+<tr>
+<td align="center">0字节指令</td>
+<td align="center">OP</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">入栈（PUSH）和出栈（POP）就是0地址指令。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>SISC: 精简指令集；</li>
+<li>CISC: 复杂指令集；</li>
+</ul>
+<h3 id="4-5-寻址方式"><a href="#4-5-寻址方式" class="headerlink" title="4.5 寻址方式"></a>4.5 寻址方式</h3><p>&emsp;&emsp;运址是找操作数的地址或者下一条将要执行的指令地址。数据和指令存储在存储单元中的，需要进行编号，在存储单元中寻找数据和指令就是寻址。寻址有多种方式（为了扩大寻址范围和增加寻址灵活性）。</p>
+<ul>
+<li>立即寻址方式：操作数直接在指令中，速度快，灵活性差；</li>
+<li>直接寻址方式：指令中存放的是操作数的地址；</li>
+<li>间接寻址方式：指令中存放了一个地址，这个地址对应的内容是操作数的地址；</li>
+<li>寄存器寻址方式：寄存器存放操作数；</li>
+<li>寄存器间接寻址方式：寄存器内存放的是操作数的地址；</li>
+</ul>
+<h4 id="4-5-1-例题"><a href="#4-5-1-例题" class="headerlink" title="4.5.1 例题"></a>4.5.1 例题</h4><ol>
+<li>若CPU要执行的指令为：MOV R1，#45（即将数值45传送到寄存器R1中），则该指令中采用的寻址方式为（B）。</li>
+</ol>
+<p>A. 直接寻址和立即寻址<br>B. 寄存器寻址和立即寻址<br>C. 相对寻址和间接寻址<br>D. 寄存器间接寻址和直接寻址</p>
+<ol start="2">
+<li>指令系统中采用不同寻址方式的目的是（D）。</li>
+</ol>
+<p>A. 提高从内存获取数据的速度<br>B. 提高从外存获取数据的速度<br>C. 降低操作码的译码难度<br>D. 扩大寻址空间并提高编程灵活性</p>
+<h3 id="4-6-流水线"><a href="#4-6-流水线" class="headerlink" title="4.6 流水线"></a>4.6 流水线</h3><p>&emsp;&emsp;多条指令重叠进行操作的一种准并行处理实现技术。通过流水线可以提高指令执行的速度。</p>
+<p><strong>取指</strong> -&gt; <strong>分析</strong> -&gt; <strong>执行</strong> -&gt;</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/line.png" alt="line.png" title="line"></p>
+<h4 id="4-6-1-流水线计算公式。"><a href="#4-6-1-流水线计算公式。" class="headerlink" title="4.6.1 流水线计算公式。"></a>4.6.1 流水线计算公式。</h4><p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/stage.png" alt="stage.png" title="stage"></p>
+<h5 id="4-6-1-1-流水线周期"><a href="#4-6-1-1-流水线周期" class="headerlink" title="4.6.1.1 流水线周期"></a>4.6.1.1 流水线周期</h5><p>&emsp;&emsp;执行时间最长的一段（ $\Delta t$ ）。<br>&emsp;&emsp;如流水线把一条指令分为三部分，及k &#x3D; 3，个部分对应的执行时间为：取指 $t_1$ 、分析 $t_2$、执行 $t_3$ ，则流水线周期为 $t_1$ 、 $t_2$ 、 $t_3$ 。</p>
+<h5 id="4-6-1-2-流水线执行时间（-T-k-）"><a href="#4-6-1-2-流水线执行时间（-T-k-）" class="headerlink" title="4.6.1.2 流水线执行时间（ $T_k$ ）"></a>4.6.1.2 流水线执行时间（ $T_k$ ）</h5><p>&emsp;&emsp;1条指令执行时间 + （指令条数 - 1） * 流水线周期</p>
+<ul>
+<li>理论公式： $(t_1 + t_2 + … + t_k) + (n - 1) \times \Delta t$</li>
+<li>实践公式： $k \times \Delta t + (n - 1) \times \Delta t$</li>
+</ul>
+<h5 id="4-6-1-3-流水线吞吐率（TP）"><a href="#4-6-1-3-流水线吞吐率（TP）" class="headerlink" title="4.6.1.3 流水线吞吐率（TP）"></a>4.6.1.3 流水线吞吐率（TP）</h5><p>&emsp;&emsp;计算的最基本的公式为： $TP &#x3D; \frac{n}{T_k}$<br>&emsp;&emsp;流水线最大吞吐率：流水线周期的倒数（ $\frac{1}{\Delta t}$ ）。</p>
+<h4 id="4-6-2-例题"><a href="#4-6-2-例题" class="headerlink" title="4.6.2 例题"></a>4.6.2 例题</h4><ol>
+<li>若指令流水线把一条指令分为取指、分析和执行三部分，且三部分的时间分别是取指2ns，分析2ns，执行1ns。那么流水线周期是？100条指令全部执行完毕需要的时间就是？</li>
+</ol>
+<p>答：三部分的执行时间最长一段是 $\Delta t &#x3D; 2$ ，那么100条指令执行完的执行时间为 $(2 + 2 + 1) + (100 - 1) \times 2 &#x3D; 203$ 。</p>
+<ol start="2">
+<li>若指令流水线由5段组成，第1、3、5段所需时间为 $\Delta t$ ，第2、4段所需时间分别为 $3 \Delta t$ 、 $2 \Delta t$ ，如下图所示，那么连续输入n条指令时的吞吐率（单位时间内执行的指令个数）TP为（B）。</li>
+</ol>
+<p>-&gt; $\Delta t$ -&gt; $3 \Delta t$ -&gt; $\Delta t$ -&gt; $2 \Delta t$ -&gt; $\Delta t$ -&gt;</p>
+<p>A. $\frac{n}{5 \times (3 + 2) \Delta t}$<br>B. $\frac{n}{(3 + 3 + 2) \Delta t + 3(n - 1) \Delta t}$<br>C. $\frac{n}{(3 + 2) \Delta t + (n - 3) \Delta t}$<br>D. $\frac{n}{(3 + 2) \Delta t + 5 \times 3 \Delta t}$</p>
+<h3 id="4-7-多级存储器结构"><a href="#4-7-多级存储器结构" class="headerlink" title="4.7 多级存储器结构"></a>4.7 多级存储器结构</h3><p>&emsp;&emsp;存储器被组织成金字塔层次结构。存储器自上而下，组成6个层次结构，依次变得更慢，访问频率低、容量更大、每字节的造价更便宜。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/storage.png" alt="storage.png" title="storage"></p>
+<h4 id="4-7-1-Cache"><a href="#4-7-1-Cache" class="headerlink" title="4.7.1 Cache"></a>4.7.1 Cache</h4><h5 id="4-7-1-1-高速缓存Cache"><a href="#4-7-1-1-高速缓存Cache" class="headerlink" title="4.7.1.1 高速缓存Cache"></a>4.7.1.1 高速缓存Cache</h5><ul>
+<li>功能：提高CPU数据输入输出的速率，突破所谓的“冯诺伊曼瓶颈”；</li>
+<li>速度：在计算机的存储系统中，Cache是访问速度较快的层次；</li>
+<li>原理：使用Cache改善系统性能的依据是程序的局部性原理；</li>
+<li>组成：Cache由两部分组成：控制部分和Cache存储器部分；</li>
+</ul>
+<p>&emsp;&emsp;平均系统周期时间（以读操作为例：使用“Cache + 主存储器”）</p>
+<p>$$ t_3 &#x3D; h \times t_1 + (1 - h) \times t_2$$</p>
+<p>&emsp;&emsp;h代表对Cache的访问命中率， $t_1$ 表示Cache的周期时间， $t_2$ 表示主存储器的周期时间，系统的平均周期时间为 $t_3$ ，(1 - h)又称为失败率（未命中率）。</p>
+<h4 id="4-7-2-地址映像"><a href="#4-7-2-地址映像" class="headerlink" title="4.7.2 地址映像"></a>4.7.2 地址映像</h4><ul>
+<li>通常由SRAM（Static Random Access Memory静态存储器）组成。其访问速度远高于主存，接近CPU；</li>
+<li>其功能是提高CPU数据输入输出速率。其理论依据是程序的局部性原理。实现基础是将主存和Cache划分成大小相同的块&#x2F;页；</li>
+<li>装入缓存时将主存块与Cache块的映射关系存入相联存储表（硬件实现）中；</li>
+<li>CPU通过主存地址访存时先访问Cache（命中可提升速度，所以其关键性能指标是命中率），依据主存地址关联相联存储表转换为Cache地址。如果在Cache没有，才需要访问主存（Cache页置换，置换算法会影响命中率）。</li>
+</ul>
+<h4 id="4-7-3-直接映像和变换"><a href="#4-7-3-直接映像和变换" class="headerlink" title="4.7.3 直接映像和变换"></a>4.7.3 直接映像和变换</h4><ul>
+<li>主存储器中一块只能映像到cache的一个特定的块中；</li>
+<li>主存与缓存分成相同大小的数据块；</li>
+<li>主存空间按缓存容量分成区，每一区的块数与缓存的总块数相等；</li>
+<li>主存中某区的一块存入缓存时只能存入缓存中块号相同的位置；</li>
+</ul>
+<p>&emsp;&emsp;特点：</p>
+<ul>
+<li>地址变换电路简单，访问速度快；</li>
+<li>空间利用率低，冲突概率高；</li>
+<li>对页面置换算法依赖度较高，且Cache空间利用率较低，命中率较低；</li>
+</ul>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/cache.png" alt="cache.png" title="cache"></p>
+<h4 id="4-7-4-全相联地址映射和变换"><a href="#4-7-4-全相联地址映射和变换" class="headerlink" title="4.7.4 全相联地址映射和变换"></a>4.7.4 全相联地址映射和变换</h4><ul>
+<li>主存的任意一块可以映像到cache中的任意一块的位置上；</li>
+<li>主存与缓存分成相同大小的数据块；</li>
+<li>主存的某一数据块可以装入缓存的任意一块空间中；</li>
+</ul>
+<p>&emsp;&emsp;特点：</p>
+<ul>
+<li>空间利用率高，命中率较高；</li>
+<li>冲突概率低；</li>
+<li>实现复杂，速度慢，适合小容量cache；</li>
+</ul>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/cache1.png" alt="cache1.png" title="cache1"></p>
+<h4 id="4-7-5-组相联地址映像和变换"><a href="#4-7-5-组相联地址映像和变换" class="headerlink" title="4.7.5 组相联地址映像和变换"></a>4.7.5 组相联地址映像和变换</h4><ul>
+<li>主存和cache按同样大小分块；cache分为若干组，如两块一组，主存按cache组数分区；</li>
+<li>每个组采用直接映射地址方式；</li>
+<li>组内的块则采用全相联映射方式；</li>
+</ul>
+<p>&emsp;&emsp;特点：</p>
+<ul>
+<li>是以上两种方式的折中；</li>
+<li>实现难度和造假要比直接映射方式高；</li>
+</ul>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/cache2.png" alt="cache2.png" title="cache2"></p>
+<h3 id="4-8-输入输出设备管理"><a href="#4-8-输入输出设备管理" class="headerlink" title="4.8 输入输出设备管理"></a>4.8 输入输出设备管理</h3><ul>
+<li>直接程序控制：无条件传输方式、程序查询方式（CPU会阻塞）；</li>
+<li>中断方式（CPU不阻塞）；</li>
+<li>直接存储器存取方式（DMA）：在传送数据块的过程中不需要CPU干涉；</li>
+<li>输入输出处理机（IOP）；</li>
+</ul>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/IO.png" alt="IO.png" title="IO"></p>
+<h3 id="4-9-中断的概念"><a href="#4-9-中断的概念" class="headerlink" title="4.9 中断的概念"></a>4.9 中断的概念</h3><p>&emsp;&emsp;中断是指计算机在执行期间，系统内发生任何非寻常的或非预期的急需处理事件，使得CPU暂时中断当前正在处理的程序而转去执行相应的时间处理程序，待处理完毕后又返回原来被中断处继续执行的过程。<br>&emsp;&emsp;根据中断源产生的条件，可以把中断分为外部中断和内部中断；</p>
+<ul>
+<li>外中断：是指来自处理机和内存外部的中断，包括I&#x2F;O设备发出的I&#x2F;O中断，外部信号中断、各种定时器引起的时钟中断，以及程序调试中设置的断点等引起的调试中断等。外部中断在狭义上一般称为中断；</li>
+<li>内中断：主要是指在处理机和内存内部产生的中断。内中断一般称为陷入或异常，包括程序运算引起的各种错误，如算术操作溢出、数据格式非法、除数为零等。</li>
+</ul>
+<h3 id="4-10-可靠性"><a href="#4-10-可靠性" class="headerlink" title="4.10 可靠性"></a>4.10 可靠性</h3><p>&emsp;&emsp;用 $R_n$ 表示第n个部件的可靠度，则失效率为 $1 - R_n$ ，则可靠性计算公式如下。</p>
+<p><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/docs/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/reliability.png" alt="reliability.png" title="reliability"></p>
+<h3 id="4-11-校验码"><a href="#4-11-校验码" class="headerlink" title="4.11 校验码"></a>4.11 校验码</h3><p>&emsp;&emsp;奇偶校验、CRC、海明校验码。</p>
+<ul>
+<li><p>什么是检错和纠错？</p>
+</li>
+<li><p>什么是码距？</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">字母</th>
+<th align="center">合法码字</th>
+<th align="center">非法码字</th>
+<th align="center">码距</th>
+<th align="center">检错纠错能力</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">A &#x3D; 1, B &#x3D; 0</td>
+<td align="center">1, 0</td>
+<td align="center">-</td>
+<td align="center">1</td>
+<td align="center">不能检错和纠错</td>
+</tr>
+<tr>
+<td align="center">A &#x3D; 11, B &#x3D; 00</td>
+<td align="center">11, 00</td>
+<td align="center">10, 01</td>
+<td align="center">2</td>
+<td align="center">能检错不能纠错</td>
+</tr>
+<tr>
+<td align="center">A &#x3D; 111, B &#x3D; 000</td>
+<td align="center">111, 000</td>
+<td align="center">001, 010, 011, 100, 101, 110</td>
+<td align="center">3</td>
+<td align="center">能检错和纠1位错</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>奇偶校验码-仅可检错，可检测1（奇数）位错；</p>
+</li>
+<li><p>CRC（循环冗余码）-仅可检错，可检测多位错；</p>
+</li>
+<li><p>海明码-可检错，且可纠1位错；</p>
+</li>
+<li><p>奇偶校验：通过在编码中增加一位校验位来使编码中的1的个数为奇数（奇校验）或者为偶数（偶校验），从而使码距变为2；</p>
+</li>
+<li><p>CRC：利用生成多项式为K个数据位产生r个校验位来进行编码其编码长度为：k + r；</p>
+</li>
+<li><p>海明码：在数据位之间插入k个校验位，通过扩大码距来实现检查和纠错。设数据位是n位，校验位是k位，则n和k必须满足以下关系；</p>
+</li>
+</ul>
+<p>$$2^k - 1 \geq n + k$$</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn">OnlyCalm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://www.onlycalm.cn/2021/11/27/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">http://www.onlycalm.cn/2021/11/27/兴趣/国家软考/中级嵌入式系统设计师/第一章——计算机系统基础/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://www.onlycalm.cn" target="_blank">OnlyCalm's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/">嵌入式系统设计师</a><a class="post-meta__tags" href="/tags/%E4%B8%AD%E7%BA%A7/">中级</a><a class="post-meta__tags" href="/tags/%E8%BD%AF%E8%80%83/">软考</a></div><div class="post-share"><div class="social-share" data-image="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2021/11/20/%E7%BC%96%E7%A8%8B/c/%E8%BF%9B%E9%98%B6%E7%AF%87/c%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AE%8F%E5%AE%9A%E4%B9%89/" title="c进阶篇（十二）——深入理解宏定义"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">c进阶篇（十二）——深入理解宏定义</div></div><div class="info-2"><div class="info-item-1">c进阶篇（十二）——深入理解宏定义前言：&emsp;&emsp; c的语法中，最灵活的是宏使用，本篇文章将详细探讨宏的几种用法。 1 概念&emsp;&emsp;在c&#x2F;c++中，宏定义将一个标识符定义为一个字符串，源程序中的该标识符均以指定的字符串来替代。因此理解宏定义用法的核心是“替换”。宏定义是在预处理阶段处理的，也即在编译前就完成了宏的替换。宏的使用可以使得编程者编辑的代码得到简化，也可提高代码的运行效率。 2 规则&emsp;&emsp;宏定义的语法规则如下。 1#define &lt;宏名&gt;&lt;(参数列表)&gt; &lt;宏体&gt;  &emsp;&emsp;宏可以带参数列表也可以不带，参数列表同样也是进行替换。处理定义处在代码中所有宏名字符串都会替换为宏体。 3 不带参宏定义&emsp;&emsp;此种宏用法发简单，但却大有用处。不带参宏是没有参数列表的宏定义。 3.1 空宏用作条件编译&emsp;&emsp;条件编译离不开宏，而空宏更是常用于条件编译的条件。空宏指的是没有宏体的宏定义。空宏结合带 #...</div></div></div></a><a class="pagination-related" href="/2021/12/11/%E5%B7%A5%E5%85%B7/Git/%E5%9F%BA%E7%A1%80%E7%AF%87/Git%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%E5%8D%81%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94rebase%E6%8C%87%E4%BB%A4/" title="Git基础篇（二十五）——rebase指令"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_16.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Git基础篇（二十五）——rebase指令</div></div><div class="info-2"><div class="info-item-1">Git基础篇（二十五）——rebase指令前言：&emsp;&emsp; rebase指令是git中功能较为复杂的一个指令，用好了可以简化提交记录。 1 rebase&emsp;&emsp; rebase 可对一段连续的提交记录进行修改、删除、复制粘贴、合并操作，规范的使用该指令能使得提交记录更加干净整洁。 1.1 指定格式&emsp;&emsp;指令格式如下。 1git rebase -i [StartPoint] [EndPoint]    -i : 是指令 --interactive 的缩写，即弹出交互式界面让用户选择具体的执行动作； [StartPoint] : 指定一段提交记录的起点，但不包含该提交记录； [EndPoint] : 指定一段提交记录的终点，包含该提交记录。提交时间上不能比StartPoint指定的提交记录早；   1.2 选择提交记录&emsp;&emsp;假设有以下提交记录，提交记录的选择有多种方式，可以通过git提交时为每个提交记录生成的唯一 commit id 指定，或者用 HEAD 的形式等。在git中区间的指定都是左开右闭，...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2022/01/31/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%83%E7%AB%A0%E2%80%94%E2%80%94%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E4%B8%8E%E8%BF%90%E7%BB%B4/" title="第七章——嵌入式系统开发与运维"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_7.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-31</div><div class="info-item-2">第七章——嵌入式系统开发与运维</div></div><div class="info-2"><div class="info-item-1">第七章——嵌入式系统开发与运维前言：&emsp;&emsp; 计算机第七章节主要知识点。 1 知识点介绍 系统开发过程及项目管理； 系统分析基础知识； 系统设计知识； 下午题专题训练  2 系统开发过程及项目管理 开发模型 项目管理 软件过程改进  2.1 开发模型 瀑布模型  演化模型  增量模型  螺旋模型  快速原型模型  喷泉模型  V模型  迭代模型&#x2F;迭代开发方法  构建组装模型&#x2F;基于构件的开发方法  统一过程&#x2F;统一开发方法  敏捷开发方法  模型驱动的开发方法  软硬件协同开发的方法   2.2 瀑布模型 2.3 原型模型 2.4 螺旋模型 2.5 增量模型 2.6 V模型、喷泉模型、快速应用开发模型 2.7 构建组装模型 2.8 敏捷方法&emsp;&emsp; 敏捷宣言...</div></div></div></a><a class="pagination-related" href="/2022/01/08/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/" title="第三章——操作系统知识"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_19.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-08</div><div class="info-item-2">第三章——操作系统知识</div></div><div class="info-2"><div class="info-item-1">第三章——操作系统知识前言：&emsp;&emsp; 计算机第三章节主要知识点。 1 知识点介绍 操作系统的作用； 进程（任务）管理； 存储管理； 文件管理； 设备管理；  2 操作系统的作用&emsp;&emsp;通过资源管理（软硬件资源管理），提高计算机系统的效率，改善人机界面，向用户提供友好的工作环境。  3 进程管理3.1 进程的概念&emsp;&emsp;进程是程序在一个数据集合上运行的过程，它是系统进行资源分配和调度的一个独立单位。它由程序块、进程控制块（PCB）和数据块三部分组成。 3.2 进程和程序的区别 进程是程序的一次执行过程，没有程序就没有进程； 程序是完成某一特定功能的一系列程序语句的集合，只要不被破坏，他就永远存在； 程序是一个静态的概念，进程是一个动态的概念，它由创建而产生，完成任务后因撤销而消亡；进程是系统进行资源分配和调度的独立单位，而程序不是。  3.3...</div></div></div></a><a class="pagination-related" href="/2022/02/01/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%B9%9D%E7%AB%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" title="第九章——数据结构与算法"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-01</div><div class="info-item-2">第九章——数据结构与算法</div></div><div class="info-2"><div class="info-item-1">第九章——数据结构与算法前言：&emsp;&emsp; 计算机第九章节主要知识点。 1 知识点介绍 数据结构与算法概念 线性表 数组与矩阵 树与二叉树 图 查找  2 数据结构定义 数据结构 数据逻辑结构：指数据元素之间的管理。 线性结构：一对一关系 非线性结构：一对多，多对多关系   数据物理结构：数据在物理设备上具体如何存储。    3 算法概念&emsp;&emsp;算法的5个重要特征  又穷性：执行有穷步之后结束，且每一步都可在有穷时间内完成。 确定性：算法中每一条指令都必须由确切的含义，不能含糊不清。 输入（&gt;&#x3D; 0） 输出（&gt;&#x3D; 1） 有效性（可行性）：算法的每个步骤都能有效执行并能在执行有限此后得到确定的结果，例如a &#x3D; 0，b &#x2F; a就无效。  4 伪代码&emsp;&emsp;伪代码是一种算法描述语言，介于自然语言与编程语言之间，不用拘泥于具体的实现。  5 线性表5.1...</div></div></div></a><a class="pagination-related" href="/2022/01/02/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E2%80%94%E2%80%94%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6/" title="第二章——嵌入式系统软件"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_6.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="info-item-2">第二章——嵌入式系统软件</div></div><div class="info-2"><div class="info-item-1">第二章——嵌入式系统软件前言：&emsp;&emsp; 计算机第二章节主要知识点。 1 知识点介绍 嵌入式软件基础； 嵌入式操作系统概述；  2 嵌入式软件基础 嵌入式软件概述； 嵌入式软件分类； 嵌入式软件的体系结构； 设备驱动层； 嵌入式中间件；  2.1 嵌入式软件的特点 规模较小； 开发难度大； 硬件资源有限； 嵌入式软件一般涉及到底层软件的开发，需要软硬件基础； 开发环境和运行环境不同；   实时性和可靠性要求高。如火箭飞行控制、核电站； 要求固化存储；  2.2...</div></div></div></a><a class="pagination-related" href="/2022/01/30/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E4%BA%94%E7%AB%A0%E2%80%94%E2%80%94%E5%AE%89%E5%85%A8%E6%80%A7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="第五章——安全性基础知识"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_17.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-30</div><div class="info-item-2">第五章——安全性基础知识</div></div><div class="info-2"><div class="info-item-1">第五章——安全性基础知识前言：&emsp;&emsp; 计算机第五章节主要知识点。 1 知识点介绍 计算机系统安全概述； 信息安全基础； 网络安全协议；  2 网络攻击 被动攻击：指攻击者从网络上窃听他人的通信内容。通常把这类攻击称为接活。 流量分析：是通过持续检测现有网络中的流量变化或者变化趋势，从而得到相应信息的一种被动攻击方式。   主动攻击：是指通过一系列的方法，主动地获取向被攻击对象实施破坏的一种攻击方式。 篡改：攻击者故意篡改网络上传送的报文。也包括彻底中断传送的报文。 恶意程序：种类繁多，威胁较大的有：计算机病毒、计算机蠕虫、特洛伊木马、逻辑炸弹。 拒绝服务：指攻击者向因特网上的某个服务器不停地发送大量分组，使因特网或服务器无法提供正常服务。如：Dos，DDos。     2.1 例题&emsp;&emsp;下列行为中，（）属于被动攻击行为。 A. 伪造B. 窃听C. DDOS攻击D. 篡改信息 3...</div></div></div></a><a class="pagination-related" href="/2022/02/01/%E5%85%B4%E8%B6%A3/%E5%9B%BD%E5%AE%B6%E8%BD%AF%E8%80%83/%E4%B8%AD%E7%BA%A7%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%AC%AC%E5%85%AB%E7%AB%A0%E2%80%94%E2%80%94%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%96%BD%E7%9F%A5%E8%AF%86/" title="第八章——嵌入式系统实施知识"><img class="cover" src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_11.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-01</div><div class="info-item-2">第八章——嵌入式系统实施知识</div></div><div class="info-2"><div class="info-item-1">第八章——嵌入式系统实施知识前言：&emsp;&emsp; 计算机第八章节主要知识点。 1 知识点介绍 软件测试 软件调试 软件评审 验证与确认 下午题专题训练  2 嵌入式系统实施知识2.1 测试概述 经典定义：在规定的条件下对程序进行操作，以发现错误，对软件质量进行评估。 对象：程序、数据和文档。 目的：发现软件的错误，验证软件是否满足用户需求，并通过分析软件错误产生的原因，以帮助发现当前开发工作所采用的软件过程的缺陷，以便进行软件过程改进。  &emsp;&emsp;嵌入式软件的测试工作与台式机上的应用软件的测试工作有许多共同之处，但也有很大区别。  嵌入式系统的硬件一般采用专门的测试仪器进行测试； 由于嵌入式软件自身的特点，其测试过程相对复杂； 与PC软件相比，在测试嵌入式软件时，除了逻辑上的正确性之外，还要看重系统的性能和健壮性； 嵌入式软件的一个重要特点是实时性； 嵌入式系统的开发是一个软硬件相互协调、互相反馈和互相测试的过程；  2.1 例题 软件测试的目的是（B）。  A. 评价软件的质量B. 发现软件的错误C. 证明软件是正确的D....</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">OnlyCalm</div><div class="author-info-description">自娱自乐，做大娱乐家。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">267</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">346</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">65</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/onlycalm" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_42475711" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">贫富安。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80"><span class="toc-text">第一章——计算机系统基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%9F%A5%E8%AF%86%E7%82%B9%E4%BB%8B%E7%BB%8D"><span class="toc-text">1 知识点介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E5%80%BC%E8%BD%AC%E6%8D%A2"><span class="toc-text">2 数值转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-BCD%E7%A0%81"><span class="toc-text">2.1 BCD码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-8421%E7%A0%81"><span class="toc-text">2.2 8421码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-N%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%8D%81%E8%BF%9B%E5%88%B6"><span class="toc-text">2.3 N进制转十进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%ACN%E8%BF%9B%E5%88%B6"><span class="toc-text">2.4 十进制转N进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%92%8C%E5%85%AB%E8%BF%9B%E5%88%B6%E4%BA%92%E8%BD%AC"><span class="toc-text">2.5 二进制和八进制互转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%92%8C%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E4%BA%92%E8%BD%AC"><span class="toc-text">2.6 二进制和十六进制互转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%8D%95%E4%BD%8D"><span class="toc-text">2.7 数据的存储单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97"><span class="toc-text">2.8 二进制算术运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-1-%E4%BE%8B%E9%A2%98"><span class="toc-text">2.8.1 例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-text">3 数的表示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%A0%81%E5%88%B6"><span class="toc-text">3.1 码制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AE%9A%E7%82%B9%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-text">3.2 定点数和浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-%E5%AE%9A%E7%82%B9%E6%95%B0%EF%BC%88%E5%AE%9A%E7%82%B9%E8%A1%A8%E7%A4%BA%E6%B3%95%EF%BC%89"><span class="toc-text">3.2.1 定点数（定点表示法）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E6%B5%AE%E7%82%B9%E6%95%B0%EF%BC%88%E6%B5%AE%E7%82%B9%E8%A1%A8%E7%A4%BA%E6%B3%95%EF%BC%89"><span class="toc-text">3.2.2 浮点数（浮点表示法）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-1-%E4%BE%8B%E9%A2%98"><span class="toc-text">3.2.2.1 例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">4 计算机的组成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E9%87%8D%E8%A6%81%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-text">4.1 重要寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-%E8%BF%90%E7%AE%97%E5%99%A8"><span class="toc-text">4.1.1 运算器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">4.1.2 控制器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-1-%E4%BE%8B%E9%A2%98"><span class="toc-text">4.1.2.1 例题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">4.2 基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%80%BB%E7%BA%BF%E7%B3%BB%E7%BB%9F"><span class="toc-text">4.3 总线系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-1-%E6%80%BB%E7%BA%BF%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">4.3.1 总线的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-2-%E6%80%BB%E7%BA%BF%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-text">4.3.2 总线的性能指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-3-%E4%BE%8B%E9%A2%98"><span class="toc-text">4.3.3 例题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E6%8C%87%E4%BB%A4"><span class="toc-text">4.4 指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">4.4.1 基本概念</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="toc-text">4.5 寻址方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-1-%E4%BE%8B%E9%A2%98"><span class="toc-text">4.5.1 例题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="toc-text">4.6 流水线</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6-1-%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F%E3%80%82"><span class="toc-text">4.6.1 流水线计算公式。</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-6-1-1-%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%91%A8%E6%9C%9F"><span class="toc-text">4.6.1.1 流水线周期</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-6-1-2-%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4%EF%BC%88-T-k-%EF%BC%89"><span class="toc-text">4.6.1.2 流水线执行时间（ $T_k$ ）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-6-1-3-%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%90%9E%E5%90%90%E7%8E%87%EF%BC%88TP%EF%BC%89"><span class="toc-text">4.6.1.3 流水线吞吐率（TP）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6-2-%E4%BE%8B%E9%A2%98"><span class="toc-text">4.6.2 例题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E5%99%A8%E7%BB%93%E6%9E%84"><span class="toc-text">4.7 多级存储器结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-1-Cache"><span class="toc-text">4.7.1 Cache</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-7-1-1-%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98Cache"><span class="toc-text">4.7.1.1 高速缓存Cache</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-2-%E5%9C%B0%E5%9D%80%E6%98%A0%E5%83%8F"><span class="toc-text">4.7.2 地址映像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-3-%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%83%8F%E5%92%8C%E5%8F%98%E6%8D%A2"><span class="toc-text">4.7.3 直接映像和变换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-4-%E5%85%A8%E7%9B%B8%E8%81%94%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E5%92%8C%E5%8F%98%E6%8D%A2"><span class="toc-text">4.7.4 全相联地址映射和变换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-5-%E7%BB%84%E7%9B%B8%E8%81%94%E5%9C%B0%E5%9D%80%E6%98%A0%E5%83%8F%E5%92%8C%E5%8F%98%E6%8D%A2"><span class="toc-text">4.7.5 组相联地址映像和变换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86"><span class="toc-text">4.8 输入输出设备管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-%E4%B8%AD%E6%96%AD%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">4.9 中断的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-10-%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-text">4.10 可靠性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-11-%E6%A0%A1%E9%AA%8C%E7%A0%81"><span class="toc-text">4.11 校验码</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（三）——搭建linux工程"/></a><div class="content"><a class="title" href="/2025/08/17/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BAlinux%E5%B7%A5%E7%A8%8B/" title="FreeRTOS基础篇（三）——搭建linux工程">FreeRTOS基础篇（三）——搭建linux工程</a><time datetime="2025-08-17T11:26:00.000Z" title="发表于 2025-08-17 19:26:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（一）——介绍"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E4%BB%8B%E7%BB%8D/" title="FreeRTOS基础篇（一）——介绍">FreeRTOS基础篇（一）——介绍</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FreeRTOS基础篇（二）——QEMU"/></a><div class="content"><a class="title" href="/2025/08/16/%E5%B9%B3%E5%8F%B0/FreeRTOS/%E5%9F%BA%E7%A1%80%E7%AF%87/FreeRTOS%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94QEMU/" title="FreeRTOS基础篇（二）——QEMU">FreeRTOS基础篇（二）——QEMU</a><time datetime="2025-08-16T15:29:00.000Z" title="发表于 2025-08-16 23:29:00">2025-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Github Actions配置CI和CD"/></a><div class="content"><a class="title" href="/2025/06/01/%E5%B7%A5%E5%85%B7/Github/Github%20Actions%E9%85%8D%E7%BD%AECI%E5%92%8CCD/" title="Github Actions配置CI和CD">Github Actions配置CI和CD</a><time datetime="2025-05-31T16:01:00.000Z" title="发表于 2025-06-01 00:01:00">2025-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件"><img src="https://blogimage-1302867234.cos.ap-chengdu.myqcloud.com/blogimage/res/Cover_5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础篇（五）——vscode使用docker插件"/></a><div class="content"><a class="title" href="/2025/05/05/%E5%B7%A5%E5%85%B7/Docker/%E5%9F%BA%E7%A1%80%E7%AF%87/Docker%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94vscode%E4%BD%BF%E7%94%A8docker%E6%8F%92%E4%BB%B6/" title="Docker基础篇（五）——vscode使用docker插件">Docker基础篇（五）——vscode使用docker插件</a><time datetime="2025-05-04T16:18:00.000Z" title="发表于 2025-05-05 00:18:00">2025-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OnlyCalm</div><div class="footer_custom_text">生生灯火，明暗无辄</br>欢迎访问 <a href="https://www.onlycalm.cn">OnlyCalm</a> 的博客</br> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2024183071号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: 'uoaDTvEN4KnsU5xM1f2l1T12-MdYXbMMI',
+      appKey: 'f2158LsoEVzRzMS8EG7rvFSs',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: '0b3f5b76c03e1d9ecca0',
+      clientSecret: '94ba0623c1599038f16bc6ecbdf0c9015c735fe5',
+      repo: 'blogtalk',
+      owner: 'onlycalm',
+      admin: ['onlycalm'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '6ca95ab6e0c6c1b50a39ce43b7a7f7a0'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Valine' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/sakura.js"></script><div class="aplayer no-destroy" data-id="7642168633" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="于心有愧,信心花舍,时光隧道,四季,不求人,张氏情歌,夕阳无限好,单车,心的距离,婚礼祝福,积木,我们,苦瓜" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>
